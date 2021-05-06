@@ -25,7 +25,12 @@ namespace UI.Consola
             Console.WriteLine("4 - Modificar");
             Console.WriteLine("5 - Eliminar");
             Console.WriteLine("6 - Salir");
-            switch (LeerOpcionMenu())
+            int opcion;
+            do
+            {
+                opcion = LeerOpcionMenu();
+            } while (opcion == -1);
+            switch (opcion)
             {
                 case 1:
                     ListadoGeneral();
@@ -53,15 +58,22 @@ namespace UI.Consola
                 opcion = Convert.ToInt32(Console.ReadLine());
                 if (opcion < 1 | opcion > 6)
                 {
-                    throw new Exception("La opción ingresada es incorrecta!");
+                    throw new Exception("La opción ingresada es incorrecta, esta debe estar entre 1 y 6!");
                 }
+                return opcion;
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine("La opción ingresada es incorrecta, esta debe ser un número entero!");
+                opcion = -1;
+                return opcion;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                //LeerOpcionMenu();
+                opcion = -1;
+                return opcion;
             }
-            return opcion;
         }
         private void VolverAlMenu()
         {
@@ -80,14 +92,21 @@ namespace UI.Consola
                 {
                     throw new Exception();
                 }
+                Console.Clear();
+                return ID;
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine("El ID ingresado no es válido, este debe ser un número entero!");
+                ID = -1;
+                return ID;
             }
             catch (Exception e)
             {
                 Console.WriteLine("El ID ingresado no es válido, este debe ser un número entero mayor que 0!");
-                //SolicitarID();
+                ID = -1;
+                return ID;
             }
-            Console.Clear();
-            return ID;
         }
         private void ListadoGeneral()
         {
@@ -102,7 +121,11 @@ namespace UI.Consola
         private void Consultar()
         {
             Console.Clear();
-            int ID = SolicitarID();
+            int ID;
+            do
+            {
+                ID = SolicitarID();
+            } while (ID == -1);
             // el catch para la excepción de que no se ingresó un entero lo trato en SolicitarID()
             try
             {
@@ -152,7 +175,11 @@ namespace UI.Consola
         private void Modificar()
         {
             Console.Clear();
-            int ID = SolicitarID();
+            int ID;
+            do
+            {
+                ID = SolicitarID();
+            } while (ID == -1);
             try
             {
                 Usuario usr = UsuarioNegocio.GetOne(ID);
@@ -184,7 +211,11 @@ namespace UI.Consola
         private void Eliminar()
         {
             Console.Clear();
-            int ID = SolicitarID();
+            int ID;
+            do
+            {
+                ID = SolicitarID();
+            } while (ID == -1);
             try
             {
                 Usuario usr = UsuarioNegocio.GetOne(ID);
