@@ -43,7 +43,7 @@ namespace Data.Database
                     _Usuarios.Add(usr);
 
                     usr = new Business.Entities.Usuario();
-                    usr.ID = 3;
+                    usr.ID = 4;
                     usr.State = Business.Entities.BusinessEntity.States.Unmodified;
                     usr.Nombre = "Alan";
                     usr.Apellido = "Brado";

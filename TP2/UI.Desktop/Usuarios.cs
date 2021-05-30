@@ -17,7 +17,7 @@ namespace UI.Desktop
         public Usuarios()
         {
             InitializeComponent();
-            
+
         }
 
         private void toolStripContainer1_ContentPanel_Load(object sender, EventArgs e)
@@ -51,5 +51,47 @@ namespace UI.Desktop
             this.Close();
         }
 
+        private void tsbNuevo_Click(object sender, EventArgs e)
+        {
+            UsuarioDesktop formUsuario = new UsuarioDesktop(ApplicationForm.ModoForm.Alta);
+            formUsuario.ShowDialog();
+            this.Listar();
+        }
+
+        private void dgvUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void tsbEditar_Click(object sender, EventArgs e)
+        {
+            if (this.dgvUsuarios.SelectedRows.Count > 0)
+            {
+                int ID = ((Business.Entities.Usuario)this.dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
+                UsuarioDesktop formUsuario = new UsuarioDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                formUsuario.ShowDialog();
+                this.Listar();
+            }
+            else
+            {
+                MessageBox.Show("Seleccionar una fila en la grilla para poder editar");
+            }
+
+        }
+
+        private void tsbEliminar_Click(object sender, EventArgs e)
+        {
+            if (this.dgvUsuarios.SelectedRows.Count > 0)
+            {
+                int ID = ((Business.Entities.Usuario)this.dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
+                UsuarioDesktop formUsuario = new UsuarioDesktop(ID, ApplicationForm.ModoForm.Baja);
+                formUsuario.ShowDialog();
+                this.Listar();
+            }
+            else
+            {
+                MessageBox.Show("Seleccionar una fila en la grilla para poder eliminar");
+            }
+        }
     }
 }
