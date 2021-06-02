@@ -22,8 +22,7 @@ namespace UI.Desktop
             //la propiedad Text de los TextBox contiene el texto escrito en ellos
             if (this.txtUsuario.Text == "Admin" && this.txtPass.Text == "admin")
             {
-                MessageBox.Show("Usted ha ingresado al sistema correctamente."
-                , "Login", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.DialogResult = DialogResult.OK;
             }
             else
             {

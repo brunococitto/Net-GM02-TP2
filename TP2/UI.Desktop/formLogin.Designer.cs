@@ -104,6 +104,7 @@ namespace UI.Desktop
             // 
             // formLogin
             // 
+            this.AcceptButton = this.btnIngresar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(340, 255);
@@ -114,7 +115,11 @@ namespace UI.Desktop
             this.Controls.Add(this.btnIngresar);
             this.Controls.Add(this.txtPass);
             this.Controls.Add(this.txtUsuario);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "formLogin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Ingreso";
             this.ResumeLayout(false);
             this.PerformLayout();
