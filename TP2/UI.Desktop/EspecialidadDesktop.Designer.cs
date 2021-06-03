@@ -95,6 +95,7 @@ namespace UI.Desktop
             // 
             // txtID
             // 
+            this.txtID.Enabled = false;
             this.txtID.Location = new System.Drawing.Point(141, 3);
             this.txtID.Name = "txtID";
             this.txtID.ReadOnly = true;

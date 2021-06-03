@@ -89,7 +89,6 @@ namespace UI.Desktop
             this.TLPanelUsuarios.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 63F));
             this.TLPanelUsuarios.Size = new System.Drawing.Size(748, 242);
             this.TLPanelUsuarios.TabIndex = 0;
- 
             // 
             // lblID
             // 
@@ -143,6 +142,7 @@ namespace UI.Desktop
             // 
             // txtID
             // 
+            this.txtID.Enabled = false;
             this.txtID.Location = new System.Drawing.Point(152, 3);
             this.txtID.Name = "txtID";
             this.txtID.ReadOnly = true;
