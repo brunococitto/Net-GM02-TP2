@@ -31,6 +31,15 @@ namespace UI.Desktop
             }
         }
 
-
+        private void btnUsuarios_Click(object sender, EventArgs e)
+        {
+            Usuarios appUsuarios = new Usuarios();
+            appUsuarios.ShowDialog();
+        }
+        private void btnEspecialidades_Click(object sender, EventArgs e)
+        {
+            Especialidades appEspecialidades = new Especialidades();
+            appEspecialidades.ShowDialog();
+        }
     }
 }
