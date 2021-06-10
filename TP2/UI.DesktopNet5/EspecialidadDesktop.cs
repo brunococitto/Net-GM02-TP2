@@ -18,7 +18,7 @@ namespace UI.Desktop
         {
             InitializeComponent();
         }
-        public EspecialidadDesktop(ModoForm modo) : this() 
+        public EspecialidadDesktop(ModoForm modo) : this()
         {
             Modos = modo;
         }
@@ -30,7 +30,7 @@ namespace UI.Desktop
             MapearDeDatos();
         }
         public Especialidad EspecialidadActual { set; get; }
-        public override void MapearDeDatos() 
+        public override void MapearDeDatos()
         {
             this.txtID.Text = this.EspecialidadActual.ID.ToString();
             this.txtDescripcion.Text = this.EspecialidadActual.Descripcion;
@@ -52,7 +52,7 @@ namespace UI.Desktop
         }
         public override void MapearADatos()
         {
-            if (Modos == ModoForm.Alta) 
+            if (Modos == ModoForm.Alta)
             {
                 EspecialidadActual = new Especialidad();
                 EspecialidadActual.Descripcion = this.txtDescripcion.Text;
@@ -71,7 +71,7 @@ namespace UI.Desktop
                     break;
             }
         }
-        public override void GuardarCambios() 
+        public override void GuardarCambios()
         {
             EspecialidadLogic e = new EspecialidadLogic();
             MapearADatos();

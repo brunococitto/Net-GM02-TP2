@@ -41,8 +41,8 @@ namespace UI.Desktop
             // 
             // TLPanelEspecialidades
             // 
-            this.TLPanelEspecialidades.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.TLPanelEspecialidades.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TLPanelEspecialidades.AutoScroll = true;
             this.TLPanelEspecialidades.AutoSize = true;
@@ -152,3 +152,4 @@ namespace UI.Desktop
         private System.Windows.Forms.Button btnCancelar;
     }
 }
+

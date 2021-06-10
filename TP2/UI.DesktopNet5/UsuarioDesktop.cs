@@ -19,7 +19,7 @@ namespace UI.Desktop
             InitializeComponent();
         }
 
-        public UsuarioDesktop(ModoForm modo) : this() 
+        public UsuarioDesktop(ModoForm modo) : this()
         {
             Modos = modo;
         }
@@ -35,7 +35,7 @@ namespace UI.Desktop
 
         public Usuario UsuarioActual { set; get; }
 
-        public override void MapearDeDatos() 
+        public override void MapearDeDatos()
         {
             this.txtID.Text = this.UsuarioActual.ID.ToString();
             this.chkHabilitado.Checked = this.UsuarioActual.Habilitado;
@@ -67,7 +67,7 @@ namespace UI.Desktop
 
         public override void MapearADatos()
         {
-            if (Modos == ModoForm.Alta) 
+            if (Modos == ModoForm.Alta)
             {
                 UsuarioActual = new Usuario();
                 UsuarioActual.Nombre = this.txtNombre.Text;
@@ -101,7 +101,7 @@ namespace UI.Desktop
 
         }
 
-        public override void GuardarCambios() 
+        public override void GuardarCambios()
         {
             UsuarioLogic u = new UsuarioLogic();
             MapearADatos();
@@ -131,14 +131,14 @@ namespace UI.Desktop
                 Notificar("Error", "El Email no es valido", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            
+
             else { return true; }
 
         }
 
-        
 
-        
+
+
         private void UsuarioDesktop_Load(object sender, EventArgs e)
         {
 

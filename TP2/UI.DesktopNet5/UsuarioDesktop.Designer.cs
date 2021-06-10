@@ -52,8 +52,8 @@ namespace UI.Desktop
             // 
             // TLPanelUsuarios
             // 
-            this.TLPanelUsuarios.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.TLPanelUsuarios.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TLPanelUsuarios.AutoScroll = true;
             this.TLPanelUsuarios.AutoSize = true;
@@ -277,3 +277,4 @@ namespace UI.Desktop
         private System.Windows.Forms.CheckBox chkHabilitado;
     }
 }
+

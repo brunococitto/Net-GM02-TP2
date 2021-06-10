@@ -28,28 +28,26 @@ namespace UI.Desktop
 
         public ModoForm _modos;
         public ModoForm Modos { get { return _modos; } set { _modos = value; } }
-    
-                
+
+
         public virtual void MapearDeDatos() { }
         public virtual void MapearADatos() { }
         public virtual void GuardarCambios() { }
         public virtual bool Validar() { return false; }
 
         public void Notificar(string titulo, string mensaje, MessageBoxButtons
-        botones, MessageBoxIcon icono) { MessageBox.Show(mensaje, titulo, botones, icono); }
+        botones, MessageBoxIcon icono)
+        { MessageBox.Show(mensaje, titulo, botones, icono); }
 
         public void Notificar(string mensaje, MessageBoxButtons botones,
-        MessageBoxIcon icono) { this.Notificar(this.Text, mensaje, botones, icono); }
+        MessageBoxIcon icono)
+        { this.Notificar(this.Text, mensaje, botones, icono); }
 
         private void ApplicationForm_Load(object sender, EventArgs e)
         {
 
         }
     }
-    
+
 
 }
-
-
-
-    
