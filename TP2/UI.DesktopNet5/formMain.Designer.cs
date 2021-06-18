@@ -34,6 +34,7 @@ namespace UI.Desktop
             this.mnuSalir = new System.Windows.Forms.ToolStripMenuItem();
             this.btnUsuarios = new System.Windows.Forms.Button();
             this.btnEspecialidades = new System.Windows.Forms.Button();
+            this.btnModulos = new System.Windows.Forms.Button();
             this.mnsPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,7 +44,8 @@ namespace UI.Desktop
             this.mnuArchivo});
             this.mnsPrincipal.Location = new System.Drawing.Point(0, 0);
             this.mnsPrincipal.Name = "mnsPrincipal";
-            this.mnsPrincipal.Size = new System.Drawing.Size(800, 24);
+            this.mnsPrincipal.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            this.mnsPrincipal.Size = new System.Drawing.Size(933, 24);
             this.mnsPrincipal.TabIndex = 1;
             this.mnsPrincipal.Text = "menuStrip1";
             // 
@@ -64,9 +66,10 @@ namespace UI.Desktop
             // 
             // btnUsuarios
             // 
-            this.btnUsuarios.Location = new System.Drawing.Point(12, 36);
+            this.btnUsuarios.Location = new System.Drawing.Point(14, 42);
+            this.btnUsuarios.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnUsuarios.Name = "btnUsuarios";
-            this.btnUsuarios.Size = new System.Drawing.Size(152, 41);
+            this.btnUsuarios.Size = new System.Drawing.Size(177, 47);
             this.btnUsuarios.TabIndex = 3;
             this.btnUsuarios.Text = "Usuarios";
             this.btnUsuarios.UseVisualStyleBackColor = true;
@@ -74,24 +77,38 @@ namespace UI.Desktop
             // 
             // btnEspecialidades
             // 
-            this.btnEspecialidades.Location = new System.Drawing.Point(12, 83);
+            this.btnEspecialidades.Location = new System.Drawing.Point(14, 96);
+            this.btnEspecialidades.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnEspecialidades.Name = "btnEspecialidades";
-            this.btnEspecialidades.Size = new System.Drawing.Size(152, 41);
+            this.btnEspecialidades.Size = new System.Drawing.Size(177, 47);
             this.btnEspecialidades.TabIndex = 4;
             this.btnEspecialidades.Text = "Especialidades";
             this.btnEspecialidades.UseVisualStyleBackColor = true;
             this.btnEspecialidades.Click += new System.EventHandler(this.btnEspecialidades_Click);
             // 
+            // btnModulos
+            // 
+            this.btnModulos.Location = new System.Drawing.Point(14, 149);
+            this.btnModulos.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnModulos.Name = "btnModulos";
+            this.btnModulos.Size = new System.Drawing.Size(177, 47);
+            this.btnModulos.TabIndex = 6;
+            this.btnModulos.Text = "Modulos";
+            this.btnModulos.UseVisualStyleBackColor = true;
+            this.btnModulos.Click += new System.EventHandler(this.btnModulos_Click);
+            // 
             // formMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(933, 519);
+            this.Controls.Add(this.btnModulos);
             this.Controls.Add(this.btnEspecialidades);
             this.Controls.Add(this.btnUsuarios);
             this.Controls.Add(this.mnsPrincipal);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.mnsPrincipal;
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "formMain";
             this.Text = "Academia";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -110,6 +127,7 @@ namespace UI.Desktop
         private System.Windows.Forms.ToolStripMenuItem mnuSalir;
         private System.Windows.Forms.Button btnUsuarios;
         private System.Windows.Forms.Button btnEspecialidades;
+        private System.Windows.Forms.Button btnModulos;
     }
 }
 

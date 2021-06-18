@@ -43,5 +43,11 @@ namespace UI.Desktop
             Especialidades appEspecialidades = new Especialidades();
             appEspecialidades.ShowDialog();
         }
+
+        private void btnModulos_Click(object sender, EventArgs e)
+        {
+            Modulos appModulos = new Modulos();
+            appModulos.ShowDialog();
+        }
     }
 }
