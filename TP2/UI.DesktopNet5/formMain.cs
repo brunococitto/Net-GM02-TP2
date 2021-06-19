@@ -49,5 +49,10 @@ namespace UI.Desktop
             Modulos appModulos = new Modulos();
             appModulos.ShowDialog();
         }
+
+        private void mnuCerrarSesion_Click(object sender, EventArgs e)
+        {
+            this.formMain_Shown(sender, e);
+        }
     }
 }

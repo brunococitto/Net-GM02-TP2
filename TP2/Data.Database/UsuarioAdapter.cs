@@ -171,5 +171,41 @@ namespace Data.Database
             }
             usuario.State = BusinessEntity.States.Unmodified;
         }
+        public Usuario Login(string usuario, string contrasenia)
+        {
+            try
+            {
+                Usuario usr = new Usuario();
+                this.OpenConnection();
+                SqlCommand cmdLogin = new SqlCommand("SELECT * FROM usuarios WHERE nombre_usuario=@usuario and clave=@contrasenia", sqlConn);
+                cmdLogin.Parameters.Add("@usuario", SqlDbType.VarChar, 50).Value = usuario;
+                cmdLogin.Parameters.Add("@contrasenia", SqlDbType.VarChar, 50).Value = contrasenia;
+                SqlDataReader drLogin = cmdLogin.ExecuteReader();
+                if (drLogin.Read())
+                {
+                    usr.ID = (int)drLogin["id_usuario"];
+                    usr.NombreUsuario = (string)drLogin["nombre_usuario"];
+                    usr.Clave = (string)drLogin["clave"];
+                    usr.Habilitado = (bool)drLogin["habilitado"];
+                    usr.Nombre = (string)drLogin["nombre"];
+                    usr.Apellido = (string)drLogin["apellido"];
+                    usr.Email = (string)drLogin["email"];
+                    drLogin.Close();
+                    return usr;
+                } else
+                {
+                    return null;
+                }
+            }
+            catch (Exception Ex)
+            {
+                Exception ExcepcionManejada = new Exception("Error al recuperar usuario", Ex);
+                throw ExcepcionManejada;
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+        }
     }
 }

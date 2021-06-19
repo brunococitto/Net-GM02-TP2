@@ -31,5 +31,10 @@ namespace Business.Logic
         {
             UsuarioData.Save(usuario);
         }
+        public Usuario Login(string usuario, string contrasenia)
+        {
+            Usuario usr = UsuarioData.Login(usuario, contrasenia);
+            return usr;
+        }
     }
 }

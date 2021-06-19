@@ -35,6 +35,7 @@ namespace UI.Desktop
             this.btnUsuarios = new System.Windows.Forms.Button();
             this.btnEspecialidades = new System.Windows.Forms.Button();
             this.btnModulos = new System.Windows.Forms.Button();
+            this.mnuCerrarSesion = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +53,8 @@ namespace UI.Desktop
             // mnuArchivo
             // 
             this.mnuArchivo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuSalir});
+            this.mnuSalir,
+            this.mnuCerrarSesion});
             this.mnuArchivo.Name = "mnuArchivo";
             this.mnuArchivo.Size = new System.Drawing.Size(60, 20);
             this.mnuArchivo.Text = "Archivo";
@@ -60,7 +62,7 @@ namespace UI.Desktop
             // mnuSalir
             // 
             this.mnuSalir.Name = "mnuSalir";
-            this.mnuSalir.Size = new System.Drawing.Size(96, 22);
+            this.mnuSalir.Size = new System.Drawing.Size(180, 22);
             this.mnuSalir.Text = "Salir";
             this.mnuSalir.Click += new System.EventHandler(this.mnuSalir_Click);
             // 
@@ -97,6 +99,13 @@ namespace UI.Desktop
             this.btnModulos.UseVisualStyleBackColor = true;
             this.btnModulos.Click += new System.EventHandler(this.btnModulos_Click);
             // 
+            // mnuCerrarSesion
+            // 
+            this.mnuCerrarSesion.Name = "mnuCerrarSesion";
+            this.mnuCerrarSesion.Size = new System.Drawing.Size(180, 22);
+            this.mnuCerrarSesion.Text = "Cerrar sesión";
+            this.mnuCerrarSesion.Click += new System.EventHandler(this.mnuCerrarSesion_Click);
+            // 
             // formMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -128,6 +137,7 @@ namespace UI.Desktop
         private System.Windows.Forms.Button btnUsuarios;
         private System.Windows.Forms.Button btnEspecialidades;
         private System.Windows.Forms.Button btnModulos;
+        private System.Windows.Forms.ToolStripMenuItem mnuCerrarSesion;
     }
 }
 

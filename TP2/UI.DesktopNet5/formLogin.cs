@@ -21,8 +21,9 @@ namespace UI.Desktop
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            //la propiedad Text de los TextBox contiene el texto escrito en ellos
-            if (this.txtUsuario.Text == "Admin" && this.txtPass.Text == "admin")
+            UsuarioLogic usrLogic = new UsuarioLogic();
+            Usuario usr = usrLogic.Login(this.txtUsuario.Text, this.txtPass.Text);
+            if (usr != null)
             {
                 this.DialogResult = DialogResult.OK;
             }
