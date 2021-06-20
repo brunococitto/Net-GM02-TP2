@@ -36,9 +36,9 @@ namespace UI.Desktop
         }
         public void Listar()
         {
+            // Tengo que pedir la lista de especialidades y de planes
             PlanLogic pl = new PlanLogic();
             EspecialidadLogic el = new EspecialidadLogic();
-            // Tengo que pedir la lista de especialidades y de planes
             List<Plan> planes = pl.GetAll();
             List<Especialidad> especialidades = el.GetAll();
             // Tengo que cambiar el ID de la especialidad por su descripción para mostrarlo
@@ -53,9 +53,10 @@ namespace UI.Desktop
                                 Descripcion = p.Descripcion,
                                 Especialidad = e.Descripcion
                             };
-            this.dgvPlanes.AutoGenerateColumns = false;
-            // Espera una lista 
+            // Cada uno de los objetos nuevos tiene ID (plan), Descripción (plan) y Especialidad
+            // Espera algo que implemente la interfaz ILIST, como por ej una lista 
             this.dgvPlanes.DataSource = consulta.ToList();
+            this.dgvPlanes.AutoGenerateColumns = false;
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
