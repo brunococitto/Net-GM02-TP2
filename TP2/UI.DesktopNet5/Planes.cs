@@ -53,8 +53,9 @@ namespace UI.Desktop
                                 Descripcion = p.Descripcion,
                                 Especialidad = e.Descripcion
                             };
-            // Cada uno de los objetos nuevos tiene ID (plan), Descripción (plan) y Especialidad
-            // Espera algo que implemente la interfaz ILIST, como por ej una lista 
+            // Cada uno de los objetos nuevos tiene ID (plan), Descripción (plan) y Especialidad (descripcion especialidad)
+            // El DataSource de un dgv espera algo que implemente la interfaz ILIST, como por ej una lista
+            // Entonces convierto lo que antes era algo anónimo a una lista
             this.dgvPlanes.DataSource = consulta.ToList();
             this.dgvPlanes.AutoGenerateColumns = false;
         }
@@ -101,7 +102,7 @@ namespace UI.Desktop
         {
             if (this.dgvPlanes.SelectedRows.Count > 0)
             {
-                int ID = ((Business.Entities.Plan)this.dgvPlanes.SelectedRows[0].DataBoundItem).ID;
+                int ID = (int)this.dgvPlanes.SelectedRows[0].Cells["ID"].Value;
                 PlanDesktop formPlan = new PlanDesktop(ID, ApplicationForm.ModoForm.Baja);
                 formPlan.ShowDialog();
                 this.Listar();

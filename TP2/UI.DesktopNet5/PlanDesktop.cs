@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
-using FastMember;
 
 namespace UI.Desktop
 {
@@ -20,14 +19,18 @@ namespace UI.Desktop
         {
             InitializeComponent();
         }
+        // Este es el constructor cuando se da de alta alta, ya que solo tiene un arg
         public PlanDesktop(ModoForm modo) : this()
         {
             Modos = modo;
+            // Cargo las especialidades para mostrarlas en el combobox
             EspecialidadLogic el = new EspecialidadLogic();
             List<Especialidad> listaEsp = el.GetAll();
-            this.cbEspecialidad.DataSource = listToDataTable(listaEsp).DefaultView;
-            //this.cbEspecialidad.SelectedIndex = 0;
+            this.cbEspecialidad.DataSource = listaEsp;
+            // this.cbEspecialidad.DataSource = listToDataTable(listaEsp).DefaultView;
+            this.cbEspecialidad.SelectedIndex = 0;
         }
+        // Este es el constructor cuando se edita o elimina algo, ya que tiene dos args
         public PlanDesktop(int ID, ModoForm modo) : this()
         {
             Modos = modo;
@@ -44,9 +47,8 @@ namespace UI.Desktop
             Especialidad espActualPlan = el.GetOne(PlanActual.IDEspecialidad);
             // A su vez tengo que cargar las otras especialidades por si quiero seleccionar otra
             List<Especialidad> especialidades = el.GetAll();
-            // El tema es que lo anterior me da una lista y yo necesito un datatable
-            // asi que necesito un metodo que convierta list a datatable
-            this.cbEspecialidad.DataSource = listToDataTable(especialidades).DefaultView;
+            // seteo como datasource del combobox la lista de especialidades anteriores
+            this.cbEspecialidad.DataSource = especialidades;
             // ahora tengo que seleccionar la especialidad correspondiente al plan actual
             this.cbEspecialidad.SelectedIndex = cbEspecialidad.FindStringExact(espActualPlan.Descripcion);
             switch (this.Modos)
@@ -59,9 +61,13 @@ namespace UI.Desktop
                     break;
                 case ModoForm.Baja:
                     this.btnAceptar.Text = "Eliminar";
+                    this.cbEspecialidad.Enabled = false;
+                    this.txtDescripcion.Enabled = false;
                     break;
                 case ModoForm.Consulta:
                     this.btnAceptar.Text = "Aceptar";
+                    this.cbEspecialidad.Enabled = false;
+                    this.txtDescripcion.Enabled = false;
                     break;
             }
         }
@@ -71,11 +77,13 @@ namespace UI.Desktop
             {
                 PlanActual = new Plan();
                 PlanActual.Descripcion = this.txtDescripcion.Text;
+                // Recordar que el value member del combo es el ID de especialidad
                 PlanActual.IDEspecialidad = (int)this.cbEspecialidad.SelectedValue;
             }
             if (Modos == ModoForm.Modificacion)
             {
                 PlanActual.Descripcion = this.txtDescripcion.Text;
+                // Recordar que el value member del combo es el ID de especialidad
                 PlanActual.IDEspecialidad = (int)this.cbEspecialidad.SelectedValue;
             }
             switch (Modos)
@@ -143,23 +151,6 @@ namespace UI.Desktop
         {
             PlanLogic e = new PlanLogic();
             e.Delete(PlanActual.ID);
-        }
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-        // Este método sirve para convertir de la lista que devuelve el método GetAll
-        // Al DataTable necesario para cargar el combo box de especialidades
-        private DataTable listToDataTable(List<Especialidad> listaEsp)
-        {
-            // lo hice siguiendo el primer comentario de
-            // https://stackoverflow.com/questions/564366/convert-generic-list-enumerable-to-datatable
-            DataTable dataTable = new DataTable();
-            using (var reader = ObjectReader.Create(listaEsp))
-            {
-                dataTable.Load(reader);
-            }
-            return dataTable;
         }
     }
 }
