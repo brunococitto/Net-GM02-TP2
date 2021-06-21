@@ -37,6 +37,7 @@ namespace UI.Desktop
             this.btnEspecialidades = new System.Windows.Forms.Button();
             this.btnModulos = new System.Windows.Forms.Button();
             this.btnPlanes = new System.Windows.Forms.Button();
+            this.btnMaterias = new System.Windows.Forms.Button();
             this.mnsPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -118,11 +119,23 @@ namespace UI.Desktop
             this.btnPlanes.UseVisualStyleBackColor = true;
             this.btnPlanes.Click += new System.EventHandler(this.btnPlanes_Click);
             // 
+            // btnMaterias
+            // 
+            this.btnMaterias.Location = new System.Drawing.Point(14, 255);
+            this.btnMaterias.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnMaterias.Name = "btnMaterias";
+            this.btnMaterias.Size = new System.Drawing.Size(177, 47);
+            this.btnMaterias.TabIndex = 10;
+            this.btnMaterias.Text = "Materias";
+            this.btnMaterias.UseVisualStyleBackColor = true;
+            this.btnMaterias.Click += new System.EventHandler(this.btnMaterias_Click);
+            // 
             // formMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(933, 519);
+            this.Controls.Add(this.btnMaterias);
             this.Controls.Add(this.btnPlanes);
             this.Controls.Add(this.btnModulos);
             this.Controls.Add(this.btnEspecialidades);
@@ -152,6 +165,7 @@ namespace UI.Desktop
         private System.Windows.Forms.Button btnModulos;
         private System.Windows.Forms.ToolStripMenuItem mnuCerrarSesion;
         private System.Windows.Forms.Button btnPlanes;
+        private System.Windows.Forms.Button btnMaterias;
     }
 }
 

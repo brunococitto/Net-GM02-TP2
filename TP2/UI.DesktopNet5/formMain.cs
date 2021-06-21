@@ -60,5 +60,11 @@ namespace UI.Desktop
             Planes appPlanes = new Planes();
             appPlanes.ShowDialog();
         }
+
+        private void btnMaterias_Click(object sender, EventArgs e)
+        {
+            Materias appMaterias = new Materias();
+            appMaterias.ShowDialog();
+        }
     }
 }
