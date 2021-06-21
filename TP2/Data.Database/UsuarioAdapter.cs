@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using System.Security.Cryptography;
 
 namespace Data.Database
 {
@@ -80,6 +81,7 @@ namespace Data.Database
         {
             try
             {
+                usuario.Clave = hashearClave(usuario.Clave);
                 this.OpenConnection();
                 SqlCommand cmdSave = new SqlCommand(
                     "UPDATE usuarios SET nombre_usuario = @nombre_usuario, clave = @clave, " +
@@ -109,6 +111,7 @@ namespace Data.Database
         {
             try
             {
+                usuario.Clave = hashearClave(usuario.Clave);
                 this.OpenConnection();
                 SqlCommand cmdSave = new SqlCommand(
                     "INSERT INTO usuarios(nombre_usuario, clave, habilitado, nombre, apellido, email) " +
@@ -122,7 +125,7 @@ namespace Data.Database
                 cmdSave.Parameters.Add("@apellido", SqlDbType.VarChar, 50).Value = usuario.Apellido;
                 cmdSave.Parameters.Add("@email", SqlDbType.VarChar, 50).Value = usuario.Email;
                 usuario.ID = Decimal.ToInt32((decimal)cmdSave.ExecuteScalar());
-                
+
             }
             catch (Exception e)
             {
@@ -175,6 +178,7 @@ namespace Data.Database
         {
             try
             {
+                contrasenia = hashearClave(contrasenia);
                 Usuario usr = new Usuario();
                 this.OpenConnection();
                 SqlCommand cmdLogin = new SqlCommand("SELECT * FROM usuarios WHERE nombre_usuario=@usuario and clave=@contrasenia", sqlConn);
@@ -205,6 +209,19 @@ namespace Data.Database
             finally
             {
                 this.CloseConnection();
+            }
+        }
+        private string hashearClave(string claveOriginal)
+        {
+            using (SHA1Managed sha1 = new SHA1Managed())
+            {
+                var claveHasheada = sha1.ComputeHash(Encoding.UTF8.GetBytes(claveOriginal));
+                var salida = new StringBuilder(claveHasheada.Length * 2);
+                foreach (byte b in claveHasheada)
+                {
+                    salida.Append(b.ToString("X2"));
+                }
+                return salida.ToString();
             }
         }
     }

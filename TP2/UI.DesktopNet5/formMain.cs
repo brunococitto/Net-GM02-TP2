@@ -54,5 +54,11 @@ namespace UI.Desktop
         {
             this.formMain_Shown(sender, e);
         }
+
+        private void btnPlanes_Click(object sender, EventArgs e)
+        {
+            Planes appPlanes = new Planes();
+            appPlanes.ShowDialog();
+        }
     }
 }

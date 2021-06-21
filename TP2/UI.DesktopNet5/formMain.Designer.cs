@@ -32,10 +32,11 @@ namespace UI.Desktop
             this.mnsPrincipal = new System.Windows.Forms.MenuStrip();
             this.mnuArchivo = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSalir = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCerrarSesion = new System.Windows.Forms.ToolStripMenuItem();
             this.btnUsuarios = new System.Windows.Forms.Button();
             this.btnEspecialidades = new System.Windows.Forms.Button();
             this.btnModulos = new System.Windows.Forms.Button();
-            this.mnuCerrarSesion = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnPlanes = new System.Windows.Forms.Button();
             this.mnsPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,9 +63,16 @@ namespace UI.Desktop
             // mnuSalir
             // 
             this.mnuSalir.Name = "mnuSalir";
-            this.mnuSalir.Size = new System.Drawing.Size(180, 22);
+            this.mnuSalir.Size = new System.Drawing.Size(142, 22);
             this.mnuSalir.Text = "Salir";
             this.mnuSalir.Click += new System.EventHandler(this.mnuSalir_Click);
+            // 
+            // mnuCerrarSesion
+            // 
+            this.mnuCerrarSesion.Name = "mnuCerrarSesion";
+            this.mnuCerrarSesion.Size = new System.Drawing.Size(142, 22);
+            this.mnuCerrarSesion.Text = "Cerrar sesión";
+            this.mnuCerrarSesion.Click += new System.EventHandler(this.mnuCerrarSesion_Click);
             // 
             // btnUsuarios
             // 
@@ -99,18 +107,23 @@ namespace UI.Desktop
             this.btnModulos.UseVisualStyleBackColor = true;
             this.btnModulos.Click += new System.EventHandler(this.btnModulos_Click);
             // 
-            // mnuCerrarSesion
+            // btnPlanes
             // 
-            this.mnuCerrarSesion.Name = "mnuCerrarSesion";
-            this.mnuCerrarSesion.Size = new System.Drawing.Size(180, 22);
-            this.mnuCerrarSesion.Text = "Cerrar sesión";
-            this.mnuCerrarSesion.Click += new System.EventHandler(this.mnuCerrarSesion_Click);
+            this.btnPlanes.Location = new System.Drawing.Point(14, 202);
+            this.btnPlanes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnPlanes.Name = "btnPlanes";
+            this.btnPlanes.Size = new System.Drawing.Size(177, 47);
+            this.btnPlanes.TabIndex = 8;
+            this.btnPlanes.Text = "Planes";
+            this.btnPlanes.UseVisualStyleBackColor = true;
+            this.btnPlanes.Click += new System.EventHandler(this.btnPlanes_Click);
             // 
             // formMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(933, 519);
+            this.Controls.Add(this.btnPlanes);
             this.Controls.Add(this.btnModulos);
             this.Controls.Add(this.btnEspecialidades);
             this.Controls.Add(this.btnUsuarios);
@@ -138,6 +151,7 @@ namespace UI.Desktop
         private System.Windows.Forms.Button btnEspecialidades;
         private System.Windows.Forms.Button btnModulos;
         private System.Windows.Forms.ToolStripMenuItem mnuCerrarSesion;
+        private System.Windows.Forms.Button btnPlanes;
     }
 }
 
