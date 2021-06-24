@@ -111,6 +111,7 @@ namespace UI.Desktop
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(415, 142);
             this.Controls.Add(this.TLPanelModulos);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ModuloDesktop";
             this.Text = "Modulo";
             this.TLPanelModulos.ResumeLayout(false);

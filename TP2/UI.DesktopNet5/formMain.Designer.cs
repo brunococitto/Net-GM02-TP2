@@ -38,7 +38,10 @@ namespace UI.Desktop
             this.btnModulos = new System.Windows.Forms.Button();
             this.btnPlanes = new System.Windows.Forms.Button();
             this.btnMaterias = new System.Windows.Forms.Button();
+            this.panelMenuBotones = new System.Windows.Forms.Panel();
+            this.panelPrincipal = new System.Windows.Forms.Panel();
             this.mnsPrincipal.SuspendLayout();
+            this.panelMenuBotones.SuspendLayout();
             this.SuspendLayout();
             // 
             // mnsPrincipal
@@ -77,7 +80,7 @@ namespace UI.Desktop
             // 
             // btnUsuarios
             // 
-            this.btnUsuarios.Location = new System.Drawing.Point(14, 42);
+            this.btnUsuarios.Location = new System.Drawing.Point(4, 3);
             this.btnUsuarios.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnUsuarios.Name = "btnUsuarios";
             this.btnUsuarios.Size = new System.Drawing.Size(177, 47);
@@ -88,7 +91,7 @@ namespace UI.Desktop
             // 
             // btnEspecialidades
             // 
-            this.btnEspecialidades.Location = new System.Drawing.Point(14, 96);
+            this.btnEspecialidades.Location = new System.Drawing.Point(4, 56);
             this.btnEspecialidades.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnEspecialidades.Name = "btnEspecialidades";
             this.btnEspecialidades.Size = new System.Drawing.Size(177, 47);
@@ -99,7 +102,7 @@ namespace UI.Desktop
             // 
             // btnModulos
             // 
-            this.btnModulos.Location = new System.Drawing.Point(14, 149);
+            this.btnModulos.Location = new System.Drawing.Point(4, 109);
             this.btnModulos.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnModulos.Name = "btnModulos";
             this.btnModulos.Size = new System.Drawing.Size(177, 47);
@@ -110,7 +113,7 @@ namespace UI.Desktop
             // 
             // btnPlanes
             // 
-            this.btnPlanes.Location = new System.Drawing.Point(14, 202);
+            this.btnPlanes.Location = new System.Drawing.Point(4, 162);
             this.btnPlanes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnPlanes.Name = "btnPlanes";
             this.btnPlanes.Size = new System.Drawing.Size(177, 47);
@@ -121,7 +124,7 @@ namespace UI.Desktop
             // 
             // btnMaterias
             // 
-            this.btnMaterias.Location = new System.Drawing.Point(14, 255);
+            this.btnMaterias.Location = new System.Drawing.Point(4, 215);
             this.btnMaterias.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnMaterias.Name = "btnMaterias";
             this.btnMaterias.Size = new System.Drawing.Size(177, 47);
@@ -130,16 +133,36 @@ namespace UI.Desktop
             this.btnMaterias.UseVisualStyleBackColor = true;
             this.btnMaterias.Click += new System.EventHandler(this.btnMaterias_Click);
             // 
+            // panelMenuBotones
+            // 
+            this.panelMenuBotones.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panelMenuBotones.Controls.Add(this.btnUsuarios);
+            this.panelMenuBotones.Controls.Add(this.btnMaterias);
+            this.panelMenuBotones.Controls.Add(this.btnEspecialidades);
+            this.panelMenuBotones.Controls.Add(this.btnPlanes);
+            this.panelMenuBotones.Controls.Add(this.btnModulos);
+            this.panelMenuBotones.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelMenuBotones.Location = new System.Drawing.Point(0, 24);
+            this.panelMenuBotones.Name = "panelMenuBotones";
+            this.panelMenuBotones.Size = new System.Drawing.Size(185, 495);
+            this.panelMenuBotones.TabIndex = 12;
+            // 
+            // panelPrincipal
+            // 
+            this.panelPrincipal.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.panelPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelPrincipal.Location = new System.Drawing.Point(185, 24);
+            this.panelPrincipal.Name = "panelPrincipal";
+            this.panelPrincipal.Size = new System.Drawing.Size(748, 495);
+            this.panelPrincipal.TabIndex = 13;
+            // 
             // formMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(933, 519);
-            this.Controls.Add(this.btnMaterias);
-            this.Controls.Add(this.btnPlanes);
-            this.Controls.Add(this.btnModulos);
-            this.Controls.Add(this.btnEspecialidades);
-            this.Controls.Add(this.btnUsuarios);
+            this.Controls.Add(this.panelPrincipal);
+            this.Controls.Add(this.panelMenuBotones);
             this.Controls.Add(this.mnsPrincipal);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.mnsPrincipal;
@@ -150,6 +173,7 @@ namespace UI.Desktop
             this.Shown += new System.EventHandler(this.formMain_Shown);
             this.mnsPrincipal.ResumeLayout(false);
             this.mnsPrincipal.PerformLayout();
+            this.panelMenuBotones.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -166,6 +190,8 @@ namespace UI.Desktop
         private System.Windows.Forms.ToolStripMenuItem mnuCerrarSesion;
         private System.Windows.Forms.Button btnPlanes;
         private System.Windows.Forms.Button btnMaterias;
+        private System.Windows.Forms.Panel panelMenuBotones;
+        private System.Windows.Forms.Panel panelPrincipal;
     }
 }
 

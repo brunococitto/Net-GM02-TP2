@@ -153,9 +153,11 @@ namespace UI.Desktop
 
             }
         }
+        // public Materias materias { get; set; }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             Close();
+            // materias.volver();
         }
         public virtual void Eliminar()
         {

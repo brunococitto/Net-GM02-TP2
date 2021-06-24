@@ -74,10 +74,28 @@ namespace UI.Desktop
         private void tsbNuevo_Click(object sender, EventArgs e)
         {
             MateriaDesktop formMateria = new MateriaDesktop(ApplicationForm.ModoForm.Alta);
+            // this.tsMaterias.Visible = false;
+            // this.tscMaterias.Visible = false;
+            // this.panelDesktop.Visible = true;
+            // formMateria.TopLevel = false;
+            // formMateria.AutoScroll = true;
+            // Esto es para sacarle el borde de windows
+            // formMateria.FormBorderStyle = FormBorderStyle.None;
+            // Esto es para que rellene todo el panel
+            // formMateria.Dock = DockStyle.Fill;
+            // this.panelDesktop.Controls.Add(formMateria);
+            // //this.panelPrincipal.Tag = app;
             formMateria.ShowDialog();
-            this.Listar();
-        }
+            // formMateria.materias = this;
 
+        }
+        // public void volver()
+        // {
+        // this.panelDesktop.Visible = false;
+        // this.tsMaterias.Visible = true;
+        // this.tscMaterias.Visible = true;
+        // this.Listar();
+        // }
         private void dgvUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 

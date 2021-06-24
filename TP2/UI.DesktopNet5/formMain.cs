@@ -14,6 +14,23 @@ namespace UI.Desktop
 {
     public partial class formMain : Form
     {
+        private void AbrirFormEnPanel(Form app)
+        {
+            // Tengo que chequear si ya hay algo abierto en el panel primero
+            if (this.panelPrincipal.Controls.Count > 0 )
+            {
+                this.panelPrincipal.Controls[0].Dispose();
+            }
+            app.TopLevel = false;
+            app.AutoScroll = true;
+            // Esto es para sacarle el borde de windows
+            app.FormBorderStyle = FormBorderStyle.None;
+            // Esto es para que rellene todo el panel
+            app.Dock = DockStyle.Fill;
+            this.panelPrincipal.Controls.Add(app);
+            //this.panelPrincipal.Tag = app;
+            app.Show();
+        }
         public formMain()
         {
             InitializeComponent();
@@ -36,18 +53,22 @@ namespace UI.Desktop
         private void btnUsuarios_Click(object sender, EventArgs e)
         {
             Usuarios appUsuarios = new Usuarios();
-            appUsuarios.ShowDialog();
+            AbrirFormEnPanel(appUsuarios);
+            //appUsuarios.ShowDialog();
+
         }
         private void btnEspecialidades_Click(object sender, EventArgs e)
         {
             Especialidades appEspecialidades = new Especialidades();
-            appEspecialidades.ShowDialog();
+            //appEspecialidades.ShowDialog();
+            AbrirFormEnPanel(appEspecialidades);
         }
 
         private void btnModulos_Click(object sender, EventArgs e)
         {
             Modulos appModulos = new Modulos();
-            appModulos.ShowDialog();
+            //appModulos.ShowDialog();
+            AbrirFormEnPanel(appModulos);
         }
 
         private void mnuCerrarSesion_Click(object sender, EventArgs e)
@@ -58,13 +79,15 @@ namespace UI.Desktop
         private void btnPlanes_Click(object sender, EventArgs e)
         {
             Planes appPlanes = new Planes();
-            appPlanes.ShowDialog();
+            //appPlanes.ShowDialog();
+            AbrirFormEnPanel(appPlanes);
         }
 
         private void btnMaterias_Click(object sender, EventArgs e)
         {
             Materias appMaterias = new Materias();
-            appMaterias.ShowDialog();
+            //appMaterias.ShowDialog();
+            AbrirFormEnPanel(appMaterias);
         }
     }
 }
