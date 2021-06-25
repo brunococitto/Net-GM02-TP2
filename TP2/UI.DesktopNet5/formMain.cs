@@ -66,5 +66,11 @@ namespace UI.Desktop
             Materias appMaterias = new Materias();
             appMaterias.ShowDialog();
         }
+
+        private void btnComision_Click(object sender, EventArgs e)
+        {
+            Comisiones appComisiones = new Comisiones();
+            appComisiones.ShowDialog();
+        }
     }
 }

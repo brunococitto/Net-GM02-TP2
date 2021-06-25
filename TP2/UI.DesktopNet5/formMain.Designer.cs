@@ -38,6 +38,7 @@ namespace UI.Desktop
             this.btnModulos = new System.Windows.Forms.Button();
             this.btnPlanes = new System.Windows.Forms.Button();
             this.btnMaterias = new System.Windows.Forms.Button();
+            this.btnComision = new System.Windows.Forms.Button();
             this.mnsPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -130,11 +131,23 @@ namespace UI.Desktop
             this.btnMaterias.UseVisualStyleBackColor = true;
             this.btnMaterias.Click += new System.EventHandler(this.btnMaterias_Click);
             // 
+            // btnComision
+            // 
+            this.btnComision.Location = new System.Drawing.Point(213, 42);
+            this.btnComision.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnComision.Name = "btnComision";
+            this.btnComision.Size = new System.Drawing.Size(177, 47);
+            this.btnComision.TabIndex = 12;
+            this.btnComision.Text = "Comision";
+            this.btnComision.UseVisualStyleBackColor = true;
+            this.btnComision.Click += new System.EventHandler(this.btnComision_Click);
+            // 
             // formMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(933, 519);
+            this.Controls.Add(this.btnComision);
             this.Controls.Add(this.btnMaterias);
             this.Controls.Add(this.btnPlanes);
             this.Controls.Add(this.btnModulos);
@@ -166,6 +179,7 @@ namespace UI.Desktop
         private System.Windows.Forms.ToolStripMenuItem mnuCerrarSesion;
         private System.Windows.Forms.Button btnPlanes;
         private System.Windows.Forms.Button btnMaterias;
+        private System.Windows.Forms.Button btnComision;
     }
 }
 
