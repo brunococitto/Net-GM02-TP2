@@ -70,7 +70,13 @@ namespace UI.Desktop
         private void btnComision_Click(object sender, EventArgs e)
         {
             Comisiones appComisiones = new Comisiones();
-            appComisiones.ShowDialog();
+            appComisiones.ShowDialog(); 
+        }
+
+        private void btnCurso_Click(object sender, EventArgs e)
+        {
+            Cursos appCursos = new Cursos();
+            appCursos.ShowDialog();
         }
     }
 }

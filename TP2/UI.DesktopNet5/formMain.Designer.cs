@@ -39,6 +39,7 @@ namespace UI.Desktop
             this.btnPlanes = new System.Windows.Forms.Button();
             this.btnMaterias = new System.Windows.Forms.Button();
             this.btnComision = new System.Windows.Forms.Button();
+            this.btnCurso = new System.Windows.Forms.Button();
             this.mnsPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -142,11 +143,23 @@ namespace UI.Desktop
             this.btnComision.UseVisualStyleBackColor = true;
             this.btnComision.Click += new System.EventHandler(this.btnComision_Click);
             // 
+            // btnCurso
+            // 
+            this.btnCurso.Location = new System.Drawing.Point(213, 96);
+            this.btnCurso.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnCurso.Name = "btnCurso";
+            this.btnCurso.Size = new System.Drawing.Size(177, 47);
+            this.btnCurso.TabIndex = 14;
+            this.btnCurso.Text = "Cursos";
+            this.btnCurso.UseVisualStyleBackColor = true;
+            this.btnCurso.Click += new System.EventHandler(this.btnCurso_Click);
+            // 
             // formMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(933, 519);
+            this.Controls.Add(this.btnCurso);
             this.Controls.Add(this.btnComision);
             this.Controls.Add(this.btnMaterias);
             this.Controls.Add(this.btnPlanes);
@@ -180,6 +193,7 @@ namespace UI.Desktop
         private System.Windows.Forms.Button btnPlanes;
         private System.Windows.Forms.Button btnMaterias;
         private System.Windows.Forms.Button btnComision;
+        private System.Windows.Forms.Button btnCurso;
     }
 }
 
