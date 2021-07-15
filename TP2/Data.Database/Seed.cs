@@ -20,11 +20,12 @@ namespace Data.Database
             {
                 new()
                 {
-                    Nombre = "Ale"
-                },
-                new()
-                {
-                    Nombre = "Juan"
+                    NombreUsuario = "bcocitto",
+                    Clave = "C7C3ECFF956CE64056F4BBC9453C8CA853AFA68E",
+                    Apellido = "Cocitto",
+                    Nombre = "Bruno",
+                    Email = "bcocitto@gmail.com",
+                    Habilitado = true
                 }
             };
 
