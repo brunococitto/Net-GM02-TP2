@@ -8,9 +8,8 @@ namespace Data.Database
 {
     public class Adapter
     {
-        //private SqlConnection sqlConnection = new SqlConnection("ConnectionString;");
         const string consKeyDefaultCnnString = "ConnStringLocal";
-        public SqlConnection sqlConn;
+        protected SqlConnection sqlConn;
         protected void OpenConnection()
         {
             var connectionString = ConfigurationManager.ConnectionStrings[consKeyDefaultCnnString].ConnectionString;
@@ -22,11 +21,6 @@ namespace Data.Database
         {
             sqlConn.Close();
             sqlConn = null;
-        }
-
-        protected SqlDataReader ExecuteReader(String commandText)
-        {
-            throw new Exception("Metodo no implementado");
         }
     }
 }

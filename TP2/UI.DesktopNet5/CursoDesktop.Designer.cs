@@ -206,10 +206,8 @@ namespace UI.Desktop
             this.MinimizeBox = false;
             this.Name = "CursoDesktop";
             this.Text = "Curso";
-            this.Load += new System.EventHandler(this.CursoDesktop_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

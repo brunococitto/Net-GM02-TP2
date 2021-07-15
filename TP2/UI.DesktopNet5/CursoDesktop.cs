@@ -9,40 +9,44 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
+using Data.Database;
 
 namespace UI.Desktop
 {
     public partial class CursoDesktop : ApplicationForm
     {
         public Curso CursoActual { set; get; }
-        public CursoDesktop()
+        private readonly ComisionLogic _comisionLogic;
+        private readonly MateriaLogic _materiaLogic;
+        private readonly CursoLogic _cursoLogic;
+        public CursoDesktop(AcademyContext context)
         {
             InitializeComponent();
+            _comisionLogic = new ComisionLogic(new ComisionAdapter(context));
+            _materiaLogic = new MateriaLogic(new MateriaAdapter(context));
+            _cursoLogic = new CursoLogic(new CursoAdapter(context));
         }
         // Este es el constructor cuando se da de alta alta, ya que solo tiene un arg
-        public CursoDesktop(ModoForm modo) : this()
+        public CursoDesktop(ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
             // Cargo las materias para mostrarlos en el combobox
-            MateriaLogic ml = new MateriaLogic();
-            List<Materia> listaMaterias = ml.GetAll();
+            List<Materia> listaMaterias = _materiaLogic.GetAll();
             this.cbMateria.DataSource = listaMaterias;
             // selecciono la materia de la posicion 0 como para seleccionar algo
             this.cbMateria.SelectedIndex = 0;
             // Modos = modo;
             // Cargo las comisiones para mostrarlos en el combobox
-            ComisionLogic coml = new ComisionLogic();
-            List<Comision> listaComisiones = coml.GetAll();
+            List<Comision> listaComisiones = _comisionLogic.GetAll();
             this.cbComision.DataSource = listaComisiones;
             // selecciono la comision de la posicion 0 como para seleccionar algo
             this.cbComision.SelectedIndex = 0;
         }
         // Este es el constructor cuando se edita o elimina algo, ya que tiene dos args
-        public CursoDesktop(int ID, ModoForm modo) : this()
+        public CursoDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            CursoLogic c = new CursoLogic();
-            CursoActual = c.GetOne(ID);
+            CursoActual = _cursoLogic.GetOne(ID);
             MapearDeDatos();
         }
         public override void MapearDeDatos()
@@ -52,19 +56,17 @@ namespace UI.Desktop
             this.txtAnoCalendario.Text = this.CursoActual.AnoCalendario.ToString();
             this.txtCupo.Text = this.CursoActual.Cupo.ToString();
             // Acá cuando cargo el curso tengo que buscar la materia asignada
-            MateriaLogic ml = new MateriaLogic();
-            Materia materiaActualCurso = ml.GetOne(CursoActual.IDMateria);
+            Materia materiaActualCurso = _materiaLogic.GetOne(CursoActual.IDMateria);
             // A su vez tengo que cargar las otras materias por si quiero seleccionar otra
-            List<Materia> materias = ml.GetAll();
+            List<Materia> materias = _materiaLogic.GetAll();
             // seteo como datasource del combobox la lista de materias anteriores
             this.cbMateria.DataSource = materias;
             // ahora tengo que seleccionar la materia correspondiente a el curso
             this.cbMateria.SelectedIndex = cbMateria.FindStringExact(materiaActualCurso.Descripcion);
             // Acá cuando cargo el curso tengo que buscar la materia asignada
-            ComisionLogic coml = new ComisionLogic();
-            Comision comisionActualCurso = coml.GetOne(CursoActual.IDComision);
+            Comision comisionActualCurso = _comisionLogic.GetOne(CursoActual.IDComision);
             // A su vez tengo que cargar las otras materias por si quiero seleccionar otra
-            List<Comision> comisiones = coml.GetAll();
+            List<Comision> comisiones = _comisionLogic.GetAll();
             // seteo como datasource del combobox la lista de materias anteriores
             this.cbComision.DataSource = comisiones;
             // ahora tengo que seleccionar la materia correspondiente a el curso
@@ -129,9 +131,8 @@ namespace UI.Desktop
         }
         public override void GuardarCambios()
         {
-            CursoLogic c = new CursoLogic();
             MapearADatos();
-            c.Save(CursoActual);
+            _cursoLogic.Save(CursoActual);
         }
         public override bool Validar()
         {
@@ -142,9 +143,6 @@ namespace UI.Desktop
                 return false;
             }
             else { return true; }
-        }
-        private void CursoDesktop_Load(object sender, EventArgs e)
-        {
         }
         private void btnAceptar_Click(object sender, EventArgs e)
         {
@@ -171,7 +169,6 @@ namespace UI.Desktop
                 case ModoForm.Consulta:
                     Close();
                     break;
-
             }
         }
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -180,8 +177,7 @@ namespace UI.Desktop
         }
         public virtual void Eliminar()
         {
-            CursoLogic e = new CursoLogic();
-            e.Delete(CursoActual.ID);
+            _cursoLogic.Delete(CursoActual.ID);
         }
     }
 }

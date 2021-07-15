@@ -9,33 +9,36 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
+using Data.Database;
 
 namespace UI.Desktop
 {
     public partial class PlanDesktop : ApplicationForm
     {
+        private readonly PlanLogic _planLogic;
+        private readonly EspecialidadLogic _especialidadLogic;
         public Plan PlanActual { set; get; }
-        public PlanDesktop()
+        public PlanDesktop(AcademyContext context)
         {
             InitializeComponent();
+            _planLogic = new PlanLogic(new PlanAdapter(context));
+            _especialidadLogic = new EspecialidadLogic(new EspecialidadAdapter(context));
         }
         // Este es el constructor cuando se da de alta alta, ya que solo tiene un arg
-        public PlanDesktop(ModoForm modo) : this()
+        public PlanDesktop(ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
             // Cargo las especialidades para mostrarlas en el combobox
-            EspecialidadLogic el = new EspecialidadLogic();
-            List<Especialidad> listaEsp = el.GetAll();
+            List<Especialidad> listaEsp = _especialidadLogic.GetAll();
             this.cbEspecialidad.DataSource = listaEsp;
             // this.cbEspecialidad.DataSource = listToDataTable(listaEsp).DefaultView;
             this.cbEspecialidad.SelectedIndex = 0;
         }
         // Este es el constructor cuando se edita o elimina algo, ya que tiene dos args
-        public PlanDesktop(int ID, ModoForm modo) : this()
+        public PlanDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            PlanLogic p = new PlanLogic();
-            PlanActual = p.GetOne(ID);
+            PlanActual = _planLogic.GetOne(ID);
             MapearDeDatos();
         }
         public override void MapearDeDatos()
@@ -43,10 +46,9 @@ namespace UI.Desktop
             this.txtID.Text = this.PlanActual.ID.ToString();
             this.txtDescripcion.Text = this.PlanActual.Descripcion;
             // Acá cuando cargo el plan tengo que buscar la especialidad asignada al plan
-            EspecialidadLogic el = new EspecialidadLogic();
-            Especialidad espActualPlan = el.GetOne(PlanActual.IDEspecialidad);
+            Especialidad espActualPlan = _especialidadLogic.GetOne(PlanActual.IDEspecialidad);
             // A su vez tengo que cargar las otras especialidades por si quiero seleccionar otra
-            List<Especialidad> especialidades = el.GetAll();
+            List<Especialidad> especialidades = _especialidadLogic.GetAll();
             // seteo como datasource del combobox la lista de especialidades anteriores
             this.cbEspecialidad.DataSource = especialidades;
             // ahora tengo que seleccionar la especialidad correspondiente al plan actual
@@ -98,22 +100,17 @@ namespace UI.Desktop
         }
         public override void GuardarCambios()
         {
-            PlanLogic e = new PlanLogic();
             MapearADatos();
-            e.Save(PlanActual);
+            _planLogic.Save(PlanActual);
         }
         public override bool Validar()
         {
-
             if (string.IsNullOrWhiteSpace(this.txtDescripcion.Text))
             {
                 Notificar("Error", "Debe completar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             else { return true; }
-        }
-        private void PlanDesktop_Load(object sender, EventArgs e)
-        {
         }
         private void btnAceptar_Click(object sender, EventArgs e)
         {
@@ -140,7 +137,6 @@ namespace UI.Desktop
                 case ModoForm.Consulta:
                     Close();
                     break;
-
             }
         }
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -149,8 +145,7 @@ namespace UI.Desktop
         }
         public virtual void Eliminar()
         {
-            PlanLogic e = new PlanLogic();
-            e.Delete(PlanActual.ID);
+            _planLogic.Delete(PlanActual.ID);
         }
     }
 }

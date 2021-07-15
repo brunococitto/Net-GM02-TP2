@@ -9,6 +9,13 @@ namespace Data.Database
 {
     public class CursoAdapter : Adapter
     {
+        private readonly AcademyContext _context;
+        private Adapter _adapter;
+        public CursoAdapter(AcademyContext context)
+        {
+            _adapter = new Adapter();
+            _context = context;
+        }
         public List<Curso> GetAll()
         {
             List<Curso> cursos = new List<Curso>();

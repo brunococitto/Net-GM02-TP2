@@ -10,10 +10,10 @@ namespace Business.Logic
 {
     public class EspecialidadLogic : BusinessLogic
     {
-        public EspecialidadAdapter EspecialidadData { get; set; }
-        public EspecialidadLogic()
+        private EspecialidadAdapter EspecialidadData { get; set; }
+        public EspecialidadLogic(EspecialidadAdapter especialidadAdapter)
         {
-            EspecialidadData =  new EspecialidadAdapter();
+            EspecialidadData = especialidadAdapter;
         }
         public List<Especialidad> GetAll()
         {

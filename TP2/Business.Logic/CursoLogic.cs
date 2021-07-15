@@ -10,10 +10,10 @@ namespace Business.Logic
 {
     public class CursoLogic : BusinessLogic
     {
-        public CursoAdapter CursoData { get; set; }
-        public CursoLogic()
+        private CursoAdapter CursoData { get; set; }
+        public CursoLogic(CursoAdapter cursoAdapter)
         {
-            CursoData =  new CursoAdapter();
+            CursoData = cursoAdapter;
         }
         public List<Curso> GetAll()
         {

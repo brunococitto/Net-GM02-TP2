@@ -10,6 +10,13 @@ namespace Data.Database
 {
     public class UsuarioAdapter : Adapter
     {
+        private readonly AcademyContext _context;
+        private Adapter _adapter;
+        public UsuarioAdapter(AcademyContext context)
+        {
+            _adapter = new Adapter();
+            _context = context;
+        }
         public List<Usuario> GetAll()
         {
             List<Usuario> usuarios = new List<Usuario>();

@@ -182,7 +182,6 @@ namespace UI.Desktop
             this.MinimizeBox = false;
             this.Name = "MateriaDesktop";
             this.Text = "Materia";
-            this.Load += new System.EventHandler(this.MateriaDesktop_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

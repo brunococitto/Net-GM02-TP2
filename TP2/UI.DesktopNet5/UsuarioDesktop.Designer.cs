@@ -247,12 +247,10 @@ namespace UI.Desktop
             this.MinimizeBox = false;
             this.Name = "UsuarioDesktop";
             this.Text = "Usuario";
-            this.Load += new System.EventHandler(this.UsuarioDesktop_Load);
             this.TLPanelUsuarios.ResumeLayout(false);
             this.TLPanelUsuarios.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

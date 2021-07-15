@@ -9,24 +9,26 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
+using Data.Database;
 
 namespace UI.Desktop
 {
     public partial class EspecialidadDesktop : ApplicationForm
     {
-        public EspecialidadDesktop()
+        private readonly EspecialidadLogic _especialidadLogic;
+        public EspecialidadDesktop(AcademyContext context)
         {
             InitializeComponent();
+            _especialidadLogic = new EspecialidadLogic(new EspecialidadAdapter(context));
         }
-        public EspecialidadDesktop(ModoForm modo) : this()
+        public EspecialidadDesktop(ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
         }
-        public EspecialidadDesktop(int ID, ModoForm modo) : this()
+        public EspecialidadDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            EspecialidadLogic e = new EspecialidadLogic();
-            EspecialidadActual = e.GetOne(ID);
+            EspecialidadActual = _especialidadLogic.GetOne(ID);
             MapearDeDatos();
         }
         public Especialidad EspecialidadActual { set; get; }
@@ -73,22 +75,17 @@ namespace UI.Desktop
         }
         public override void GuardarCambios()
         {
-            EspecialidadLogic e = new EspecialidadLogic();
             MapearADatos();
-            e.Save(EspecialidadActual);
+            _especialidadLogic.Save(EspecialidadActual);
         }
         public override bool Validar()
         {
-
             if (string.IsNullOrWhiteSpace(this.txtDescripcion.Text))
             {
                 Notificar("Error", "Debe completar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             else { return true; }
-        }
-        private void EspecialidadDesktop_Load(object sender, EventArgs e)
-        {
         }
         private void btnAceptar_Click(object sender, EventArgs e)
         {
@@ -124,8 +121,7 @@ namespace UI.Desktop
         }
         public virtual void Eliminar()
         {
-            EspecialidadLogic e = new EspecialidadLogic();
-            e.Delete(EspecialidadActual.ID);
+            _especialidadLogic.Delete(EspecialidadActual.ID);
         }
     }
 }

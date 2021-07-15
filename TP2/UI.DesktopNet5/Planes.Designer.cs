@@ -106,7 +106,6 @@ namespace UI.Desktop
             this.dgvPlanes.Name = "dgvPlanes";
             this.dgvPlanes.Size = new System.Drawing.Size(594, 371);
             this.dgvPlanes.TabIndex = 0;
-            this.dgvPlanes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellContentClick);
             // 
             // id
             // 

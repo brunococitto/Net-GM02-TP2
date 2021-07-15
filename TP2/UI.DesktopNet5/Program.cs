@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
+using Business.Logic;
+using Data.Database;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace UI.Desktop
 {
@@ -16,8 +22,24 @@ namespace UI.Desktop
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Usuarios());
-            Application.Run(new formMain());
+
+            var host = Host.CreateDefaultBuilder().ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton<formMain>();
+                services.AddDbContext<AcademyContext>(opt =>
+                {
+                    opt.UseSqlServer(ConfigurationManager.ConnectionStrings["ConnStringLocal"].ConnectionString);
+                });
+            }).Build();
+
+            using (var services = host.Services.CreateScope())
+            {
+                var dbContext = services.ServiceProvider.GetRequiredService<AcademyContext>();
+                Seed.SeedData(dbContext);
+
+                var formMain = services.ServiceProvider.GetRequiredService<formMain>();
+                Application.Run(formMain);
+            }
         }
     }
 }

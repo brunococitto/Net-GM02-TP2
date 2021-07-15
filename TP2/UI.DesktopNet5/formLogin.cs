@@ -9,20 +9,21 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
+using Data.Database;
 
 namespace UI.Desktop
 {
     public partial class formLogin : Form
     {
-        public formLogin()
+        private readonly UsuarioLogic _usuarioLogic;
+        public formLogin(AcademyContext context)
         {
             InitializeComponent();
+            _usuarioLogic = new UsuarioLogic(new UsuarioAdapter(context));
         }
-
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            UsuarioLogic usrLogic = new UsuarioLogic();
-            Usuario usr = usrLogic.Login(this.txtUsuario.Text, this.txtPass.Text);
+            Usuario usr = _usuarioLogic.Login(this.txtUsuario.Text, this.txtPass.Text);
             if (usr != null)
             {
                 this.DialogResult = DialogResult.OK;
@@ -33,7 +34,6 @@ namespace UI.Desktop
                 , MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void lnkOlvidaPass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             MessageBox.Show("Es Ud. un usuario muy descuidado, haga memoria", "Olvidé mi contraseña",

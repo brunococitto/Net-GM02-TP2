@@ -9,14 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
+using Data.Database;
 
 namespace UI.Desktop
 {
     public partial class formMain : Form
     {
-        public formMain()
+        private readonly AcademyContext _context;
+        public formMain(AcademyContext context)
         {
             InitializeComponent();
+            _context = context;
         }
 
         private void mnuSalir_Click(object sender, EventArgs e)
@@ -26,7 +29,7 @@ namespace UI.Desktop
 
         private void formMain_Shown(object sender, EventArgs e)
         {
-            formLogin appLogin = new formLogin();
+            formLogin appLogin = new formLogin(_context);
             if (appLogin.ShowDialog() != DialogResult.OK)
             {
                 this.Dispose();
@@ -35,18 +38,18 @@ namespace UI.Desktop
 
         private void btnUsuarios_Click(object sender, EventArgs e)
         {
-            Usuarios appUsuarios = new Usuarios();
+            Usuarios appUsuarios = new Usuarios(_context);
             appUsuarios.ShowDialog();
         }
         private void btnEspecialidades_Click(object sender, EventArgs e)
         {
-            Especialidades appEspecialidades = new Especialidades();
+            Especialidades appEspecialidades = new Especialidades(_context);
             appEspecialidades.ShowDialog();
         }
 
         private void btnModulos_Click(object sender, EventArgs e)
         {
-            Modulos appModulos = new Modulos();
+            Modulos appModulos = new Modulos(_context);
             appModulos.ShowDialog();
         }
 
@@ -57,25 +60,25 @@ namespace UI.Desktop
 
         private void btnPlanes_Click(object sender, EventArgs e)
         {
-            Planes appPlanes = new Planes();
+            Planes appPlanes = new Planes(_context);
             appPlanes.ShowDialog();
         }
 
         private void btnMaterias_Click(object sender, EventArgs e)
         {
-            Materias appMaterias = new Materias();
+            Materias appMaterias = new Materias(_context);
             appMaterias.ShowDialog();
         }
 
         private void btnComision_Click(object sender, EventArgs e)
         {
-            Comisiones appComisiones = new Comisiones();
+            Comisiones appComisiones = new Comisiones(_context);
             appComisiones.ShowDialog(); 
         }
 
         private void btnCurso_Click(object sender, EventArgs e)
         {
-            Cursos appCursos = new Cursos();
+            Cursos appCursos = new Cursos(_context);
             appCursos.ShowDialog();
         }
     }

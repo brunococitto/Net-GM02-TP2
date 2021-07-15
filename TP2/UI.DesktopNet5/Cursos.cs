@@ -9,40 +9,34 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
+using Data.Database;
 
 namespace UI.Desktop
 {
     public partial class Cursos : Form
     {
-        public Cursos()
+        private readonly ComisionLogic _comisionLogic;
+        private readonly MateriaLogic _materiaLogic;
+        private readonly CursoLogic _cursoLogic;
+        private readonly AcademyContext _context;
+        public Cursos(AcademyContext context)
         {
             InitializeComponent();
-
+            _comisionLogic = new ComisionLogic(new ComisionAdapter(context));
+            _materiaLogic = new MateriaLogic(new MateriaAdapter(context));
+            _cursoLogic = new CursoLogic(new CursoAdapter(context));
+            _context = context;
         }
-
-        private void toolStripContainer1_ContentPanel_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void Cursos_Load(object sender, EventArgs e)
         {
             this.Listar();
         }
-
-        private void tlMaterias_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
         public void Listar()
         {
             // Tengo que pedir la lista de cursos de materias y comisiones
-            CursoLogic cl = new CursoLogic();
-            MateriaLogic ml = new MateriaLogic();
-            ComisionLogic coml = new ComisionLogic();
-            List<Materia> materias = ml.GetAll();
-            List<Comision> comisiones = coml.GetAll();
-            List<Curso> cursos = cl.GetAll();
+            List<Materia> materias = _materiaLogic.GetAll();
+            List<Comision> comisiones = _comisionLogic.GetAll();
+            List<Curso> cursos = _cursoLogic.GetAll();
             // Tengo que cambiar el ID del plan por su descripción para mostrarlo
             // Puedo recorrer los arreglos y matchear o puedo usar LINQ y hacerlo mucho más fácil
             var consulta =
@@ -65,35 +59,26 @@ namespace UI.Desktop
             this.dgvCursos.DataSource = consulta.ToList();
             this.dgvCursos.AutoGenerateColumns = false;
         }
-
         private void btnActualizar_Click(object sender, EventArgs e)
         {
             this.Listar();
         }
-
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void tsbNuevo_Click(object sender, EventArgs e)
         {
-            CursoDesktop formCurso = new CursoDesktop(ApplicationForm.ModoForm.Alta);
+            CursoDesktop formCurso = new CursoDesktop(ApplicationForm.ModoForm.Alta, _context);
             formCurso.ShowDialog();
             this.Listar();
         }
-
-        private void dgvUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void tsbEditar_Click(object sender, EventArgs e)
         {
             if (this.dgvCursos.SelectedRows.Count > 0)
             {
                 int ID = (int)this.dgvCursos.SelectedRows[0].Cells["ID"].Value;
-                CursoDesktop formCurso = new CursoDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                CursoDesktop formCurso = new CursoDesktop(ID, ApplicationForm.ModoForm.Modificacion, _context);
                 formCurso.ShowDialog();
                 this.Listar();
             }
@@ -103,13 +88,12 @@ namespace UI.Desktop
             }
 
         }
-
         private void tsbEliminar_Click(object sender, EventArgs e)
         {
             if (this.dgvCursos.SelectedRows.Count > 0)
             {
                 int ID = (int)this.dgvCursos.SelectedRows[0].Cells["ID"].Value;
-                CursoDesktop formCurso = new CursoDesktop(ID, ApplicationForm.ModoForm.Baja);
+                CursoDesktop formCurso = new CursoDesktop(ID, ApplicationForm.ModoForm.Baja, _context);
                 formCurso.ShowDialog();
                 this.Listar();
             }

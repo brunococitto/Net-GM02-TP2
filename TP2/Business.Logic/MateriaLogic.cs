@@ -10,10 +10,10 @@ namespace Business.Logic
 {
     public class MateriaLogic : BusinessLogic
     {
-        public MateriaAdapter MateriaData { get; set; }
-        public MateriaLogic()
+        private MateriaAdapter MateriaData { get; set; }
+        public MateriaLogic(MateriaAdapter materiaAdapter)
         {
-            MateriaData =  new MateriaAdapter();
+            MateriaData = materiaAdapter;
         }
         public List<Materia> GetAll()
         {

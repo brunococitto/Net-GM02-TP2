@@ -9,33 +9,36 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
+using Data.Database;
 using System.Text.RegularExpressions;
 
 namespace UI.Desktop
 {
     public partial class ComisionesDesktop : ApplicationForm
     {
-        public ComisionesDesktop()
+        private readonly ComisionLogic _comisionLogic;
+        private readonly PlanLogic _planLogic;
+        public ComisionesDesktop(AcademyContext context)
         {
             InitializeComponent();
+            _comisionLogic = new ComisionLogic(new ComisionAdapter(context));
+            _planLogic = new PlanLogic(new PlanAdapter(context));
         }
 
-        public ComisionesDesktop(ModoForm modo) : this()
+        public ComisionesDesktop(ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
             // Cargo los planes para mostrarlos en el combobox
-            PlanLogic pl = new PlanLogic();
-            List<Plan> listaPlanes = pl.GetAll();
+            List<Plan> listaPlanes = _planLogic.GetAll();
             this.comboBoxIDPlan.DataSource = listaPlanes;
             // selecciono el plan de la posicion 0 como para seleccionar algo
             this.comboBoxIDPlan.SelectedIndex = 0;
         }
 
-        public ComisionesDesktop(int ID, ModoForm modo) : this()
+        public ComisionesDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            ComisionLogic c = new ComisionLogic();
-            ComisionActual = c.GetOne(ID);
+            ComisionActual = _comisionLogic.GetOne(ID);
             MapearDeDatos();
         }
 
@@ -47,10 +50,9 @@ namespace UI.Desktop
             this.txtBoxDesc.Text = this.ComisionActual.Descripcion;
             this.txtBoxAnioEspecialidad.Text = this.ComisionActual.AnoEspecialidad.ToString();
             // Acá cuando cargo la comi tengo que buscar el plan 
-            PlanLogic pl = new PlanLogic();
-            Plan planActualComi = pl.GetOne(ComisionActual.IDPlan);
+            Plan planActualComi = _planLogic.GetOne(ComisionActual.IDPlan);
             // A su vez tengo que cargar los otros planes
-            List<Plan> planes = pl.GetAll();
+            List<Plan> planes = _planLogic.GetAll();
             // seteo como datasource del combobox la lista de planes anteriores
             this.comboBoxIDPlan.DataSource = planes;
             // ahora tengo que seleccionar el plan correspondiente a la comi actual
@@ -107,9 +109,8 @@ namespace UI.Desktop
 
         public override void GuardarCambios()
         {
-            ComisionLogic c = new ComisionLogic();
             MapearADatos();
-            c.Save(ComisionActual);
+            _comisionLogic.Save(ComisionActual);
         }
 
          public override bool Validar()
@@ -161,8 +162,7 @@ namespace UI.Desktop
 
         public virtual void Eliminar()
         {
-            ComisionLogic c = new ComisionLogic();
-            c.Delete(ComisionActual.ID);
+            _comisionLogic.Delete(ComisionActual.ID);
         }
 
         private void bCancelar_Click(object sender, EventArgs e)
