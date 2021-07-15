@@ -27,8 +27,8 @@ namespace Data.Database
                 while (drModulos.Read())
                 {
                     Modulo mod = new Modulo();
-                    mod.ID = (int)drModulos["id_modulo"];
-                    mod.Descripcion = (string)drModulos["desc_modulo"];
+                    mod.ID = (int)drModulos["ID"];
+                    mod.Descripcion = drModulos["desc_modulo"].ToString();
                     modulos.Add(mod);
                 }
                 drModulos.Close();
@@ -51,13 +51,13 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdModulos = new SqlCommand("select * from modulos where id_modulo = @id", sqlConn);
+                SqlCommand cmdModulos = new SqlCommand("select * from modulos where ID = @id", sqlConn);
                 cmdModulos.Parameters.Add("@id", SqlDbType.Int).Value = ID;
                 SqlDataReader drModulos = cmdModulos.ExecuteReader();
                 if (drModulos.Read())
                 {
-                    mod.ID = (int)drModulos["id_modulo"];
-                    mod.Descripcion = (string)drModulos["desc_modulo"];
+                    mod.ID = (int)drModulos["ID"];
+                    mod.Descripcion = drModulos["desc_modulo"].ToString();
                 }
                 drModulos.Close();
             }
@@ -80,7 +80,7 @@ namespace Data.Database
                 this.OpenConnection();
                 SqlCommand cmdSave = new SqlCommand(
                     "UPDATE modulos SET desc_modulo = @desc_modulo " +
-                    "WHERE id_modulo = @id"
+                    "WHERE ID = @id"
                     , sqlConn);
                 cmdSave.Parameters.Add("@id", SqlDbType.Int).Value = modulo.ID;
                 cmdSave.Parameters.Add("@desc_modulo", SqlDbType.VarChar, 50).Value = modulo.Descripcion;
@@ -126,7 +126,7 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdDelete = new SqlCommand("delete modulos where id_modulo = @id", sqlConn);
+                SqlCommand cmdDelete = new SqlCommand("delete modulos where ID = @id", sqlConn);
                 cmdDelete.Parameters.Add("@id", SqlDbType.Int).Value = ID;
                 cmdDelete.ExecuteNonQuery();
             }

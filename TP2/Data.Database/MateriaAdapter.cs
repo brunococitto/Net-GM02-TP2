@@ -27,8 +27,8 @@ namespace Data.Database
                 while (drMaterias.Read())
                 {
                     Materia materia = new Materia();
-                    materia.ID = (int)drMaterias["id_materia"];
-                    materia.Descripcion = (string)drMaterias["desc_materia"];
+                    materia.ID = (int)drMaterias["ID"];
+                    materia.Descripcion = drMaterias["desc_materia"].ToString();
                     materia.HSSemanales = (int)drMaterias["hs_semanales"];
                     materia.HSTotales = (int)drMaterias["hs_totales"];
                     materia.IDPlan = (int)drMaterias["id_plan"];
@@ -54,13 +54,13 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdMaterias = new SqlCommand("select * from materias where id_materia = @id", sqlConn);
+                SqlCommand cmdMaterias = new SqlCommand("select * from materias where ID = @id", sqlConn);
                 cmdMaterias.Parameters.Add("@id", SqlDbType.Int).Value = ID;
                 SqlDataReader drMaterias = cmdMaterias.ExecuteReader();
                 if (drMaterias.Read())
                 {
-                    materia.ID = (int)drMaterias["id_materia"];
-                    materia.Descripcion = (string)drMaterias["desc_materia"];
+                    materia.ID = (int)drMaterias["ID"];
+                    materia.Descripcion = drMaterias["desc_materia"].ToString();
                     materia.HSSemanales = (int)drMaterias["hs_semanales"];
                     materia.HSTotales = (int)drMaterias["hs_totales"];
                     materia.IDPlan = (int)drMaterias["id_plan"];
@@ -87,7 +87,7 @@ namespace Data.Database
                 SqlCommand cmdSave = new SqlCommand(
                     "UPDATE materias SET desc_materia = @desc, hs_semanales = @hs_sem, " +
                     "hs_totales = @hs_tot, id_plan = @id_plan " +
-                    "WHERE id_materia = @id"
+                    "WHERE ID = @id"
                     , sqlConn);
                 cmdSave.Parameters.Add("@id", SqlDbType.Int).Value = materia.ID;
                 cmdSave.Parameters.Add("@desc", SqlDbType.VarChar, 50).Value = materia.Descripcion;
@@ -139,7 +139,7 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdDelete = new SqlCommand("delete materias where id_materia = @id", sqlConn);
+                SqlCommand cmdDelete = new SqlCommand("delete materias where ID = @id", sqlConn);
                 cmdDelete.Parameters.Add("@id", SqlDbType.Int).Value = ID;
                 cmdDelete.ExecuteNonQuery();
             }

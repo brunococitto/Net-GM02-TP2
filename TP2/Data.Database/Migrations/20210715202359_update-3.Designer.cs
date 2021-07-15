@@ -4,14 +4,16 @@ using Data.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Database.Migrations
 {
     [DbContext(typeof(AcademyContext))]
-    partial class AcademyContextModelSnapshot : ModelSnapshot
+    [Migration("20210715202359_update-3")]
+    partial class update3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,15 +78,15 @@ namespace Data.Database.Migrations
 
                     b.Property<int>("AnoCalendario")
                         .HasColumnType("int")
-                        .HasColumnName("anio_calendario");
+                        .HasColumnName("desc_curso");
 
                     b.Property<int>("Cupo")
                         .HasColumnType("int")
-                        .HasColumnName("cupo");
+                        .HasColumnName("anio_calendario");
 
                     b.Property<string>("Descripcion")
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("desc_curso");
+                        .HasColumnName("cupo");
 
                     b.Property<int>("IDComision")
                         .HasColumnType("int")

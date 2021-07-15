@@ -27,8 +27,8 @@ namespace Data.Database
                 while (drPlanes.Read())
                 {
                     Plan plan = new Plan();
-                    plan.ID = (int)drPlanes["id_plan"];
-                    plan.Descripcion = (string)drPlanes["desc_plan"];
+                    plan.ID = (int)drPlanes["ID"];
+                    plan.Descripcion = drPlanes["desc_plan"].ToString();
                     plan.IDEspecialidad = (int)drPlanes["id_especialidad"];
                     planes.Add(plan);
                 }
@@ -52,13 +52,13 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdPlanes = new SqlCommand("select * from planes where id_plan = @id", sqlConn);
+                SqlCommand cmdPlanes = new SqlCommand("select * from planes where ID = @id", sqlConn);
                 cmdPlanes.Parameters.Add("@id", SqlDbType.Int).Value = ID;
                 SqlDataReader drPlanes = cmdPlanes.ExecuteReader();
                 if (drPlanes.Read())
                 {
-                    plan.ID = (int)drPlanes["id_plan"];
-                    plan.Descripcion = (string)drPlanes["desc_plan"];
+                    plan.ID = (int)drPlanes["ID"];
+                    plan.Descripcion = drPlanes["desc_plan"].ToString();
                     plan.IDEspecialidad = (int)drPlanes["id_especialidad"];
                 }
                 drPlanes.Close();
@@ -82,7 +82,7 @@ namespace Data.Database
                 this.OpenConnection();
                 SqlCommand cmdSave = new SqlCommand(
                     "UPDATE planes SET desc_plan = @desc, id_especialidad = @id_esp " +
-                    "WHERE id_plan = @id"
+                    "WHERE ID = @id"
                     , sqlConn);
                 cmdSave.Parameters.Add("@id", SqlDbType.Int).Value = plan.ID;
                 cmdSave.Parameters.Add("@desc", SqlDbType.VarChar, 50).Value = plan.Descripcion;
@@ -130,7 +130,7 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdDelete = new SqlCommand("delete planes where id_plan = @id", sqlConn);
+                SqlCommand cmdDelete = new SqlCommand("delete planes where ID = @id", sqlConn);
                 cmdDelete.Parameters.Add("@id", SqlDbType.Int).Value = ID;
                 cmdDelete.ExecuteNonQuery();
             }

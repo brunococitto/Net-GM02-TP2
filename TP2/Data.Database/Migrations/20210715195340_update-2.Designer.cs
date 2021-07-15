@@ -4,14 +4,16 @@ using Data.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Database.Migrations
 {
     [DbContext(typeof(AcademyContext))]
-    partial class AcademyContextModelSnapshot : ModelSnapshot
+    [Migration("20210715195340_update-2")]
+    partial class update2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,24 +77,19 @@ namespace Data.Database.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AnoCalendario")
-                        .HasColumnType("int")
-                        .HasColumnName("anio_calendario");
+                        .HasColumnType("int");
 
                     b.Property<int>("Cupo")
-                        .HasColumnType("int")
-                        .HasColumnName("cupo");
+                        .HasColumnType("int");
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("desc_curso");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IDComision")
-                        .HasColumnType("int")
-                        .HasColumnName("id_comision");
+                        .HasColumnType("int");
 
                     b.Property<int>("IDMateria")
-                        .HasColumnType("int")
-                        .HasColumnName("id_materia");
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
@@ -144,20 +141,16 @@ namespace Data.Database.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("desc_materia");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("HSSemanales")
-                        .HasColumnType("int")
-                        .HasColumnName("hs_semanales");
+                        .HasColumnType("int");
 
                     b.Property<int>("HSTotales")
-                        .HasColumnType("int")
-                        .HasColumnName("hs_totales");
+                        .HasColumnType("int");
 
                     b.Property<int>("IDPlan")
-                        .HasColumnType("int")
-                        .HasColumnName("id_plan");
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
@@ -172,8 +165,7 @@ namespace Data.Database.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("desc_modulo");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
@@ -254,12 +246,10 @@ namespace Data.Database.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("desc_plan");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IDEspecialidad")
-                        .HasColumnType("int")
-                        .HasColumnName("id_especialidad");
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
@@ -274,28 +264,22 @@ namespace Data.Database.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Apellido")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("apellido");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Clave")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("clave");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("email");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Habilitado")
-                        .HasColumnType("bit")
-                        .HasColumnName("habilitado");
+                        .HasColumnType("bit");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("nombre");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NombreUsuario")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("nombre_usuario");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
