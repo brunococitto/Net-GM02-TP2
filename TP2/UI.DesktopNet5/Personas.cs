@@ -53,6 +53,11 @@ namespace UI.Desktop
                                 Plan = pl.Descripcion,
                                 TipoPersona = per.TipoPersona
                             };
+            foreach (Persona p in personas)
+            {
+                MessageBox.Show($"Nombre: {p.Nombre} // Plan: {p.IDPlan}");
+            }
+            MessageBox.Show($"Cant personas: {personas.Count} // cant elementos consulta: {consulta.ToList().Count} // cant planes: {planes.Count}");
             this.dgvPersonas.DataSource = consulta.ToList();
             this.dgvPersonas.AutoGenerateColumns = false;
         }

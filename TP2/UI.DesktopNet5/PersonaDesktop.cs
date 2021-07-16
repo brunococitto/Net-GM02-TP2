@@ -93,7 +93,7 @@ namespace UI.Desktop
             PersonaActual.Legajo = Int32.Parse(this.txtLegajo.Text);
             PersonaActual.Telefono = this.txtTelefono.Text;
             PersonaActual.Direccion = this.txtDireccion.Text;
-            PersonaActual.IDPlan = this.cbPlan.SelectedIndex;
+            PersonaActual.IDPlan = (int)this.cbPlan.SelectedValue;
             PersonaActual.FechaNacimiento = this.dtpFechaNacimiento.Value.Date;
             PersonaActual.TipoPersona = (Business.Entities.Persona.TiposPersona)Enum.Parse(typeof(Business.Entities.Persona.TiposPersona), cbTipoPersona.SelectedItem.ToString());
             switch (Modos)
