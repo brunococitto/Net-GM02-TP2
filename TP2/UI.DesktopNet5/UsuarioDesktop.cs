@@ -16,31 +16,46 @@ namespace UI.Desktop
     public partial class UsuarioDesktop : ApplicationForm
     {
         private readonly UsuarioLogic _usuarioLogic;
+        private readonly PersonaLogic _personaLogic;
+        private Usuario UsuarioActual { set; get; }
         public UsuarioDesktop(AcademyContext context)
         {
             InitializeComponent();
             _usuarioLogic = new UsuarioLogic(new UsuarioAdapter(context));
+            _personaLogic = new PersonaLogic(new PersonaAdapter(context));
         }
         public UsuarioDesktop(ModoForm modo, AcademyContext context) : this(context)
         {
+            // Este constructor es cuando doy de alta un nuevo usuario
             Modos = modo;
+            // Creo el nuevo usuario acá para después poder asignarle el ID de persona
+            UsuarioActual = new Usuario();
+            // Está todo deshabilitado hasta que cargues un legajo que coincida con una persona
+            this.txtUsuario.ReadOnly = true;
+            this.chkHabilitado.Enabled = false;
+            this.txtClave.ReadOnly = true;
+            this.txtConfirmarClave.ReadOnly = true;
         }
         public UsuarioDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
             UsuarioActual = _usuarioLogic.GetOne(ID);
+            // Como estoy modificando o borrando el usuario, no tengo que poder modificar el legajo
+            // al cual está asociado
+            this.txtLegajo.Enabled = false;
             MapearDeDatos();
         }
-        public Usuario UsuarioActual { set; get; }
         public override void MapearDeDatos()
         {
             this.txtID.Text = this.UsuarioActual.ID.ToString();
             this.chkHabilitado.Checked = this.UsuarioActual.Habilitado;
-            this.txtNombre.Text = this.UsuarioActual.Nombre;
-            this.txtApellido.Text = this.UsuarioActual.Apellido;
-            this.txtClave.Text = this.UsuarioActual.Clave;
-            this.txtEmail.Text = this.UsuarioActual.Email;
             this.txtUsuario.Text = this.UsuarioActual.NombreUsuario;
+            // La clave no la tengo que cargar porque no se muestra, siempre se vuelve a poner de 0
+            // Ahora tengo que cargar los datos de la persona también
+            Persona per = _personaLogic.GetOne(UsuarioActual.IDPersona);
+            this.txtLegajo.Text = per.Legajo.ToString();
+            this.txtNombre.Text = per.Nombre;
+            this.txtApellido.Text = per.Apellido;
             switch (this.Modos)
             {
                 case ModoForm.Alta:
@@ -59,25 +74,9 @@ namespace UI.Desktop
         }
         public override void MapearADatos()
         {
-            if (Modos == ModoForm.Alta)
-            {
-                UsuarioActual = new Usuario();
-                UsuarioActual.Nombre = this.txtNombre.Text;
-                UsuarioActual.Habilitado = this.chkHabilitado.Checked;
-                UsuarioActual.Apellido = this.txtApellido.Text;
-                UsuarioActual.Clave = this.txtClave.Text;
-                UsuarioActual.Email = this.txtEmail.Text;
-                UsuarioActual.NombreUsuario = this.txtUsuario.Text;
-            }
-            if (Modos == ModoForm.Modificacion)
-            {
-                UsuarioActual.Nombre = this.txtNombre.Text;
-                UsuarioActual.Habilitado = this.chkHabilitado.Checked;
-                UsuarioActual.Apellido = this.txtApellido.Text;
-                UsuarioActual.Clave = this.txtClave.Text;
-                UsuarioActual.Email = this.txtEmail.Text;
-                UsuarioActual.NombreUsuario = this.txtUsuario.Text;
-            }
+            UsuarioActual.Habilitado = this.chkHabilitado.Checked;
+            UsuarioActual.Clave = this.txtClave.Text;
+            UsuarioActual.NombreUsuario = this.txtUsuario.Text;
             switch (Modos)
             {
                 case ModoForm.Alta:
@@ -110,12 +109,57 @@ namespace UI.Desktop
                 Notificar("Error", "La clave no coincide con la confirmación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else if (!this.txtEmail.Text.Contains("@") || !this.txtEmail.Text.Contains("."))
-            {
-                Notificar("Error", "El Email no es valido", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
             else { return true; }
+        }
+        // Esto se podría hacer un nivel más arriba y ya usarlo para la implementación en web
+        // Habría que darle un par de vueltas de tuerca, capaz en validaciones se puede meter
+        // Aparte seguro se puede hacer muchisimo más eficiente
+        private void cargarPersona()
+        {
+            this.btnAceptar.Enabled = false;
+            List<Persona> personas = _personaLogic.GetAll();
+            try
+            {
+                // Esta validacion tiene q ser q no es vacio y q son solo numeros
+                // Metele regex a este if pa
+                if (this.txtLegajo.Text.Length == 0)
+                {
+                    Exception e = new Exception("Ingrese un legajo.");
+                    throw e;
+                }
+                var persona = (from p in personas
+                               where p.Legajo == Int32.Parse(this.txtLegajo.Text)
+                               select p).ToList();
+                if (persona.Count == 0)
+                {
+                    Exception e = new Exception("No existe persona para el legajo ingresado.");
+                    throw e;
+                }
+                Persona per = _personaLogic.GetOne(persona[0].ID);
+                // Asigno los datos de la persona a los textbox
+                this.txtNombre.Text = per.Nombre;
+                this.txtApellido.Text = per.Apellido;
+                // Verifico que no exista un usuario ya para esta persona
+                var usuarios = (from u in _usuarioLogic.GetAll()
+                                where u.IDPersona == per.ID
+                                select u);
+                if (usuarios.Any())
+                {
+                    Exception e = new Exception("Ya existe un usuario para la persona ingresada.");
+                    throw e;
+                }
+                UsuarioActual.IDPersona = per.ID;
+                // Una vez que cargo la persona, vuelvo a habilitar el resto de los elementos
+                this.btnAceptar.Enabled = true;
+                this.txtUsuario.ReadOnly = false;
+                this.chkHabilitado.Enabled = true;
+                this.txtClave.ReadOnly = false;
+                this.txtConfirmarClave.ReadOnly = false;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
         private void btnAceptar_Click(object sender, EventArgs e)
         {
@@ -151,6 +195,11 @@ namespace UI.Desktop
         public virtual void Eliminar()
         {
             _usuarioLogic.Delete(UsuarioActual.ID);
+        }
+
+        private void txtLegajo_Leave(object sender, EventArgs e)
+        {
+            cargarPersona();
         }
     }
 }

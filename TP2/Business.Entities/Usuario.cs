@@ -11,10 +11,8 @@ namespace Business.Entities
     {
         private string _NombreUsuario;
         private string _Clave;
-        private string _Nombre;
-        private string _Apellido;
-        private string _Email;
         private bool _Habilitado;
+        private int _IDPersona;
         [Column("nombre_usuario")]
         public string NombreUsuario
         {
@@ -39,42 +37,6 @@ namespace Business.Entities
                 _Clave = value;
             }
         }
-        [Column("nombre")]
-        public string Nombre
-        {
-            get
-            {
-                return _Nombre;
-            }
-            set
-            {
-                _Nombre = value;
-            }
-        }
-        [Column("apellido")]
-        public string Apellido
-        {
-            get
-            {
-                return _Apellido;
-            }
-            set
-            {
-                _Apellido = value;
-            }
-        }
-        [Column("email")]
-        public string Email
-        {
-            get
-            {
-                return _Email;
-            }
-            set
-            {
-                _Email = value;
-            }
-        }
         [Column("habilitado")]
         public bool Habilitado
         {
@@ -85,6 +47,18 @@ namespace Business.Entities
             set
             {
                 _Habilitado = value;
+            }
+        }
+        [Column("id_persona")]
+        public int IDPersona
+        {
+            get
+            {
+                return _IDPersona;
+            }
+            set
+            {
+                _IDPersona = value;
             }
         }
     }

@@ -48,6 +48,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Personas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PersonaDesktop.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Usuarios.cs">
       <SubType>Form</SubType>
     </Compile>

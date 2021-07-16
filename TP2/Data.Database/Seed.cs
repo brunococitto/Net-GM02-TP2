@@ -139,18 +139,7 @@ namespace Data.Database
                 {
                     NombreUsuario = "bcocitto",
                     Clave = "C7C3ECFF956CE64056F4BBC9453C8CA853AFA68E",
-                    Apellido = "Cocitto",
-                    Nombre = "Bruno",
-                    Email = "bcocitto@gmail.com",
-                    Habilitado = true
-                },
-                new()
-                {
-                    NombreUsuario = "smasetto",
-                    Clave = "83762B2C48D3BBA8A4DA6EF5493CA9DAA527FCFA",
-                    Apellido = "Masetto",
-                    Nombre = "Santiago Nicolás",
-                    Email = "masetto98@gmail.com",
+                    IDPersona = 1,
                     Habilitado = true
                 }
             };
@@ -165,7 +154,23 @@ namespace Data.Database
                     Cupo = 10
                 }
             };
+            var personas = new List<Persona>
+            {
+                new()
+                {
+                    Nombre = "Bruno",
+                    Apellido = "Cocitto",
+                    Direccion = "asd 123",
+                    Telefono = "0303456",
+                    Email = "asd@asd.com",
+                    FechaNacimiento = new DateTime(2011, 12, 01),
+                    Legajo = 123,
+                    IDPlan = 1,
+                    TipoPersona = Persona.TiposPersona.Alumno
+                }
+            };
 
+            context.AddRange(personas);
             context.AddRange(especialidades);
             context.AddRange(planes);
             context.AddRange(comisiones);
