@@ -9,60 +9,49 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
-
+using Data.Database;
 
 namespace UI.Desktop
 {
     public partial class Modulos : Form
     {
-        public Modulos()
+        private readonly ModuloLogic _moduloLogic;
+        private readonly AcademyContext _context;
+        public Modulos(AcademyContext context)
         {
             InitializeComponent();
+            _moduloLogic = new ModuloLogic(new ModuloAdapter(context));
+            _context = context;
         }
         private void Modulos_Load(object sender, EventArgs e)
         {
             this.Listar();
         }
-
-        private void tlModulos_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
         public void Listar()
         {
-            ModuloLogic el = new ModuloLogic();
             this.dgvModulos.AutoGenerateColumns = false;
-            this.dgvModulos.DataSource = el.GetAll();
+            this.dgvModulos.DataSource = _moduloLogic.GetAll();
         }
-
         private void btnActualizar_Click(object sender, EventArgs e)
         {
             this.Listar();
         }
-
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void tsbNuevo_Click(object sender, EventArgs e)
         {
-            ModuloDesktop formModulo = new ModuloDesktop(ApplicationForm.ModoForm.Alta);
+            ModuloDesktop formModulo = new ModuloDesktop(ApplicationForm.ModoForm.Alta, _context);
             formModulo.ShowDialog();
             this.Listar();
         }
-
-        private void dgvUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void tsbEditar_Click(object sender, EventArgs e)
         {
             if (this.dgvModulos.SelectedRows.Count > 0)
             {
                 int ID = ((Business.Entities.Modulo)this.dgvModulos.SelectedRows[0].DataBoundItem).ID;
-                ModuloDesktop formModulo = new ModuloDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                ModuloDesktop formModulo = new ModuloDesktop(ID, ApplicationForm.ModoForm.Modificacion, _context);
                 formModulo.ShowDialog();
                 this.Listar();
             }
@@ -70,15 +59,13 @@ namespace UI.Desktop
             {
                 MessageBox.Show("Seleccionar una fila en la grilla para poder editar");
             }
-
         }
-
         private void tsbEliminar_Click(object sender, EventArgs e)
         {
             if (this.dgvModulos.SelectedRows.Count > 0)
             {
                 int ID = ((Business.Entities.Modulo)this.dgvModulos.SelectedRows[0].DataBoundItem).ID;
-                ModuloDesktop formModulo = new ModuloDesktop(ID, ApplicationForm.ModoForm.Baja);
+                ModuloDesktop formModulo = new ModuloDesktop(ID, ApplicationForm.ModoForm.Baja, _context);
                 formModulo.ShowDialog();
                 this.Listar();
             }
@@ -87,6 +74,5 @@ namespace UI.Desktop
                 MessageBox.Show("Seleccionar una fila en la grilla para poder eliminar");
             }
         }
-
     }
 }

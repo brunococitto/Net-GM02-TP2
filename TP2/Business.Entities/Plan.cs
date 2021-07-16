@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Business.Entities
 {
@@ -10,6 +11,7 @@ namespace Business.Entities
     {
         private string _Descripcion;
         private int _IDEspecialidad;
+        [Column("desc_plan")]
         public string Descripcion
         {
             get
@@ -21,6 +23,7 @@ namespace Business.Entities
                 _Descripcion = value;
             }
         }
+        [Column("id_especialidad")]
         public int IDEspecialidad
         {
             get

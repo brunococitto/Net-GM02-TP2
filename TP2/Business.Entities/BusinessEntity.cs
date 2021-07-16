@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Business.Entities
 {
@@ -28,6 +29,7 @@ namespace Business.Entities
                 _ID = value;
             }
         }
+        [NotMapped]
         public States State
         {
             get

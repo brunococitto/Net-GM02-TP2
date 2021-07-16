@@ -138,7 +138,6 @@ namespace UI.Desktop
             this.MinimizeBox = false;
             this.Name = "PlanDesktop";
             this.Text = "Plan";
-            this.Load += new System.EventHandler(this.PlanDesktop_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

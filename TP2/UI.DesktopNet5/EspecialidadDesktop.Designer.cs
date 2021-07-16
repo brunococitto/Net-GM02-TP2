@@ -141,12 +141,10 @@ namespace UI.Desktop
             this.MinimizeBox = false;
             this.Name = "EspecialidadDesktop";
             this.Text = "Especialidad";
-            this.Load += new System.EventHandler(this.EspecialidadDesktop_Load);
             this.TLPanelEspecialidades.ResumeLayout(false);
             this.TLPanelEspecialidades.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

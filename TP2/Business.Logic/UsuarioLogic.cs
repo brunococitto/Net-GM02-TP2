@@ -10,10 +10,10 @@ namespace Business.Logic
 {
     public class UsuarioLogic : BusinessLogic
     {
-        public UsuarioAdapter UsuarioData { get; set; }
-        public UsuarioLogic()
+        private UsuarioAdapter UsuarioData { get; set; }
+        public UsuarioLogic(UsuarioAdapter usuarioAdapter)
         {
-            UsuarioData =  new UsuarioAdapter();
+            UsuarioData =  usuarioAdapter;
         }
         public List<Usuario> GetAll()
         {

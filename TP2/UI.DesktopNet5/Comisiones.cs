@@ -9,34 +9,31 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
+using Data.Database;
 
 namespace UI.Desktop
 {
     public partial class Comisiones : Form
     {
-        public Comisiones()
+        private readonly ComisionLogic _comisionLogic;
+        private readonly PlanLogic _planLogic;
+        private readonly AcademyContext _context;
+        public Comisiones(AcademyContext context)
         {
             InitializeComponent();
+            _comisionLogic = new ComisionLogic(new ComisionAdapter(context));
+            _planLogic = new PlanLogic(new PlanAdapter(context));
+            _context = context;
         }
-
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void Comisiones_Load(object sender, EventArgs e)
         {
             this.Listar();
         }
-
         public void Listar()
         {
-            ComisionLogic cl = new ComisionLogic();
             // Tengo que pedir la lista de comisiones y de planes
-            PlanLogic pl = new PlanLogic();
-            List<Plan> planes = pl.GetAll();
-            List<Comision> comisiones = cl.GetAll();
+            List<Plan> planes = _planLogic.GetAll();
+            List<Comision> comisiones = _comisionLogic.GetAll();
             // Tengo que cambiar el ID de la especialidad por su descripción para mostrarlo
             // Puedo recorrer los arreglos y matchear o puedo usar LINQ y hacerlo mucho más fácil
             var consulta =
@@ -54,28 +51,20 @@ namespace UI.Desktop
             // Entonces convierto lo que antes era algo anónimo a una lista
             this.dgvComisiones.DataSource = consulta.ToList();
             this.dgvComisiones.AutoGenerateColumns = false;
-
         }
-
-        private void dgvEspecialidades_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void tsbNuevo_Click(object sender, EventArgs e)
         {
-            ComisionesDesktop formComision = new ComisionesDesktop(ApplicationForm.ModoForm.Alta);
+            ComisionesDesktop formComision = new ComisionesDesktop(ApplicationForm.ModoForm.Alta, _context);
             formComision.ShowDialog();
             this.Listar();
         }
-
         private void tsbEditar_Click(object sender, EventArgs e)
         {
             {
                 if (this.dgvComisiones.SelectedRows.Count > 0)
                 {
                     int ID = (int)this.dgvComisiones.SelectedRows[0].Cells["ID"].Value;
-                    ComisionesDesktop formComision = new ComisionesDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                    ComisionesDesktop formComision = new ComisionesDesktop(ID, ApplicationForm.ModoForm.Modificacion, _context);
                     formComision.ShowDialog();
                     this.Listar();
                 }
@@ -91,7 +80,7 @@ namespace UI.Desktop
             if (this.dgvComisiones.SelectedRows.Count > 0)
             {
                 int ID = (int)this.dgvComisiones.SelectedRows[0].Cells["ID"].Value;
-                ComisionesDesktop formComision = new ComisionesDesktop(ID, ApplicationForm.ModoForm.Baja);
+                ComisionesDesktop formComision = new ComisionesDesktop(ID, ApplicationForm.ModoForm.Baja, _context);
                 formComision.ShowDialog();
                 this.Listar();
             }
@@ -101,12 +90,10 @@ namespace UI.Desktop
             }
 
         }
-
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void btnActualizar_Click(object sender, EventArgs e)
         {
             this.Listar();

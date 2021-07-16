@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Business.Entities
 {
@@ -14,6 +15,7 @@ namespace Business.Entities
         private string _Apellido;
         private string _Email;
         private bool _Habilitado;
+        [Column("nombre_usuario")]
         public string NombreUsuario
         {
             get
@@ -25,6 +27,7 @@ namespace Business.Entities
                 _NombreUsuario = value;
             }
         }
+        [Column("clave")]
         public string Clave
         {
             get
@@ -36,6 +39,7 @@ namespace Business.Entities
                 _Clave = value;
             }
         }
+        [Column("nombre")]
         public string Nombre
         {
             get
@@ -47,6 +51,7 @@ namespace Business.Entities
                 _Nombre = value;
             }
         }
+        [Column("apellido")]
         public string Apellido
         {
             get
@@ -58,6 +63,7 @@ namespace Business.Entities
                 _Apellido = value;
             }
         }
+        [Column("email")]
         public string Email
         {
             get
@@ -69,6 +75,7 @@ namespace Business.Entities
                 _Email = value;
             }
         }
+        [Column("habilitado")]
         public bool Habilitado
         {
             get

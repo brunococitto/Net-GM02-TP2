@@ -10,10 +10,10 @@ namespace Business.Logic
 {
     public class ModuloLogic : BusinessLogic
     {
-        public ModuloAdapter ModuloData { get; set; }
-        public ModuloLogic()
+        private ModuloAdapter ModuloData { get; set; }
+        public ModuloLogic(ModuloAdapter moduloAdapter)
         {
-            ModuloData = new ModuloAdapter();
+            ModuloData = moduloAdapter;
         }
         public List<Modulo> GetAll()
         {

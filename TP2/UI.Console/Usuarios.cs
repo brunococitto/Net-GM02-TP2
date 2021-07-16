@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Entities;
 using Business.Logic;
+using Data.Database;
 
 namespace UI.Consola
 {
@@ -13,7 +14,8 @@ namespace UI.Consola
         public UsuarioLogic UsuarioNegocio { get; set; }
         public Usuarios()
         {
-            UsuarioNegocio = new UsuarioLogic();
+            AcademyContext context = new AcademyContext();
+            UsuarioNegocio = new UsuarioLogic(new UsuarioAdapter(context));
         }
         public void Menu()
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Business.Entities
 {
@@ -13,6 +14,7 @@ namespace Business.Entities
         private string _Descripcion;
         private int _IDComision;
         private int _IDMateria;
+        [Column("anio_calendario")]
         public int AnoCalendario
         {
             get
@@ -24,6 +26,7 @@ namespace Business.Entities
                 _AnoCalendario = value;
             }
         }
+        [Column("cupo")]
         public int Cupo
         {
             get
@@ -35,6 +38,7 @@ namespace Business.Entities
                 _Cupo = value;
             }
         }
+        [Column("desc_curso")]
         public string Descripcion
         {
             get
@@ -46,6 +50,7 @@ namespace Business.Entities
                 _Descripcion = value;
             }
         }
+        [Column("id_comision")]
         public int IDComision
         {
             get
@@ -57,6 +62,7 @@ namespace Business.Entities
                 _IDComision = value;
             }
         }
+        [Column("id_materia")]
         public int IDMateria
         {
             get

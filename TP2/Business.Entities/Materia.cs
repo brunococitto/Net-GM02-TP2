@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Business.Entities
 {
@@ -12,6 +13,7 @@ namespace Business.Entities
         private int _HSSemanales;
         private int _HSTotales;
         private int _IDPlan;
+        [Column("desc_materia")]
         public string Descripcion
         {
             get
@@ -23,6 +25,7 @@ namespace Business.Entities
                 _Descripcion = value;
             }
         }
+        [Column("hs_semanales")]
         public int HSSemanales
         {
             get
@@ -34,6 +37,7 @@ namespace Business.Entities
                 _HSSemanales = value;
             }
         }
+        [Column("hs_totales")]
         public int HSTotales
         {
             get
@@ -45,6 +49,7 @@ namespace Business.Entities
                 _HSTotales = value;
             }
         }
+        [Column("id_plan")]
         public int IDPlan
         {
             get

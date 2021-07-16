@@ -9,24 +9,26 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business.Logic;
 using Business.Entities;
+using Data.Database;
 
 namespace UI.Desktop
 {
     public partial class ModuloDesktop : ApplicationForm
     {
-        public ModuloDesktop()
+        private readonly ModuloLogic _moduloLogic;
+        public ModuloDesktop(AcademyContext context)
         {
             InitializeComponent();
+            _moduloLogic = new ModuloLogic(new ModuloAdapter(context));
         }
-        public ModuloDesktop(ModoForm modo) : this()
+        public ModuloDesktop(ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
         }
-        public ModuloDesktop(int ID, ModoForm modo) : this()
+        public ModuloDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            ModuloLogic m = new ModuloLogic();
-            ModuloActual = m.GetOne(ID);
+            ModuloActual = _moduloLogic.GetOne(ID);
             MapearDeDatos();
         }
         public Modulo ModuloActual { set; get; }
@@ -51,7 +53,6 @@ namespace UI.Desktop
         }
         public override void MapearADatos()
         {
-
             if (Modos == ModoForm.Alta)
             {
                 ModuloActual = new Modulo();
@@ -71,14 +72,11 @@ namespace UI.Desktop
                     break;
             }
         }
-
         public override void GuardarCambios()
         {
-            ModuloLogic m = new ModuloLogic();
             MapearADatos();
-            m.Save(ModuloActual);
+            _moduloLogic.Save(ModuloActual);
         }
-
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             switch (Modos)
@@ -109,10 +107,8 @@ namespace UI.Desktop
         }
         public virtual void Eliminar()
         {
-            ModuloLogic m = new ModuloLogic();
-            m.Delete(ModuloActual.ID);
+            _moduloLogic.Delete(ModuloActual.ID);
         }
-
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             Close();

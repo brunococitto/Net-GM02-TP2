@@ -10,10 +10,10 @@ namespace Business.Logic
 {
     public class ComisionLogic : BusinessLogic
     {
-        public ComisionAdapter ComisionData { get; set; }
-        public ComisionLogic()
+        private ComisionAdapter ComisionData { get; set; }
+        public ComisionLogic(ComisionAdapter comisionAdapter)
         {
-            ComisionData =  new ComisionAdapter();
+            ComisionData = comisionAdapter;
         }
         public List<Comision> GetAll()
         {

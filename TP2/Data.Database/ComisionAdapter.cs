@@ -9,6 +9,13 @@ namespace Data.Database
 {
     public class ComisionAdapter : Adapter
     {
+        private readonly AcademyContext _context;
+        private Adapter _adapter;
+        public ComisionAdapter(AcademyContext context)
+        {
+            _adapter = new Adapter();
+            _context = context;
+        }
         public List<Comision> GetAll()
         {
             List<Comision> comisiones = new List<Comision>();
@@ -20,8 +27,8 @@ namespace Data.Database
                 while (drComisiones.Read())
                 {
                     Comision comi = new Comision();
-                    comi.ID = (int)drComisiones["id_comision"];
-                    comi.Descripcion = (string)drComisiones["desc_comision"];
+                    comi.ID = (int)drComisiones["ID"];
+                    comi.Descripcion = drComisiones["desc_comision"].ToString();
                     comi.AnoEspecialidad = (int)drComisiones["anio_especialidad"];
                     comi.IDPlan = (int)drComisiones["id_plan"];
                     comisiones.Add(comi);
@@ -47,13 +54,13 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdComisiones = new SqlCommand("select * from comisiones where id_comision = @id", sqlConn);
+                SqlCommand cmdComisiones = new SqlCommand("select * from comisiones where ID = @id", sqlConn);
                 cmdComisiones.Parameters.Add("@id", SqlDbType.Int).Value = ID;
                 SqlDataReader drComisiones = cmdComisiones.ExecuteReader();
                 if (drComisiones.Read())
                 {
-                    comi.ID = (int)drComisiones["id_comision"];
-                    comi.Descripcion = (string)drComisiones["desc_comision"];
+                    comi.ID = (int)drComisiones["ID"];
+                    comi.Descripcion = drComisiones["desc_comision"].ToString();
                     comi.AnoEspecialidad = (int)drComisiones["anio_especialidad"];
                     comi.IDPlan = (int)drComisiones["id_plan"];
                 }
@@ -79,7 +86,7 @@ namespace Data.Database
                 SqlCommand cmdSave = new SqlCommand(
                     "UPDATE comisiones SET desc_comision = @desc_comision, anio_especialidad = @anio_especialidad, " +
                     "id_plan = @id_plan " +
-                    "WHERE id_comision = @id"
+                    "WHERE ID = @id"
                     , sqlConn);
                 cmdSave.Parameters.Add("@id", SqlDbType.Int).Value = comision.ID;
                 cmdSave.Parameters.Add("@desc_comision", SqlDbType.VarChar, 50).Value = comision.Descripcion;
@@ -128,7 +135,7 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdDelete = new SqlCommand("delete comisiones where id_comision = @id", sqlConn);
+                SqlCommand cmdDelete = new SqlCommand("delete comisiones where ID = @id", sqlConn);
                 cmdDelete.Parameters.Add("@id", SqlDbType.Int).Value = ID;
                 cmdDelete.ExecuteNonQuery();
             }

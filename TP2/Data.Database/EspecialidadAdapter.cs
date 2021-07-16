@@ -9,6 +9,13 @@ namespace Data.Database
 {
     public class EspecialidadAdapter : Adapter
     {
+        private readonly AcademyContext _context;
+        private Adapter _adapter;
+        public EspecialidadAdapter(AcademyContext context)
+        {
+            _adapter = new Adapter();
+            _context = context;
+        }
         public List<Especialidad> GetAll()
         {
             List<Especialidad> especialidades = new List<Especialidad>();
@@ -20,8 +27,8 @@ namespace Data.Database
                 while (drEspecialidades.Read())
                 {
                     Especialidad esp = new Especialidad();
-                    esp.ID = (int)drEspecialidades["id_especialidad"];
-                    esp.Descripcion = (string)drEspecialidades["desc_especialidad"];
+                    esp.ID = (int)drEspecialidades["ID"];
+                    esp.Descripcion = drEspecialidades["desc_especialidad"].ToString();
                     especialidades.Add(esp);
                 }
                 drEspecialidades.Close();
@@ -44,13 +51,13 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdEspecialidades = new SqlCommand("select * from especialidades where id_especialidad = @id", sqlConn);
+                SqlCommand cmdEspecialidades = new SqlCommand("select * from especialidades where ID = @id", sqlConn);
                 cmdEspecialidades.Parameters.Add("@id", SqlDbType.Int).Value = ID;
                 SqlDataReader drEspecialidades = cmdEspecialidades.ExecuteReader();
                 if (drEspecialidades.Read())
                 {
-                    esp.ID = (int)drEspecialidades["id_especialidad"];
-                    esp.Descripcion = (string)drEspecialidades["desc_especialidad"];
+                    esp.ID = (int)drEspecialidades["ID"];
+                    esp.Descripcion = drEspecialidades["desc_especialidad"].ToString();
                 }
                 drEspecialidades.Close();
             }
@@ -73,7 +80,7 @@ namespace Data.Database
                 this.OpenConnection();
                 SqlCommand cmdSave = new SqlCommand(
                     "UPDATE especialidades SET desc_especialidad = @desc_especialidad " +
-                    "WHERE id_especialidad = @id"
+                    "WHERE ID = @id"
                     , sqlConn);
                 cmdSave.Parameters.Add("@id", SqlDbType.Int).Value = especialidad.ID;
                 cmdSave.Parameters.Add("@desc_especialidad", SqlDbType.VarChar, 50).Value = especialidad.Descripcion;
@@ -119,7 +126,7 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdDelete = new SqlCommand("delete especialidades where id_especialidad = @id", sqlConn);
+                SqlCommand cmdDelete = new SqlCommand("delete especialidades where ID = @id", sqlConn);
                 cmdDelete.Parameters.Add("@id", SqlDbType.Int).Value = ID;
                 cmdDelete.ExecuteNonQuery();
             }

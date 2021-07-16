@@ -9,33 +9,36 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
+using Data.Database;
 
 namespace UI.Desktop
 {
     public partial class MateriaDesktop : ApplicationForm
     {
+        private readonly MateriaLogic _materiaLogic;
+        private readonly PlanLogic _planLogic;
         public Materia MateriaActual { set; get; }
-        public MateriaDesktop()
+        public MateriaDesktop(AcademyContext context)
         {
             InitializeComponent();
+            _materiaLogic = new MateriaLogic(new MateriaAdapter(context));
+            _planLogic = new PlanLogic(new PlanAdapter(context));
         }
         // Este es el constructor cuando se da de alta alta, ya que solo tiene un arg
-        public MateriaDesktop(ModoForm modo) : this()
+        public MateriaDesktop(ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
             // Cargo los planes para mostrarlos en el combobox
-            PlanLogic pl = new PlanLogic();
-            List<Plan> listaPlanes = pl.GetAll();
+            List<Plan> listaPlanes = _planLogic.GetAll();
             this.cbPlan.DataSource = listaPlanes;
             // selecciono el plan de la posicion 0 como para seleccionar algo
             this.cbPlan.SelectedIndex = 0;
         }
         // Este es el constructor cuando se edita o elimina algo, ya que tiene dos args
-        public MateriaDesktop(int ID, ModoForm modo) : this()
+        public MateriaDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            MateriaLogic m = new MateriaLogic();
-            MateriaActual = m.GetOne(ID);
+            MateriaActual = _materiaLogic.GetOne(ID);
             MapearDeDatos();
         }
         public override void MapearDeDatos()
@@ -45,10 +48,9 @@ namespace UI.Desktop
             this.txtHorasSemanales.Text = this.MateriaActual.HSSemanales.ToString();
             this.txtHorasTotales.Text = this.MateriaActual.HSTotales.ToString();
             // Acá cuando cargo la materia tengo que buscar el plan asignado
-            PlanLogic pl = new PlanLogic();
-            Plan planActualMateria = pl.GetOne(MateriaActual.IDPlan);
+            Plan planActualMateria = _planLogic.GetOne(MateriaActual.IDPlan);
             // A su vez tengo que cargar los otros planes por si quiero seleccionar otro
-            List<Plan> planes = pl.GetAll();
+            List<Plan> planes = _planLogic.GetAll();
             // seteo como datasource del combobox la lista de planes anteriores
             this.cbPlan.DataSource = planes;
             // ahora tengo que seleccionar el plan correspondiente a la materia
@@ -108,22 +110,17 @@ namespace UI.Desktop
         }
         public override void GuardarCambios()
         {
-            MateriaLogic m = new MateriaLogic();
             MapearADatos();
-            m.Save(MateriaActual);
+            _materiaLogic.Save(MateriaActual);
         }
         public override bool Validar()
         {
-
             if (string.IsNullOrWhiteSpace(this.txtDescripcion.Text))
             {
                 Notificar("Error", "Debe completar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             else { return true; }
-        }
-        private void MateriaDesktop_Load(object sender, EventArgs e)
-        {
         }
         private void btnAceptar_Click(object sender, EventArgs e)
         {
@@ -159,8 +156,7 @@ namespace UI.Desktop
         }
         public virtual void Eliminar()
         {
-            MateriaLogic e = new MateriaLogic();
-            e.Delete(MateriaActual.ID);
+            _materiaLogic.Delete(MateriaActual.ID);
         }
     }
 }

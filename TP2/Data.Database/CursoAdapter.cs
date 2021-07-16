@@ -9,6 +9,13 @@ namespace Data.Database
 {
     public class CursoAdapter : Adapter
     {
+        private readonly AcademyContext _context;
+        private Adapter _adapter;
+        public CursoAdapter(AcademyContext context)
+        {
+            _adapter = new Adapter();
+            _context = context;
+        }
         public List<Curso> GetAll()
         {
             List<Curso> cursos = new List<Curso>();
@@ -20,8 +27,8 @@ namespace Data.Database
                 while (drCursos.Read())
                 {
                     Curso curso = new Curso();
-                    curso.ID = (int)drCursos["id_curso"];
-                    curso.Descripcion = (string)drCursos["desc_curso"];
+                    curso.ID = (int)drCursos["ID"];
+                    curso.Descripcion = drCursos["desc_curso"].ToString();
                     curso.AnoCalendario = (int)drCursos["anio_calendario"];
                     curso.Cupo = (int)drCursos["cupo"];
                     curso.IDComision = (int)drCursos["id_comision"];
@@ -48,13 +55,13 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdCursos = new SqlCommand("select * from cursos where id_curso = @id", sqlConn);
+                SqlCommand cmdCursos = new SqlCommand("select * from cursos where ID = @id", sqlConn);
                 cmdCursos.Parameters.Add("@id", SqlDbType.Int).Value = ID;
                 SqlDataReader drCursos = cmdCursos.ExecuteReader();
                 if (drCursos.Read())
                 {
-                    curso.ID = (int)drCursos["id_curso"];
-                    curso.Descripcion = (string)drCursos["desc_curso"];
+                    curso.ID = (int)drCursos["ID"];
+                    curso.Descripcion = drCursos["desc_curso"].ToString();
                     curso.AnoCalendario = (int)drCursos["anio_calendario"];
                     curso.Cupo = (int)drCursos["cupo"];
                     curso.IDComision = (int)drCursos["id_comision"];
@@ -82,7 +89,7 @@ namespace Data.Database
                 this.OpenConnection();
                 SqlCommand cmdSave = new SqlCommand(
                     "UPDATE cursos SET desc_curso = @desc, id_materia = @id_mat,id_comision = @id_com ,anio_calendario = @anio_cal,cupo = @cupo " +
-                    "WHERE id_curso = @id"
+                    "WHERE ID = @id"
                     , sqlConn);
                 cmdSave.Parameters.Add("@id", SqlDbType.Int).Value = curso.ID;
                 cmdSave.Parameters.Add("@desc", SqlDbType.VarChar, 50).Value = curso.Descripcion;
@@ -136,7 +143,7 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdDelete = new SqlCommand("delete cursos where id_curso = @id", sqlConn);
+                SqlCommand cmdDelete = new SqlCommand("delete cursos where ID = @id", sqlConn);
                 cmdDelete.Parameters.Add("@id", SqlDbType.Int).Value = ID;
                 cmdDelete.ExecuteNonQuery();
             }

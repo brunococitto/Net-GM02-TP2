@@ -10,10 +10,10 @@ namespace Business.Logic
 {
     public class PlanLogic : BusinessLogic
     {
-        public PlanAdapter PlanData { get; set; }
-        public PlanLogic()
+        private PlanAdapter PlanData { get; set; }
+        public PlanLogic(PlanAdapter planAdapter)
         {
-            PlanData =  new PlanAdapter();
+            PlanData = planAdapter;
         }
         public List<Plan> GetAll()
         {

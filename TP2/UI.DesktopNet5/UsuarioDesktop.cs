@@ -9,32 +9,29 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
+using Data.Database;
 
 namespace UI.Desktop
 {
     public partial class UsuarioDesktop : ApplicationForm
     {
-        public UsuarioDesktop()
+        private readonly UsuarioLogic _usuarioLogic;
+        public UsuarioDesktop(AcademyContext context)
         {
             InitializeComponent();
+            _usuarioLogic = new UsuarioLogic(new UsuarioAdapter(context));
         }
-
-        public UsuarioDesktop(ModoForm modo) : this()
+        public UsuarioDesktop(ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
         }
-
-        public UsuarioDesktop(int ID, ModoForm modo) : this()
+        public UsuarioDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            UsuarioLogic u = new UsuarioLogic();
-            UsuarioActual = u.GetOne(ID);
+            UsuarioActual = _usuarioLogic.GetOne(ID);
             MapearDeDatos();
         }
-
-
         public Usuario UsuarioActual { set; get; }
-
         public override void MapearDeDatos()
         {
             this.txtID.Text = this.UsuarioActual.ID.ToString();
@@ -44,7 +41,6 @@ namespace UI.Desktop
             this.txtClave.Text = this.UsuarioActual.Clave;
             this.txtEmail.Text = this.UsuarioActual.Email;
             this.txtUsuario.Text = this.UsuarioActual.NombreUsuario;
-
             switch (this.Modos)
             {
                 case ModoForm.Alta:
@@ -60,11 +56,7 @@ namespace UI.Desktop
                     this.btnAceptar.Text = "Aceptar";
                     break;
             }
-
-
         }
-
-
         public override void MapearADatos()
         {
             if (Modos == ModoForm.Alta)
@@ -77,7 +69,6 @@ namespace UI.Desktop
                 UsuarioActual.Email = this.txtEmail.Text;
                 UsuarioActual.NombreUsuario = this.txtUsuario.Text;
             }
-
             if (Modos == ModoForm.Modificacion)
             {
                 UsuarioActual.Nombre = this.txtNombre.Text;
@@ -87,7 +78,6 @@ namespace UI.Desktop
                 UsuarioActual.Email = this.txtEmail.Text;
                 UsuarioActual.NombreUsuario = this.txtUsuario.Text;
             }
-
             switch (Modos)
             {
                 case ModoForm.Alta:
@@ -97,20 +87,14 @@ namespace UI.Desktop
                     UsuarioActual.State = BusinessEntity.States.Modified;
                     break;
             }
-
-
         }
-
         public override void GuardarCambios()
         {
-            UsuarioLogic u = new UsuarioLogic();
             MapearADatos();
-            u.Save(UsuarioActual);
-
+            _usuarioLogic.Save(UsuarioActual);
         }
         public override bool Validar()
         {
-
             if (string.IsNullOrWhiteSpace(this.txtApellido.Text) || string.IsNullOrWhiteSpace(this.txtNombre.Text) || string.IsNullOrWhiteSpace(this.txtUsuario.Text))
             {
                 Notificar("Error", "Debe completar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -131,22 +115,10 @@ namespace UI.Desktop
                 Notificar("Error", "El Email no es valido", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-
             else { return true; }
-
         }
-
-
-
-
-        private void UsuarioDesktop_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-
             switch (Modos)
             {
                 case ModoForm.Alta:
@@ -170,21 +142,15 @@ namespace UI.Desktop
                 case ModoForm.Consulta:
                     Close();
                     break;
-
             }
         }
-
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             Close();
         }
-
         public virtual void Eliminar()
         {
-            UsuarioLogic u = new UsuarioLogic();
-            u.Delete(UsuarioActual.ID);
-
+            _usuarioLogic.Delete(UsuarioActual.ID);
         }
-
     }
 }
