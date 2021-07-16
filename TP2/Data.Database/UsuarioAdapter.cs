@@ -31,9 +31,7 @@ namespace Data.Database
                     usr.NombreUsuario = (string)drUsuarios["nombre_usuario"];
                     usr.Clave = drUsuarios["clave"].ToString();
                     usr.Habilitado = (bool)drUsuarios["habilitado"];
-                    usr.Nombre = drUsuarios["nombre"].ToString();
-                    usr.Apellido = drUsuarios["apellido"].ToString();
-                    usr.Email = drUsuarios["email"].ToString();
+                    usr.IDPersona = (int)drUsuarios["id_persona"];
                     usuarios.Add(usr);
                 }
                 drUsuarios.Close();
@@ -65,9 +63,7 @@ namespace Data.Database
                     usr.NombreUsuario = drUsuarios["nombre_usuario"].ToString();
                     usr.Clave = drUsuarios["clave"].ToString();
                     usr.Habilitado = (bool)drUsuarios["habilitado"];
-                    usr.Nombre = drUsuarios["nombre"].ToString();
-                    usr.Apellido = drUsuarios["apellido"].ToString();
-                    usr.Email = drUsuarios["email"].ToString();
+                    usr.IDPersona = (int)drUsuarios["id_persona"];
                 }
                 drUsuarios.Close();
             }
@@ -91,16 +87,14 @@ namespace Data.Database
                 this.OpenConnection();
                 SqlCommand cmdSave = new SqlCommand(
                     "UPDATE usuarios SET nombre_usuario = @NombreUsuario, clave = @Clave, " +
-                    "habilitado = @Habilitado, nombre = @Nombre, apellido = @Apellido, email = @Email " +
+                    "habilitado = @Habilitado, id_persona = @IDPersona " +
                     "WHERE ID = @ID"
                     , sqlConn);
                 cmdSave.Parameters.Add("@ID", SqlDbType.Int).Value = usuario.ID;
                 cmdSave.Parameters.Add("@NombreUsuario", SqlDbType.VarChar, 50).Value = usuario.NombreUsuario;
                 cmdSave.Parameters.Add("@Clave", SqlDbType.VarChar, 50).Value = usuario.Clave;
                 cmdSave.Parameters.Add("@Habilitado", SqlDbType.Bit).Value = usuario.Habilitado;
-                cmdSave.Parameters.Add("@Nombre", SqlDbType.VarChar, 50).Value = usuario.Nombre;
-                cmdSave.Parameters.Add("@Apellido", SqlDbType.VarChar, 50).Value = usuario.Apellido;
-                cmdSave.Parameters.Add("@Email", SqlDbType.VarChar, 50).Value = usuario.Email;
+                cmdSave.Parameters.Add("@IDPersona", SqlDbType.Int).Value = usuario.IDPersona;
                 cmdSave.ExecuteNonQuery();
             }
             catch (Exception e)
@@ -120,16 +114,14 @@ namespace Data.Database
                 usuario.Clave = hashearClave(usuario.Clave);
                 this.OpenConnection();
                 SqlCommand cmdSave = new SqlCommand(
-                    "INSERT INTO usuarios(nombre_usuario, clave, habilitado, nombre, apellido, email) " +
-                    "VALUES (@NombreUsuario, @Clave, @Habilitado, @Nombre, @Apellido, @Email) " +
+                    "INSERT INTO usuarios(nombre_usuario, clave, habilitado, id_persona) " +
+                    "VALUES (@NombreUsuario, @Clave, @Habilitado, @IDPersona) " +
                     "SELECT @@identity"
                     , sqlConn);
                 cmdSave.Parameters.Add("@NombreUsuario", SqlDbType.VarChar, 50).Value = usuario.NombreUsuario;
                 cmdSave.Parameters.Add("@Clave", SqlDbType.VarChar, 50).Value = usuario.Clave;
                 cmdSave.Parameters.Add("@Habilitado", SqlDbType.Bit).Value = usuario.Habilitado;
-                cmdSave.Parameters.Add("@Nombre", SqlDbType.VarChar, 50).Value = usuario.Nombre;
-                cmdSave.Parameters.Add("@Apellido", SqlDbType.VarChar, 50).Value = usuario.Apellido;
-                cmdSave.Parameters.Add("@Email", SqlDbType.VarChar, 50).Value = usuario.Email;
+                cmdSave.Parameters.Add("@IDPersona", SqlDbType.Int).Value = usuario.IDPersona;
                 usuario.ID = Decimal.ToInt32((decimal)cmdSave.ExecuteScalar());
             }
             catch (Exception e)
@@ -196,9 +188,7 @@ namespace Data.Database
                     usr.NombreUsuario = drLogin["nombre_usuario"].ToString();
                     usr.Clave = drLogin["clave"].ToString();
                     usr.Habilitado = (bool)drLogin["habilitado"];
-                    usr.Nombre = drLogin["nombre"].ToString();
-                    usr.Apellido = drLogin["apellido"].ToString();
-                    usr.Email = drLogin["email"].ToString();
+                    usr.IDPersona = (int)drLogin["id_persona"];
                     drLogin.Close();
                     return usr;
                 } else

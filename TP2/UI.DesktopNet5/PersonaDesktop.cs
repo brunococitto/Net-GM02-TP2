@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
 using Data.Database;
+using System.Globalization;
 
 namespace UI.Desktop
 {
@@ -17,6 +18,7 @@ namespace UI.Desktop
     {
         private readonly PersonaLogic _personaLogic;
         private readonly PlanLogic _planLogic;
+        private Persona PersonaActual { set; get; }
         public PersonaDesktop(AcademyContext context)
         {
             InitializeComponent();
@@ -32,7 +34,7 @@ namespace UI.Desktop
             // selecciono el plan de la posicion 0 como para seleccionar algo
             this.cbPlan.SelectedIndex = 0;
             // Tipos persona
-            this.cbTipoPersona.DataSource = Enum.GetValues(typeof(Business.Entities.Persona.TiposPersona));
+            this.cbTipoPersona.DataSource = Enum.GetNames(typeof(Business.Entities.Persona.TiposPersona));
         }
         public PersonaDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
@@ -40,7 +42,6 @@ namespace UI.Desktop
             PersonaActual = _personaLogic.GetOne(ID);
             MapearDeDatos();
         }
-        public Persona PersonaActual { set; get; }
         public override void MapearDeDatos()
         {
             this.txtID.Text = this.PersonaActual.ID.ToString();
@@ -59,9 +60,9 @@ namespace UI.Desktop
             // ahora tengo que seleccionar el plan correspondiente a la persona
             this.cbPlan.SelectedIndex = cbPlan.FindStringExact(planActualPersona.Descripcion);
             // Cargo la fecha
-            this.dtpFechaNacimiento.Text = this.PersonaActual.FechaNacimiento.ToString();
+            this.dtpFechaNacimiento.Value = this.PersonaActual.FechaNacimiento;
             // Tipos persona
-            this.cbTipoPersona.DataSource = Enum.GetNames(typeof(Business.Entities.Persona.TiposPersona)).ToList();
+            this.cbTipoPersona.DataSource = Enum.GetNames(typeof(Business.Entities.Persona.TiposPersona));
             // Tengo que seleccionar del combo de tipos el tipo de mi persona
             this.cbTipoPersona.SelectedIndex = cbTipoPersona.FindStringExact(Enum.GetName(PersonaActual.TipoPersona));
             switch (this.Modos)
@@ -93,7 +94,7 @@ namespace UI.Desktop
             PersonaActual.Telefono = this.txtTelefono.Text;
             PersonaActual.Direccion = this.txtDireccion.Text;
             PersonaActual.IDPlan = this.cbPlan.SelectedIndex;
-            PersonaActual.FechaNacimiento = DateTime.Parse(this.dtpFechaNacimiento.Text);
+            PersonaActual.FechaNacimiento = this.dtpFechaNacimiento.Value.Date;
             PersonaActual.TipoPersona = (Business.Entities.Persona.TiposPersona)Enum.Parse(typeof(Business.Entities.Persona.TiposPersona), cbTipoPersona.SelectedItem.ToString());
             switch (Modos)
             {

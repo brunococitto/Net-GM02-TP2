@@ -40,14 +40,14 @@ namespace UI.Desktop
             this.tsbEditar = new System.Windows.Forms.ToolStripButton();
             this.tsbEliminar = new System.Windows.Forms.ToolStripButton();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fechaNacimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.plan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tipoPersona = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tscPersonas.ContentPanel.SuspendLayout();
             this.tscPersonas.TopToolStripPanel.SuspendLayout();
@@ -104,19 +104,20 @@ namespace UI.Desktop
             this.dgvPersonas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPersonas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
+            this.legajo,
             this.nombre,
             this.apellido,
             this.direccion,
             this.email,
+            this.telefono,
             this.fechaNacimiento,
             this.plan,
-            this.legajo,
-            this.telefono,
             this.tipoPersona});
             this.tlPersonas.SetColumnSpan(this.dgvPersonas, 2);
             this.dgvPersonas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPersonas.Location = new System.Drawing.Point(4, 3);
             this.dgvPersonas.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dgvPersonas.MultiSelect = false;
             this.dgvPersonas.Name = "dgvPersonas";
             this.dgvPersonas.Size = new System.Drawing.Size(925, 371);
             this.dgvPersonas.TabIndex = 0;
@@ -197,6 +198,12 @@ namespace UI.Desktop
             this.id.Name = "id";
             this.id.ReadOnly = true;
             // 
+            // legajo
+            // 
+            this.legajo.DataPropertyName = "Legajo";
+            this.legajo.HeaderText = "Legajo";
+            this.legajo.Name = "legajo";
+            // 
             // nombre
             // 
             this.nombre.DataPropertyName = "Nombre";
@@ -225,6 +232,12 @@ namespace UI.Desktop
             this.email.Name = "email";
             this.email.ReadOnly = true;
             // 
+            // telefono
+            // 
+            this.telefono.DataPropertyName = "Telefono";
+            this.telefono.HeaderText = "Telefono";
+            this.telefono.Name = "telefono";
+            // 
             // fechaNacimiento
             // 
             this.fechaNacimiento.DataPropertyName = "FechaNacimiento";
@@ -236,18 +249,6 @@ namespace UI.Desktop
             this.plan.DataPropertyName = "Plan";
             this.plan.HeaderText = "Plan";
             this.plan.Name = "plan";
-            // 
-            // legajo
-            // 
-            this.legajo.DataPropertyName = "Legajo";
-            this.legajo.HeaderText = "Legajo";
-            this.legajo.Name = "legajo";
-            // 
-            // telefono
-            // 
-            this.telefono.DataPropertyName = "Telefono";
-            this.telefono.HeaderText = "Telefono";
-            this.telefono.Name = "telefono";
             // 
             // tipoPersona
             // 
@@ -290,14 +291,14 @@ namespace UI.Desktop
         private System.Windows.Forms.ToolStripButton tsbEditar;
         private System.Windows.Forms.ToolStripButton tsbEliminar;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn legajo;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn apellido;
         private System.Windows.Forms.DataGridViewTextBoxColumn direccion;
         private System.Windows.Forms.DataGridViewTextBoxColumn email;
+        private System.Windows.Forms.DataGridViewTextBoxColumn telefono;
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaNacimiento;
         private System.Windows.Forms.DataGridViewTextBoxColumn plan;
-        private System.Windows.Forms.DataGridViewTextBoxColumn legajo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn telefono;
         private System.Windows.Forms.DataGridViewTextBoxColumn tipoPersona;
     }
 }

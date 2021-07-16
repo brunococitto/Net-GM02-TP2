@@ -225,7 +225,6 @@ namespace UI.Desktop
             // 
             // cbTipoPersona
             // 
-            
             this.cbTipoPersona.FormattingEnabled = true;
             this.cbTipoPersona.Location = new System.Drawing.Point(140, 134);
             this.cbTipoPersona.Name = "cbTipoPersona";

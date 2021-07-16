@@ -51,10 +51,10 @@ namespace UI.Desktop
                                 Email = per.Email,
                                 FechaNacimiento = per.FechaNacimiento,
                                 Plan = pl.Descripcion,
-                                TipoPersona = per.TipoPersona.ToString()
+                                TipoPersona = per.TipoPersona
                             };
-            this.dgvPersonas.AutoGenerateColumns = false;
             this.dgvPersonas.DataSource = consulta.ToList();
+            this.dgvPersonas.AutoGenerateColumns = false;
         }
         private void btnActualizar_Click(object sender, EventArgs e)
         {
