@@ -13,6 +13,7 @@ namespace Data.Database
         protected void OpenConnection()
         {
             var connectionString = ConfigurationManager.ConnectionStrings[consKeyDefaultCnnString].ConnectionString;
+            //var connectionString = @"Server=(localdb)\mssqllocaldb;Database=academia;Trusted_Connection=True;MultipleActiveResultSets=true";
             this.sqlConn = new SqlConnection(connectionString);
             sqlConn.Open();
         }

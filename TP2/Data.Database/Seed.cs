@@ -165,7 +165,23 @@ namespace Data.Database
                     Cupo = 10
                 }
             };
+            var personas = new List<Persona>
+            {
+                new()
+                {
+                    Nombre = "Bruno",
+                    Apellido = "Cocitto",
+                    Direccion = "asd 123",
+                    Telefono = "0303456",
+                    Email = "asd@asd.com",
+                    FechaNacimiento = new DateTime(2011, 12, 01),
+                    Legajo = 123,
+                    IDPlan = 1,
+                    TipoPersona = Persona.TiposPersona.Alumno
+                }
+            };
 
+            context.AddRange(personas);
             context.AddRange(especialidades);
             context.AddRange(planes);
             context.AddRange(comisiones);

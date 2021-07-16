@@ -14,8 +14,7 @@ namespace UI.Consola
         public UsuarioLogic UsuarioNegocio { get; set; }
         public Usuarios()
         {
-            AcademyContext context = new AcademyContext();
-            UsuarioNegocio = new UsuarioLogic(new UsuarioAdapter(context));
+            UsuarioNegocio = new UsuarioLogic(new UsuarioAdapter());
         }
         public void Menu()
         {

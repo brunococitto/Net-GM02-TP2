@@ -11,10 +11,9 @@ namespace Data.Database
     public class UsuarioAdapter : Adapter
     {
         private readonly AcademyContext _context;
-        private Adapter _adapter;
+        public UsuarioAdapter() { }
         public UsuarioAdapter(AcademyContext context)
         {
-            _adapter = new Adapter();
             _context = context;
         }
         public List<Usuario> GetAll()
@@ -122,7 +121,7 @@ namespace Data.Database
                 this.OpenConnection();
                 SqlCommand cmdSave = new SqlCommand(
                     "INSERT INTO usuarios(nombre_usuario, clave, habilitado, nombre, apellido, email) " +
-                    "VALUES (@NombreUsuario, @Clave, @Habilitado, @Nombre, @Apellido, @Email, @Estado) " +
+                    "VALUES (@NombreUsuario, @Clave, @Habilitado, @Nombre, @Apellido, @Email) " +
                     "SELECT @@identity"
                     , sqlConn);
                 cmdSave.Parameters.Add("@NombreUsuario", SqlDbType.VarChar, 50).Value = usuario.NombreUsuario;
@@ -132,7 +131,6 @@ namespace Data.Database
                 cmdSave.Parameters.Add("@Apellido", SqlDbType.VarChar, 50).Value = usuario.Apellido;
                 cmdSave.Parameters.Add("@Email", SqlDbType.VarChar, 50).Value = usuario.Email;
                 usuario.ID = Decimal.ToInt32((decimal)cmdSave.ExecuteScalar());
-
             }
             catch (Exception e)
             {

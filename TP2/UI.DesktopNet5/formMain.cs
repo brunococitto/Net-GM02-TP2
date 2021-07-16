@@ -81,5 +81,10 @@ namespace UI.Desktop
             Cursos appCursos = new Cursos(_context);
             appCursos.ShowDialog();
         }
+        private void btnPersonas_Click(object sender, EventArgs e)
+        {
+            Personas appPersonas = new Personas(_context);
+            appPersonas.ShowDialog();
+        }
     }
 }
