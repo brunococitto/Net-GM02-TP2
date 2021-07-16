@@ -10,10 +10,8 @@ namespace Data.Database
     public class ModuloAdapter : Adapter
     {
         private readonly AcademyContext _context;
-        private Adapter _adapter;
         public ModuloAdapter(AcademyContext context)
         {
-            _adapter = new Adapter();
             _context = context;
         }
         public List<Modulo> GetAll()

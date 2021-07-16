@@ -10,10 +10,8 @@ namespace Data.Database
     public class EspecialidadAdapter : Adapter
     {
         private readonly AcademyContext _context;
-        private Adapter _adapter;
         public EspecialidadAdapter(AcademyContext context)
         {
-            _adapter = new Adapter();
             _context = context;
         }
         public List<Especialidad> GetAll()

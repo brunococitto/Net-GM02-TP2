@@ -11,6 +11,7 @@ namespace Data.Database
     public class UsuarioAdapter : Adapter
     {
         private readonly AcademyContext _context;
+        // Este bypass es para poder usarlo desde el proyecto UI.Consola sin tener que crear el contexto
         public UsuarioAdapter() { }
         public UsuarioAdapter(AcademyContext context)
         {

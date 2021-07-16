@@ -10,10 +10,8 @@ namespace Data.Database
     public class ComisionAdapter : Adapter
     {
         private readonly AcademyContext _context;
-        private Adapter _adapter;
         public ComisionAdapter(AcademyContext context)
         {
-            _adapter = new Adapter();
             _context = context;
         }
         public List<Comision> GetAll()
