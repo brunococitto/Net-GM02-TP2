@@ -14,20 +14,20 @@ using System.Globalization;
 
 namespace UI.Desktop
 {
-    public partial class AlumnoInscripcionDesktop : ApplicationForm
+    public partial class RegistrarNotaDesktop : ApplicationForm
     {
         private readonly AlumnoInscripcionLogic _alumnoInscripcionLogic;
         private readonly CursoLogic _cursoLogic;
         private readonly PersonaLogic _personaLogic;
         private AlumnoInscripcion AlumnoInscripcionActual { set; get; }
-        public AlumnoInscripcionDesktop(AcademyContext context)
+        public RegistrarNotaDesktop(AcademyContext context)
         {
             InitializeComponent();
             _alumnoInscripcionLogic = new AlumnoInscripcionLogic(new AlumnoInscripcionAdapter(context));
             _cursoLogic = new CursoLogic(new CursoAdapter(context));
             _personaLogic = new PersonaLogic(new PersonaAdapter(context));
         }
-        public AlumnoInscripcionDesktop(ModoForm modo, AcademyContext context) : this(context)
+        public RegistrarNotaDesktop(ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
             // No te deja hacer nada hasta que no introduzcas un legajo válido, como en usuario
@@ -40,7 +40,7 @@ namespace UI.Desktop
             // selecciono el curso de la posicion 0 como para seleccionar algo
             this.cbCurso.SelectedIndex = 0;
         }
-        public AlumnoInscripcionDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
+        public RegistrarNotaDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
             AlumnoInscripcionActual = _alumnoInscripcionLogic.GetOne(ID);
@@ -85,8 +85,8 @@ namespace UI.Desktop
             {
                 AlumnoInscripcionActual = new AlumnoInscripcion();
             }
-            AlumnoInscripcionActual.Condicion = "";
-            AlumnoInscripcionActual.Nota = 0;
+            AlumnoInscripcionActual.Condicion = this.txtCondicion.Text;
+            AlumnoInscripcionActual.Nota = Int32.Parse(this.txtNota.Text);
             AlumnoInscripcionActual.IDCurso = (int)this.cbCurso.SelectedValue;
             var alumno = from p in _personaLogic.GetAll()
                            where p.Legajo == Int32.Parse(this.txtLegajo.Text)
@@ -119,7 +119,9 @@ namespace UI.Desktop
         private void cargarPersona()
         {
             this.btnAceptar.Enabled = false;
+            this.txtCondicion.ReadOnly = true;
             this.cbCurso.Enabled = false;
+            this.txtNota.ReadOnly = true;
             this.txtNombre.Text = "";
             this.txtApellido.Text = "";
             List<Persona> personas = _personaLogic.GetAll();
@@ -152,7 +154,9 @@ namespace UI.Desktop
                 this.txtApellido.Text = per.Apellido;
                 // Una vez que cargo la persona, vuelvo a habilitar el resto de los elementos
                 this.btnAceptar.Enabled = true;
+                this.txtCondicion.ReadOnly = false;
                 this.cbCurso.Enabled = true;
+                this.txtNota.ReadOnly = false;
             }
             catch (Exception e)
             {
