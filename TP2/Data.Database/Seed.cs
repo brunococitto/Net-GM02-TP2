@@ -169,7 +169,18 @@ namespace Data.Database
                     TipoPersona = Persona.TiposPersona.Alumno
                 }
             };
+            var inscripciones = new List<AlumnoInscripcion>
+            {
+                new()
+                {
+                    Condicion = "Regular",
+                    IDAlumno = 1,
+                    IDCurso = 1,
+                    Nota = 0
+                }
+            };
 
+            context.AddRange(inscripciones);
             context.AddRange(personas);
             context.AddRange(especialidades);
             context.AddRange(planes);

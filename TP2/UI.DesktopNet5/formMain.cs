@@ -86,5 +86,11 @@ namespace UI.Desktop
             Personas appPersonas = new Personas(_context);
             appPersonas.ShowDialog();
         }
+
+        private void btnInscripciones_Click(object sender, EventArgs e)
+        {
+            AlumnoInscripciones appInscripciones = new AlumnoInscripciones(_context);
+            appInscripciones.ShowDialog();
+        }
     }
 }

@@ -41,6 +41,7 @@ namespace UI.Desktop
             this.btnComision = new System.Windows.Forms.Button();
             this.btnCurso = new System.Windows.Forms.Button();
             this.btnPersonas = new System.Windows.Forms.Button();
+            this.btnInscripciones = new System.Windows.Forms.Button();
             this.mnsPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -166,11 +167,23 @@ namespace UI.Desktop
             this.btnPersonas.UseVisualStyleBackColor = true;
             this.btnPersonas.Click += new System.EventHandler(this.btnPersonas_Click);
             // 
+            // btnInscripciones
+            // 
+            this.btnInscripciones.Location = new System.Drawing.Point(213, 202);
+            this.btnInscripciones.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnInscripciones.Name = "btnInscripciones";
+            this.btnInscripciones.Size = new System.Drawing.Size(177, 47);
+            this.btnInscripciones.TabIndex = 18;
+            this.btnInscripciones.Text = "Inscripciones";
+            this.btnInscripciones.UseVisualStyleBackColor = true;
+            this.btnInscripciones.Click += new System.EventHandler(this.btnInscripciones_Click);
+            // 
             // formMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(933, 519);
+            this.Controls.Add(this.btnInscripciones);
             this.Controls.Add(this.btnPersonas);
             this.Controls.Add(this.btnCurso);
             this.Controls.Add(this.btnComision);
@@ -208,6 +221,7 @@ namespace UI.Desktop
         private System.Windows.Forms.Button btnComision;
         private System.Windows.Forms.Button btnCurso;
         private System.Windows.Forms.Button btnPersonas;
+        private System.Windows.Forms.Button btnInscripciones;
     }
 }
 
