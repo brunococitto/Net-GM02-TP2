@@ -104,6 +104,7 @@ namespace UI.Desktop
             this.dgvEspecialidades.Name = "dgvEspecialidades";
             this.dgvEspecialidades.Size = new System.Drawing.Size(266, 371);
             this.dgvEspecialidades.TabIndex = 0;
+            this.dgvEspecialidades.MultiSelect = false;
             // 
             // id
             // 

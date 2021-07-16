@@ -112,6 +112,7 @@ namespace UI.Desktop
             this.dgvCursos.Name = "dgvCursos";
             this.dgvCursos.Size = new System.Drawing.Size(594, 371);
             this.dgvCursos.TabIndex = 0;
+            this.dgvCursos.MultiSelect = false;
             // 
             // btnActualizar
             // 

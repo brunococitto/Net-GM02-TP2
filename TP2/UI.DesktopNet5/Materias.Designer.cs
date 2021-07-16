@@ -110,6 +110,7 @@ namespace UI.Desktop
             this.dgvMaterias.Name = "dgvMaterias";
             this.dgvMaterias.Size = new System.Drawing.Size(594, 371);
             this.dgvMaterias.TabIndex = 0;
+            this.dgvMaterias.MultiSelect = false;
             // 
             // btnActualizar
             // 

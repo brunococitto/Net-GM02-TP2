@@ -112,6 +112,7 @@ namespace UI.Desktop
             this.dgvUsuarios.Name = "dgvUsuarios";
             this.dgvUsuarios.Size = new System.Drawing.Size(925, 371);
             this.dgvUsuarios.TabIndex = 0;
+            this.dgvUsuarios.MultiSelect = false;
             // 
             // btnActualizar
             // 

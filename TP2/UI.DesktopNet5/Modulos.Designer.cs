@@ -104,6 +104,7 @@ namespace UI.Desktop
             this.dgvModulos.RowTemplate.Height = 25;
             this.dgvModulos.Size = new System.Drawing.Size(429, 387);
             this.dgvModulos.TabIndex = 0;
+            this.dgvModulos.MultiSelect = false;
             // 
             // btnActualizar
             // 

@@ -108,6 +108,7 @@ namespace UI.Desktop
             this.dgvComisiones.Name = "dgvComisiones";
             this.dgvComisiones.Size = new System.Drawing.Size(443, 371);
             this.dgvComisiones.TabIndex = 0;
+            this.dgvComisiones.MultiSelect = false;
             // 
             // id
             // 
