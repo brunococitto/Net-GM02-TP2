@@ -29,35 +29,49 @@ namespace UI.Desktop
         }
         private void RegistrarNotas_Load(object sender, EventArgs e)
         {
-            this.Listar();
+            this.gbModificarInscripcion.Enabled = false;
+            this.ListarCursos();
+        }
+        public void ListarCursos()
+        {
+            //  Contemplar la posibilidad de que n
+            List<Curso> cursos = _cursoLogic.GetAll();
+            cbCursos.DataSource = cursos;
+            cbCursos.SelectedIndex = 0;
+            Listar();
         }
         public void Listar()
         {
             // Pido las alumnoInscripciones
             List<AlumnoInscripcion> alumnoInscripciones = _alumnoInscripcionLogic.GetAll();
-            // Pido los cursos
-            List<Curso> cursos = _cursoLogic.GetAll();
             // Pido las personas
             List<Persona> personas = _personaLogic.GetAll();
             // Consulta para dejar la descripción del plan
             var consulta =
                             from insc in alumnoInscripciones
-                            join cu in cursos
-                            on insc.IDCurso equals cu.ID
                             join per in personas
                             on insc.IDAlumno equals per.ID
+                            where insc.IDCurso == (int)this.cbCursos.SelectedValue
                             select new
                             {
                                 ID = insc.ID,
                                 Legajo = per.Legajo,
                                 Nombre = per.Nombre,
                                 Apellido = per.Apellido,
-                                Curso = cu.Descripcion,
                                 Condicion = insc.Condicion,
                                 Nota = insc.Nota
                             };
             this.dgvRegistrarNotas.DataSource = consulta.ToList();
             this.dgvRegistrarNotas.AutoGenerateColumns = false;
+        }
+        private void CargarDatosInscripcion()
+        {
+            AlumnoInscripcion insc = _alumnoInscripcionLogic.GetOne((int)this.dgvRegistrarNotas.SelectedRows[0].Cells[0].Value);
+            Persona per = _personaLogic.GetOne(insc.IDAlumno);
+            this.txtNombre.Text = per.Nombre;
+            this.txtApellido.Text = per.Apellido;
+            this.txtCondicion.Text = insc.Condicion;
+            this.txtNota.Text = insc.Nota.ToString();
         }
         private void btnActualizar_Click(object sender, EventArgs e)
         {
@@ -67,39 +81,30 @@ namespace UI.Desktop
         {
             this.Close();
         }
-        private void tsbNuevo_Click(object sender, EventArgs e)
+        private void cbCursos_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            AlumnoInscripcionDesktop formAlumnoInscripcion = new AlumnoInscripcionDesktop(ApplicationForm.ModoForm.Alta, _context);
-            formAlumnoInscripcion.ShowDialog();
             this.Listar();
         }
-        private void tsbEditar_Click(object sender, EventArgs e)
+
+        private void dgvRegistrarNotas_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (this.dgvRegistrarNotas.SelectedRows.Count > 0)
-            {
-                int ID = (int)this.dgvRegistrarNotas.SelectedRows[0].Cells[0].Value;
-                AlumnoInscripcionDesktop formAlumnoInscripcion = new AlumnoInscripcionDesktop(ID, ApplicationForm.ModoForm.Modificacion, _context);
-                formAlumnoInscripcion.ShowDialog();
-                this.Listar();
-            }
-            else
-            {
-                MessageBox.Show("Seleccionar una fila en la grilla para poder editar");
-            }
+            this.gbModificarInscripcion.Enabled = true;
+            this.CargarDatosInscripcion();
         }
-        private void tsbEliminar_Click(object sender, EventArgs e)
+
+        private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (this.dgvRegistrarNotas.SelectedRows.Count > 0)
-            {
-                int ID = (int)this.dgvRegistrarNotas.SelectedRows[0].Cells[0].Value;
-                AlumnoInscripcionDesktop formAlumnoInscripcion = new AlumnoInscripcionDesktop(ID, ApplicationForm.ModoForm.Baja, _context);
-                formAlumnoInscripcion.ShowDialog();
-                this.Listar();
-            }
-            else
-            {
-                MessageBox.Show("Seleccionar una fila en la grilla para poder eliminar");
-            }
+            AlumnoInscripcion insc = _alumnoInscripcionLogic.GetOne((int)this.dgvRegistrarNotas.SelectedRows[0].Cells[0].Value);
+            insc.Condicion = this.txtCondicion.Text;
+            insc.Nota = Int32.Parse(this.txtNota.Text);
+            insc.State = BusinessEntity.States.Modified;
+            _alumnoInscripcionLogic.Save(insc);
+            this.txtApellido.Text = "";
+            this.txtNombre.Text = "";
+            this.txtCondicion.Text = "";
+            this.txtNota.Text = "";
+            this.gbModificarInscripcion.Enabled = false;
+            this.Listar();
         }
     }
 }

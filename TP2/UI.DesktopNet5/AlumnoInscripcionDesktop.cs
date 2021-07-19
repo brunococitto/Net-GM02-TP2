@@ -31,9 +31,7 @@ namespace UI.Desktop
         {
             Modos = modo;
             // No te deja hacer nada hasta que no introduzcas un legajo válido, como en usuario
-            this.txtCondicion.ReadOnly = true;
-            this.txtNota.ReadOnly = true;
-            this.cbCurso.Enabled = false;
+            this.cbCurso.DropDownStyle = ComboBoxStyle.DropDownList;
             // Cargo los cursos para mostrarlos en el combobox
             List<Curso> cursos = _cursoLogic.GetAll();
             this.cbCurso.DataSource = cursos;
@@ -49,8 +47,6 @@ namespace UI.Desktop
         public override void MapearDeDatos()
         {
             this.txtID.Text = this.AlumnoInscripcionActual.ID.ToString();
-            this.txtCondicion.Text = this.AlumnoInscripcionActual.Condicion;
-            this.txtNota.Text = this.AlumnoInscripcionActual.Nota.ToString();
             // Acá cuando cargo la inscripcion tengo que buscar el alumno asignado
             Persona alumnoActual = _personaLogic.GetOne(this.AlumnoInscripcionActual.IDAlumno);
             this.txtLegajo.Text = alumnoActual.Legajo.ToString();
@@ -119,7 +115,7 @@ namespace UI.Desktop
         private void cargarPersona()
         {
             this.btnAceptar.Enabled = false;
-            this.cbCurso.Enabled = false;
+            this.cbCurso.DropDownStyle = ComboBoxStyle.DropDownList;
             this.txtNombre.Text = "";
             this.txtApellido.Text = "";
             List<Persona> personas = _personaLogic.GetAll();
@@ -152,7 +148,7 @@ namespace UI.Desktop
                 this.txtApellido.Text = per.Apellido;
                 // Una vez que cargo la persona, vuelvo a habilitar el resto de los elementos
                 this.btnAceptar.Enabled = true;
-                this.cbCurso.Enabled = true;
+                this.cbCurso.DropDownStyle = ComboBoxStyle.DropDown;
             }
             catch (Exception e)
             {

@@ -92,5 +92,11 @@ namespace UI.Desktop
             AlumnoInscripciones appInscripciones = new AlumnoInscripciones(_context);
             appInscripciones.ShowDialog();
         }
+
+        private void btnNotas_Click(object sender, EventArgs e)
+        {
+            RegistrarNotas appNotas = new RegistrarNotas(_context);
+            appNotas.ShowDialog();
+        }
     }
 }
