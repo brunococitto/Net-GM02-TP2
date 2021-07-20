@@ -25,6 +25,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="RegistrarNotaDesktop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RegistrarNotas.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="CursoDesktop.cs">
       <SubType>Form</SubType>
     </Compile>
