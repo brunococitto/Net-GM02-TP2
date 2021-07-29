@@ -20,8 +20,8 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdComisiones = new SqlCommand("select * from comisiones", sqlConn);
-                SqlDataReader drComisiones = cmdComisiones.ExecuteReader();
+                SqlCommand sqlComisiones = new SqlCommand("select * from comisiones", sqlConn);
+                SqlDataReader drComisiones = sqlComisiones.ExecuteReader();
                 while (drComisiones.Read())
                 {
                     Comision comi = new Comision();
@@ -52,9 +52,9 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdComisiones = new SqlCommand("select * from comisiones where ID = @id", sqlConn);
-                cmdComisiones.Parameters.Add("@id", SqlDbType.Int).Value = ID;
-                SqlDataReader drComisiones = cmdComisiones.ExecuteReader();
+                SqlCommand sqlComisiones = new SqlCommand("select * from comisiones where ID = @id", sqlConn);
+                sqlComisiones.Parameters.Add("@id", SqlDbType.Int).Value = ID;
+                SqlDataReader drComisiones = sqlComisiones.ExecuteReader();
                 if (drComisiones.Read())
                 {
                     comi.ID = (int)drComisiones["ID"];
@@ -81,16 +81,16 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdSave = new SqlCommand(
+                SqlCommand sqlSave = new SqlCommand(
                     "UPDATE comisiones SET desc_comision = @desc_comision, anio_especialidad = @anio_especialidad, " +
                     "id_plan = @id_plan " +
                     "WHERE ID = @id"
                     , sqlConn);
-                cmdSave.Parameters.Add("@id", SqlDbType.Int).Value = comision.ID;
-                cmdSave.Parameters.Add("@desc_comision", SqlDbType.VarChar, 50).Value = comision.Descripcion;
-                cmdSave.Parameters.Add("@anio_especialidad", SqlDbType.Int).Value = comision.AnoEspecialidad;
-                cmdSave.Parameters.Add("@id_plan", SqlDbType.Int).Value = comision.IDPlan;
-                cmdSave.ExecuteNonQuery();
+                sqlSave.Parameters.Add("@id", SqlDbType.Int).Value = comision.ID;
+                sqlSave.Parameters.Add("@desc_comision", SqlDbType.VarChar, 50).Value = comision.Descripcion;
+                sqlSave.Parameters.Add("@anio_especialidad", SqlDbType.Int).Value = comision.AnoEspecialidad;
+                sqlSave.Parameters.Add("@id_plan", SqlDbType.Int).Value = comision.IDPlan;
+                sqlSave.ExecuteNonQuery();
             }
             catch (Exception e)
             {
@@ -107,15 +107,15 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdSave = new SqlCommand(
+                SqlCommand sqlSave = new SqlCommand(
                     "INSERT INTO comisiones(desc_comision, anio_especialidad, id_plan) " +
                     "VALUES (@desc_comision, @anio_especialidad, @id_plan) " +
                     "SELECT @@identity"
                     , sqlConn);
-                cmdSave.Parameters.Add("@desc_comision", SqlDbType.VarChar, 50).Value = comision.Descripcion;
-                cmdSave.Parameters.Add("@anio_especialidad", SqlDbType.Int).Value = comision.AnoEspecialidad;
-                cmdSave.Parameters.Add("@id_plan", SqlDbType.Int).Value = comision.IDPlan;
-                comision.ID = Decimal.ToInt32((decimal)cmdSave.ExecuteScalar());
+                sqlSave.Parameters.Add("@desc_comision", SqlDbType.VarChar, 50).Value = comision.Descripcion;
+                sqlSave.Parameters.Add("@anio_especialidad", SqlDbType.Int).Value = comision.AnoEspecialidad;
+                sqlSave.Parameters.Add("@id_plan", SqlDbType.Int).Value = comision.IDPlan;
+                comision.ID = Decimal.ToInt32((decimal)sqlSave.ExecuteScalar());
             }
             catch (Exception e)
             {
@@ -133,9 +133,9 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdDelete = new SqlCommand("delete comisiones where ID = @id", sqlConn);
-                cmdDelete.Parameters.Add("@id", SqlDbType.Int).Value = ID;
-                cmdDelete.ExecuteNonQuery();
+                SqlCommand sqlDelete = new SqlCommand("delete comisiones where ID = @id", sqlConn);
+                sqlDelete.Parameters.Add("@id", SqlDbType.Int).Value = ID;
+                sqlDelete.ExecuteNonQuery();
             }
             catch (Exception e)
             {

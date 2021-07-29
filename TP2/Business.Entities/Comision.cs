@@ -9,19 +9,19 @@ namespace Business.Entities
 {
     public class Comision : BusinessEntity
     {
-        private int _AnoEspecialidad;
-        private string _Descripcion;
-        private int _IDPlan;
+        private int _anoEspecialidad;
+        private string _descripcion;
+        private int _idPlan;
         [Column("anio_especialidad")]
         public int AnoEspecialidad
         {
             get
             {
-                return _AnoEspecialidad;
+                return _anoEspecialidad;
             }
             set
             {
-                _AnoEspecialidad = value;
+                _anoEspecialidad = value;
             }
         }
         [Column("desc_comision")]
@@ -29,11 +29,11 @@ namespace Business.Entities
         {
             get
             {
-                return _Descripcion;
+                return _descripcion;
             }
             set
             {
-                _Descripcion = value;
+                _descripcion = value;
             }
         }
         [Column("id_plan")]
@@ -41,11 +41,11 @@ namespace Business.Entities
         {
             get
             {
-                return _IDPlan;
+                return _idPlan;
             }
             set
             {
-                _IDPlan = value;
+                _idPlan = value;
             }
         }
     }

@@ -9,20 +9,20 @@ namespace Business.Entities
 {
     public class Materia : BusinessEntity
     {
-        private string _Descripcion;
-        private int _HSSemanales;
-        private int _HSTotales;
-        private int _IDPlan;
+        private string _descripcion;
+        private int _hsSemanales;
+        private int _hsTotales;
+        private int _idPlan;
         [Column("desc_materia")]
         public string Descripcion
         {
             get
             {
-                return _Descripcion;
+                return _descripcion;
             }
             set
             {
-                _Descripcion = value;
+                _descripcion = value;
             }
         }
         [Column("hs_semanales")]
@@ -30,11 +30,11 @@ namespace Business.Entities
         {
             get
             {
-                return _HSSemanales;
+                return _hsSemanales;
             }
             set
             {
-                _HSSemanales = value;
+                _hsSemanales = value;
             }
         }
         [Column("hs_totales")]
@@ -42,11 +42,11 @@ namespace Business.Entities
         {
             get
             {
-                return _HSTotales;
+                return _hsTotales;
             }
             set
             {
-                _HSTotales = value;
+                _hsTotales = value;
             }
         }
         [Column("id_plan")]
@@ -54,11 +54,11 @@ namespace Business.Entities
         {
             get
             {
-                return _IDPlan;
+                return _idPlan;
             }
             set
             {
-                _IDPlan = value;
+                _idPlan = value;
             }
         }
     }

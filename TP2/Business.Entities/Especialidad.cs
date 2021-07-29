@@ -9,17 +9,17 @@ namespace Business.Entities
 {
     public class Especialidad : BusinessEntity
     {
-        private string _Descripcion;
+        private string _descripcion;
         [Column("desc_especialidad")]
         public string Descripcion
         {
             get
             {
-                return _Descripcion;
+                return _descripcion;
             }
             set
             {
-                _Descripcion = value;
+                _descripcion = value;
             }
         }
     }
