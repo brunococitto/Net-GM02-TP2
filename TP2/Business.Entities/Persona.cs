@@ -14,112 +14,112 @@ namespace Business.Entities
             Profesor = 2,
             Administrativo = 3
         }
-        private string _Apellido;
-        private string _Nombre;
-        private string _Direccion;
-        private string _Email;
-        private string _Telefono;
-        private int _IDPlan;
-        private int _Legajo;
-        private DateTime _FechaNacimiento;
-        public TiposPersona _TipoPersona;
+        private string _apellido;
+        private string _nombre;
+        private string _direccion;
+        private string _email;
+        private string _telefono;
+        private int _idPlan;
+        private int _legajo;
+        private DateTime _fechaNacimiento;
+        public TiposPersona _tipoPersona;
         public string Apellido
         {
             get
             {
-                return _Apellido;
+                return _apellido;
             }
             set
             {
-                _Apellido = value;
+                _apellido = value;
             }
         }
         public string Nombre
         {
             get
             {
-                return _Nombre;
+                return _nombre;
             }
             set
             {
-                _Nombre = value;
+                _nombre = value;
             }
         }
         public string Direccion
         {
             get
             {
-                return _Direccion;
+                return _direccion;
             }
             set
             {
-                _Direccion = value;
+                _direccion = value;
             }
         }
         public string Email
         {
             get
             {
-                return _Email;
+                return _email;
             }
             set
             {
-                _Email = value;
+                _email = value;
             }
         }
         public string Telefono
         {
             get
             {
-                return _Telefono;
+                return _telefono;
             }
             set
             {
-                _Telefono = value;
+                _telefono = value;
             }
         }
         public int IDPlan
         {
             get
             {
-                return _IDPlan;
+                return _idPlan;
             }
             set
             {
-                _IDPlan = value;
+                _idPlan = value;
             }
         }
         public int Legajo
         {
             get
             {
-                return _Legajo;
+                return _legajo;
             }
             set
             {
-                _Legajo = value;
+                _legajo = value;
             }
         }
         public DateTime FechaNacimiento
         {
             get
             {
-                return _FechaNacimiento;
+                return _fechaNacimiento;
             }
             set
             {
-                _FechaNacimiento = value;
+                _fechaNacimiento = value;
             }
         }
         public TiposPersona TipoPersona
         {
             get
             {
-                return _TipoPersona;
+                return _tipoPersona;
             }
             set
             {
-                _TipoPersona = value;
+                _tipoPersona = value;
             }
         }
 

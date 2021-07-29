@@ -8,52 +8,52 @@ namespace Business.Entities
 {
     public class AlumnoInscripcion : BusinessEntity
     {
-        private string _Condicion;
-        private int _IDAlumno;
-        private int _IDCurso;
-        private int _Nota;
+        private string _condicion;
+        private int _idAlumno;
+        private int _idCurso;
+        private int _nota;
         public string Condicion
         {
             get
             {
-                return _Condicion;
+                return _condicion;
             }
             set
             {
-                _Condicion = value;
+                _condicion = value;
             }
         }
         public int IDAlumno
         {
             get
             {
-                return _IDAlumno;
+                return _idAlumno;
             }
             set
             {
-                _IDAlumno = value;
+                _idAlumno = value;
             }
         }
         public int IDCurso
         {
             get
             {
-                return _IDCurso;
+                return _idCurso;
             }
             set
             {
-                _IDCurso = value;
+                _idCurso = value;
             }
         }
         public int Nota
         {
             get
             {
-                return _Nota;
+                return _nota;
             }
             set
             {
-                _Nota = value;
+                _nota = value;
             }
         }
     }

@@ -14,40 +14,40 @@ namespace Business.Entities
             Auxiliar,
             Suplente
         }
-        private TiposCargo _Cargo;
-        private int _IDCurso;
-        private int _IDDocente;
+        private TiposCargo _cargo;
+        private int _idCurso;
+        private int _idDocente;
         public TiposCargo Cargo
         {
             get
             {
-                return _Cargo;
+                return _cargo;
             }
             set
             {
-                _Cargo = value;
+                _cargo = value;
             }
         }
         public int IDCurso
         {
             get
             {
-                return _IDCurso;
+                return _idCurso;
             }
             set
             {
-                _IDCurso = value;
+                _idCurso = value;
             }
         }
         public int IDDocente
         {
             get
             {
-                return _IDDocente;
+                return _idDocente;
             }
             set
             {
-                _IDDocente = value;
+                _idDocente = value;
             }
         }
     }
