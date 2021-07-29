@@ -148,16 +148,16 @@ namespace UI.Consola
             try
             {
                 Usuario usr = new Usuario();
-                Console.Write("Ingrese el nombre del usuario y presione ENTER: ");
-                usr.Nombre = Console.ReadLine();
-                Console.Write("Ingrese el apellido del usuario y presione ENTER: ");
-                usr.Apellido = Console.ReadLine();
+                //Console.Write("Ingrese el nombre del usuario y presione ENTER: ");
+                //usr.Nombre = Console.ReadLine();
+                //Console.Write("Ingrese el apellido del usuario y presione ENTER: ");
+                //usr.Apellido = Console.ReadLine();
                 Console.Write("Ingrese el nombre de usuario del usuario y presione ENTER: ");
                 usr.NombreUsuario = Console.ReadLine();
                 Console.Write("Ingrese la clave del usuario y presione ENTER: ");
                 usr.Clave = Console.ReadLine();
-                Console.Write("Ingrese el email del usuario y presione ENTER: ");
-                usr.Email = Console.ReadLine();
+                //Console.Write("Ingrese el email del usuario y presione ENTER: ");
+                //usr.Email = Console.ReadLine();
                 Console.Write("Ingrese el estado habilitado (True/False) del usuario y presione ENTER: ");
                 usr.Habilitado = Convert.ToBoolean(Console.ReadLine());
                 usr.State = BusinessEntity.States.New;
@@ -185,16 +185,13 @@ namespace UI.Consola
             {
                 Usuario usr = UsuarioNegocio.GetOne(ID);
                 Console.WriteLine($"Está modificando el usuario: {usr.ID}");
-                Console.Write($"El actual nombre del usuario es: {usr.Nombre}, ingrese el nombre modificado: ");
-                usr.Nombre = Console.ReadLine();
-                Console.Write($"El actual apellido del usuario es: {usr.Apellido}, ingrese el apellido modificado: ");
-                usr.Apellido = Console.ReadLine();
+                
                 Console.Write($"El actual nombre de usuario del usuario es: {usr.NombreUsuario}, ingrese el nombre de usuario modificado: ");
                 usr.NombreUsuario = Console.ReadLine();
                 Console.Write($"La clave actual del usuario es: {usr.Clave}, ingrese la clave modificada: ");
                 usr.Clave = Console.ReadLine();
-                Console.Write($"El actual email del usuario es: {usr.Email}, ingrese el email modificado: ");
-                usr.Email = Console.ReadLine();
+                //Console.Write($"El actual email del usuario es: {usr.Email}, ingrese el email modificado: ");
+                //usr.Email = Console.ReadLine();
                 Console.Write($"El estado habilitado actual del usuario es: {usr.Habilitado}, ingrese el estado habilitado modificado: ");
                 usr.Habilitado = Convert.ToBoolean(Console.ReadLine());
                 usr.State = BusinessEntity.States.Modified;
@@ -220,7 +217,7 @@ namespace UI.Consola
             try
             {
                 Usuario usr = UsuarioNegocio.GetOne(ID);
-                Console.WriteLine($"El usuario a eliminar es: {usr.Nombre} {usr.Apellido}");
+                //Console.WriteLine($"El usuario a eliminar es: {usr.Nombre} {usr.Apellido}");
                 UsuarioNegocio.Delete(ID);
                 Console.WriteLine("Usuario eliminado!");
             }
@@ -237,11 +234,11 @@ namespace UI.Consola
         {
             // \t dentro de un string representa un TAB
             Console.WriteLine($"Usuario: {usr.ID}");
-            Console.WriteLine($"\t\tNombre: {usr.Nombre}");
-            Console.WriteLine($"\t\tApellido: {usr.Apellido}");
+            //Console.WriteLine($"\t\tNombre: {usr.Nombre}");
+            //Console.WriteLine($"\t\tApellido: {usr.Apellido}");
             Console.WriteLine($"\t\tNombre de Usuario: {usr.NombreUsuario}");
             Console.WriteLine($"\t\tClave: {usr.Clave}");
-            Console.WriteLine($"\t\tEmail: {usr.Email}");
+            //Console.WriteLine($"\t\tEmail: {usr.Email}");
             Console.WriteLine($"\t\tHabilitado: {usr.Habilitado}");
             Console.WriteLine();
         }
