@@ -176,7 +176,9 @@ namespace Data.Database
                     Condicion = "Regular",
                     IDAlumno = 1,
                     IDCurso = 1,
-                    Nota = 0
+                    Nota = 0,
+                    Persona = personas[0],
+                    Curso = cursos[0]
                 }
             };
 

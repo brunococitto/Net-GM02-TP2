@@ -47,18 +47,14 @@ namespace UI.Desktop
         public override void MapearDeDatos()
         {
             this.txtID.Text = this.AlumnoInscripcionActual.ID.ToString();
-            // Acá cuando cargo la inscripcion tengo que buscar el alumno asignado
-            Persona alumnoActual = _personaLogic.GetOne(this.AlumnoInscripcionActual.IDAlumno);
-            this.txtLegajo.Text = alumnoActual.Legajo.ToString();
-            this.txtNombre.Text = alumnoActual.Nombre;
-            this.txtApellido.Text = alumnoActual.Apellido;
-            // Acá cuando cargo la inscripcion tengo que buscar el curso asignado
-            Curso cursoActual = _cursoLogic.GetOne(this.AlumnoInscripcionActual.IDCurso);
-            // A su vez tengo que cargar los otros cursos por si quiero seleccionar otro
+            this.txtLegajo.Text = AlumnoInscripcionActual.Persona.Legajo.ToString();
+            this.txtNombre.Text = AlumnoInscripcionActual.Persona.Nombre;
+            this.txtApellido.Text = AlumnoInscripcionActual.Persona.Apellido;
+            // Tengo que cargar los cursos por si quiero seleccionar otro
             // Y seleccionar el actual
             List<Curso> cursos = _cursoLogic.GetAll();
             this.cbCurso.DataSource = cursos;
-            this.cbCurso.SelectedIndex = cbCurso.FindStringExact(cursoActual.Descripcion);
+            this.cbCurso.SelectedIndex = cbCurso.FindStringExact(AlumnoInscripcionActual.Curso.Descripcion);
             switch (this.Modos)
             {
                 case ModoForm.Alta:
@@ -69,6 +65,8 @@ namespace UI.Desktop
                     break;
                 case ModoForm.Baja:
                     this.btnAceptar.Text = "Eliminar";
+                    this.txtLegajo.Enabled = false;
+                    this.cbCurso.Enabled = false;
                     break;
                 case ModoForm.Consulta:
                     this.btnAceptar.Text = "Aceptar";
@@ -80,14 +78,11 @@ namespace UI.Desktop
             if (Modos == ModoForm.Alta)
             {
                 AlumnoInscripcionActual = new AlumnoInscripcion();
+                AlumnoInscripcionActual.Condicion = "";
+                AlumnoInscripcionActual.Nota = 0;
             }
-            AlumnoInscripcionActual.Condicion = "";
-            AlumnoInscripcionActual.Nota = 0;
             AlumnoInscripcionActual.IDCurso = (int)this.cbCurso.SelectedValue;
-            var alumno = from p in _personaLogic.GetAll()
-                           where p.Legajo == Int32.Parse(this.txtLegajo.Text)
-                           select p;
-            AlumnoInscripcionActual.IDAlumno = (int)alumno.ToList()[0].ID;
+            AlumnoInscripcionActual.IDAlumno = _personaLogic.GetOneConLegajo(Int32.Parse(this.txtLegajo.Text)).ID;
             switch (Modos)
             {
                 case ModoForm.Alta:
@@ -118,7 +113,6 @@ namespace UI.Desktop
             this.cbCurso.DropDownStyle = ComboBoxStyle.DropDownList;
             this.txtNombre.Text = "";
             this.txtApellido.Text = "";
-            List<Persona> personas = _personaLogic.GetAll();
             try
             {
                 // Esta validacion tiene q ser q no es vacio y q son solo numeros
@@ -128,15 +122,12 @@ namespace UI.Desktop
                     Exception e = new Exception("Ingrese un legajo.");
                     throw e;
                 }
-                var persona = (from p in personas
-                               where p.Legajo == Int32.Parse(this.txtLegajo.Text)
-                               select p).ToList();
-                if (persona.Count == 0)
+                Persona per = _personaLogic.GetOneConLegajo(Int32.Parse(this.txtLegajo.Text));
+                if (per == null)
                 {
                     Exception e = new Exception("No existe persona para el legajo ingresado.");
                     throw e;
                 }
-                Persona per = _personaLogic.GetOne(persona[0].ID);
                 // Valido que la persona ingresada sea un alumno
                 if (per.TipoPersona != Business.Entities.Persona.TiposPersona.Alumno)
                 {
@@ -191,7 +182,6 @@ namespace UI.Desktop
         {
             _personaLogic.Delete(AlumnoInscripcionActual.ID);
         }
-
         private void txtLegajo_Leave(object sender, EventArgs e)
         {
             cargarPersona();

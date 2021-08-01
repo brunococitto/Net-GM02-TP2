@@ -34,7 +34,8 @@ namespace UI.Desktop
         }
         public void ListarCursos()
         {
-            //  Contemplar la posibilidad de que n
+            // Si es profe que solo cargue los cursos de ese profe
+            // Si es administrativo que cargue todos
             List<Curso> cursos = _cursoLogic.GetAll();
             cbCursos.DataSource = cursos;
             cbCursos.SelectedIndex = 0;
@@ -43,7 +44,7 @@ namespace UI.Desktop
         public void Listar()
         {
             // Pido las alumnoInscripciones
-            List<AlumnoInscripcion> alumnoInscripciones = _alumnoInscripcionLogic.GetAll();
+            List<AlumnoInscripcion> alumnoInscripciones = _alumnoInscripcionLogic.GetInscripcionesCurso((int)this.cbCursos.SelectedValue);
             // Pido las personas
             List<Persona> personas = _personaLogic.GetAll();
             // Consulta para dejar la descripción del plan
@@ -51,7 +52,6 @@ namespace UI.Desktop
                             from insc in alumnoInscripciones
                             join per in personas
                             on insc.IDAlumno equals per.ID
-                            where insc.IDCurso == (int)this.cbCursos.SelectedValue
                             select new
                             {
                                 ID = insc.ID,
@@ -105,6 +105,11 @@ namespace UI.Desktop
             this.txtNota.Text = "";
             this.gbModificarInscripcion.Enabled = false;
             this.Listar();
+        }
+
+        private void dgvRegistrarNotas_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.gbModificarInscripcion.Enabled = false;
         }
     }
 }

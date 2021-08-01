@@ -30,6 +30,7 @@ namespace UI.Desktop
         private void InitializeComponent()
         {
             this.tscRegistrarNotas = new System.Windows.Forms.ToolStripContainer();
+            this.tlRegistrarNotas = new System.Windows.Forms.TableLayoutPanel();
             this.gbModificarInscripcion = new System.Windows.Forms.GroupBox();
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblNota = new System.Windows.Forms.Label();
@@ -40,8 +41,6 @@ namespace UI.Desktop
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.lblCondicion = new System.Windows.Forms.Label();
             this.txtCondicion = new System.Windows.Forms.TextBox();
-            this.lblSeleccionarCurso = new System.Windows.Forms.Label();
-            this.cbCursos = new System.Windows.Forms.ComboBox();
             this.dgvRegistrarNotas = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,37 +48,68 @@ namespace UI.Desktop
             this.apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.condicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nota = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cbCursos = new System.Windows.Forms.ComboBox();
+            this.lblSeleccionarCurso = new System.Windows.Forms.Label();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnActualizar = new System.Windows.Forms.Button();
             this.tscRegistrarNotas.ContentPanel.SuspendLayout();
             this.tscRegistrarNotas.SuspendLayout();
+            this.tlRegistrarNotas.SuspendLayout();
             this.gbModificarInscripcion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistrarNotas)).BeginInit();
             this.SuspendLayout();
             // 
             // tscRegistrarNotas
             // 
+            this.tscRegistrarNotas.BottomToolStripPanelVisible = false;
             // 
             // tscRegistrarNotas.ContentPanel
             // 
-            this.tscRegistrarNotas.ContentPanel.Controls.Add(this.gbModificarInscripcion);
-            this.tscRegistrarNotas.ContentPanel.Controls.Add(this.lblSeleccionarCurso);
-            this.tscRegistrarNotas.ContentPanel.Controls.Add(this.cbCursos);
-            this.tscRegistrarNotas.ContentPanel.Controls.Add(this.dgvRegistrarNotas);
-            this.tscRegistrarNotas.ContentPanel.Controls.Add(this.btnSalir);
+            this.tscRegistrarNotas.ContentPanel.Controls.Add(this.tlRegistrarNotas);
             this.tscRegistrarNotas.ContentPanel.Controls.Add(this.btnActualizar);
             this.tscRegistrarNotas.ContentPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tscRegistrarNotas.ContentPanel.Size = new System.Drawing.Size(837, 379);
+            this.tscRegistrarNotas.ContentPanel.Size = new System.Drawing.Size(1108, 387);
             this.tscRegistrarNotas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tscRegistrarNotas.LeftToolStripPanelVisible = false;
             this.tscRegistrarNotas.Location = new System.Drawing.Point(0, 0);
             this.tscRegistrarNotas.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tscRegistrarNotas.Name = "tscRegistrarNotas";
-            this.tscRegistrarNotas.Size = new System.Drawing.Size(837, 379);
+            this.tscRegistrarNotas.RightToolStripPanelVisible = false;
+            this.tscRegistrarNotas.Size = new System.Drawing.Size(1108, 387);
             this.tscRegistrarNotas.TabIndex = 0;
             this.tscRegistrarNotas.Text = "toolStripContainer1";
             // 
+            // tscRegistrarNotas.TopToolStripPanel
+            // 
+            this.tscRegistrarNotas.TopToolStripPanel.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.tscRegistrarNotas.TopToolStripPanel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.tscRegistrarNotas.TopToolStripPanelVisible = false;
+            // 
+            // tlRegistrarNotas
+            // 
+            this.tlRegistrarNotas.ColumnCount = 4;
+            this.tlRegistrarNotas.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.52088F));
+            this.tlRegistrarNotas.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.34397F));
+            this.tlRegistrarNotas.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.64975F));
+            this.tlRegistrarNotas.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.485401F));
+            this.tlRegistrarNotas.Controls.Add(this.gbModificarInscripcion, 0, 2);
+            this.tlRegistrarNotas.Controls.Add(this.dgvRegistrarNotas, 0, 1);
+            this.tlRegistrarNotas.Controls.Add(this.cbCursos, 1, 0);
+            this.tlRegistrarNotas.Controls.Add(this.lblSeleccionarCurso, 0, 0);
+            this.tlRegistrarNotas.Controls.Add(this.btnSalir, 3, 2);
+            this.tlRegistrarNotas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlRegistrarNotas.Location = new System.Drawing.Point(0, 0);
+            this.tlRegistrarNotas.Name = "tlRegistrarNotas";
+            this.tlRegistrarNotas.RowCount = 3;
+            this.tlRegistrarNotas.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlRegistrarNotas.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlRegistrarNotas.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlRegistrarNotas.Size = new System.Drawing.Size(1108, 387);
+            this.tlRegistrarNotas.TabIndex = 15;
+            // 
             // gbModificarInscripcion
             // 
+            this.tlRegistrarNotas.SetColumnSpan(this.gbModificarInscripcion, 3);
             this.gbModificarInscripcion.Controls.Add(this.lblNombre);
             this.gbModificarInscripcion.Controls.Add(this.lblNota);
             this.gbModificarInscripcion.Controls.Add(this.txtNota);
@@ -89,18 +119,18 @@ namespace UI.Desktop
             this.gbModificarInscripcion.Controls.Add(this.txtApellido);
             this.gbModificarInscripcion.Controls.Add(this.lblCondicion);
             this.gbModificarInscripcion.Controls.Add(this.txtCondicion);
-            this.gbModificarInscripcion.Location = new System.Drawing.Point(13, 242);
+            this.gbModificarInscripcion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbModificarInscripcion.Location = new System.Drawing.Point(3, 334);
             this.gbModificarInscripcion.Name = "gbModificarInscripcion";
-            this.gbModificarInscripcion.Size = new System.Drawing.Size(449, 109);
+            this.gbModificarInscripcion.Size = new System.Drawing.Size(995, 50);
             this.gbModificarInscripcion.TabIndex = 14;
             this.gbModificarInscripcion.TabStop = false;
-            this.gbModificarInscripcion.Text = "Modificar inscripcion";
+            this.gbModificarInscripcion.Text = "Cargar nota";
             // 
             // lblNombre
             // 
-            this.lblNombre.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblNombre.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.lblNombre.AutoSize = true;
             this.lblNombre.Location = new System.Drawing.Point(17, 19);
             this.lblNombre.Name = "lblNombre";
@@ -111,11 +141,10 @@ namespace UI.Desktop
             // 
             // lblNota
             // 
-            this.lblNota.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblNota.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.lblNota.AutoSize = true;
-            this.lblNota.Location = new System.Drawing.Point(250, 48);
+            this.lblNota.Location = new System.Drawing.Point(673, 19);
             this.lblNota.Name = "lblNota";
             this.lblNota.Size = new System.Drawing.Size(33, 15);
             this.lblNota.TabIndex = 11;
@@ -124,18 +153,21 @@ namespace UI.Desktop
             // 
             // txtNota
             // 
-            this.txtNota.Location = new System.Drawing.Point(289, 45);
+            this.txtNota.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtNota.Location = new System.Drawing.Point(709, 16);
             this.txtNota.Name = "txtNota";
             this.txtNota.Size = new System.Drawing.Size(42, 23);
             this.txtNota.TabIndex = 12;
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGuardar.Location = new System.Drawing.Point(14, 74);
+            this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGuardar.Location = new System.Drawing.Point(900, 12);
             this.btnGuardar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(88, 29);
+            this.btnGuardar.Size = new System.Drawing.Size(88, 32);
             this.btnGuardar.TabIndex = 13;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -143,6 +175,8 @@ namespace UI.Desktop
             // 
             // txtNombre
             // 
+            this.txtNombre.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.txtNombre.Enabled = false;
             this.txtNombre.Location = new System.Drawing.Point(74, 16);
             this.txtNombre.Name = "txtNombre";
@@ -151,9 +185,8 @@ namespace UI.Desktop
             // 
             // lblApellido
             // 
-            this.lblApellido.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblApellido.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.lblApellido.AutoSize = true;
             this.lblApellido.Location = new System.Drawing.Point(232, 19);
             this.lblApellido.Name = "lblApellido";
@@ -164,6 +197,8 @@ namespace UI.Desktop
             // 
             // txtApellido
             // 
+            this.txtApellido.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.txtApellido.Enabled = false;
             this.txtApellido.Location = new System.Drawing.Point(289, 16);
             this.txtApellido.Name = "txtApellido";
@@ -172,11 +207,10 @@ namespace UI.Desktop
             // 
             // lblCondicion
             // 
-            this.lblCondicion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCondicion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.lblCondicion.AutoSize = true;
-            this.lblCondicion.Location = new System.Drawing.Point(6, 48);
+            this.lblCondicion.Location = new System.Drawing.Point(447, 19);
             this.lblCondicion.Name = "lblCondicion";
             this.lblCondicion.Size = new System.Drawing.Size(62, 15);
             this.lblCondicion.TabIndex = 9;
@@ -185,34 +219,12 @@ namespace UI.Desktop
             // 
             // txtCondicion
             // 
-            this.txtCondicion.Location = new System.Drawing.Point(74, 45);
+            this.txtCondicion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtCondicion.Location = new System.Drawing.Point(515, 16);
             this.txtCondicion.Name = "txtCondicion";
             this.txtCondicion.Size = new System.Drawing.Size(152, 23);
             this.txtCondicion.TabIndex = 10;
-            // 
-            // lblSeleccionarCurso
-            // 
-            this.lblSeleccionarCurso.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSeleccionarCurso.AutoSize = true;
-            this.lblSeleccionarCurso.Location = new System.Drawing.Point(12, 11);
-            this.lblSeleccionarCurso.Name = "lblSeleccionarCurso";
-            this.lblSeleccionarCurso.Size = new System.Drawing.Size(38, 15);
-            this.lblSeleccionarCurso.TabIndex = 4;
-            this.lblSeleccionarCurso.Text = "Curso";
-            this.lblSeleccionarCurso.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cbCursos
-            // 
-            this.cbCursos.DisplayMember = "Descripcion";
-            this.cbCursos.FormattingEnabled = true;
-            this.cbCursos.Location = new System.Drawing.Point(80, 8);
-            this.cbCursos.Name = "cbCursos";
-            this.cbCursos.Size = new System.Drawing.Size(750, 23);
-            this.cbCursos.TabIndex = 3;
-            this.cbCursos.ValueMember = "ID";
-            this.cbCursos.SelectionChangeCommitted += new System.EventHandler(this.cbCursos_SelectionChangeCommitted);
             // 
             // dgvRegistrarNotas
             // 
@@ -220,7 +232,6 @@ namespace UI.Desktop
             this.dgvRegistrarNotas.AllowUserToDeleteRows = false;
             this.dgvRegistrarNotas.AllowUserToResizeColumns = false;
             this.dgvRegistrarNotas.AllowUserToResizeRows = false;
-            this.dgvRegistrarNotas.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dgvRegistrarNotas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRegistrarNotas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
@@ -229,16 +240,21 @@ namespace UI.Desktop
             this.apellido,
             this.condicion,
             this.nota});
-            this.dgvRegistrarNotas.Location = new System.Drawing.Point(13, 49);
+            this.tlRegistrarNotas.SetColumnSpan(this.dgvRegistrarNotas, 4);
+            this.dgvRegistrarNotas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvRegistrarNotas.Location = new System.Drawing.Point(4, 32);
             this.dgvRegistrarNotas.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgvRegistrarNotas.MultiSelect = false;
             this.dgvRegistrarNotas.Name = "dgvRegistrarNotas";
-            this.dgvRegistrarNotas.Size = new System.Drawing.Size(818, 187);
+            this.dgvRegistrarNotas.ReadOnly = true;
+            this.dgvRegistrarNotas.Size = new System.Drawing.Size(1100, 296);
             this.dgvRegistrarNotas.TabIndex = 0;
+            this.dgvRegistrarNotas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRegistrarNotas_CellClick);
             this.dgvRegistrarNotas.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvRegistrarNotas_RowHeaderMouseClick);
             // 
             // id
             // 
+            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.id.DataPropertyName = "ID";
             this.id.HeaderText = "ID";
             this.id.Name = "id";
@@ -247,43 +263,82 @@ namespace UI.Desktop
             // 
             // legajo
             // 
+            this.legajo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.legajo.DataPropertyName = "Legajo";
             this.legajo.HeaderText = "Legajo";
             this.legajo.Name = "legajo";
+            this.legajo.ReadOnly = true;
+            this.legajo.Width = 67;
             // 
             // nombre
             // 
+            this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.nombre.DataPropertyName = "Nombre";
             this.nombre.HeaderText = "Nombre";
             this.nombre.Name = "nombre";
             this.nombre.ReadOnly = true;
+            this.nombre.Width = 76;
             // 
             // apellido
             // 
+            this.apellido.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.apellido.DataPropertyName = "Apellido";
             this.apellido.HeaderText = "Apellido";
             this.apellido.Name = "apellido";
             this.apellido.ReadOnly = true;
+            this.apellido.Width = 76;
             // 
             // condicion
             // 
+            this.condicion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.condicion.DataPropertyName = "Condicion";
             this.condicion.HeaderText = "Condicion";
             this.condicion.Name = "condicion";
             this.condicion.ReadOnly = true;
+            this.condicion.Width = 87;
             // 
             // nota
             // 
+            this.nota.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.nota.DataPropertyName = "Nota";
             this.nota.HeaderText = "Nota";
             this.nota.Name = "nota";
+            this.nota.ReadOnly = true;
+            this.nota.Width = 58;
+            // 
+            // cbCursos
+            // 
+            this.tlRegistrarNotas.SetColumnSpan(this.cbCursos, 3);
+            this.cbCursos.DisplayMember = "Descripcion";
+            this.cbCursos.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cbCursos.FormattingEnabled = true;
+            this.cbCursos.Location = new System.Drawing.Point(119, 3);
+            this.cbCursos.Name = "cbCursos";
+            this.cbCursos.Size = new System.Drawing.Size(986, 23);
+            this.cbCursos.TabIndex = 3;
+            this.cbCursos.ValueMember = "ID";
+            this.cbCursos.SelectionChangeCommitted += new System.EventHandler(this.cbCursos_SelectionChangeCommitted);
+            // 
+            // lblSeleccionarCurso
+            // 
+            this.lblSeleccionarCurso.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSeleccionarCurso.AutoSize = true;
+            this.lblSeleccionarCurso.Location = new System.Drawing.Point(3, 0);
+            this.lblSeleccionarCurso.Name = "lblSeleccionarCurso";
+            this.lblSeleccionarCurso.Size = new System.Drawing.Size(110, 29);
+            this.lblSeleccionarCurso.TabIndex = 4;
+            this.lblSeleccionarCurso.Text = "Curso";
+            this.lblSeleccionarCurso.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(742, 242);
+            this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSalir.Location = new System.Drawing.Point(1014, 353);
             this.btnSalir.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(88, 29);
+            this.btnSalir.Size = new System.Drawing.Size(90, 31);
             this.btnSalir.TabIndex = 2;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
@@ -292,7 +347,7 @@ namespace UI.Desktop
             // btnActualizar
             // 
             this.btnActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnActualizar.Location = new System.Drawing.Point(646, 242);
+            this.btnActualizar.Location = new System.Drawing.Point(-1631, 242);
             this.btnActualizar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(88, 29);
@@ -305,16 +360,17 @@ namespace UI.Desktop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(837, 379);
+            this.ClientSize = new System.Drawing.Size(1108, 387);
             this.Controls.Add(this.tscRegistrarNotas);
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "RegistrarNotas";
             this.Text = "RegistrarNotas";
             this.Load += new System.EventHandler(this.RegistrarNotas_Load);
             this.tscRegistrarNotas.ContentPanel.ResumeLayout(false);
-            this.tscRegistrarNotas.ContentPanel.PerformLayout();
             this.tscRegistrarNotas.ResumeLayout(false);
             this.tscRegistrarNotas.PerformLayout();
+            this.tlRegistrarNotas.ResumeLayout(false);
+            this.tlRegistrarNotas.PerformLayout();
             this.gbModificarInscripcion.ResumeLayout(false);
             this.gbModificarInscripcion.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistrarNotas)).EndInit();
@@ -325,7 +381,6 @@ namespace UI.Desktop
         #endregion
 
         private System.Windows.Forms.ToolStripContainer tscRegistrarNotas;
-        private System.Windows.Forms.DataGridView dgvRegistrarNotas;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnActualizar;
         private System.Windows.Forms.ComboBox cbCursos;
@@ -340,6 +395,8 @@ namespace UI.Desktop
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.Label lblCondicion;
         private System.Windows.Forms.TextBox txtCondicion;
+        private System.Windows.Forms.TableLayoutPanel tlRegistrarNotas;
+        private System.Windows.Forms.DataGridView dgvRegistrarNotas;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn legajo;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;

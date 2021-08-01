@@ -21,12 +21,10 @@ namespace UI.Desktop
             InitializeComponent();
             _context = context;
         }
-
         private void mnuSalir_Click(object sender, EventArgs e)
         {
             this.Dispose();
         }
-
         private void formMain_Shown(object sender, EventArgs e)
         {
             formLogin appLogin = new formLogin(_context);
@@ -35,68 +33,63 @@ namespace UI.Desktop
                 this.Dispose();
             }
         }
-
-        private void btnUsuarios_Click(object sender, EventArgs e)
-        {
-            Usuarios appUsuarios = new Usuarios(_context);
-            appUsuarios.ShowDialog();
-        }
-        private void btnEspecialidades_Click(object sender, EventArgs e)
-        {
-            Especialidades appEspecialidades = new Especialidades(_context);
-            appEspecialidades.ShowDialog();
-        }
-
-        private void btnModulos_Click(object sender, EventArgs e)
-        {
-            Modulos appModulos = new Modulos(_context);
-            appModulos.ShowDialog();
-        }
-
         private void mnuCerrarSesion_Click(object sender, EventArgs e)
         {
             this.formMain_Shown(sender, e);
         }
-
-        private void btnPlanes_Click(object sender, EventArgs e)
+        private void setForm(Form form)
         {
-            Planes appPlanes = new Planes(_context);
-            appPlanes.ShowDialog();
+            if (this.pnlPrincipal.Controls.Count > 0)
+            {
+                this.pnlPrincipal.Controls[0].Dispose();
+            }
+            form.TopLevel = false;
+            form.AutoScroll = false;
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.Dock = DockStyle.Fill;
+            this.pnlPrincipal.Tag = form;
+            this.pnlPrincipal.Controls.Add(form);
+            form.Show();
         }
-
-        private void btnMaterias_Click(object sender, EventArgs e)
+        private void mnuComisiones_Click(object sender, EventArgs e)
         {
-            Materias appMaterias = new Materias(_context);
-            appMaterias.ShowDialog();
+            setForm(new Comisiones(_context));
         }
-
-        private void btnComision_Click(object sender, EventArgs e)
+        private void mnuCursos_Click(object sender, EventArgs e)
         {
-            Comisiones appComisiones = new Comisiones(_context);
-            appComisiones.ShowDialog(); 
+            setForm(new Cursos(_context));
         }
-
-        private void btnCurso_Click(object sender, EventArgs e)
+        private void mnuEspecialidades_Click(object sender, EventArgs e)
         {
-            Cursos appCursos = new Cursos(_context);
-            appCursos.ShowDialog();
+            setForm(new Especialidades(_context));
         }
-        private void btnPersonas_Click(object sender, EventArgs e)
+        private void mnuMaterias_Click(object sender, EventArgs e)
         {
-            Personas appPersonas = new Personas(_context);
-            appPersonas.ShowDialog();
+            setForm(new Materias(_context));
         }
-
-        private void btnInscripciones_Click(object sender, EventArgs e)
+        private void mnuModulos_Click(object sender, EventArgs e)
         {
-            AlumnoInscripciones appInscripciones = new AlumnoInscripciones(_context);
-            appInscripciones.ShowDialog();
+            setForm(new Modulos(_context));
         }
-
-        private void btnNotas_Click(object sender, EventArgs e)
+        private void mnuPersonas_Click(object sender, EventArgs e)
         {
-            RegistrarNotas appNotas = new RegistrarNotas(_context);
-            appNotas.ShowDialog();
+            setForm(new Personas(_context));
+        }
+        private void mnuPlanes_Click(object sender, EventArgs e)
+        {
+            setForm(new Planes(_context));
+        }
+        private void mnuUsuarios_Click(object sender, EventArgs e)
+        {
+            setForm(new Usuarios(_context));
+        }
+        private void mnuInscripciones_Click(object sender, EventArgs e)
+        {
+            setForm(new AlumnoInscripciones(_context));
+        }
+        private void mnuRegistroNotas_Click(object sender, EventArgs e)
+        {
+            setForm(new RegistrarNotas(_context));
         }
     }
 }

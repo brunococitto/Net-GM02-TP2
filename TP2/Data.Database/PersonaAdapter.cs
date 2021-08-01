@@ -100,5 +100,19 @@ namespace Data.Database
             }
             persona.State = BusinessEntity.States.Unmodified;
         }
+        public Business.Entities.Persona GetOneConLegajo(int legajo)
+        {
+            Persona persona = new Persona();
+            try
+            {
+                persona = _context.Personas.FirstOrDefault(p => p.Legajo == legajo);
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar datos de persona", e);
+                throw ExceptionManejada;
+            }
+            return persona;
+        }
     }
 }

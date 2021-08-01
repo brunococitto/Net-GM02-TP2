@@ -5,6 +5,7 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Database
 {
@@ -20,7 +21,7 @@ namespace Data.Database
             List<AlumnoInscripcion> inscripciones = new List<AlumnoInscripcion>();
             try
             {
-                inscripciones = _context.AlumnoInscripciones.ToList();
+                inscripciones = _context.AlumnoInscripciones.Include(i => i.Curso).Include(i => i.Persona).ToList();
             }
             catch (Exception e)
             {
@@ -98,6 +99,44 @@ namespace Data.Database
                 this.Update(inscripcion);
             }
             inscripcion.State = BusinessEntity.States.Unmodified;
+        }
+        public List<AlumnoInscripcion> GetInscripcionesCurso(int idCurso)
+        {
+            List<AlumnoInscripcion> inscripciones = new List<AlumnoInscripcion>();
+            try
+            {
+                inscripciones = _context.AlumnoInscripciones.Where(i => i.IDCurso == idCurso).ToList();
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar inscripciones para el curso seleccionado", e);
+                throw ExceptionManejada;
+            }
+            return inscripciones;
+        }
+        public List<Object> GetInscripcionesFormateadas()
+        {
+            try
+            {
+                var consulta = from insc in GetAll()
+                                    select new
+                                    {
+                                        ID = insc.ID,
+                                        Legajo = insc.Persona.Legajo,
+                                        Nombre = insc.Persona.Nombre,
+                                        Apellido = insc.Persona.Apellido,
+                                        Curso = insc.Curso.Descripcion,
+                                        Condicion = insc.Condicion,
+                                        Nota = insc.Nota
+                                    };
+                return consulta.ToList<Object>();
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar inscripciones formateadas", e);
+                throw ExceptionManejada;
+            }
+            
         }
     }
 }

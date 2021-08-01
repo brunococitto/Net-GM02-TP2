@@ -33,23 +33,28 @@ namespace UI.Desktop
             this.mnuArchivo = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSalir = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCerrarSesion = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnUsuarios = new System.Windows.Forms.Button();
-            this.btnEspecialidades = new System.Windows.Forms.Button();
-            this.btnModulos = new System.Windows.Forms.Button();
-            this.btnPlanes = new System.Windows.Forms.Button();
-            this.btnMaterias = new System.Windows.Forms.Button();
-            this.btnComision = new System.Windows.Forms.Button();
-            this.btnCurso = new System.Windows.Forms.Button();
-            this.btnPersonas = new System.Windows.Forms.Button();
-            this.btnInscripciones = new System.Windows.Forms.Button();
-            this.btnNotas = new System.Windows.Forms.Button();
+            this.mnuABMC = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuComisiones = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCursos = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuEspecialidades = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuMaterias = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuModulos = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuPersonas = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuPlanes = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuUsuarios = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuInscripciones = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRegistroNotas = new System.Windows.Forms.ToolStripMenuItem();
+            this.pnlPrincipal = new System.Windows.Forms.Panel();
             this.mnsPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
             // mnsPrincipal
             // 
             this.mnsPrincipal.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuArchivo});
+            this.mnuArchivo,
+            this.mnuABMC,
+            this.mnuInscripciones,
+            this.mnuRegistroNotas});
             this.mnsPrincipal.Location = new System.Drawing.Point(0, 0);
             this.mnsPrincipal.Name = "mnsPrincipal";
             this.mnsPrincipal.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
@@ -60,8 +65,8 @@ namespace UI.Desktop
             // mnuArchivo
             // 
             this.mnuArchivo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuSalir,
-            this.mnuCerrarSesion});
+            this.mnuCerrarSesion,
+            this.mnuSalir});
             this.mnuArchivo.Name = "mnuArchivo";
             this.mnuArchivo.Size = new System.Drawing.Size(60, 20);
             this.mnuArchivo.Text = "Archivo";
@@ -69,142 +74,118 @@ namespace UI.Desktop
             // mnuSalir
             // 
             this.mnuSalir.Name = "mnuSalir";
-            this.mnuSalir.Size = new System.Drawing.Size(142, 22);
+            this.mnuSalir.Size = new System.Drawing.Size(180, 22);
             this.mnuSalir.Text = "Salir";
             this.mnuSalir.Click += new System.EventHandler(this.mnuSalir_Click);
             // 
             // mnuCerrarSesion
             // 
             this.mnuCerrarSesion.Name = "mnuCerrarSesion";
-            this.mnuCerrarSesion.Size = new System.Drawing.Size(142, 22);
+            this.mnuCerrarSesion.Size = new System.Drawing.Size(180, 22);
             this.mnuCerrarSesion.Text = "Cerrar sesión";
             this.mnuCerrarSesion.Click += new System.EventHandler(this.mnuCerrarSesion_Click);
             // 
-            // btnUsuarios
+            // mnuABMC
             // 
-            this.btnUsuarios.Location = new System.Drawing.Point(14, 42);
-            this.btnUsuarios.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnUsuarios.Name = "btnUsuarios";
-            this.btnUsuarios.Size = new System.Drawing.Size(177, 47);
-            this.btnUsuarios.TabIndex = 3;
-            this.btnUsuarios.Text = "Usuarios";
-            this.btnUsuarios.UseVisualStyleBackColor = true;
-            this.btnUsuarios.Click += new System.EventHandler(this.btnUsuarios_Click);
+            this.mnuABMC.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuComisiones,
+            this.mnuCursos,
+            this.mnuEspecialidades,
+            this.mnuMaterias,
+            this.mnuModulos,
+            this.mnuPersonas,
+            this.mnuPlanes,
+            this.mnuUsuarios});
+            this.mnuABMC.Name = "mnuABMC";
+            this.mnuABMC.Size = new System.Drawing.Size(53, 20);
+            this.mnuABMC.Text = "ABMC";
             // 
-            // btnEspecialidades
+            // mnuComisiones
             // 
-            this.btnEspecialidades.Location = new System.Drawing.Point(14, 96);
-            this.btnEspecialidades.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnEspecialidades.Name = "btnEspecialidades";
-            this.btnEspecialidades.Size = new System.Drawing.Size(177, 47);
-            this.btnEspecialidades.TabIndex = 4;
-            this.btnEspecialidades.Text = "Especialidades";
-            this.btnEspecialidades.UseVisualStyleBackColor = true;
-            this.btnEspecialidades.Click += new System.EventHandler(this.btnEspecialidades_Click);
+            this.mnuComisiones.Name = "mnuComisiones";
+            this.mnuComisiones.Size = new System.Drawing.Size(150, 22);
+            this.mnuComisiones.Text = "Comisiones";
+            this.mnuComisiones.Click += new System.EventHandler(this.mnuComisiones_Click);
             // 
-            // btnModulos
+            // mnuCursos
             // 
-            this.btnModulos.Location = new System.Drawing.Point(14, 149);
-            this.btnModulos.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnModulos.Name = "btnModulos";
-            this.btnModulos.Size = new System.Drawing.Size(177, 47);
-            this.btnModulos.TabIndex = 6;
-            this.btnModulos.Text = "Modulos";
-            this.btnModulos.UseVisualStyleBackColor = true;
-            this.btnModulos.Click += new System.EventHandler(this.btnModulos_Click);
+            this.mnuCursos.Name = "mnuCursos";
+            this.mnuCursos.Size = new System.Drawing.Size(150, 22);
+            this.mnuCursos.Text = "Cursos";
+            this.mnuCursos.Click += new System.EventHandler(this.mnuCursos_Click);
             // 
-            // btnPlanes
+            // mnuEspecialidades
             // 
-            this.btnPlanes.Location = new System.Drawing.Point(14, 202);
-            this.btnPlanes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnPlanes.Name = "btnPlanes";
-            this.btnPlanes.Size = new System.Drawing.Size(177, 47);
-            this.btnPlanes.TabIndex = 8;
-            this.btnPlanes.Text = "Planes";
-            this.btnPlanes.UseVisualStyleBackColor = true;
-            this.btnPlanes.Click += new System.EventHandler(this.btnPlanes_Click);
+            this.mnuEspecialidades.Name = "mnuEspecialidades";
+            this.mnuEspecialidades.Size = new System.Drawing.Size(150, 22);
+            this.mnuEspecialidades.Text = "Especialidades";
+            this.mnuEspecialidades.Click += new System.EventHandler(this.mnuEspecialidades_Click);
             // 
-            // btnMaterias
+            // mnuMaterias
             // 
-            this.btnMaterias.Location = new System.Drawing.Point(14, 255);
-            this.btnMaterias.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnMaterias.Name = "btnMaterias";
-            this.btnMaterias.Size = new System.Drawing.Size(177, 47);
-            this.btnMaterias.TabIndex = 10;
-            this.btnMaterias.Text = "Materias";
-            this.btnMaterias.UseVisualStyleBackColor = true;
-            this.btnMaterias.Click += new System.EventHandler(this.btnMaterias_Click);
+            this.mnuMaterias.Name = "mnuMaterias";
+            this.mnuMaterias.Size = new System.Drawing.Size(150, 22);
+            this.mnuMaterias.Text = "Materias";
+            this.mnuMaterias.Click += new System.EventHandler(this.mnuMaterias_Click);
             // 
-            // btnComision
+            // mnuModulos
             // 
-            this.btnComision.Location = new System.Drawing.Point(213, 42);
-            this.btnComision.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnComision.Name = "btnComision";
-            this.btnComision.Size = new System.Drawing.Size(177, 47);
-            this.btnComision.TabIndex = 12;
-            this.btnComision.Text = "Comision";
-            this.btnComision.UseVisualStyleBackColor = true;
-            this.btnComision.Click += new System.EventHandler(this.btnComision_Click);
+            this.mnuModulos.Name = "mnuModulos";
+            this.mnuModulos.Size = new System.Drawing.Size(150, 22);
+            this.mnuModulos.Text = "Modulos";
+            this.mnuModulos.Click += new System.EventHandler(this.mnuModulos_Click);
             // 
-            // btnCurso
+            // mnuPersonas
             // 
-            this.btnCurso.Location = new System.Drawing.Point(213, 96);
-            this.btnCurso.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnCurso.Name = "btnCurso";
-            this.btnCurso.Size = new System.Drawing.Size(177, 47);
-            this.btnCurso.TabIndex = 14;
-            this.btnCurso.Text = "Cursos";
-            this.btnCurso.UseVisualStyleBackColor = true;
-            this.btnCurso.Click += new System.EventHandler(this.btnCurso_Click);
+            this.mnuPersonas.Name = "mnuPersonas";
+            this.mnuPersonas.Size = new System.Drawing.Size(150, 22);
+            this.mnuPersonas.Text = "Personas";
+            this.mnuPersonas.Click += new System.EventHandler(this.mnuPersonas_Click);
             // 
-            // btnPersonas
+            // mnuPlanes
             // 
-            this.btnPersonas.Location = new System.Drawing.Point(213, 149);
-            this.btnPersonas.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnPersonas.Name = "btnPersonas";
-            this.btnPersonas.Size = new System.Drawing.Size(177, 47);
-            this.btnPersonas.TabIndex = 16;
-            this.btnPersonas.Text = "Personas";
-            this.btnPersonas.UseVisualStyleBackColor = true;
-            this.btnPersonas.Click += new System.EventHandler(this.btnPersonas_Click);
+            this.mnuPlanes.Name = "mnuPlanes";
+            this.mnuPlanes.Size = new System.Drawing.Size(150, 22);
+            this.mnuPlanes.Text = "Planes";
+            this.mnuPlanes.Click += new System.EventHandler(this.mnuPlanes_Click);
             // 
-            // btnInscripciones
+            // mnuUsuarios
             // 
-            this.btnInscripciones.Location = new System.Drawing.Point(213, 202);
-            this.btnInscripciones.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnInscripciones.Name = "btnInscripciones";
-            this.btnInscripciones.Size = new System.Drawing.Size(177, 47);
-            this.btnInscripciones.TabIndex = 18;
-            this.btnInscripciones.Text = "Inscripciones";
-            this.btnInscripciones.UseVisualStyleBackColor = true;
-            this.btnInscripciones.Click += new System.EventHandler(this.btnInscripciones_Click);
+            this.mnuUsuarios.Name = "mnuUsuarios";
+            this.mnuUsuarios.Size = new System.Drawing.Size(150, 22);
+            this.mnuUsuarios.Text = "Usuarios";
+            this.mnuUsuarios.Click += new System.EventHandler(this.mnuUsuarios_Click);
             // 
-            // btnNotas
+            // mnuInscripciones
             // 
-            this.btnNotas.Location = new System.Drawing.Point(213, 255);
-            this.btnNotas.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnNotas.Name = "btnNotas";
-            this.btnNotas.Size = new System.Drawing.Size(177, 47);
-            this.btnNotas.TabIndex = 20;
-            this.btnNotas.Text = "Notas";
-            this.btnNotas.UseVisualStyleBackColor = true;
-            this.btnNotas.Click += new System.EventHandler(this.btnNotas_Click);
+            this.mnuInscripciones.Name = "mnuInscripciones";
+            this.mnuInscripciones.Size = new System.Drawing.Size(88, 20);
+            this.mnuInscripciones.Text = "Inscripciones";
+            this.mnuInscripciones.Click += new System.EventHandler(this.mnuInscripciones_Click);
+            // 
+            // mnuRegistroNotas
+            // 
+            this.mnuRegistroNotas.Name = "mnuRegistroNotas";
+            this.mnuRegistroNotas.Size = new System.Drawing.Size(94, 20);
+            this.mnuRegistroNotas.Text = "Registro notas";
+            this.mnuRegistroNotas.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.mnuRegistroNotas.Click += new System.EventHandler(this.mnuRegistroNotas_Click);
+            // 
+            // pnlPrincipal
+            // 
+            this.pnlPrincipal.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.pnlPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlPrincipal.Location = new System.Drawing.Point(0, 24);
+            this.pnlPrincipal.Name = "pnlPrincipal";
+            this.pnlPrincipal.Size = new System.Drawing.Size(933, 495);
+            this.pnlPrincipal.TabIndex = 22;
             // 
             // formMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(933, 519);
-            this.Controls.Add(this.btnNotas);
-            this.Controls.Add(this.btnInscripciones);
-            this.Controls.Add(this.btnPersonas);
-            this.Controls.Add(this.btnCurso);
-            this.Controls.Add(this.btnComision);
-            this.Controls.Add(this.btnMaterias);
-            this.Controls.Add(this.btnPlanes);
-            this.Controls.Add(this.btnModulos);
-            this.Controls.Add(this.btnEspecialidades);
-            this.Controls.Add(this.btnUsuarios);
+            this.Controls.Add(this.pnlPrincipal);
             this.Controls.Add(this.mnsPrincipal);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.mnsPrincipal;
@@ -225,17 +206,19 @@ namespace UI.Desktop
         private System.Windows.Forms.MenuStrip mnsPrincipal;
         private System.Windows.Forms.ToolStripMenuItem mnuArchivo;
         private System.Windows.Forms.ToolStripMenuItem mnuSalir;
-        private System.Windows.Forms.Button btnUsuarios;
-        private System.Windows.Forms.Button btnEspecialidades;
-        private System.Windows.Forms.Button btnModulos;
         private System.Windows.Forms.ToolStripMenuItem mnuCerrarSesion;
-        private System.Windows.Forms.Button btnPlanes;
-        private System.Windows.Forms.Button btnMaterias;
-        private System.Windows.Forms.Button btnComision;
-        private System.Windows.Forms.Button btnCurso;
-        private System.Windows.Forms.Button btnPersonas;
-        private System.Windows.Forms.Button btnInscripciones;
-        private System.Windows.Forms.Button btnNotas;
+        private System.Windows.Forms.ToolStripMenuItem mnuABMC;
+        private System.Windows.Forms.ToolStripMenuItem mnuComisiones;
+        private System.Windows.Forms.ToolStripMenuItem mnuCursos;
+        private System.Windows.Forms.ToolStripMenuItem mnuEspecialidades;
+        private System.Windows.Forms.ToolStripMenuItem mnuMaterias;
+        private System.Windows.Forms.ToolStripMenuItem mnuModulos;
+        private System.Windows.Forms.ToolStripMenuItem mnuPersonas;
+        private System.Windows.Forms.ToolStripMenuItem mnuPlanes;
+        private System.Windows.Forms.ToolStripMenuItem mnuUsuarios;
+        private System.Windows.Forms.ToolStripMenuItem mnuInscripciones;
+        private System.Windows.Forms.ToolStripMenuItem mnuRegistroNotas;
+        private System.Windows.Forms.Panel pnlPrincipal;
     }
 }
 

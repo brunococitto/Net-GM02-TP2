@@ -4,14 +4,16 @@ using Data.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Database.Migrations
 {
     [DbContext(typeof(AcademyContext))]
-    partial class AcademyContextModelSnapshot : ModelSnapshot
+    [Migration("20210801152547_update-6")]
+    partial class update6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,6 +31,9 @@ namespace Data.Database.Migrations
                     b.Property<string>("Condicion")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CursoID")
+                        .HasColumnType("int");
+
                     b.Property<int>("IDAlumno")
                         .HasColumnType("int");
 
@@ -38,11 +43,14 @@ namespace Data.Database.Migrations
                     b.Property<int>("Nota")
                         .HasColumnType("int");
 
+                    b.Property<int?>("PersonaID")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
 
-                    b.HasIndex("IDAlumno");
+                    b.HasIndex("CursoID");
 
-                    b.HasIndex("IDCurso");
+                    b.HasIndex("PersonaID");
 
                     b.ToTable("AlumnoInscripciones");
                 });
@@ -300,17 +308,13 @@ namespace Data.Database.Migrations
 
             modelBuilder.Entity("Business.Entities.AlumnoInscripcion", b =>
                 {
-                    b.HasOne("Business.Entities.Persona", "Persona")
-                        .WithMany()
-                        .HasForeignKey("IDAlumno")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Business.Entities.Curso", "Curso")
                         .WithMany()
-                        .HasForeignKey("IDCurso")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CursoID");
+
+                    b.HasOne("Business.Entities.Persona", "Persona")
+                        .WithMany()
+                        .HasForeignKey("PersonaID");
 
                     b.Navigation("Curso");
 

@@ -115,7 +115,6 @@ namespace UI.Desktop
             this.dgvAlumnoInscripciones.Name = "dgvAlumnoInscripciones";
             this.dgvAlumnoInscripciones.Size = new System.Drawing.Size(925, 371);
             this.dgvAlumnoInscripciones.TabIndex = 0;
-            this.dgvAlumnoInscripciones.MultiSelect = false;
             // 
             // btnActualizar
             // 

@@ -16,15 +16,11 @@ namespace UI.Desktop
     public partial class AlumnoInscripciones : Form
     {
         private readonly AlumnoInscripcionLogic _alumnoInscripcionLogic;
-        private readonly CursoLogic _cursoLogic;
-        private readonly PersonaLogic _personaLogic;
         private readonly AcademyContext _context;
         public AlumnoInscripciones(AcademyContext context)
         {
             InitializeComponent();
             _alumnoInscripcionLogic = new AlumnoInscripcionLogic(new AlumnoInscripcionAdapter(context));
-            _cursoLogic = new CursoLogic(new CursoAdapter(context));
-            _personaLogic = new PersonaLogic(new PersonaAdapter(context));
             _context = context;
         }
         private void AlumnoInscripciones_Load(object sender, EventArgs e)
@@ -33,30 +29,7 @@ namespace UI.Desktop
         }
         public void Listar()
         {
-            // Pido las alumnoInscripciones
-            List<AlumnoInscripcion> alumnoInscripciones = _alumnoInscripcionLogic.GetAll();
-            // Pido los cursos
-            List<Curso> cursos = _cursoLogic.GetAll();
-            // Pido las personas
-            List<Persona> personas = _personaLogic.GetAll();
-            // Consulta para dejar la descripción del plan
-            var consulta =
-                            from insc in alumnoInscripciones
-                            join cu in cursos
-                            on insc.IDCurso equals cu.ID
-                            join per in personas
-                            on insc.IDAlumno equals per.ID
-                            select new
-                            {
-                                ID = insc.ID,
-                                Legajo = per.Legajo,
-                                Nombre = per.Nombre,
-                                Apellido = per.Apellido,
-                                Curso = cu.Descripcion,
-                                Condicion = insc.Condicion,
-                                Nota = insc.Nota
-                            };
-            this.dgvAlumnoInscripciones.DataSource = consulta.ToList();
+            this.dgvAlumnoInscripciones.DataSource = _alumnoInscripcionLogic.GetInscripcionesFormateadas();
             this.dgvAlumnoInscripciones.AutoGenerateColumns = false;
         }
         private void btnActualizar_Click(object sender, EventArgs e)

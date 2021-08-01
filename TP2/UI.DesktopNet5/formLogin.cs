@@ -16,6 +16,7 @@ namespace UI.Desktop
     public partial class formLogin : Form
     {
         private readonly UsuarioLogic _usuarioLogic;
+        public Boolean login = false;
         public formLogin(AcademyContext context)
         {
             InitializeComponent();

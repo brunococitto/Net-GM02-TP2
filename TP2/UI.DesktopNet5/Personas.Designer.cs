@@ -33,12 +33,6 @@ namespace UI.Desktop
             this.tscPersonas = new System.Windows.Forms.ToolStripContainer();
             this.tlPersonas = new System.Windows.Forms.TableLayoutPanel();
             this.dgvPersonas = new System.Windows.Forms.DataGridView();
-            this.btnActualizar = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
-            this.tsPersonas = new System.Windows.Forms.ToolStrip();
-            this.tsbNuevo = new System.Windows.Forms.ToolStripButton();
-            this.tsbEditar = new System.Windows.Forms.ToolStripButton();
-            this.tsbEliminar = new System.Windows.Forms.ToolStripButton();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,6 +43,12 @@ namespace UI.Desktop
             this.fechaNacimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.plan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tipoPersona = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnActualizar = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
+            this.tsPersonas = new System.Windows.Forms.ToolStrip();
+            this.tsbNuevo = new System.Windows.Forms.ToolStripButton();
+            this.tsbEditar = new System.Windows.Forms.ToolStripButton();
+            this.tsbEliminar = new System.Windows.Forms.ToolStripButton();
             this.tscPersonas.ContentPanel.SuspendLayout();
             this.tscPersonas.TopToolStripPanel.SuspendLayout();
             this.tscPersonas.SuspendLayout();
@@ -122,6 +122,71 @@ namespace UI.Desktop
             this.dgvPersonas.Size = new System.Drawing.Size(925, 371);
             this.dgvPersonas.TabIndex = 0;
             // 
+            // id
+            // 
+            this.id.DataPropertyName = "ID";
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            // 
+            // legajo
+            // 
+            this.legajo.DataPropertyName = "Legajo";
+            this.legajo.HeaderText = "Legajo";
+            this.legajo.Name = "legajo";
+            // 
+            // nombre
+            // 
+            this.nombre.DataPropertyName = "Nombre";
+            this.nombre.HeaderText = "Nombre";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            // 
+            // apellido
+            // 
+            this.apellido.DataPropertyName = "Apellido";
+            this.apellido.HeaderText = "Apellido";
+            this.apellido.Name = "apellido";
+            this.apellido.ReadOnly = true;
+            // 
+            // direccion
+            // 
+            this.direccion.DataPropertyName = "Direccion";
+            this.direccion.HeaderText = "Direccion";
+            this.direccion.Name = "direccion";
+            this.direccion.ReadOnly = true;
+            // 
+            // email
+            // 
+            this.email.DataPropertyName = "Email";
+            this.email.HeaderText = "EMail";
+            this.email.Name = "email";
+            this.email.ReadOnly = true;
+            // 
+            // telefono
+            // 
+            this.telefono.DataPropertyName = "Telefono";
+            this.telefono.HeaderText = "Telefono";
+            this.telefono.Name = "telefono";
+            // 
+            // fechaNacimiento
+            // 
+            this.fechaNacimiento.DataPropertyName = "FechaNacimiento";
+            this.fechaNacimiento.HeaderText = "Fecha de Nacimiento";
+            this.fechaNacimiento.Name = "fechaNacimiento";
+            // 
+            // plan
+            // 
+            this.plan.DataPropertyName = "Plan";
+            this.plan.HeaderText = "Plan";
+            this.plan.Name = "plan";
+            // 
+            // tipoPersona
+            // 
+            this.tipoPersona.DataPropertyName = "TipoPersona";
+            this.tipoPersona.HeaderText = "TipoPersona";
+            this.tipoPersona.Name = "tipoPersona";
+            // 
             // btnActualizar
             // 
             this.btnActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -190,71 +255,6 @@ namespace UI.Desktop
             this.tsbEliminar.Text = "toolStripButton1";
             this.tsbEliminar.ToolTipText = "Eliminar";
             this.tsbEliminar.Click += new System.EventHandler(this.tsbEliminar_Click);
-            // 
-            // id
-            // 
-            this.id.DataPropertyName = "ID";
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            // 
-            // legajo
-            // 
-            this.legajo.DataPropertyName = "Legajo";
-            this.legajo.HeaderText = "Legajo";
-            this.legajo.Name = "legajo";
-            // 
-            // nombre
-            // 
-            this.nombre.DataPropertyName = "Nombre";
-            this.nombre.HeaderText = "Nombre";
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            // 
-            // apellido
-            // 
-            this.apellido.DataPropertyName = "Apellido";
-            this.apellido.HeaderText = "Apellido";
-            this.apellido.Name = "apellido";
-            this.apellido.ReadOnly = true;
-            // 
-            // direccion
-            // 
-            this.direccion.DataPropertyName = "Direccion";
-            this.direccion.HeaderText = "Direccion";
-            this.direccion.Name = "direccion";
-            this.direccion.ReadOnly = true;
-            // 
-            // email
-            // 
-            this.email.DataPropertyName = "Email";
-            this.email.HeaderText = "EMail";
-            this.email.Name = "email";
-            this.email.ReadOnly = true;
-            // 
-            // telefono
-            // 
-            this.telefono.DataPropertyName = "Telefono";
-            this.telefono.HeaderText = "Telefono";
-            this.telefono.Name = "telefono";
-            // 
-            // fechaNacimiento
-            // 
-            this.fechaNacimiento.DataPropertyName = "FechaNacimiento";
-            this.fechaNacimiento.HeaderText = "Fecha de Nacimiento";
-            this.fechaNacimiento.Name = "fechaNacimiento";
-            // 
-            // plan
-            // 
-            this.plan.DataPropertyName = "Plan";
-            this.plan.HeaderText = "Plan";
-            this.plan.Name = "plan";
-            // 
-            // tipoPersona
-            // 
-            this.tipoPersona.DataPropertyName = "TipoPersona";
-            this.tipoPersona.HeaderText = "TipoPersona";
-            this.tipoPersona.Name = "tipoPersona";
             // 
             // Personas
             // 
