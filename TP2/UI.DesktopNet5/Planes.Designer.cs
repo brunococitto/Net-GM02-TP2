@@ -37,7 +37,6 @@ namespace UI.Desktop
             this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.especialidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnActualizar = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
             this.tsPlanes = new System.Windows.Forms.ToolStrip();
             this.tsbNuevo = new System.Windows.Forms.ToolStripButton();
             this.tsbEditar = new System.Windows.Forms.ToolStripButton();
@@ -76,8 +75,7 @@ namespace UI.Desktop
             this.tlPlanes.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlPlanes.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlPlanes.Controls.Add(this.dgvPlanes, 0, 0);
-            this.tlPlanes.Controls.Add(this.btnActualizar, 0, 1);
-            this.tlPlanes.Controls.Add(this.btnSalir, 1, 1);
+            this.tlPlanes.Controls.Add(this.btnActualizar, 1, 1);
             this.tlPlanes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlPlanes.Location = new System.Drawing.Point(0, 0);
             this.tlPlanes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -103,10 +101,10 @@ namespace UI.Desktop
             this.dgvPlanes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPlanes.Location = new System.Drawing.Point(4, 3);
             this.dgvPlanes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dgvPlanes.MultiSelect = false;
             this.dgvPlanes.Name = "dgvPlanes";
             this.dgvPlanes.Size = new System.Drawing.Size(594, 371);
             this.dgvPlanes.TabIndex = 0;
-            this.dgvPlanes.MultiSelect = false;
             // 
             // id
             // 
@@ -131,7 +129,7 @@ namespace UI.Desktop
             // btnActualizar
             // 
             this.btnActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnActualizar.Location = new System.Drawing.Point(414, 380);
+            this.btnActualizar.Location = new System.Drawing.Point(510, 380);
             this.btnActualizar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(88, 27);
@@ -139,17 +137,6 @@ namespace UI.Desktop
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = true;
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Location = new System.Drawing.Point(510, 380);
-            this.btnSalir.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(88, 27);
-            this.btnSalir.TabIndex = 2;
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // tsPlanes
             // 
@@ -227,7 +214,6 @@ namespace UI.Desktop
         private System.Windows.Forms.TableLayoutPanel tlPlanes;
         private System.Windows.Forms.DataGridView dgvPlanes;
         private System.Windows.Forms.Button btnActualizar;
-        private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.ToolStrip tsPlanes;
         private System.Windows.Forms.ToolStripButton tsbNuevo;
         private System.Windows.Forms.ToolStripButton tsbEditar;

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Data.Database
 {
@@ -46,7 +48,6 @@ namespace Data.Database
             }
             return cursos;
         }
-
         public Business.Entities.Curso GetOne(int ID)
         {
             Curso curso = new Curso();
@@ -171,6 +172,20 @@ namespace Data.Database
                 this.Update(curso);
             }
             curso.State = BusinessEntity.States.Unmodified;
+        }
+        public List<Curso> GetCursosProfesor(int idProfesor)
+        {
+            List<Curso> cursos = new List<Curso>();
+            try
+            {
+                cursos = _context.DocentesCursos.Where(dc => dc.IDDocente == idProfesor).Select(dc => dc.Curso).ToList();
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar cursos para el profesor", e);
+                throw ExceptionManejada;
+            }
+            return cursos;
         }
     }
 }

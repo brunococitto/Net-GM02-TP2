@@ -33,17 +33,16 @@ namespace UI.Desktop
             this.tscMaterias = new System.Windows.Forms.ToolStripContainer();
             this.tlMaterias = new System.Windows.Forms.TableLayoutPanel();
             this.dgvMaterias = new System.Windows.Forms.DataGridView();
-            this.btnActualizar = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
-            this.tsMaterias = new System.Windows.Forms.ToolStrip();
-            this.tsbNuevo = new System.Windows.Forms.ToolStripButton();
-            this.tsbEditar = new System.Windows.Forms.ToolStripButton();
-            this.tsbEliminar = new System.Windows.Forms.ToolStripButton();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.horas_semanales = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.horas_totales = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.plan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnActualizar = new System.Windows.Forms.Button();
+            this.tsMaterias = new System.Windows.Forms.ToolStrip();
+            this.tsbNuevo = new System.Windows.Forms.ToolStripButton();
+            this.tsbEditar = new System.Windows.Forms.ToolStripButton();
+            this.tsbEliminar = new System.Windows.Forms.ToolStripButton();
             this.tscMaterias.ContentPanel.SuspendLayout();
             this.tscMaterias.TopToolStripPanel.SuspendLayout();
             this.tscMaterias.SuspendLayout();
@@ -78,8 +77,7 @@ namespace UI.Desktop
             this.tlMaterias.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlMaterias.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlMaterias.Controls.Add(this.dgvMaterias, 0, 0);
-            this.tlMaterias.Controls.Add(this.btnActualizar, 0, 1);
-            this.tlMaterias.Controls.Add(this.btnSalir, 1, 1);
+            this.tlMaterias.Controls.Add(this.btnActualizar, 1, 1);
             this.tlMaterias.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlMaterias.Location = new System.Drawing.Point(0, 0);
             this.tlMaterias.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -107,15 +105,48 @@ namespace UI.Desktop
             this.dgvMaterias.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvMaterias.Location = new System.Drawing.Point(4, 3);
             this.dgvMaterias.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dgvMaterias.MultiSelect = false;
             this.dgvMaterias.Name = "dgvMaterias";
             this.dgvMaterias.Size = new System.Drawing.Size(594, 371);
             this.dgvMaterias.TabIndex = 0;
-            this.dgvMaterias.MultiSelect = false;
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "ID";
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            // 
+            // descripcion
+            // 
+            this.descripcion.DataPropertyName = "Descripcion";
+            this.descripcion.HeaderText = "Descripcion";
+            this.descripcion.Name = "descripcion";
+            this.descripcion.Width = 150;
+            // 
+            // horas_semanales
+            // 
+            this.horas_semanales.DataPropertyName = "horas_semanales";
+            this.horas_semanales.HeaderText = "Horas semanales";
+            this.horas_semanales.Name = "horas_semanales";
+            // 
+            // horas_totales
+            // 
+            this.horas_totales.DataPropertyName = "horas_totales";
+            this.horas_totales.HeaderText = "Horas totales";
+            this.horas_totales.Name = "horas_totales";
+            // 
+            // plan
+            // 
+            this.plan.DataPropertyName = "Plan";
+            this.plan.HeaderText = "Plan";
+            this.plan.Name = "plan";
+            this.plan.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.plan.Width = 300;
             // 
             // btnActualizar
             // 
             this.btnActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnActualizar.Location = new System.Drawing.Point(414, 380);
+            this.btnActualizar.Location = new System.Drawing.Point(510, 380);
             this.btnActualizar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(88, 27);
@@ -123,17 +154,6 @@ namespace UI.Desktop
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = true;
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Location = new System.Drawing.Point(510, 380);
-            this.btnSalir.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(88, 27);
-            this.btnSalir.TabIndex = 2;
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // tsMaterias
             // 
@@ -181,39 +201,6 @@ namespace UI.Desktop
             this.tsbEliminar.ToolTipText = "Eliminar";
             this.tsbEliminar.Click += new System.EventHandler(this.tsbEliminar_Click);
             // 
-            // id
-            // 
-            this.id.DataPropertyName = "ID";
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            // 
-            // descripcion
-            // 
-            this.descripcion.DataPropertyName = "Descripcion";
-            this.descripcion.HeaderText = "Descripcion";
-            this.descripcion.Name = "descripcion";
-            this.descripcion.Width = 150;
-            // 
-            // horas_semanales
-            // 
-            this.horas_semanales.DataPropertyName = "horas_semanales";
-            this.horas_semanales.HeaderText = "Horas semanales";
-            this.horas_semanales.Name = "horas_semanales";
-            // 
-            // horas_totales
-            // 
-            this.horas_totales.DataPropertyName = "horas_totales";
-            this.horas_totales.HeaderText = "Horas totales";
-            this.horas_totales.Name = "horas_totales";
-            // 
-            // plan
-            // 
-            this.plan.DataPropertyName = "Plan";
-            this.plan.HeaderText = "Plan";
-            this.plan.Name = "plan";
-            this.plan.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.plan.Width = 300;
-            // 
             // Materias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -244,7 +231,6 @@ namespace UI.Desktop
         private System.Windows.Forms.TableLayoutPanel tlMaterias;
         private System.Windows.Forms.DataGridView dgvMaterias;
         private System.Windows.Forms.Button btnActualizar;
-        private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.ToolStrip tsMaterias;
         private System.Windows.Forms.ToolStripButton tsbNuevo;
         private System.Windows.Forms.ToolStripButton tsbEditar;

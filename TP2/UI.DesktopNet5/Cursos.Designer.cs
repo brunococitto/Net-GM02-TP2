@@ -33,18 +33,17 @@ namespace UI.Desktop
             this.tscMaterias = new System.Windows.Forms.ToolStripContainer();
             this.tlMaterias = new System.Windows.Forms.TableLayoutPanel();
             this.dgvCursos = new System.Windows.Forms.DataGridView();
-            this.btnActualizar = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
-            this.tsCursos = new System.Windows.Forms.ToolStrip();
-            this.tsbNuevo = new System.Windows.Forms.ToolStripButton();
-            this.tsbEditar = new System.Windows.Forms.ToolStripButton();
-            this.tsbEliminar = new System.Windows.Forms.ToolStripButton();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.desc_curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.desc_materia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.desc_comision = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.anio_calendario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnActualizar = new System.Windows.Forms.Button();
+            this.tsCursos = new System.Windows.Forms.ToolStrip();
+            this.tsbNuevo = new System.Windows.Forms.ToolStripButton();
+            this.tsbEditar = new System.Windows.Forms.ToolStripButton();
+            this.tsbEliminar = new System.Windows.Forms.ToolStripButton();
             this.tscMaterias.ContentPanel.SuspendLayout();
             this.tscMaterias.TopToolStripPanel.SuspendLayout();
             this.tscMaterias.SuspendLayout();
@@ -79,8 +78,7 @@ namespace UI.Desktop
             this.tlMaterias.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlMaterias.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlMaterias.Controls.Add(this.dgvCursos, 0, 0);
-            this.tlMaterias.Controls.Add(this.btnActualizar, 0, 1);
-            this.tlMaterias.Controls.Add(this.btnSalir, 1, 1);
+            this.tlMaterias.Controls.Add(this.btnActualizar, 1, 1);
             this.tlMaterias.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlMaterias.Location = new System.Drawing.Point(0, 0);
             this.tlMaterias.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -109,15 +107,55 @@ namespace UI.Desktop
             this.dgvCursos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCursos.Location = new System.Drawing.Point(4, 3);
             this.dgvCursos.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dgvCursos.MultiSelect = false;
             this.dgvCursos.Name = "dgvCursos";
             this.dgvCursos.Size = new System.Drawing.Size(594, 371);
             this.dgvCursos.TabIndex = 0;
-            this.dgvCursos.MultiSelect = false;
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "ID";
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            // 
+            // desc_curso
+            // 
+            this.desc_curso.DataPropertyName = "DescripcionCur";
+            this.desc_curso.HeaderText = "Descripcion";
+            this.desc_curso.Name = "desc_curso";
+            this.desc_curso.ReadOnly = true;
+            // 
+            // desc_materia
+            // 
+            this.desc_materia.DataPropertyName = "DescripcionMat";
+            this.desc_materia.HeaderText = "Materia";
+            this.desc_materia.Name = "desc_materia";
+            this.desc_materia.Width = 150;
+            // 
+            // desc_comision
+            // 
+            this.desc_comision.DataPropertyName = "DescripcionCom";
+            this.desc_comision.HeaderText = "Comision";
+            this.desc_comision.Name = "desc_comision";
+            // 
+            // anio_calendario
+            // 
+            this.anio_calendario.DataPropertyName = "AnoCalendario";
+            this.anio_calendario.HeaderText = "Anio Calendario";
+            this.anio_calendario.Name = "anio_calendario";
+            // 
+            // cupo
+            // 
+            this.cupo.DataPropertyName = "Cupo";
+            this.cupo.HeaderText = "Cupo";
+            this.cupo.Name = "cupo";
+            this.cupo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cupo.Width = 300;
             // 
             // btnActualizar
             // 
             this.btnActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnActualizar.Location = new System.Drawing.Point(414, 380);
+            this.btnActualizar.Location = new System.Drawing.Point(510, 380);
             this.btnActualizar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(88, 27);
@@ -125,17 +163,6 @@ namespace UI.Desktop
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = true;
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Location = new System.Drawing.Point(510, 380);
-            this.btnSalir.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(88, 27);
-            this.btnSalir.TabIndex = 2;
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // tsCursos
             // 
@@ -183,46 +210,6 @@ namespace UI.Desktop
             this.tsbEliminar.ToolTipText = "Eliminar";
             this.tsbEliminar.Click += new System.EventHandler(this.tsbEliminar_Click);
             // 
-            // id
-            // 
-            this.id.DataPropertyName = "ID";
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            // 
-            // desc_curso
-            // 
-            this.desc_curso.DataPropertyName = "DescripcionCur";
-            this.desc_curso.HeaderText = "Descripcion";
-            this.desc_curso.Name = "desc_curso";
-            this.desc_curso.ReadOnly = true;
-            // 
-            // desc_materia
-            // 
-            this.desc_materia.DataPropertyName = "DescripcionMat";
-            this.desc_materia.HeaderText = "Materia";
-            this.desc_materia.Name = "desc_materia";
-            this.desc_materia.Width = 150;
-            // 
-            // desc_comision
-            // 
-            this.desc_comision.DataPropertyName = "DescripcionCom";
-            this.desc_comision.HeaderText = "Comision";
-            this.desc_comision.Name = "desc_comision";
-            // 
-            // anio_calendario
-            // 
-            this.anio_calendario.DataPropertyName = "AnoCalendario";
-            this.anio_calendario.HeaderText = "Anio Calendario";
-            this.anio_calendario.Name = "anio_calendario";
-            // 
-            // cupo
-            // 
-            this.cupo.DataPropertyName = "Cupo";
-            this.cupo.HeaderText = "Cupo";
-            this.cupo.Name = "cupo";
-            this.cupo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.cupo.Width = 300;
-            // 
             // Cursos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -253,7 +240,6 @@ namespace UI.Desktop
         private System.Windows.Forms.TableLayoutPanel tlMaterias;
         private System.Windows.Forms.DataGridView dgvCursos;
         private System.Windows.Forms.Button btnActualizar;
-        private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.ToolStrip tsCursos;
         private System.Windows.Forms.ToolStripButton tsbNuevo;
         private System.Windows.Forms.ToolStripButton tsbEditar;

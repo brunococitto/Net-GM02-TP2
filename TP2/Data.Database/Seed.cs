@@ -37,6 +37,10 @@ namespace Data.Database
                 new()
                 {
                     Descripcion = "Ingeniería Civil"
+                },
+                new()
+                {
+                    Descripcion = "Administrativo"
                 }
             };
             var planes = new List<Plan>()
@@ -60,6 +64,11 @@ namespace Data.Database
                 {
                     Descripcion = "2009",
                     IDEspecialidad = 3
+                },
+                new()
+                {
+                    Descripcion = "Administrativo",
+                    IDEspecialidad = 1
                 }
             };
             var comisiones = new List<Comision>
@@ -139,7 +148,28 @@ namespace Data.Database
                 {
                     NombreUsuario = "bcocitto",
                     Clave = "C7C3ECFF956CE64056F4BBC9453C8CA853AFA68E",
+                    IDPersona = 4,
+                    Habilitado = true
+                },
+                new()
+                {
+                    NombreUsuario = "smasetto",
+                    Clave = "83762B2C48D3BBA8A4DA6EF5493CA9DAA527FCFA",
                     IDPersona = 1,
+                    Habilitado = true
+                },
+                new()
+                {
+                    NombreUsuario = "fschiavoni",
+                    Clave = "AAEF5F07A9DCB37E082D23871E558B3FBDC13EE2",
+                    IDPersona = 2,
+                    Habilitado = true
+                },
+                new()
+                {
+                    NombreUsuario = "mdorado",
+                    Clave = "83E83B756D616723B0C53754387AA0647BDF7CDC",
+                    IDPersona = 3,
                     Habilitado = true
                 }
             };
@@ -149,7 +179,15 @@ namespace Data.Database
                 {
                     AnoCalendario = 2021,
                     Descripcion = "AG_2021_502",
-                    IDComision = 6,
+                    IDComision = 1,
+                    IDMateria = 1,
+                    Cupo = 10
+                },
+                new()
+                {
+                    AnoCalendario = 2021,
+                    Descripcion = "SdG_2021_502",
+                    IDComision = 1,
                     IDMateria = 2,
                     Cupo = 10
                 }
@@ -160,12 +198,48 @@ namespace Data.Database
                 {
                     Nombre = "Bruno",
                     Apellido = "Cocitto",
-                    Direccion = "asd 123",
+                    Direccion = "Calle falsa 123",
                     Telefono = "0303456",
-                    Email = "asd@asd.com",
+                    Email = "bcocitto@gmail.com",
                     FechaNacimiento = new DateTime(2011, 12, 01),
-                    Legajo = 123,
+                    Legajo = 45214,
                     IDPlan = 1,
+                    TipoPersona = Persona.TiposPersona.Administrativo
+                },
+                new()
+                {
+                    Nombre = "Santiago",
+                    Apellido = "Masetto",
+                    Direccion = "Calle falsa 123",
+                    Telefono = "0303456",
+                    Email = "smasetto@gmail.com",
+                    FechaNacimiento = new DateTime(2011, 12, 01),
+                    Legajo = 44996,
+                    IDPlan = 4,
+                    TipoPersona = Persona.TiposPersona.Profesor
+                },
+                new()
+                {
+                    Nombre = "Franco",
+                    Apellido = "Schiavoni",
+                    Direccion = "Calle falsa 123",
+                    Telefono = "0303456",
+                    Email = "fschiavoni@gmail.com",
+                    FechaNacimiento = new DateTime(2011, 12, 01),
+                    Legajo = 44123,
+                    IDPlan = 4,
+                    TipoPersona = Persona.TiposPersona.Profesor
+                },
+                new()
+                {
+                    Nombre = "Manuel",
+                    Apellido = "Dorado",
+                    Direccion = "Calle falsa 123",
+                    Telefono = "0303456",
+                    Email = "mdorado@gmail.com",
+                    FechaNacimiento = new DateTime(2011, 12, 01),
+                    Legajo = 44997,
+                    IDPlan = 4,
                     TipoPersona = Persona.TiposPersona.Alumno
                 }
             };
@@ -181,7 +255,19 @@ namespace Data.Database
                     Curso = cursos[0]
                 }
             };
+            var asignaciones = new List<DocenteCurso>
+            {
+                new()
+                {
+                    IDDocente = 1,
+                    IDCurso = 1,
+                    Cargo = DocenteCurso.TiposCargo.Auxiliar,
+                    Persona = personas[1],
+                    Curso = cursos[0]
+                }
+            };
 
+            context.AddRange(asignaciones);
             context.AddRange(inscripciones);
             context.AddRange(personas);
             context.AddRange(especialidades);

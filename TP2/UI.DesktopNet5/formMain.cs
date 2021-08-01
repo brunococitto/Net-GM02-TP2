@@ -27,29 +27,65 @@ namespace UI.Desktop
         }
         private void formMain_Shown(object sender, EventArgs e)
         {
+            this.tlMain.Visible = false;
             formLogin appLogin = new formLogin(_context);
             if (appLogin.ShowDialog() != DialogResult.OK)
             {
                 this.Dispose();
             }
+            this.lblMain.Text = $"Bienvenido: {Singleton.getInstance().PersonaLogged.Legajo} - {Singleton.getInstance().PersonaLogged.Apellido}, {Singleton.getInstance().PersonaLogged.Nombre}";
+            this.lblMain.Visible = true;
+            switch (Singleton.getInstance().PersonaLogged.TipoPersona)
+            {
+                case Business.Entities.Persona.TiposPersona.Alumno:
+                    this.mnuABMC.Visible = false;
+                    this.mnuInscripciones.Visible = false;
+                    this.mnuRegistroNotas.Visible = false;
+                    this.mnuAsignarProfesores.Visible = false;
+                    this.mnuEstadoAcademico.Visible = true;
+                    break;
+                case Business.Entities.Persona.TiposPersona.Profesor:
+                    this.mnuABMC.Visible = false;
+                    this.mnuInscripciones.Visible = false;
+                    this.mnuAsignarProfesores.Visible = false;
+                    this.mnuRegistroNotas.Visible = true;
+                    this.mnuEstadoAcademico.Visible = false;
+                    break;
+                case Business.Entities.Persona.TiposPersona.Administrativo:
+                    this.mnuABMC.Visible = true;
+                    this.mnuInscripciones.Visible = true;
+                    this.mnuAsignarProfesores.Visible = true;
+                    this.mnuRegistroNotas.Visible = false;
+                    this.mnuEstadoAcademico.Visible = false;
+                    break;
+            }
+            this.tlMain.Visible = true;
         }
         private void mnuCerrarSesion_Click(object sender, EventArgs e)
         {
+            resetPanelPrincipal();
+            this.lblMain.Visible = false;
             this.formMain_Shown(sender, e);
         }
         private void setForm(Form form)
         {
-            if (this.pnlPrincipal.Controls.Count > 0)
-            {
-                this.pnlPrincipal.Controls[0].Dispose();
-            }
+            resetPanelPrincipal();
             form.TopLevel = false;
             form.AutoScroll = false;
             form.FormBorderStyle = FormBorderStyle.None;
             form.Dock = DockStyle.Fill;
             this.pnlPrincipal.Tag = form;
             this.pnlPrincipal.Controls.Add(form);
+            this.lblMain.Visible = false;
             form.Show();
+        }
+        private void resetPanelPrincipal()
+        {
+            if (this.pnlPrincipal.Controls.Count > 0)
+            {
+                this.pnlPrincipal.Controls[0].Dispose();
+            }
+            this.lblMain.Visible = true;
         }
         private void mnuComisiones_Click(object sender, EventArgs e)
         {
@@ -90,6 +126,20 @@ namespace UI.Desktop
         private void mnuRegistroNotas_Click(object sender, EventArgs e)
         {
             setForm(new RegistrarNotas(_context));
+        }
+        private void asignarProfesoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            setForm(new DocenteCursos(_context));
+        }
+
+        private void estadoAcademicoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            setForm(new EstadoAcademico(_context));
+        }
+
+        private void tsbHome_Click(object sender, EventArgs e)
+        {
+            resetPanelPrincipal();
         }
     }
 }
