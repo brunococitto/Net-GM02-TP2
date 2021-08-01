@@ -80,12 +80,18 @@ namespace UI.Desktop
         }
         public override bool Validar()
         {
-            if (string.IsNullOrWhiteSpace(this.txtDescripcion.Text))
+            try
             {
-                Notificar("Error", "Debe completar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Validaciones.ValidarNulo(this.txtDescripcion.Text, "descripcón");
+                Validaciones.ValidarLetras(this.txtDescripcion.Text, "descripcón");
+                return true;
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
                 return false;
             }
-            else { return true; }
         }
         private void btnAceptar_Click(object sender, EventArgs e)
         {

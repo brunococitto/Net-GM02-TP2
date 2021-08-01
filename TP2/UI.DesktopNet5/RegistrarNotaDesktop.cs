@@ -109,12 +109,25 @@ namespace UI.Desktop
         }
         public override bool Validar()
         {
-            if (string.IsNullOrWhiteSpace(this.txtApellido.Text) || string.IsNullOrWhiteSpace(this.txtNombre.Text) || string.IsNullOrWhiteSpace(this.txtLegajo.Text))
+            try
             {
-                Notificar("Error", "Debe completar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Validaciones.ValidarNulo(this.txtLegajo.Text, "legajo");
+                Validaciones.ValidarNumero(this.txtLegajo.Text, "legajo");
+                Validaciones.ValidarNulo(this.txtNombre.Text, "nombre");
+                Validaciones.ValidarLetras(this.txtNombre.Text, "nombre");
+                Validaciones.ValidarNulo(this.txtApellido.Text, "apellido");
+                Validaciones.ValidarLetras(this.txtApellido.Text, "apellido");
+                Validaciones.ValidarNulo(this.txtCondicion.Text, "condición");
+                Validaciones.ValidarLetras(this.txtCondicion.Text, "condición");
+                Validaciones.ValidarNulo(this.txtNota.Text, "nota");
+                Validaciones.ValidarNumero(this.txtNota.Text, "nota");
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
                 return false;
             }
-            else { return true; }
         }
         private void cargarPersona()
         {

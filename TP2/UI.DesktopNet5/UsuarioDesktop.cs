@@ -94,22 +94,31 @@ namespace UI.Desktop
         }
         public override bool Validar()
         {
-            if (string.IsNullOrWhiteSpace(this.txtApellido.Text) || string.IsNullOrWhiteSpace(this.txtNombre.Text) || string.IsNullOrWhiteSpace(this.txtUsuario.Text))
+
+            try
             {
-                Notificar("Error", "Debe completar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Validaciones.ValidarNulo(this.txtLegajo.Text, "legajo");
+                Validaciones.ValidarNumero(this.txtLegajo.Text, "legajo");
+                Validaciones.ValidarNulo(this.txtNombre.Text, "nombre");
+                Validaciones.ValidarLetras(this.txtNombre.Text, "nombre");
+                Validaciones.ValidarNulo(this.txtApellido.Text, "apellido");
+                Validaciones.ValidarLetras(this.txtApellido.Text, "apellido");
+                Validaciones.ValidarNulo(this.txtClave.Text, "contraseña");
+                Validaciones.ValidarNulo(this.txtUsuario.Text, "usuario");
+                Validaciones.ValidarLetras(this.txtUsuario.Text, "usuario");
+                Validaciones.ValidarClave(this.txtClave.Text);
+                Validaciones.ValidarNulo(this.txtConfirmarClave.Text, "confirmar clave");
+                Validaciones.ValidarConfirmacionClave(this.txtClave.Text, this.txtConfirmarClave.Text);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
                 return false;
             }
-            else if (this.txtClave.Text.Length < 8)
-            {
-                Notificar("Error", "La clave debe tener 8 o más caracteres", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            else if (this.txtClave.Text != this.txtConfirmarClave.Text)
-            {
-                Notificar("Error", "La clave no coincide con la confirmación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            else { return true; }
+
+
         }
         // Esto se podría hacer un nivel más arriba y ya usarlo para la implementación en web
         // Habría que darle un par de vueltas de tuerca, capaz en validaciones se puede meter

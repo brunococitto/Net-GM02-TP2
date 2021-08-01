@@ -114,21 +114,22 @@ namespace UI.Desktop
         }
 
          public override bool Validar()
-        {
-            if (string.IsNullOrWhiteSpace(this.txtBoxAnioEspecialidad.Text) || string.IsNullOrWhiteSpace(this.txtBoxDesc.Text))
+         {
+            try
             {
-                Notificar("Error", "Debe completar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                Validaciones.ValidarNulo(this.txtBoxAnioEspecialidad.Text, "Año Especialidad");
+                Validaciones.ValidarNulo(this.txtBoxDesc.Text, "Descripcion");
+                Validaciones.ValidarNumero(this.txtBoxAnioEspecialidad.Text, "Año Especialidad");
+                Validaciones.ValidarLetrasNumeros(this.txtBoxDesc.Text, "Descripcion");
+                return true;
             }
-            else if(Regex.IsMatch(this.txtBoxAnioEspecialidad.ToString(), @"[a-z,A-Z]+$"))
+            catch (Exception e)
             {
-                Notificar("Error", "El año especialidad debe de ser un numero", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message);
                 return false;
             }
 
-            else { return true; }
-
-        }
+         }
 
         private void bAceptar_Click(object sender, EventArgs e)
         {
