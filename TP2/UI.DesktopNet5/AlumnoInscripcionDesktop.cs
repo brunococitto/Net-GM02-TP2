@@ -100,12 +100,17 @@ namespace UI.Desktop
         }
         public override bool Validar()
         {
-            if (string.IsNullOrWhiteSpace(this.txtApellido.Text) || string.IsNullOrWhiteSpace(this.txtNombre.Text) || string.IsNullOrWhiteSpace(this.txtLegajo.Text))
+            try
             {
-                Notificar("Error", "Debe completar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Validaciones.ValidarNulo(this.txtLegajo.Text, "legajo");
+                Validaciones.ValidarNumero(this.txtLegajo.Text,"legajo");
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
                 return false;
             }
-            else { return true; }
         }
         private void cargarPersona()
         {
@@ -115,13 +120,8 @@ namespace UI.Desktop
             this.txtApellido.Text = "";
             try
             {
-                // Esta validacion tiene q ser q no es vacio y q son solo numeros
-                // Metele regex a este if pa
-                if (this.txtLegajo.Text.Length == 0)
-                {
-                    Exception e = new Exception("Ingrese un legajo.");
-                    throw e;
-                }
+                Validaciones.ValidarNulo(this.txtLegajo.Text,"legajo");
+                Validaciones.ValidarNumero(this.txtLegajo.Text,"legajo");
                 Persona per = _personaLogic.GetOneConLegajo(Int32.Parse(this.txtLegajo.Text));
                 if (per == null)
                 {

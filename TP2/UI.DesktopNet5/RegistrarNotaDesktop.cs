@@ -10,52 +10,59 @@ using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
 using Data.Database;
+using System.Globalization;
 
 namespace UI.Desktop
 {
-    public partial class UsuarioDesktop : ApplicationForm
+    public partial class RegistrarNotaDesktop : ApplicationForm
     {
-        private readonly UsuarioLogic _usuarioLogic;
+        private readonly AlumnoInscripcionLogic _alumnoInscripcionLogic;
+        private readonly CursoLogic _cursoLogic;
         private readonly PersonaLogic _personaLogic;
-        private Usuario UsuarioActual { set; get; }
-        public UsuarioDesktop(AcademyContext context)
+        private AlumnoInscripcion AlumnoInscripcionActual { set; get; }
+        public RegistrarNotaDesktop(AcademyContext context)
         {
             InitializeComponent();
-            _usuarioLogic = new UsuarioLogic(new UsuarioAdapter(context));
+            _alumnoInscripcionLogic = new AlumnoInscripcionLogic(new AlumnoInscripcionAdapter(context));
+            _cursoLogic = new CursoLogic(new CursoAdapter(context));
             _personaLogic = new PersonaLogic(new PersonaAdapter(context));
         }
-        public UsuarioDesktop(ModoForm modo, AcademyContext context) : this(context)
+        public RegistrarNotaDesktop(ModoForm modo, AcademyContext context) : this(context)
         {
-            // Este constructor es cuando doy de alta un nuevo usuario
             Modos = modo;
-            // Creo el nuevo usuario acá para después poder asignarle el ID de persona
-            UsuarioActual = new Usuario();
-            // Está todo deshabilitado hasta que cargues un legajo que coincida con una persona
-            this.txtUsuario.ReadOnly = true;
-            this.chkHabilitado.Enabled = false;
-            this.txtClave.ReadOnly = true;
-            this.txtConfirmarClave.ReadOnly = true;
+            // No te deja hacer nada hasta que no introduzcas un legajo válido, como en usuario
+            this.txtCondicion.ReadOnly = true;
+            this.txtNota.ReadOnly = true;
+            this.cbCurso.Enabled = false;
+            // Cargo los cursos para mostrarlos en el combobox
+            List<Curso> cursos = _cursoLogic.GetAll();
+            this.cbCurso.DataSource = cursos;
+            // selecciono el curso de la posicion 0 como para seleccionar algo
+            this.cbCurso.SelectedIndex = 0;
         }
-        public UsuarioDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
+        public RegistrarNotaDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            UsuarioActual = _usuarioLogic.GetOne(ID);
-            // Como estoy modificando o borrando el usuario, no tengo que poder modificar el legajo
-            // al cual está asociado
-            this.txtLegajo.Enabled = false;
+            AlumnoInscripcionActual = _alumnoInscripcionLogic.GetOne(ID);
             MapearDeDatos();
         }
         public override void MapearDeDatos()
         {
-            this.txtID.Text = this.UsuarioActual.ID.ToString();
-            this.chkHabilitado.Checked = this.UsuarioActual.Habilitado;
-            this.txtUsuario.Text = this.UsuarioActual.NombreUsuario;
-            // La clave no la tengo que cargar porque no se muestra, siempre se vuelve a poner de 0
-            // Ahora tengo que cargar los datos de la persona también
-            Persona per = _personaLogic.GetOne(UsuarioActual.IDPersona);
-            this.txtLegajo.Text = per.Legajo.ToString();
-            this.txtNombre.Text = per.Nombre;
-            this.txtApellido.Text = per.Apellido;
+            this.txtID.Text = this.AlumnoInscripcionActual.ID.ToString();
+            this.txtCondicion.Text = this.AlumnoInscripcionActual.Condicion;
+            this.txtNota.Text = this.AlumnoInscripcionActual.Nota.ToString();
+            // Acá cuando cargo la inscripcion tengo que buscar el alumno asignado
+            Persona alumnoActual = _personaLogic.GetOne(this.AlumnoInscripcionActual.IDAlumno);
+            this.txtLegajo.Text = alumnoActual.Legajo.ToString();
+            this.txtNombre.Text = alumnoActual.Nombre;
+            this.txtApellido.Text = alumnoActual.Apellido;
+            // Acá cuando cargo la inscripcion tengo que buscar el curso asignado
+            Curso cursoActual = _cursoLogic.GetOne(this.AlumnoInscripcionActual.IDCurso);
+            // A su vez tengo que cargar los otros cursos por si quiero seleccionar otro
+            // Y seleccionar el actual
+            List<Curso> cursos = _cursoLogic.GetAll();
+            this.cbCurso.DataSource = cursos;
+            this.cbCurso.SelectedIndex = cbCurso.FindStringExact(cursoActual.Descripcion);
             switch (this.Modos)
             {
                 case ModoForm.Alta:
@@ -74,27 +81,34 @@ namespace UI.Desktop
         }
         public override void MapearADatos()
         {
-            UsuarioActual.Habilitado = this.chkHabilitado.Checked;
-            UsuarioActual.Clave = this.txtClave.Text;
-            UsuarioActual.NombreUsuario = this.txtUsuario.Text;
+            if (Modos == ModoForm.Alta)
+            {
+                AlumnoInscripcionActual = new AlumnoInscripcion();
+            }
+            AlumnoInscripcionActual.Condicion = this.txtCondicion.Text;
+            AlumnoInscripcionActual.Nota = Int32.Parse(this.txtNota.Text);
+            AlumnoInscripcionActual.IDCurso = (int)this.cbCurso.SelectedValue;
+            var alumno = from p in _personaLogic.GetAll()
+                           where p.Legajo == Int32.Parse(this.txtLegajo.Text)
+                           select p;
+            AlumnoInscripcionActual.IDAlumno = (int)alumno.ToList()[0].ID;
             switch (Modos)
             {
                 case ModoForm.Alta:
-                    UsuarioActual.State = BusinessEntity.States.New;
+                    AlumnoInscripcionActual.State = BusinessEntity.States.New;
                     break;
                 case ModoForm.Modificacion:
-                    UsuarioActual.State = BusinessEntity.States.Modified;
+                    AlumnoInscripcionActual.State = BusinessEntity.States.Modified;
                     break;
             }
         }
         public override void GuardarCambios()
         {
             MapearADatos();
-            _usuarioLogic.Save(UsuarioActual);
+            _alumnoInscripcionLogic.Save(AlumnoInscripcionActual);
         }
         public override bool Validar()
         {
-
             try
             {
                 Validaciones.ValidarNulo(this.txtLegajo.Text, "legajo");
@@ -103,13 +117,10 @@ namespace UI.Desktop
                 Validaciones.ValidarLetras(this.txtNombre.Text, "nombre");
                 Validaciones.ValidarNulo(this.txtApellido.Text, "apellido");
                 Validaciones.ValidarLetras(this.txtApellido.Text, "apellido");
-                Validaciones.ValidarNulo(this.txtClave.Text, "contraseña");
-                Validaciones.ValidarNulo(this.txtUsuario.Text, "usuario");
-                Validaciones.ValidarLetras(this.txtUsuario.Text, "usuario");
-                Validaciones.ValidarClave(this.txtClave.Text);
-                Validaciones.ValidarNulo(this.txtConfirmarClave.Text, "confirmar clave");
-                Validaciones.ValidarConfirmacionClave(this.txtClave.Text, this.txtConfirmarClave.Text);
-
+                Validaciones.ValidarNulo(this.txtCondicion.Text, "condición");
+                Validaciones.ValidarLetras(this.txtCondicion.Text, "condición");
+                Validaciones.ValidarNulo(this.txtNota.Text, "nota");
+                Validaciones.ValidarNumero(this.txtNota.Text, "nota");
                 return true;
             }
             catch (Exception e)
@@ -117,15 +128,15 @@ namespace UI.Desktop
                 MessageBox.Show(e.Message);
                 return false;
             }
-
-
         }
-        // Esto se podría hacer un nivel más arriba y ya usarlo para la implementación en web
-        // Habría que darle un par de vueltas de tuerca, capaz en validaciones se puede meter
-        // Aparte seguro se puede hacer muchisimo más eficiente
         private void cargarPersona()
         {
             this.btnAceptar.Enabled = false;
+            this.txtCondicion.ReadOnly = true;
+            this.cbCurso.Enabled = false;
+            this.txtNota.ReadOnly = true;
+            this.txtNombre.Text = "";
+            this.txtApellido.Text = "";
             List<Persona> personas = _personaLogic.GetAll();
             try
             {
@@ -145,25 +156,20 @@ namespace UI.Desktop
                     throw e;
                 }
                 Persona per = _personaLogic.GetOne(persona[0].ID);
+                // Valido que la persona ingresada sea un alumno
+                if (per.TipoPersona != Business.Entities.Persona.TiposPersona.Alumno)
+                {
+                    Exception e = new Exception("El legajo ingresado no corresponde a un alumno.");
+                    throw e;
+                }
                 // Asigno los datos de la persona a los textbox
                 this.txtNombre.Text = per.Nombre;
                 this.txtApellido.Text = per.Apellido;
-                // Verifico que no exista un usuario ya para esta persona
-                var usuarios = (from u in _usuarioLogic.GetAll()
-                                where u.IDPersona == per.ID
-                                select u);
-                if (usuarios.Any())
-                {
-                    Exception e = new Exception("Ya existe un usuario para la persona ingresada.");
-                    throw e;
-                }
-                UsuarioActual.IDPersona = per.ID;
                 // Una vez que cargo la persona, vuelvo a habilitar el resto de los elementos
                 this.btnAceptar.Enabled = true;
-                this.txtUsuario.ReadOnly = false;
-                this.chkHabilitado.Enabled = true;
-                this.txtClave.ReadOnly = false;
-                this.txtConfirmarClave.ReadOnly = false;
+                this.txtCondicion.ReadOnly = false;
+                this.cbCurso.Enabled = true;
+                this.txtNota.ReadOnly = false;
             }
             catch (Exception e)
             {
@@ -172,6 +178,7 @@ namespace UI.Desktop
         }
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+            // Acá habría que validar que no exista ya una inscripcion para X alumno y X curso
             switch (Modos)
             {
                 case ModoForm.Alta:
@@ -203,7 +210,7 @@ namespace UI.Desktop
         }
         public virtual void Eliminar()
         {
-            _usuarioLogic.Delete(UsuarioActual.ID);
+            _personaLogic.Delete(AlumnoInscripcionActual.ID);
         }
 
         private void txtLegajo_Leave(object sender, EventArgs e)

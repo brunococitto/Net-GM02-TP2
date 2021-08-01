@@ -113,17 +113,27 @@ namespace UI.Desktop
         }
         public override bool Validar()
         {
-            if (string.IsNullOrWhiteSpace(this.txtApellido.Text) || string.IsNullOrWhiteSpace(this.txtNombre.Text) || string.IsNullOrWhiteSpace(this.txtLegajo.Text))
+            try
             {
-                Notificar("Error", "Debe completar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Validaciones.ValidarNulo(this.txtNombre.Text, "nombre");
+                Validaciones.ValidarLetras(this.txtNombre.Text, "nombre");
+                Validaciones.ValidarNulo(this.txtApellido.Text, "apellido");
+                Validaciones.ValidarLetras(this.txtApellido.Text, "apellido");
+                Validaciones.ValidarNulo(this.txtLegajo.Text, "legajo");
+                Validaciones.ValidarNumero(this.txtLegajo.Text, "legajo");
+                Validaciones.ValidarNulo(this.txtDireccion.Text, "dirección");
+                Validaciones.ValidarLetrasNumeros(this.txtDireccion.Text, "dirección");
+                Validaciones.ValidarNulo(this.txtTelefono.Text, "teléfono");
+                Validaciones.ValidarNumero(this.txtTelefono.Text, "teléfono");
+                Validaciones.ValidarNulo(this.txtEmail.Text, "email");
+                Validaciones.ValidarEmail(this.txtEmail.Text);
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
                 return false;
             }
-            else if (!this.txtEmail.Text.Contains("@") || !this.txtEmail.Text.Contains("."))
-            {
-                Notificar("Error", "El Email no es valido", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            else { return true; }
         }
         private void btnAceptar_Click(object sender, EventArgs e)
         {
