@@ -33,17 +33,17 @@ namespace UI.Desktop
             this.tscMaterias = new System.Windows.Forms.ToolStripContainer();
             this.tlMaterias = new System.Windows.Forms.TableLayoutPanel();
             this.dgvCursos = new System.Windows.Forms.DataGridView();
+            this.btnActualizar = new System.Windows.Forms.Button();
+            this.tsCursos = new System.Windows.Forms.ToolStrip();
+            this.tsbNuevo = new System.Windows.Forms.ToolStripButton();
+            this.tsbEditar = new System.Windows.Forms.ToolStripButton();
+            this.tsbEliminar = new System.Windows.Forms.ToolStripButton();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.desc_curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.desc_materia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.desc_comision = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.anio_calendario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnActualizar = new System.Windows.Forms.Button();
-            this.tsCursos = new System.Windows.Forms.ToolStrip();
-            this.tsbNuevo = new System.Windows.Forms.ToolStripButton();
-            this.tsbEditar = new System.Windows.Forms.ToolStripButton();
-            this.tsbEliminar = new System.Windows.Forms.ToolStripButton();
             this.tscMaterias.ContentPanel.SuspendLayout();
             this.tscMaterias.TopToolStripPanel.SuspendLayout();
             this.tscMaterias.SuspendLayout();
@@ -112,46 +112,6 @@ namespace UI.Desktop
             this.dgvCursos.Size = new System.Drawing.Size(594, 371);
             this.dgvCursos.TabIndex = 0;
             // 
-            // id
-            // 
-            this.id.DataPropertyName = "ID";
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            // 
-            // desc_curso
-            // 
-            this.desc_curso.DataPropertyName = "DescripcionCur";
-            this.desc_curso.HeaderText = "Descripcion";
-            this.desc_curso.Name = "desc_curso";
-            this.desc_curso.ReadOnly = true;
-            // 
-            // desc_materia
-            // 
-            this.desc_materia.DataPropertyName = "DescripcionMat";
-            this.desc_materia.HeaderText = "Materia";
-            this.desc_materia.Name = "desc_materia";
-            this.desc_materia.Width = 150;
-            // 
-            // desc_comision
-            // 
-            this.desc_comision.DataPropertyName = "DescripcionCom";
-            this.desc_comision.HeaderText = "Comision";
-            this.desc_comision.Name = "desc_comision";
-            // 
-            // anio_calendario
-            // 
-            this.anio_calendario.DataPropertyName = "AnoCalendario";
-            this.anio_calendario.HeaderText = "Anio Calendario";
-            this.anio_calendario.Name = "anio_calendario";
-            // 
-            // cupo
-            // 
-            this.cupo.DataPropertyName = "Cupo";
-            this.cupo.HeaderText = "Cupo";
-            this.cupo.Name = "cupo";
-            this.cupo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.cupo.Width = 300;
-            // 
             // btnActualizar
             // 
             this.btnActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -209,6 +169,47 @@ namespace UI.Desktop
             this.tsbEliminar.Text = "toolStripButton1";
             this.tsbEliminar.ToolTipText = "Eliminar";
             this.tsbEliminar.Click += new System.EventHandler(this.tsbEliminar_Click);
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "ID";
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.Visible = false;
+            // 
+            // desc_curso
+            // 
+            this.desc_curso.DataPropertyName = "DescripcionCur";
+            this.desc_curso.HeaderText = "Descripcion";
+            this.desc_curso.Name = "desc_curso";
+            this.desc_curso.ReadOnly = true;
+            // 
+            // desc_materia
+            // 
+            this.desc_materia.DataPropertyName = "DescripcionMat";
+            this.desc_materia.HeaderText = "Materia";
+            this.desc_materia.Name = "desc_materia";
+            this.desc_materia.Width = 150;
+            // 
+            // desc_comision
+            // 
+            this.desc_comision.DataPropertyName = "DescripcionCom";
+            this.desc_comision.HeaderText = "Comision";
+            this.desc_comision.Name = "desc_comision";
+            // 
+            // anio_calendario
+            // 
+            this.anio_calendario.DataPropertyName = "AnoCalendario";
+            this.anio_calendario.HeaderText = "Anio Calendario";
+            this.anio_calendario.Name = "anio_calendario";
+            // 
+            // cupo
+            // 
+            this.cupo.DataPropertyName = "Cupo";
+            this.cupo.HeaderText = "Cupo";
+            this.cupo.Name = "cupo";
+            this.cupo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cupo.Width = 300;
             // 
             // Cursos
             // 

@@ -33,16 +33,16 @@ namespace UI.Desktop
             this.tscMaterias = new System.Windows.Forms.ToolStripContainer();
             this.tlMaterias = new System.Windows.Forms.TableLayoutPanel();
             this.dgvMaterias = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.horas_semanales = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.horas_totales = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.plan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnActualizar = new System.Windows.Forms.Button();
             this.tsMaterias = new System.Windows.Forms.ToolStrip();
             this.tsbNuevo = new System.Windows.Forms.ToolStripButton();
             this.tsbEditar = new System.Windows.Forms.ToolStripButton();
             this.tsbEliminar = new System.Windows.Forms.ToolStripButton();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.horas_semanales = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.horas_totales = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.plan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tscMaterias.ContentPanel.SuspendLayout();
             this.tscMaterias.TopToolStripPanel.SuspendLayout();
             this.tscMaterias.SuspendLayout();
@@ -110,39 +110,6 @@ namespace UI.Desktop
             this.dgvMaterias.Size = new System.Drawing.Size(594, 371);
             this.dgvMaterias.TabIndex = 0;
             // 
-            // id
-            // 
-            this.id.DataPropertyName = "ID";
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            // 
-            // descripcion
-            // 
-            this.descripcion.DataPropertyName = "Descripcion";
-            this.descripcion.HeaderText = "Descripcion";
-            this.descripcion.Name = "descripcion";
-            this.descripcion.Width = 150;
-            // 
-            // horas_semanales
-            // 
-            this.horas_semanales.DataPropertyName = "horas_semanales";
-            this.horas_semanales.HeaderText = "Horas semanales";
-            this.horas_semanales.Name = "horas_semanales";
-            // 
-            // horas_totales
-            // 
-            this.horas_totales.DataPropertyName = "horas_totales";
-            this.horas_totales.HeaderText = "Horas totales";
-            this.horas_totales.Name = "horas_totales";
-            // 
-            // plan
-            // 
-            this.plan.DataPropertyName = "Plan";
-            this.plan.HeaderText = "Plan";
-            this.plan.Name = "plan";
-            this.plan.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.plan.Width = 300;
-            // 
             // btnActualizar
             // 
             this.btnActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -200,6 +167,40 @@ namespace UI.Desktop
             this.tsbEliminar.Text = "toolStripButton1";
             this.tsbEliminar.ToolTipText = "Eliminar";
             this.tsbEliminar.Click += new System.EventHandler(this.tsbEliminar_Click);
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "ID";
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.Visible = false;
+            // 
+            // descripcion
+            // 
+            this.descripcion.DataPropertyName = "Descripcion";
+            this.descripcion.HeaderText = "Descripcion";
+            this.descripcion.Name = "descripcion";
+            this.descripcion.Width = 150;
+            // 
+            // horas_semanales
+            // 
+            this.horas_semanales.DataPropertyName = "horas_semanales";
+            this.horas_semanales.HeaderText = "Horas semanales";
+            this.horas_semanales.Name = "horas_semanales";
+            // 
+            // horas_totales
+            // 
+            this.horas_totales.DataPropertyName = "horas_totales";
+            this.horas_totales.HeaderText = "Horas totales";
+            this.horas_totales.Name = "horas_totales";
+            // 
+            // plan
+            // 
+            this.plan.DataPropertyName = "Plan";
+            this.plan.HeaderText = "Plan";
+            this.plan.Name = "plan";
+            this.plan.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.plan.Width = 300;
             // 
             // Materias
             // 

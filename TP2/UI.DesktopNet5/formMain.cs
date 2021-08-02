@@ -81,6 +81,7 @@ namespace UI.Desktop
             this.pnlPrincipal.Tag = form;
             this.pnlPrincipal.Controls.Add(form);
             this.lblMain.Visible = false;
+            this.tsbExportar.Enabled = true;
             form.Show();
         }
         private void resetPanelPrincipal()
@@ -90,6 +91,9 @@ namespace UI.Desktop
                 this.pnlPrincipal.Controls[0].Dispose();
             }
             this.lblMain.Visible = true;
+            Singleton.getInstance().DgvActual = null;
+            Singleton.getInstance().ModuloActual = null;
+            this.tsbExportar.Enabled = false;
         }
         private void mnuComisiones_Click(object sender, EventArgs e)
         {
@@ -148,7 +152,7 @@ namespace UI.Desktop
 
         private void tsbExportar_Click(object sender, EventArgs e)
         {
-            if (Singleton.getInstance().DgvActual.Rows.Count > 0)
+            if (Singleton.getInstance().DgvActual != null && Singleton.getInstance().DgvActual.Rows.Count > 0)
             {
                 SaveFileDialog sfd = new SaveFileDialog();
                 sfd.Filter = "PDF (*.pdf)|*.pdf";
@@ -180,8 +184,11 @@ namespace UI.Desktop
 
                             foreach (DataGridViewColumn column in Singleton.getInstance().DgvActual.Columns)
                             {
-                                PdfPCell cell = new PdfPCell(new Phrase(column.HeaderText));
-                                pdfTable.AddCell(cell);
+                                if (column.Visible == true)
+                                {
+                                    PdfPCell cell = new PdfPCell(new Phrase(column.HeaderText));
+                                    pdfTable.AddCell(cell);
+                                }                                
                             }
 
                             foreach (DataGridViewRow row in Singleton.getInstance().DgvActual.Rows)
