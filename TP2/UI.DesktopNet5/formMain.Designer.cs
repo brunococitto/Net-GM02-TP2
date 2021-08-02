@@ -51,6 +51,7 @@ namespace UI.Desktop
             this.lblMain = new System.Windows.Forms.Label();
             this.tsHome = new System.Windows.Forms.ToolStrip();
             this.tsbHome = new System.Windows.Forms.ToolStripButton();
+            this.tsbExportar = new System.Windows.Forms.ToolStripButton();
             this.tlMain = new System.Windows.Forms.TableLayoutPanel();
             this.mnsPrincipal.SuspendLayout();
             this.tsHome.SuspendLayout();
@@ -73,7 +74,7 @@ namespace UI.Desktop
             this.mnsPrincipal.Location = new System.Drawing.Point(0, 0);
             this.mnsPrincipal.Name = "mnsPrincipal";
             this.mnsPrincipal.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.mnsPrincipal.Size = new System.Drawing.Size(1068, 25);
+            this.mnsPrincipal.Size = new System.Drawing.Size(1014, 25);
             this.mnsPrincipal.TabIndex = 1;
             this.mnsPrincipal.Text = "menuStrip1";
             // 
@@ -228,10 +229,11 @@ namespace UI.Desktop
             this.tsHome.Dock = System.Windows.Forms.DockStyle.None;
             this.tsHome.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.tsHome.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbHome});
-            this.tsHome.Location = new System.Drawing.Point(1068, 0);
+            this.tsbHome,
+            this.tsbExportar});
+            this.tsHome.Location = new System.Drawing.Point(1014, 0);
             this.tsHome.Name = "tsHome";
-            this.tsHome.Size = new System.Drawing.Size(26, 25);
+            this.tsHome.Size = new System.Drawing.Size(80, 25);
             this.tsHome.TabIndex = 2;
             // 
             // tsbHome
@@ -244,6 +246,17 @@ namespace UI.Desktop
             this.tsbHome.Text = "toolStripButton1";
             this.tsbHome.ToolTipText = "Regresar al inicio";
             this.tsbHome.Click += new System.EventHandler(this.tsbHome_Click);
+            // 
+            // tsbExportar
+            // 
+            this.tsbExportar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbExportar.Image = ((System.Drawing.Image)(resources.GetObject("tsbExportar.Image")));
+            this.tsbExportar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbExportar.Name = "tsbExportar";
+            this.tsbExportar.Size = new System.Drawing.Size(23, 22);
+            this.tsbExportar.Text = "toolStripButton1";
+            this.tsbExportar.ToolTipText = "Exportar lista como PDF";
+            this.tsbExportar.Click += new System.EventHandler(this.tsbExportar_Click);
             // 
             // tlMain
             // 
@@ -314,6 +327,7 @@ namespace UI.Desktop
         private System.Windows.Forms.ToolStrip tsHome;
         private System.Windows.Forms.ToolStripButton tsbHome;
         private System.Windows.Forms.TableLayoutPanel tlMain;
+        private System.Windows.Forms.ToolStripButton tsbExportar;
     }
 }
 

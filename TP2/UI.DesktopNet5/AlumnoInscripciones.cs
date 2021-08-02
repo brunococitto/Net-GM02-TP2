@@ -25,6 +25,8 @@ namespace UI.Desktop
         }
         private void AlumnoInscripciones_Load(object sender, EventArgs e)
         {
+            Singleton.getInstance().DgvActual = this.dgvAlumnoInscripciones;
+            Singleton.getInstance().ModuloActual = "Inscripciones";
             this.Listar();
         }
         public void Listar()

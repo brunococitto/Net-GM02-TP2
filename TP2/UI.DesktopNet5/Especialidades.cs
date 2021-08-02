@@ -25,6 +25,8 @@ namespace UI.Desktop
         }
         private void Especialidades_Load(object sender, EventArgs e)
         {
+            Singleton.getInstance().DgvActual = this.dgvEspecialidades;
+            Singleton.getInstance().ModuloActual = "Especialidades";
             this.Listar();
         }
         public void Listar()

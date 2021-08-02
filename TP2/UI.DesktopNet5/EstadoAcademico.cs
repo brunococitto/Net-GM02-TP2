@@ -25,6 +25,8 @@ namespace UI.Desktop
         }
         private void EstadoAcademico_Load(object sender, EventArgs e)
         {
+            Singleton.getInstance().DgvActual = this.dgvEstadoAcademico;
+            Singleton.getInstance().ModuloActual = "Estado academico";
             this.Listar();
         }
         public void Listar()

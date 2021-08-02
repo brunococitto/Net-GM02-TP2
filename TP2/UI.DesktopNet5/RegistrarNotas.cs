@@ -29,6 +29,8 @@ namespace UI.Desktop
         }
         private void RegistrarNotas_Load(object sender, EventArgs e)
         {
+            Singleton.getInstance().DgvActual = this.dgvRegistrarNotas;
+            Singleton.getInstance().ModuloActual = "Notas";
             this.gbModificarInscripcion.Enabled = false;
             this.ListarCursos();
         }
