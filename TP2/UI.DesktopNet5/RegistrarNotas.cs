@@ -39,8 +39,15 @@ namespace UI.Desktop
             // Solo cargo los cursos del profe logueado
             List<Curso> cursos = _cursoLogic.GetCursosProfesor(Singleton.getInstance().PersonaLogged.ID);
             cbCursos.DataSource = cursos;
-            cbCursos.SelectedIndex = 0;
-            Listar();
+            if (cursos.Count > 0 )
+            {
+                cbCursos.SelectedIndex = 0;
+                Listar();
+            }
+            else
+            {
+                MessageBox.Show("No hay cursos registrados para el profesor.");
+            }
         }
         public void Listar()
         {

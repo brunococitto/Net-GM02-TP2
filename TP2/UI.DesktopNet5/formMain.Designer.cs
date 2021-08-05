@@ -74,7 +74,7 @@ namespace UI.Desktop
             this.mnsPrincipal.Location = new System.Drawing.Point(0, 0);
             this.mnsPrincipal.Name = "mnsPrincipal";
             this.mnsPrincipal.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.mnsPrincipal.Size = new System.Drawing.Size(1014, 25);
+            this.mnsPrincipal.Size = new System.Drawing.Size(1045, 25);
             this.mnsPrincipal.TabIndex = 1;
             this.mnsPrincipal.Text = "menuStrip1";
             // 
@@ -231,9 +231,9 @@ namespace UI.Desktop
             this.tsHome.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbHome,
             this.tsbExportar});
-            this.tsHome.Location = new System.Drawing.Point(1014, 0);
+            this.tsHome.Location = new System.Drawing.Point(1045, 0);
             this.tsHome.Name = "tsHome";
-            this.tsHome.Size = new System.Drawing.Size(80, 25);
+            this.tsHome.Size = new System.Drawing.Size(49, 25);
             this.tsHome.TabIndex = 2;
             // 
             // tsbHome
@@ -286,7 +286,6 @@ namespace UI.Desktop
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.mnsPrincipal;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "formMain";
             this.Text = "Academia";
