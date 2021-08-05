@@ -148,28 +148,28 @@ namespace Data.Database
                 {
                     NombreUsuario = "bcocitto",
                     Clave = "C7C3ECFF956CE64056F4BBC9453C8CA853AFA68E",
-                    IDPersona = 4,
+                    IDPersona = 3,
                     Habilitado = true
                 },
                 new()
                 {
                     NombreUsuario = "smasetto",
                     Clave = "83762B2C48D3BBA8A4DA6EF5493CA9DAA527FCFA",
-                    IDPersona = 1,
+                    IDPersona = 2,
                     Habilitado = true
                 },
                 new()
                 {
                     NombreUsuario = "fschiavoni",
                     Clave = "AAEF5F07A9DCB37E082D23871E558B3FBDC13EE2",
-                    IDPersona = 2,
+                    IDPersona = 3,
                     Habilitado = true
                 },
                 new()
                 {
                     NombreUsuario = "mdorado",
                     Clave = "83E83B756D616723B0C53754387AA0647BDF7CDC",
-                    IDPersona = 3,
+                    IDPersona = 4,
                     Habilitado = true
                 }
             };

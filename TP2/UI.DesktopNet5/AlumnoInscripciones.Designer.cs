@@ -174,51 +174,65 @@ namespace UI.Desktop
             // 
             // id
             // 
+            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.id.DataPropertyName = "ID";
             this.id.HeaderText = "ID";
             this.id.Name = "id";
             this.id.ReadOnly = true;
             this.id.Visible = false;
+            this.id.Width = 43;
             // 
             // legajo
             // 
+            this.legajo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.legajo.DataPropertyName = "Legajo";
             this.legajo.HeaderText = "Legajo";
             this.legajo.Name = "legajo";
+            this.legajo.Width = 67;
             // 
             // nombre
             // 
+            this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.nombre.DataPropertyName = "Nombre";
             this.nombre.HeaderText = "Nombre";
             this.nombre.Name = "nombre";
             this.nombre.ReadOnly = true;
+            this.nombre.Width = 76;
             // 
             // apellido
             // 
+            this.apellido.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.apellido.DataPropertyName = "Apellido";
             this.apellido.HeaderText = "Apellido";
             this.apellido.Name = "apellido";
             this.apellido.ReadOnly = true;
+            this.apellido.Width = 76;
             // 
             // curso
             // 
+            this.curso.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.curso.DataPropertyName = "Curso";
             this.curso.HeaderText = "Curso";
             this.curso.Name = "curso";
             this.curso.ReadOnly = true;
+            this.curso.Width = 63;
             // 
             // condicion
             // 
+            this.condicion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.condicion.DataPropertyName = "Condicion";
             this.condicion.HeaderText = "Condicion";
             this.condicion.Name = "condicion";
             this.condicion.ReadOnly = true;
+            this.condicion.Width = 87;
             // 
             // nota
             // 
+            this.nota.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.nota.DataPropertyName = "Nota";
             this.nota.HeaderText = "Nota";
             this.nota.Name = "nota";
+            this.nota.Width = 58;
             // 
             // AlumnoInscripciones
             // 
