@@ -34,7 +34,6 @@ namespace UI.Desktop
             this.tlAlumnoInscripciones = new System.Windows.Forms.TableLayoutPanel();
             this.dgvAlumnoInscripciones = new System.Windows.Forms.DataGridView();
             this.btnActualizar = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
             this.tsAlumnoInscripciones = new System.Windows.Forms.ToolStrip();
             this.tsbNuevo = new System.Windows.Forms.ToolStripButton();
             this.tsbEditar = new System.Windows.Forms.ToolStripButton();
@@ -80,8 +79,7 @@ namespace UI.Desktop
             this.tlAlumnoInscripciones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlAlumnoInscripciones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlAlumnoInscripciones.Controls.Add(this.dgvAlumnoInscripciones, 0, 0);
-            this.tlAlumnoInscripciones.Controls.Add(this.btnActualizar, 0, 1);
-            this.tlAlumnoInscripciones.Controls.Add(this.btnSalir, 1, 1);
+            this.tlAlumnoInscripciones.Controls.Add(this.btnActualizar, 1, 1);
             this.tlAlumnoInscripciones.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlAlumnoInscripciones.Location = new System.Drawing.Point(0, 0);
             this.tlAlumnoInscripciones.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -119,7 +117,7 @@ namespace UI.Desktop
             // btnActualizar
             // 
             this.btnActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnActualizar.Location = new System.Drawing.Point(745, 380);
+            this.btnActualizar.Location = new System.Drawing.Point(841, 380);
             this.btnActualizar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(88, 27);
@@ -127,17 +125,6 @@ namespace UI.Desktop
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = true;
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Location = new System.Drawing.Point(841, 380);
-            this.btnSalir.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(88, 27);
-            this.btnSalir.TabIndex = 2;
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // tsAlumnoInscripciones
             // 
@@ -191,6 +178,7 @@ namespace UI.Desktop
             this.id.HeaderText = "ID";
             this.id.Name = "id";
             this.id.ReadOnly = true;
+            this.id.Visible = false;
             // 
             // legajo
             // 
@@ -261,7 +249,6 @@ namespace UI.Desktop
         private System.Windows.Forms.TableLayoutPanel tlAlumnoInscripciones;
         private System.Windows.Forms.DataGridView dgvAlumnoInscripciones;
         private System.Windows.Forms.Button btnActualizar;
-        private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.ToolStrip tsAlumnoInscripciones;
         private System.Windows.Forms.ToolStripButton tsbNuevo;
         private System.Windows.Forms.ToolStripButton tsbEditar;

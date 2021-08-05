@@ -50,7 +50,6 @@ namespace UI.Desktop
             this.nota = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cbCursos = new System.Windows.Forms.ComboBox();
             this.lblSeleccionarCurso = new System.Windows.Forms.Label();
-            this.btnSalir = new System.Windows.Forms.Button();
             this.btnActualizar = new System.Windows.Forms.Button();
             this.tscRegistrarNotas.ContentPanel.SuspendLayout();
             this.tscRegistrarNotas.SuspendLayout();
@@ -87,16 +86,14 @@ namespace UI.Desktop
             // 
             // tlRegistrarNotas
             // 
-            this.tlRegistrarNotas.ColumnCount = 4;
+            this.tlRegistrarNotas.ColumnCount = 3;
             this.tlRegistrarNotas.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.52088F));
             this.tlRegistrarNotas.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.34397F));
             this.tlRegistrarNotas.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.64975F));
-            this.tlRegistrarNotas.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.485401F));
             this.tlRegistrarNotas.Controls.Add(this.gbModificarInscripcion, 0, 2);
             this.tlRegistrarNotas.Controls.Add(this.dgvRegistrarNotas, 0, 1);
             this.tlRegistrarNotas.Controls.Add(this.cbCursos, 1, 0);
             this.tlRegistrarNotas.Controls.Add(this.lblSeleccionarCurso, 0, 0);
-            this.tlRegistrarNotas.Controls.Add(this.btnSalir, 3, 2);
             this.tlRegistrarNotas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlRegistrarNotas.Location = new System.Drawing.Point(0, 0);
             this.tlRegistrarNotas.Name = "tlRegistrarNotas";
@@ -122,7 +119,7 @@ namespace UI.Desktop
             this.gbModificarInscripcion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbModificarInscripcion.Location = new System.Drawing.Point(3, 334);
             this.gbModificarInscripcion.Name = "gbModificarInscripcion";
-            this.gbModificarInscripcion.Size = new System.Drawing.Size(995, 50);
+            this.gbModificarInscripcion.Size = new System.Drawing.Size(1102, 50);
             this.gbModificarInscripcion.TabIndex = 14;
             this.gbModificarInscripcion.TabStop = false;
             this.gbModificarInscripcion.Text = "Cargar nota";
@@ -164,7 +161,7 @@ namespace UI.Desktop
             // 
             this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGuardar.Location = new System.Drawing.Point(900, 12);
+            this.btnGuardar.Location = new System.Drawing.Point(1007, 12);
             this.btnGuardar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(88, 32);
@@ -240,7 +237,7 @@ namespace UI.Desktop
             this.apellido,
             this.condicion,
             this.nota});
-            this.tlRegistrarNotas.SetColumnSpan(this.dgvRegistrarNotas, 4);
+            this.tlRegistrarNotas.SetColumnSpan(this.dgvRegistrarNotas, 3);
             this.dgvRegistrarNotas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvRegistrarNotas.Location = new System.Drawing.Point(4, 32);
             this.dgvRegistrarNotas.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -308,13 +305,13 @@ namespace UI.Desktop
             // 
             // cbCursos
             // 
-            this.tlRegistrarNotas.SetColumnSpan(this.cbCursos, 3);
+            this.tlRegistrarNotas.SetColumnSpan(this.cbCursos, 2);
             this.cbCursos.DisplayMember = "Descripcion";
             this.cbCursos.Dock = System.Windows.Forms.DockStyle.Top;
             this.cbCursos.FormattingEnabled = true;
-            this.cbCursos.Location = new System.Drawing.Point(119, 3);
+            this.cbCursos.Location = new System.Drawing.Point(131, 3);
             this.cbCursos.Name = "cbCursos";
-            this.cbCursos.Size = new System.Drawing.Size(986, 23);
+            this.cbCursos.Size = new System.Drawing.Size(974, 23);
             this.cbCursos.TabIndex = 3;
             this.cbCursos.ValueMember = "ID";
             this.cbCursos.SelectionChangeCommitted += new System.EventHandler(this.cbCursos_SelectionChangeCommitted);
@@ -327,22 +324,10 @@ namespace UI.Desktop
             this.lblSeleccionarCurso.AutoSize = true;
             this.lblSeleccionarCurso.Location = new System.Drawing.Point(3, 0);
             this.lblSeleccionarCurso.Name = "lblSeleccionarCurso";
-            this.lblSeleccionarCurso.Size = new System.Drawing.Size(110, 29);
+            this.lblSeleccionarCurso.Size = new System.Drawing.Size(122, 29);
             this.lblSeleccionarCurso.TabIndex = 4;
             this.lblSeleccionarCurso.Text = "Curso";
             this.lblSeleccionarCurso.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSalir.Location = new System.Drawing.Point(1014, 353);
-            this.btnSalir.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(90, 31);
-            this.btnSalir.TabIndex = 2;
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // btnActualizar
             // 
@@ -381,7 +366,6 @@ namespace UI.Desktop
         #endregion
 
         private System.Windows.Forms.ToolStripContainer tscRegistrarNotas;
-        private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnActualizar;
         private System.Windows.Forms.ComboBox cbCursos;
         private System.Windows.Forms.Label lblSeleccionarCurso;

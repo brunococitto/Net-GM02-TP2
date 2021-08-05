@@ -33,16 +33,15 @@ namespace UI.Desktop
             this.tscComisiones = new System.Windows.Forms.ToolStripContainer();
             this.tlComisiones = new System.Windows.Forms.TableLayoutPanel();
             this.dgvComisiones = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.anoespecialidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idplan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnActualizar = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
             this.tsComisiones = new System.Windows.Forms.ToolStrip();
             this.tsbNuevo = new System.Windows.Forms.ToolStripButton();
             this.tsbEditar = new System.Windows.Forms.ToolStripButton();
             this.tsbEliminar = new System.Windows.Forms.ToolStripButton();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.anoespecialidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idplan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tscComisiones.ContentPanel.SuspendLayout();
             this.tscComisiones.TopToolStripPanel.SuspendLayout();
             this.tscComisiones.SuspendLayout();
@@ -77,8 +76,7 @@ namespace UI.Desktop
             this.tlComisiones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlComisiones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlComisiones.Controls.Add(this.dgvComisiones, 0, 0);
-            this.tlComisiones.Controls.Add(this.btnActualizar, 0, 1);
-            this.tlComisiones.Controls.Add(this.btnSalir, 1, 1);
+            this.tlComisiones.Controls.Add(this.btnActualizar, 1, 1);
             this.tlComisiones.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlComisiones.Location = new System.Drawing.Point(0, 0);
             this.tlComisiones.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -105,43 +103,15 @@ namespace UI.Desktop
             this.dgvComisiones.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvComisiones.Location = new System.Drawing.Point(4, 3);
             this.dgvComisiones.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dgvComisiones.MultiSelect = false;
             this.dgvComisiones.Name = "dgvComisiones";
             this.dgvComisiones.Size = new System.Drawing.Size(443, 371);
             this.dgvComisiones.TabIndex = 0;
-            this.dgvComisiones.MultiSelect = false;
-            // 
-            // id
-            // 
-            this.id.DataPropertyName = "ID";
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            // 
-            // descripcion
-            // 
-            this.descripcion.DataPropertyName = "Descripcion";
-            this.descripcion.HeaderText = "Descripcion";
-            this.descripcion.Name = "descripcion";
-            this.descripcion.ReadOnly = true;
-            // 
-            // anoespecialidad
-            // 
-            this.anoespecialidad.DataPropertyName = "AnoEspecialidad";
-            this.anoespecialidad.HeaderText = "Año Especialidad";
-            this.anoespecialidad.Name = "anoespecialidad";
-            this.anoespecialidad.ReadOnly = true;
-            // 
-            // idplan
-            // 
-            this.idplan.DataPropertyName = "IDPlan";
-            this.idplan.HeaderText = "ID Plan";
-            this.idplan.Name = "idplan";
-            this.idplan.ReadOnly = true;
             // 
             // btnActualizar
             // 
             this.btnActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnActualizar.Location = new System.Drawing.Point(263, 380);
+            this.btnActualizar.Location = new System.Drawing.Point(359, 380);
             this.btnActualizar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(88, 27);
@@ -149,17 +119,6 @@ namespace UI.Desktop
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = true;
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Location = new System.Drawing.Point(359, 380);
-            this.btnSalir.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(88, 27);
-            this.btnSalir.TabIndex = 2;
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // tsComisiones
             // 
@@ -207,6 +166,35 @@ namespace UI.Desktop
             this.tsbEliminar.ToolTipText = "Eliminar";
             this.tsbEliminar.Click += new System.EventHandler(this.tsbEliminar_Click);
             // 
+            // id
+            // 
+            this.id.DataPropertyName = "ID";
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // descripcion
+            // 
+            this.descripcion.DataPropertyName = "Descripcion";
+            this.descripcion.HeaderText = "Descripcion";
+            this.descripcion.Name = "descripcion";
+            this.descripcion.ReadOnly = true;
+            // 
+            // anoespecialidad
+            // 
+            this.anoespecialidad.DataPropertyName = "AnoEspecialidad";
+            this.anoespecialidad.HeaderText = "Año Especialidad";
+            this.anoespecialidad.Name = "anoespecialidad";
+            this.anoespecialidad.ReadOnly = true;
+            // 
+            // idplan
+            // 
+            this.idplan.DataPropertyName = "IDPlan";
+            this.idplan.HeaderText = "ID Plan";
+            this.idplan.Name = "idplan";
+            this.idplan.ReadOnly = true;
+            // 
             // Comisiones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -236,7 +224,6 @@ namespace UI.Desktop
         private System.Windows.Forms.TableLayoutPanel tlComisiones;
         private System.Windows.Forms.DataGridView dgvComisiones;
         private System.Windows.Forms.Button btnActualizar;
-        private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.ToolStrip tsComisiones;
         private System.Windows.Forms.ToolStripButton tsbNuevo;
         private System.Windows.Forms.ToolStripButton tsbEditar;

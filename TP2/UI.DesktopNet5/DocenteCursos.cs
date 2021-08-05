@@ -13,26 +13,26 @@ using Data.Database;
 
 namespace UI.Desktop
 {
-    public partial class Modulos : Form
+    public partial class DocenteCursos : Form
     {
-        private readonly ModuloLogic _moduloLogic;
+        private readonly DocenteCursoLogic _docenteCursoLogic;
         private readonly AcademyContext _context;
-        public Modulos(AcademyContext context)
+        public DocenteCursos(AcademyContext context)
         {
             InitializeComponent();
-            _moduloLogic = new ModuloLogic(new ModuloAdapter(context));
+            _docenteCursoLogic = new DocenteCursoLogic(new DocenteCursoAdapter(context));
             _context = context;
         }
-        private void Modulos_Load(object sender, EventArgs e)
+        private void DocenteCursos_Load(object sender, EventArgs e)
         {
-            Singleton.getInstance().DgvActual = this.dgvModulos;
-            Singleton.getInstance().ModuloActual = "Modulos";
+            Singleton.getInstance().DgvActual = this.dgvDocenteCursos;
+            Singleton.getInstance().ModuloActual = "Docentes cursos";
             this.Listar();
         }
         public void Listar()
         {
-            this.dgvModulos.AutoGenerateColumns = false;
-            this.dgvModulos.DataSource = _moduloLogic.GetAll();
+            this.dgvDocenteCursos.DataSource = _docenteCursoLogic.GetAsignacionesFormateadas();
+            this.dgvDocenteCursos.AutoGenerateColumns = false;
         }
         private void btnActualizar_Click(object sender, EventArgs e)
         {
@@ -44,17 +44,17 @@ namespace UI.Desktop
         }
         private void tsbNuevo_Click(object sender, EventArgs e)
         {
-            ModuloDesktop formModulo = new ModuloDesktop(ApplicationForm.ModoForm.Alta, _context);
-            formModulo.ShowDialog();
+            DocenteCursoDesktop formDocenteCurso = new DocenteCursoDesktop(ApplicationForm.ModoForm.Alta, _context);
+            formDocenteCurso.ShowDialog();
             this.Listar();
         }
         private void tsbEditar_Click(object sender, EventArgs e)
         {
-            if (this.dgvModulos.SelectedRows.Count > 0)
+            if (this.dgvDocenteCursos.SelectedRows.Count > 0)
             {
-                int ID = ((Business.Entities.Modulo)this.dgvModulos.SelectedRows[0].DataBoundItem).ID;
-                ModuloDesktop formModulo = new ModuloDesktop(ID, ApplicationForm.ModoForm.Modificacion, _context);
-                formModulo.ShowDialog();
+                int ID = (int)this.dgvDocenteCursos.SelectedRows[0].Cells[0].Value;
+                DocenteCursoDesktop formDocenteCurso = new DocenteCursoDesktop(ID, ApplicationForm.ModoForm.Modificacion, _context);
+                formDocenteCurso.ShowDialog();
                 this.Listar();
             }
             else
@@ -64,11 +64,11 @@ namespace UI.Desktop
         }
         private void tsbEliminar_Click(object sender, EventArgs e)
         {
-            if (this.dgvModulos.SelectedRows.Count > 0)
+            if (this.dgvDocenteCursos.SelectedRows.Count > 0)
             {
-                int ID = ((Business.Entities.Modulo)this.dgvModulos.SelectedRows[0].DataBoundItem).ID;
-                ModuloDesktop formModulo = new ModuloDesktop(ID, ApplicationForm.ModoForm.Baja, _context);
-                formModulo.ShowDialog();
+                int ID = (int)this.dgvDocenteCursos.SelectedRows[0].Cells[0].Value;
+                DocenteCursoDesktop formDocenteCurso = new DocenteCursoDesktop(ID, ApplicationForm.ModoForm.Baja, _context);
+                formDocenteCurso.ShowDialog();
                 this.Listar();
             }
             else

@@ -33,7 +33,6 @@ namespace UI.Desktop
             this.tscModulos = new System.Windows.Forms.ToolStripContainer();
             this.tlModulos = new System.Windows.Forms.TableLayoutPanel();
             this.btnActualizar = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
             this.dgvModulos = new System.Windows.Forms.DataGridView();
             this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tsModulos = new System.Windows.Forms.ToolStrip();
@@ -72,9 +71,8 @@ namespace UI.Desktop
             this.tlModulos.ColumnCount = 2;
             this.tlModulos.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlModulos.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tlModulos.Controls.Add(this.btnActualizar, 0, 1);
-            this.tlModulos.Controls.Add(this.btnSalir, 1, 1);
             this.tlModulos.Controls.Add(this.dgvModulos, 0, 0);
+            this.tlModulos.Controls.Add(this.btnActualizar, 1, 1);
             this.tlModulos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlModulos.Location = new System.Drawing.Point(0, 0);
             this.tlModulos.Name = "tlModulos";
@@ -87,23 +85,13 @@ namespace UI.Desktop
             // btnActualizar
             // 
             this.btnActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnActualizar.Location = new System.Drawing.Point(748, 399);
+            this.btnActualizar.Location = new System.Drawing.Point(829, 399);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(75, 23);
             this.btnActualizar.TabIndex = 1;
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = true;
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Location = new System.Drawing.Point(829, 399);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(75, 23);
-            this.btnSalir.TabIndex = 2;
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // dgvModulos
             // 
@@ -136,7 +124,7 @@ namespace UI.Desktop
             this.tsbEliminar});
             this.tsModulos.Location = new System.Drawing.Point(3, 0);
             this.tsModulos.Name = "tsModulos";
-            this.tsModulos.Size = new System.Drawing.Size(103, 25);
+            this.tsModulos.Size = new System.Drawing.Size(72, 25);
             this.tsModulos.TabIndex = 0;
             this.tsModulos.Text = "toolStrip1";
             // 
@@ -201,7 +189,6 @@ namespace UI.Desktop
         private System.Windows.Forms.TableLayoutPanel tlModulos;
         private System.Windows.Forms.DataGridView dgvModulos;
         private System.Windows.Forms.Button btnActualizar;
-        private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.ToolStrip tsModulos;
         private System.Windows.Forms.ToolStripButton tsbNuevo;
         private System.Windows.Forms.ToolStripButton tsbEditar;

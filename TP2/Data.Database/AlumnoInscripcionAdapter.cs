@@ -135,8 +135,30 @@ namespace Data.Database
             {
                 Exception ExceptionManejada = new Exception("Error al recuperar inscripciones formateadas", e);
                 throw ExceptionManejada;
+            }            
+        }
+        public List<Object> GetEstadoAcademico(int idAlumno)
+        {
+            try
+            {
+                List<AlumnoInscripcion> inscripciones = _context.AlumnoInscripciones.Where(i => i.IDAlumno == idAlumno).ToList();
+                var consulta = from insc in inscripciones
+                               join m in new MateriaAdapter(_context).GetAll()
+                               on insc.Curso.IDMateria equals m.ID
+                               select new
+                               {
+                                   Materia = m.Descripcion,
+                                   Condicion = insc.Condicion,
+                                   Nota = insc.Nota
+                               };
+                return consulta.ToList<Object>();
             }
-            
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar inscripciones formateadas", e);
+                throw ExceptionManejada;
+            }
+
         }
     }
 }

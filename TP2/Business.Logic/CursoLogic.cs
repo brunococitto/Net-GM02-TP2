@@ -23,6 +23,10 @@ namespace Business.Logic
         {
             return CursoData.GetOne(id);
         }
+        public List<Curso> GetCursosProfesor(int idProfesor)
+        {
+            return CursoData.GetCursosProfesor(idProfesor);
+        }
         public void Delete(int id)
         {
             CursoData.Delete(id);

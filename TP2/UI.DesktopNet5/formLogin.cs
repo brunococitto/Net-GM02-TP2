@@ -16,17 +16,19 @@ namespace UI.Desktop
     public partial class formLogin : Form
     {
         private readonly UsuarioLogic _usuarioLogic;
-        public Boolean login = false;
+        private readonly PersonaLogic _personaLogic;
         public formLogin(AcademyContext context)
         {
             InitializeComponent();
             _usuarioLogic = new UsuarioLogic(new UsuarioAdapter(context));
+            _personaLogic = new PersonaLogic(new PersonaAdapter(context));
         }
         private void btnIngresar_Click(object sender, EventArgs e)
         {
             Usuario usr = _usuarioLogic.Login(this.txtUsuario.Text, this.txtPass.Text);
             if (usr != null)
             {
+                Singleton.setInstance(_personaLogic.GetOne(usr.IDPersona), usr);
                 this.DialogResult = DialogResult.OK;
             }
             else
@@ -37,7 +39,7 @@ namespace UI.Desktop
         }
         private void lnkOlvidaPass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            MessageBox.Show("Es Ud. un usuario muy descuidado, haga memoria", "Olvidé mi contraseña",
+            MessageBox.Show("Solicite al administrador que cambie su clave", "Olvidé mi contraseña",
             MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
     }

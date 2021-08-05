@@ -27,6 +27,10 @@ namespace Business.Logic
         {
             return InscripcionData.GetInscripcionesFormateadas();
         }
+        public List<Object> GetEstadoAcademico(int idAlumno)
+        {
+            return InscripcionData.GetEstadoAcademico(idAlumno);
+        }
         public AlumnoInscripcion GetOne(int id)
         {
             return InscripcionData.GetOne(id);

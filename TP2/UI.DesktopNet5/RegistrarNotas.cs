@@ -29,14 +29,15 @@ namespace UI.Desktop
         }
         private void RegistrarNotas_Load(object sender, EventArgs e)
         {
+            Singleton.getInstance().DgvActual = this.dgvRegistrarNotas;
+            Singleton.getInstance().ModuloActual = "Notas";
             this.gbModificarInscripcion.Enabled = false;
             this.ListarCursos();
         }
         public void ListarCursos()
         {
-            // Si es profe que solo cargue los cursos de ese profe
-            // Si es administrativo que cargue todos
-            List<Curso> cursos = _cursoLogic.GetAll();
+            // Solo cargo los cursos del profe logueado
+            List<Curso> cursos = _cursoLogic.GetCursosProfesor(Singleton.getInstance().PersonaLogged.ID);
             cbCursos.DataSource = cursos;
             cbCursos.SelectedIndex = 0;
             Listar();

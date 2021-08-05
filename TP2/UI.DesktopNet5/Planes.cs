@@ -27,6 +27,8 @@ namespace UI.Desktop
         }
         private void Planes_Load(object sender, EventArgs e)
         {
+            Singleton.getInstance().DgvActual = this.dgvPlanes;
+            Singleton.getInstance().ModuloActual = "Planes";
             this.Listar();
         }
         public void Listar()
