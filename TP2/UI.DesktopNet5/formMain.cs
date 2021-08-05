@@ -13,7 +13,6 @@ using Business.Logic;
 using Data.Database;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
-using iTextSharp.text.html.simpleparser;
 
 namespace UI.Desktop
 {
@@ -176,8 +175,7 @@ namespace UI.Desktop
                     {
                         try
                         {
-                            
-                            PdfPTable pdfTable = new PdfPTable(Singleton.getInstance().DgvActual.Columns.Count);
+                            PdfPTable pdfTable = new PdfPTable(Singleton.getInstance().DgvActual.Columns.Count - 1);
                             pdfTable.DefaultCell.Padding = 3;
                             pdfTable.WidthPercentage = 100;
                             pdfTable.HorizontalAlignment = Element.ALIGN_LEFT;
@@ -195,7 +193,10 @@ namespace UI.Desktop
                             {
                                 foreach (DataGridViewCell cell in row.Cells)
                                 {
-                                    pdfTable.AddCell(cell.Value.ToString());
+                                    if (cell.Displayed == true)
+                                    {
+                                        pdfTable.AddCell(cell.Value.ToString());
+                                    }
                                 }
                             }
 
