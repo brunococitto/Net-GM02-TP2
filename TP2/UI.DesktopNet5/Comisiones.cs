@@ -27,6 +27,8 @@ namespace UI.Desktop
         }
         private void Comisiones_Load(object sender, EventArgs e)
         {
+            Singleton.getInstance().DgvActual = this.dgvComisiones;
+            Singleton.getInstance().ModuloActual = "Comisiones";
             this.Listar();
         }
         public void Listar()

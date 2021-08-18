@@ -40,6 +40,10 @@ namespace Data.Database.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("IDAlumno");
+
+                    b.HasIndex("IDCurso");
+
                     b.ToTable("AlumnoInscripciones");
                 });
 
@@ -116,6 +120,10 @@ namespace Data.Database.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("IDCurso");
+
+                    b.HasIndex("IDDocente");
 
                     b.ToTable("DocentesCursos");
                 });
@@ -292,6 +300,44 @@ namespace Data.Database.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("Business.Entities.AlumnoInscripcion", b =>
+                {
+                    b.HasOne("Business.Entities.Persona", "Persona")
+                        .WithMany()
+                        .HasForeignKey("IDAlumno")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Business.Entities.Curso", "Curso")
+                        .WithMany()
+                        .HasForeignKey("IDCurso")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Curso");
+
+                    b.Navigation("Persona");
+                });
+
+            modelBuilder.Entity("Business.Entities.DocenteCurso", b =>
+                {
+                    b.HasOne("Business.Entities.Curso", "Curso")
+                        .WithMany()
+                        .HasForeignKey("IDCurso")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Business.Entities.Persona", "Persona")
+                        .WithMany()
+                        .HasForeignKey("IDDocente")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Curso");
+
+                    b.Navigation("Persona");
                 });
 #pragma warning restore 612, 618
         }

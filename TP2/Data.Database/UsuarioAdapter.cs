@@ -23,8 +23,8 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdUsuarios = new SqlCommand("select * from usuarios", sqlConn);
-                SqlDataReader drUsuarios = cmdUsuarios.ExecuteReader();
+                SqlCommand sqlUsuarios = new SqlCommand("select * from usuarios", sqlConn);
+                SqlDataReader drUsuarios = sqlUsuarios.ExecuteReader();
                 while (drUsuarios.Read())
                 {
                     Usuario usr = new Usuario();
@@ -55,9 +55,9 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdUsuarios = new SqlCommand("select * from usuarios where ID = @id", sqlConn);
-                cmdUsuarios.Parameters.Add("@id", SqlDbType.Int).Value = ID;
-                SqlDataReader drUsuarios = cmdUsuarios.ExecuteReader();
+                SqlCommand sqlUsuarios = new SqlCommand("select * from usuarios where ID = @id", sqlConn);
+                sqlUsuarios.Parameters.Add("@id", SqlDbType.Int).Value = ID;
+                SqlDataReader drUsuarios = sqlUsuarios.ExecuteReader();
                 if (drUsuarios.Read())
                 {
                     usr.ID = (int)drUsuarios["ID"];
@@ -86,17 +86,17 @@ namespace Data.Database
             {
                 usuario.Clave = hashearClave(usuario.Clave);
                 this.OpenConnection();
-                SqlCommand cmdSave = new SqlCommand(
+                SqlCommand sqlSave = new SqlCommand(
                     "UPDATE usuarios SET nombre_usuario = @NombreUsuario, clave = @Clave, " +
                     "habilitado = @Habilitado, id_persona = @IDPersona " +
                     "WHERE ID = @ID"
                     , sqlConn);
-                cmdSave.Parameters.Add("@ID", SqlDbType.Int).Value = usuario.ID;
-                cmdSave.Parameters.Add("@NombreUsuario", SqlDbType.VarChar, 50).Value = usuario.NombreUsuario;
-                cmdSave.Parameters.Add("@Clave", SqlDbType.VarChar, 50).Value = usuario.Clave;
-                cmdSave.Parameters.Add("@Habilitado", SqlDbType.Bit).Value = usuario.Habilitado;
-                cmdSave.Parameters.Add("@IDPersona", SqlDbType.Int).Value = usuario.IDPersona;
-                cmdSave.ExecuteNonQuery();
+                sqlSave.Parameters.Add("@ID", SqlDbType.Int).Value = usuario.ID;
+                sqlSave.Parameters.Add("@NombreUsuario", SqlDbType.VarChar, 50).Value = usuario.NombreUsuario;
+                sqlSave.Parameters.Add("@Clave", SqlDbType.VarChar, 50).Value = usuario.Clave;
+                sqlSave.Parameters.Add("@Habilitado", SqlDbType.Bit).Value = usuario.Habilitado;
+                sqlSave.Parameters.Add("@IDPersona", SqlDbType.Int).Value = usuario.IDPersona;
+                sqlSave.ExecuteNonQuery();
             }
             catch (Exception e)
             {
@@ -114,16 +114,16 @@ namespace Data.Database
             {
                 usuario.Clave = hashearClave(usuario.Clave);
                 this.OpenConnection();
-                SqlCommand cmdSave = new SqlCommand(
+                SqlCommand sqlSave = new SqlCommand(
                     "INSERT INTO usuarios(nombre_usuario, clave, habilitado, id_persona) " +
                     "VALUES (@NombreUsuario, @Clave, @Habilitado, @IDPersona) " +
                     "SELECT @@identity"
                     , sqlConn);
-                cmdSave.Parameters.Add("@NombreUsuario", SqlDbType.VarChar, 50).Value = usuario.NombreUsuario;
-                cmdSave.Parameters.Add("@Clave", SqlDbType.VarChar, 50).Value = usuario.Clave;
-                cmdSave.Parameters.Add("@Habilitado", SqlDbType.Bit).Value = usuario.Habilitado;
-                cmdSave.Parameters.Add("@IDPersona", SqlDbType.Int).Value = usuario.IDPersona;
-                usuario.ID = Decimal.ToInt32((decimal)cmdSave.ExecuteScalar());
+                sqlSave.Parameters.Add("@NombreUsuario", SqlDbType.VarChar, 50).Value = usuario.NombreUsuario;
+                sqlSave.Parameters.Add("@Clave", SqlDbType.VarChar, 50).Value = usuario.Clave;
+                sqlSave.Parameters.Add("@Habilitado", SqlDbType.Bit).Value = usuario.Habilitado;
+                sqlSave.Parameters.Add("@IDPersona", SqlDbType.Int).Value = usuario.IDPersona;
+                usuario.ID = Decimal.ToInt32((decimal)sqlSave.ExecuteScalar());
             }
             catch (Exception e)
             {
@@ -141,9 +141,9 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdDelete = new SqlCommand("delete usuarios where ID = @id", sqlConn);
-                cmdDelete.Parameters.Add("@id", SqlDbType.Int).Value = ID;
-                cmdDelete.ExecuteNonQuery();
+                SqlCommand sqlDelete = new SqlCommand("delete usuarios where ID = @id", sqlConn);
+                sqlDelete.Parameters.Add("@id", SqlDbType.Int).Value = ID;
+                sqlDelete.ExecuteNonQuery();
             }
             catch (Exception e)
             {

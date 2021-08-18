@@ -8,64 +8,64 @@ namespace Business.Entities
 {
     public class ModuloUsuario : BusinessEntity
     {
-        private int _IdUsuario;
-        private int _IdModulo;
-        private bool _PermiteAlta;
-        private bool _PermiteBaja;
-        private bool _PermiteConsulta;
+        private int _idUsuario;
+        private int _idModulo;
+        private bool _permiteAlta;
+        private bool _permiteBaja;
+        private bool _permiteConsulta;
         public int IdUsuario
         {
             get
             {
-                return _IdUsuario;
+                return _idUsuario;
             }
             set
             {
-                _IdUsuario = value;
+                _idUsuario = value;
             }
         }
         public int IdModulo
         {
             get
             {
-                return _IdModulo;
+                return _idModulo;
             }
             set
             {
-                _IdModulo = value;
+                _idModulo = value;
             }
         }
         public bool PermiteAlta
         {
             get
             {
-                return _PermiteAlta;
+                return _permiteAlta;
             }
             set
             {
-                _PermiteAlta = value;
+                _permiteAlta = value;
             }
         }
         public bool PermiteBaja
         {
             get
             {
-                return _PermiteBaja;
+                return _permiteBaja;
             }
             set
             {
-                _PermiteBaja = value;
+                _permiteBaja = value;
             }
         }
         public bool PermiteConsulta
         {
             get
             {
-                return _PermiteConsulta;
+                return _permiteConsulta;
             }
             set
             {
-                _PermiteConsulta = value;
+                _permiteConsulta = value;
             }
         }
     }

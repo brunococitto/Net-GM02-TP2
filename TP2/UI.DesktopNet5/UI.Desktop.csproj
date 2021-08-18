@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FastMember" Version="1.5.0" />
+    <PackageReference Include="iTextSharp" Version="5.5.13.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -25,7 +25,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="RegistrarNotaDesktop.cs">
+    <Compile Update="EstadoAcademico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DocenteCursoDesktop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DocenteCursos.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="RegistrarNotas.cs">

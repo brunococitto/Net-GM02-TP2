@@ -23,6 +23,10 @@ namespace Business.Logic
         {
             return PersonaData.GetOne(id);
         }
+        public Persona GetOneConLegajo(int legajo)
+        {
+            return PersonaData.GetOneConLegajo(legajo);
+        }
         public void Delete(int id)
         {
             PersonaData.Delete(id);

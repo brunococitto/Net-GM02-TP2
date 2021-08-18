@@ -9,20 +9,20 @@ namespace Business.Entities
 {
     public class Usuario : BusinessEntity
     {
-        private string _NombreUsuario;
-        private string _Clave;
-        private bool _Habilitado;
-        private int _IDPersona;
+        private string _nombreUsuario;
+        private string _clave;
+        private bool _habilitado;
+        private int _idPersona;
         [Column("nombre_usuario")]
         public string NombreUsuario
         {
             get
             {
-                return _NombreUsuario;
+                return _nombreUsuario;
             }
             set
             {
-                _NombreUsuario = value;
+                _nombreUsuario = value;
             }
         }
         [Column("clave")]
@@ -30,11 +30,11 @@ namespace Business.Entities
         {
             get
             {
-                return _Clave;
+                return _clave;
             }
             set
             {
-                _Clave = value;
+                _clave = value;
             }
         }
         [Column("habilitado")]
@@ -42,11 +42,11 @@ namespace Business.Entities
         {
             get
             {
-                return _Habilitado;
+                return _habilitado;
             }
             set
             {
-                _Habilitado = value;
+                _habilitado = value;
             }
         }
         [Column("id_persona")]
@@ -54,11 +54,11 @@ namespace Business.Entities
         {
             get
             {
-                return _IDPersona;
+                return _idPersona;
             }
             set
             {
-                _IDPersona = value;
+                _idPersona = value;
             }
         }
     }

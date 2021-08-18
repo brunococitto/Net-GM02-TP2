@@ -27,6 +27,8 @@ namespace UI.Desktop
         }
         private void Personas_Load(object sender, EventArgs e)
         {
+            Singleton.getInstance().DgvActual = this.dgvPersonas;
+            Singleton.getInstance().ModuloActual = "Personas";
             this.Listar();
         }
         public void Listar()

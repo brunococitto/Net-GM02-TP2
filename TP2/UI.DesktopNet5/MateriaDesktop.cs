@@ -115,13 +115,25 @@ namespace UI.Desktop
         }
         public override bool Validar()
         {
-            if (string.IsNullOrWhiteSpace(this.txtDescripcion.Text))
+
+            try 
             {
-                Notificar("Error", "Debe completar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                Validaciones.ValidarNulo(this.txtDescripcion.Text, "descripcion");
+                Validaciones.ValidarNulo(this.txtHorasSemanales.Text, "horas semanales");
+                Validaciones.ValidarNulo(this.txtHorasTotales.Text, "horas totales");
+                Validaciones.ValidarLetras(this.txtDescripcion.Text, "descripcion");
+                Validaciones.ValidarNumero(this.txtHorasSemanales.Text, "horas semanales");
+                Validaciones.ValidarNumero(this.txtHorasTotales.Text, "horas totales");
+                return true;
             }
-            else { return true; }
+            catch(Exception e) 
+            {
+                MessageBox.Show(e.Message);
+                return false;
+
+            }
         }
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             switch (Modos)

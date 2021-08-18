@@ -14,55 +14,54 @@ using System.Globalization;
 
 namespace UI.Desktop
 {
-    public partial class RegistrarNotaDesktop : ApplicationForm
+    public partial class DocenteCursoDesktop : ApplicationForm
     {
-        private readonly AlumnoInscripcionLogic _alumnoInscripcionLogic;
+        private readonly DocenteCursoLogic _docenteCursoLogic;
         private readonly CursoLogic _cursoLogic;
         private readonly PersonaLogic _personaLogic;
-        private AlumnoInscripcion AlumnoInscripcionActual { set; get; }
-        public RegistrarNotaDesktop(AcademyContext context)
+        private DocenteCurso DocenteCursoActual { set; get; }
+        public DocenteCursoDesktop(AcademyContext context)
         {
             InitializeComponent();
-            _alumnoInscripcionLogic = new AlumnoInscripcionLogic(new AlumnoInscripcionAdapter(context));
+            _docenteCursoLogic = new DocenteCursoLogic(new DocenteCursoAdapter(context));
             _cursoLogic = new CursoLogic(new CursoAdapter(context));
             _personaLogic = new PersonaLogic(new PersonaAdapter(context));
         }
-        public RegistrarNotaDesktop(ModoForm modo, AcademyContext context) : this(context)
+        public DocenteCursoDesktop(ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
             // No te deja hacer nada hasta que no introduzcas un legajo válido, como en usuario
-            this.txtCondicion.ReadOnly = true;
-            this.txtNota.ReadOnly = true;
-            this.cbCurso.Enabled = false;
+            this.cbCurso.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.cbCargo.DropDownStyle = ComboBoxStyle.DropDownList;
             // Cargo los cursos para mostrarlos en el combobox
             List<Curso> cursos = _cursoLogic.GetAll();
             this.cbCurso.DataSource = cursos;
             // selecciono el curso de la posicion 0 como para seleccionar algo
             this.cbCurso.SelectedIndex = 0;
+            // Cargos
+            this.cbCargo.DataSource = Enum.GetNames(typeof(Business.Entities.DocenteCurso.TiposCargo));
         }
-        public RegistrarNotaDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
+        public DocenteCursoDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            AlumnoInscripcionActual = _alumnoInscripcionLogic.GetOne(ID);
+            DocenteCursoActual = _docenteCursoLogic.GetOne(ID);
             MapearDeDatos();
         }
         public override void MapearDeDatos()
         {
-            this.txtID.Text = this.AlumnoInscripcionActual.ID.ToString();
-            this.txtCondicion.Text = this.AlumnoInscripcionActual.Condicion;
-            this.txtNota.Text = this.AlumnoInscripcionActual.Nota.ToString();
-            // Acá cuando cargo la inscripcion tengo que buscar el alumno asignado
-            Persona alumnoActual = _personaLogic.GetOne(this.AlumnoInscripcionActual.IDAlumno);
-            this.txtLegajo.Text = alumnoActual.Legajo.ToString();
-            this.txtNombre.Text = alumnoActual.Nombre;
-            this.txtApellido.Text = alumnoActual.Apellido;
-            // Acá cuando cargo la inscripcion tengo que buscar el curso asignado
-            Curso cursoActual = _cursoLogic.GetOne(this.AlumnoInscripcionActual.IDCurso);
-            // A su vez tengo que cargar los otros cursos por si quiero seleccionar otro
+            this.txtID.Text = this.DocenteCursoActual.ID.ToString();
+            this.txtLegajo.Text = DocenteCursoActual.Persona.Legajo.ToString();
+            this.txtNombre.Text = DocenteCursoActual.Persona.Nombre;
+            this.txtApellido.Text = DocenteCursoActual.Persona.Apellido;
+            // Tengo que cargar los cursos por si quiero seleccionar otro
             // Y seleccionar el actual
             List<Curso> cursos = _cursoLogic.GetAll();
             this.cbCurso.DataSource = cursos;
-            this.cbCurso.SelectedIndex = cbCurso.FindStringExact(cursoActual.Descripcion);
+            this.cbCurso.SelectedIndex = cbCurso.FindStringExact(DocenteCursoActual.Curso.Descripcion);
+            // Cargo
+            this.cbCargo.DataSource = Enum.GetNames(typeof(Business.Entities.DocenteCurso.TiposCargo));
+            // Tengo que seleccionar del combo de cargos el cargo del docente
+            this.cbCargo.SelectedIndex = cbCargo.FindStringExact(Enum.GetName(DocenteCursoActual.Cargo));
             switch (this.Modos)
             {
                 case ModoForm.Alta:
@@ -73,6 +72,9 @@ namespace UI.Desktop
                     break;
                 case ModoForm.Baja:
                     this.btnAceptar.Text = "Eliminar";
+                    this.txtLegajo.Enabled = false;
+                    this.cbCurso.Enabled = false;
+                    this.cbCargo.Enabled = false;
                     break;
                 case ModoForm.Consulta:
                     this.btnAceptar.Text = "Aceptar";
@@ -83,70 +85,61 @@ namespace UI.Desktop
         {
             if (Modos == ModoForm.Alta)
             {
-                AlumnoInscripcionActual = new AlumnoInscripcion();
+                DocenteCursoActual = new DocenteCurso();
             }
-            AlumnoInscripcionActual.Condicion = this.txtCondicion.Text;
-            AlumnoInscripcionActual.Nota = Int32.Parse(this.txtNota.Text);
-            AlumnoInscripcionActual.IDCurso = (int)this.cbCurso.SelectedValue;
-            var alumno = from p in _personaLogic.GetAll()
-                           where p.Legajo == Int32.Parse(this.txtLegajo.Text)
-                           select p;
-            AlumnoInscripcionActual.IDAlumno = (int)alumno.ToList()[0].ID;
+            DocenteCursoActual.IDCurso = (int)this.cbCurso.SelectedValue;
+            DocenteCursoActual.IDDocente= _personaLogic.GetOneConLegajo(Int32.Parse(this.txtLegajo.Text)).ID;
+            DocenteCursoActual.Cargo = (Business.Entities.DocenteCurso.TiposCargo)Enum.Parse(typeof(Business.Entities.DocenteCurso.TiposCargo), cbCargo.SelectedItem.ToString());
             switch (Modos)
             {
                 case ModoForm.Alta:
-                    AlumnoInscripcionActual.State = BusinessEntity.States.New;
+                    DocenteCursoActual.State = BusinessEntity.States.New;
                     break;
                 case ModoForm.Modificacion:
-                    AlumnoInscripcionActual.State = BusinessEntity.States.Modified;
+                    DocenteCursoActual.State = BusinessEntity.States.Modified;
                     break;
             }
         }
         public override void GuardarCambios()
         {
             MapearADatos();
-            _alumnoInscripcionLogic.Save(AlumnoInscripcionActual);
+            _docenteCursoLogic.Save(DocenteCursoActual);
         }
         public override bool Validar()
         {
-            if (string.IsNullOrWhiteSpace(this.txtApellido.Text) || string.IsNullOrWhiteSpace(this.txtNombre.Text) || string.IsNullOrWhiteSpace(this.txtLegajo.Text))
+            try
             {
-                Notificar("Error", "Debe completar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Validaciones.ValidarNulo(this.txtLegajo.Text, "legajo");
+                Validaciones.ValidarNumero(this.txtLegajo.Text,"legajo");
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
                 return false;
             }
-            else { return true; }
         }
         private void cargarPersona()
         {
             this.btnAceptar.Enabled = false;
-            this.txtCondicion.ReadOnly = true;
-            this.cbCurso.Enabled = false;
-            this.txtNota.ReadOnly = true;
+            this.cbCurso.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.cbCargo.DropDownStyle = ComboBoxStyle.DropDownList;
             this.txtNombre.Text = "";
             this.txtApellido.Text = "";
-            List<Persona> personas = _personaLogic.GetAll();
             try
             {
-                // Esta validacion tiene q ser q no es vacio y q son solo numeros
-                // Metele regex a este if pa
-                if (this.txtLegajo.Text.Length == 0)
-                {
-                    Exception e = new Exception("Ingrese un legajo.");
-                    throw e;
-                }
-                var persona = (from p in personas
-                               where p.Legajo == Int32.Parse(this.txtLegajo.Text)
-                               select p).ToList();
-                if (persona.Count == 0)
+                Validaciones.ValidarNulo(this.txtLegajo.Text,"legajo");
+                Validaciones.ValidarNumero(this.txtLegajo.Text,"legajo");
+                Persona per = _personaLogic.GetOneConLegajo(Int32.Parse(this.txtLegajo.Text));
+                if (per == null)
                 {
                     Exception e = new Exception("No existe persona para el legajo ingresado.");
                     throw e;
                 }
-                Persona per = _personaLogic.GetOne(persona[0].ID);
-                // Valido que la persona ingresada sea un alumno
-                if (per.TipoPersona != Business.Entities.Persona.TiposPersona.Alumno)
+                // Valido que la persona ingresada sea un profesor
+                if (per.TipoPersona != Business.Entities.Persona.TiposPersona.Profesor)
                 {
-                    Exception e = new Exception("El legajo ingresado no corresponde a un alumno.");
+                    Exception e = new Exception("El legajo ingresado no corresponde a un profesor.");
                     throw e;
                 }
                 // Asigno los datos de la persona a los textbox
@@ -154,9 +147,8 @@ namespace UI.Desktop
                 this.txtApellido.Text = per.Apellido;
                 // Una vez que cargo la persona, vuelvo a habilitar el resto de los elementos
                 this.btnAceptar.Enabled = true;
-                this.txtCondicion.ReadOnly = false;
-                this.cbCurso.Enabled = true;
-                this.txtNota.ReadOnly = false;
+                this.cbCurso.DropDownStyle = ComboBoxStyle.DropDown;
+                this.cbCargo.DropDownStyle = ComboBoxStyle.DropDown;
             }
             catch (Exception e)
             {
@@ -197,9 +189,8 @@ namespace UI.Desktop
         }
         public virtual void Eliminar()
         {
-            _personaLogic.Delete(AlumnoInscripcionActual.ID);
+            _docenteCursoLogic.Delete(DocenteCursoActual.ID);
         }
-
         private void txtLegajo_Leave(object sender, EventArgs e)
         {
             cargarPersona();

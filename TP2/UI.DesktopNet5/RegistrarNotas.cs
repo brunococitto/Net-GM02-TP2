@@ -29,21 +29,30 @@ namespace UI.Desktop
         }
         private void RegistrarNotas_Load(object sender, EventArgs e)
         {
+            Singleton.getInstance().DgvActual = this.dgvRegistrarNotas;
+            Singleton.getInstance().ModuloActual = "Notas";
             this.gbModificarInscripcion.Enabled = false;
             this.ListarCursos();
         }
         public void ListarCursos()
         {
-            //  Contemplar la posibilidad de que n
-            List<Curso> cursos = _cursoLogic.GetAll();
+            // Solo cargo los cursos del profe logueado
+            List<Curso> cursos = _cursoLogic.GetCursosProfesor(Singleton.getInstance().PersonaLogged.ID);
             cbCursos.DataSource = cursos;
-            cbCursos.SelectedIndex = 0;
-            Listar();
+            if (cursos.Count > 0 )
+            {
+                cbCursos.SelectedIndex = 0;
+                Listar();
+            }
+            else
+            {
+                MessageBox.Show("No hay cursos registrados para el profesor.");
+            }
         }
         public void Listar()
         {
             // Pido las alumnoInscripciones
-            List<AlumnoInscripcion> alumnoInscripciones = _alumnoInscripcionLogic.GetAll();
+            List<AlumnoInscripcion> alumnoInscripciones = _alumnoInscripcionLogic.GetInscripcionesCurso((int)this.cbCursos.SelectedValue);
             // Pido las personas
             List<Persona> personas = _personaLogic.GetAll();
             // Consulta para dejar la descripción del plan
@@ -51,7 +60,6 @@ namespace UI.Desktop
                             from insc in alumnoInscripciones
                             join per in personas
                             on insc.IDAlumno equals per.ID
-                            where insc.IDCurso == (int)this.cbCursos.SelectedValue
                             select new
                             {
                                 ID = insc.ID,
@@ -105,6 +113,11 @@ namespace UI.Desktop
             this.txtNota.Text = "";
             this.gbModificarInscripcion.Enabled = false;
             this.Listar();
+        }
+
+        private void dgvRegistrarNotas_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.gbModificarInscripcion.Enabled = false;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Business.Entities
 {
@@ -14,40 +15,66 @@ namespace Business.Entities
             Auxiliar,
             Suplente
         }
-        private TiposCargo _Cargo;
-        private int _IDCurso;
-        private int _IDDocente;
+        private TiposCargo _cargo;
+        private int _idCurso;
+        private int _idDocente;
+        private Persona _persona;
+        private Curso _curso;
+        public Persona Persona
+        {
+            get
+            {
+                return _persona;
+            }
+            set
+            {
+                _persona = value;
+            }
+        }
+        public Curso Curso
+        {
+            get
+            {
+                return _curso;
+            }
+            set
+            {
+                _curso = value;
+            }
+        }
         public TiposCargo Cargo
         {
             get
             {
-                return _Cargo;
+                return _cargo;
             }
             set
             {
-                _Cargo = value;
+                _cargo = value;
             }
         }
+        [ForeignKey("Curso")]
         public int IDCurso
         {
             get
             {
-                return _IDCurso;
+                return _idCurso;
             }
             set
             {
-                _IDCurso = value;
+                _idCurso = value;
             }
         }
+        [ForeignKey("Persona")]
         public int IDDocente
         {
             get
             {
-                return _IDDocente;
+                return _idDocente;
             }
             set
             {
-                _IDDocente = value;
+                _idDocente = value;
             }
         }
     }

@@ -9,18 +9,18 @@ namespace Business.Entities
 {
     public class Plan : BusinessEntity
     {
-        private string _Descripcion;
-        private int _IDEspecialidad;
+        private string _descripcion;
+        private int _idEspecialidad;
         [Column("desc_plan")]
         public string Descripcion
         {
             get
             {
-                return _Descripcion;
+                return _descripcion;
             }
             set
             {
-                _Descripcion = value;
+                _descripcion = value;
             }
         }
         [Column("id_especialidad")]
@@ -28,11 +28,11 @@ namespace Business.Entities
         {
             get
             {
-                return _IDEspecialidad;
+                return _idEspecialidad;
             }
             set
             {
-                _IDEspecialidad = value;
+                _idEspecialidad = value;
             }
         }
     }

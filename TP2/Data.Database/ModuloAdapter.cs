@@ -20,8 +20,8 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdModulos = new SqlCommand("select * from modulos", sqlConn);
-                SqlDataReader drModulos = cmdModulos.ExecuteReader();
+                SqlCommand sqlModulos = new SqlCommand("select * from modulos", sqlConn);
+                SqlDataReader drModulos = sqlModulos.ExecuteReader();
                 while (drModulos.Read())
                 {
                     Modulo mod = new Modulo();
@@ -49,9 +49,9 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdModulos = new SqlCommand("select * from modulos where ID = @id", sqlConn);
-                cmdModulos.Parameters.Add("@id", SqlDbType.Int).Value = ID;
-                SqlDataReader drModulos = cmdModulos.ExecuteReader();
+                SqlCommand sqlModulos = new SqlCommand("select * from modulos where ID = @id", sqlConn);
+                sqlModulos.Parameters.Add("@id", SqlDbType.Int).Value = ID;
+                SqlDataReader drModulos = sqlModulos.ExecuteReader();
                 if (drModulos.Read())
                 {
                     mod.ID = (int)drModulos["ID"];
@@ -76,13 +76,13 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdSave = new SqlCommand(
+                SqlCommand sqlSave = new SqlCommand(
                     "UPDATE modulos SET desc_modulo = @desc_modulo " +
                     "WHERE ID = @id"
                     , sqlConn);
-                cmdSave.Parameters.Add("@id", SqlDbType.Int).Value = modulo.ID;
-                cmdSave.Parameters.Add("@desc_modulo", SqlDbType.VarChar, 50).Value = modulo.Descripcion;
-                cmdSave.ExecuteNonQuery();
+                sqlSave.Parameters.Add("@id", SqlDbType.Int).Value = modulo.ID;
+                sqlSave.Parameters.Add("@desc_modulo", SqlDbType.VarChar, 50).Value = modulo.Descripcion;
+                sqlSave.ExecuteNonQuery();
             }
             catch (Exception e)
             {
@@ -99,13 +99,13 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdSave = new SqlCommand(
+                SqlCommand sqlSave = new SqlCommand(
                     "INSERT INTO modulos(desc_modulo) " +
                     "VALUES (@desc_modulo) " +
                     "SELECT @@identity"
                     , sqlConn);
-                cmdSave.Parameters.Add("@desc_modulo", SqlDbType.VarChar, 50).Value = modulo.Descripcion;
-                modulo.ID = Decimal.ToInt32((decimal)cmdSave.ExecuteScalar());
+                sqlSave.Parameters.Add("@desc_modulo", SqlDbType.VarChar, 50).Value = modulo.Descripcion;
+                modulo.ID = Decimal.ToInt32((decimal)sqlSave.ExecuteScalar());
 
             }
             catch (Exception e)
@@ -124,9 +124,9 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdDelete = new SqlCommand("delete modulos where ID = @id", sqlConn);
-                cmdDelete.Parameters.Add("@id", SqlDbType.Int).Value = ID;
-                cmdDelete.ExecuteNonQuery();
+                SqlCommand sqlDelete = new SqlCommand("delete modulos where ID = @id", sqlConn);
+                sqlDelete.Parameters.Add("@id", SqlDbType.Int).Value = ID;
+                sqlDelete.ExecuteNonQuery();
             }
             catch (Exception e)
             {

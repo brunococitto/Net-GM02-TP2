@@ -1,7 +1,7 @@
 ﻿
 namespace UI.Desktop
 {
-    partial class RegistrarNotaDesktop
+    partial class DocenteCursoDesktop
     {
         /// <summary>
         /// Required designer variable.
@@ -31,20 +31,18 @@ namespace UI.Desktop
         {
             this.lblID = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
-            this.lblCondicion = new System.Windows.Forms.Label();
-            this.lblNota = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
-            this.txtCondicion = new System.Windows.Forms.TextBox();
             this.txtID = new System.Windows.Forms.TextBox();
             this.txtLegajo = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
-            this.txtNota = new System.Windows.Forms.TextBox();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.lblApellido = new System.Windows.Forms.Label();
             this.lblLegajo = new System.Windows.Forms.Label();
             this.lblCurso = new System.Windows.Forms.Label();
             this.cbCurso = new System.Windows.Forms.ComboBox();
+            this.cbCargo = new System.Windows.Forms.ComboBox();
+            this.lblCargo = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblID
@@ -67,26 +65,6 @@ namespace UI.Desktop
             this.lblNombre.TabIndex = 1;
             this.lblNombre.Text = "Nombre";
             // 
-            // lblCondicion
-            // 
-            this.lblCondicion.AutoSize = true;
-            this.lblCondicion.Location = new System.Drawing.Point(9, 73);
-            this.lblCondicion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblCondicion.Name = "lblCondicion";
-            this.lblCondicion.Size = new System.Drawing.Size(62, 15);
-            this.lblCondicion.TabIndex = 2;
-            this.lblCondicion.Text = "Condicion";
-            // 
-            // lblNota
-            // 
-            this.lblNota.AutoSize = true;
-            this.lblNota.Location = new System.Drawing.Point(238, 73);
-            this.lblNota.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblNota.Name = "lblNota";
-            this.lblNota.Size = new System.Drawing.Size(33, 15);
-            this.lblNota.TabIndex = 3;
-            this.lblNota.Text = "Nota";
-            // 
             // txtNombre
             // 
             this.txtNombre.Enabled = false;
@@ -96,14 +74,6 @@ namespace UI.Desktop
             this.txtNombre.ReadOnly = true;
             this.txtNombre.Size = new System.Drawing.Size(133, 23);
             this.txtNombre.TabIndex = 5;
-            // 
-            // txtCondicion
-            // 
-            this.txtCondicion.Location = new System.Drawing.Point(79, 70);
-            this.txtCondicion.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.txtCondicion.Name = "txtCondicion";
-            this.txtCondicion.Size = new System.Drawing.Size(133, 23);
-            this.txtCondicion.TabIndex = 6;
             // 
             // txtID
             // 
@@ -133,14 +103,6 @@ namespace UI.Desktop
             this.txtApellido.ReadOnly = true;
             this.txtApellido.Size = new System.Drawing.Size(131, 23);
             this.txtApellido.TabIndex = 9;
-            // 
-            // txtNota
-            // 
-            this.txtNota.Location = new System.Drawing.Point(285, 70);
-            this.txtNota.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.txtNota.Name = "txtNota";
-            this.txtNota.Size = new System.Drawing.Size(131, 23);
-            this.txtNota.TabIndex = 7;
             // 
             // btnAceptar
             // 
@@ -187,7 +149,7 @@ namespace UI.Desktop
             // lblCurso
             // 
             this.lblCurso.AutoSize = true;
-            this.lblCurso.Location = new System.Drawing.Point(33, 102);
+            this.lblCurso.Location = new System.Drawing.Point(33, 73);
             this.lblCurso.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurso.Name = "lblCurso";
             this.lblCurso.Size = new System.Drawing.Size(38, 15);
@@ -200,23 +162,43 @@ namespace UI.Desktop
             this.cbCurso.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbCurso.DisplayMember = "Descripcion";
             this.cbCurso.FormattingEnabled = true;
-            this.cbCurso.Location = new System.Drawing.Point(80, 99);
+            this.cbCurso.Location = new System.Drawing.Point(79, 70);
             this.cbCurso.Name = "cbCurso";
-            this.cbCurso.Size = new System.Drawing.Size(336, 23);
+            this.cbCurso.Size = new System.Drawing.Size(337, 23);
             this.cbCurso.TabIndex = 22;
             this.cbCurso.ValueMember = "ID";
             // 
-            // RegistrarNotaDesktop
+            // cbCargo
+            // 
+            this.cbCargo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbCargo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbCargo.DisplayMember = "Descripcion";
+            this.cbCargo.FormattingEnabled = true;
+            this.cbCargo.Location = new System.Drawing.Point(79, 99);
+            this.cbCargo.Name = "cbCargo";
+            this.cbCargo.Size = new System.Drawing.Size(337, 23);
+            this.cbCargo.TabIndex = 23;
+            this.cbCargo.ValueMember = "ID";
+            // 
+            // lblCargo
+            // 
+            this.lblCargo.AutoSize = true;
+            this.lblCargo.Location = new System.Drawing.Point(32, 102);
+            this.lblCargo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCargo.Name = "lblCargo";
+            this.lblCargo.Size = new System.Drawing.Size(39, 15);
+            this.lblCargo.TabIndex = 24;
+            this.lblCargo.Text = "Cargo";
+            // 
+            // DocenteCursoDesktop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 172);
+            this.ClientSize = new System.Drawing.Size(434, 175);
+            this.Controls.Add(this.lblCargo);
+            this.Controls.Add(this.cbCargo);
             this.Controls.Add(this.cbCurso);
             this.Controls.Add(this.lblCurso);
-            this.Controls.Add(this.txtNota);
-            this.Controls.Add(this.txtCondicion);
-            this.Controls.Add(this.lblNota);
-            this.Controls.Add(this.lblCondicion);
             this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.lblID);
             this.Controls.Add(this.btnCancelar);
@@ -231,8 +213,8 @@ namespace UI.Desktop
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "RegistrarNotaDesktop";
-            this.Text = "RegistrarNota";
+            this.Name = "DocenteCursoDesktop";
+            this.Text = "DocenteCurso";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -241,20 +223,18 @@ namespace UI.Desktop
         #endregion
         private System.Windows.Forms.Label lblID;
         private System.Windows.Forms.Label lblNombre;
-        private System.Windows.Forms.Label lblCondicion;
-        private System.Windows.Forms.Label lblNota;
         private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.TextBox txtCondicion;
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.TextBox txtLegajo;
         private System.Windows.Forms.TextBox txtApellido;
-        private System.Windows.Forms.TextBox txtNota;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Label lblApellido;
         private System.Windows.Forms.Label lblLegajo;
         private System.Windows.Forms.Label lblCurso;
         private System.Windows.Forms.ComboBox cbCurso;
+        private System.Windows.Forms.ComboBox cbCargo;
+        private System.Windows.Forms.Label lblCargo;
     }
 }
 

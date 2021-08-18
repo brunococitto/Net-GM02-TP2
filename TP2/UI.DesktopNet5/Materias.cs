@@ -27,6 +27,8 @@ namespace UI.Desktop
         }
         private void Materias_Load(object sender, EventArgs e)
         {
+            Singleton.getInstance().DgvActual = this.dgvMaterias;
+            Singleton.getInstance().ModuloActual = "Materias";
             this.Listar();
         }
         public void Listar()

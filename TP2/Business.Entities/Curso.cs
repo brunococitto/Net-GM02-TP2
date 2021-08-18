@@ -9,21 +9,21 @@ namespace Business.Entities
 {
     public class Curso : BusinessEntity
     {
-        private int _AnoCalendario;
-        private int _Cupo;
-        private string _Descripcion;
-        private int _IDComision;
-        private int _IDMateria;
+        private int _anoCalendario;
+        private int _cupo;
+        private string _descripcion;
+        private int _idComision;
+        private int _idMateria;
         [Column("anio_calendario")]
         public int AnoCalendario
         {
             get
             {
-                return _AnoCalendario;
+                return _anoCalendario;
             }
             set
             {
-                _AnoCalendario = value;
+                _anoCalendario = value;
             }
         }
         [Column("cupo")]
@@ -31,11 +31,11 @@ namespace Business.Entities
         {
             get
             {
-                return _Cupo;
+                return _cupo;
             }
             set
             {
-                _Cupo = value;
+                _cupo = value;
             }
         }
         [Column("desc_curso")]
@@ -43,11 +43,11 @@ namespace Business.Entities
         {
             get
             {
-                return _Descripcion;
+                return _descripcion;
             }
             set
             {
-                _Descripcion = value;
+                _descripcion = value;
             }
         }
         [Column("id_comision")]
@@ -55,11 +55,11 @@ namespace Business.Entities
         {
             get
             {
-                return _IDComision;
+                return _idComision;
             }
             set
             {
-                _IDComision = value;
+                _idComision = value;
             }
         }
         [Column("id_materia")]
@@ -67,11 +67,11 @@ namespace Business.Entities
         {
             get
             {
-                return _IDMateria;
+                return _idMateria;
             }
             set
             {
-                _IDMateria = value;
+                _idMateria = value;
             }
         }
     }
