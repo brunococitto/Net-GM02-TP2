@@ -180,69 +180,89 @@ namespace UI.Desktop
             // 
             // id
             // 
+            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.id.DataPropertyName = "ID";
             this.id.HeaderText = "ID";
             this.id.Name = "id";
             this.id.ReadOnly = true;
             this.id.Visible = false;
+            this.id.Width = 43;
             // 
             // legajo
             // 
+            this.legajo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.legajo.DataPropertyName = "Legajo";
             this.legajo.HeaderText = "Legajo";
             this.legajo.Name = "legajo";
+            this.legajo.Width = 67;
             // 
             // nombre
             // 
+            this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.nombre.DataPropertyName = "Nombre";
             this.nombre.HeaderText = "Nombre";
             this.nombre.Name = "nombre";
             this.nombre.ReadOnly = true;
+            this.nombre.Width = 76;
             // 
             // apellido
             // 
+            this.apellido.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.apellido.DataPropertyName = "Apellido";
             this.apellido.HeaderText = "Apellido";
             this.apellido.Name = "apellido";
             this.apellido.ReadOnly = true;
+            this.apellido.Width = 76;
             // 
             // direccion
             // 
+            this.direccion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.direccion.DataPropertyName = "Direccion";
             this.direccion.HeaderText = "Direccion";
             this.direccion.Name = "direccion";
             this.direccion.ReadOnly = true;
+            this.direccion.Width = 82;
             // 
             // email
             // 
+            this.email.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.email.DataPropertyName = "Email";
             this.email.HeaderText = "EMail";
             this.email.Name = "email";
             this.email.ReadOnly = true;
+            this.email.Width = 61;
             // 
             // telefono
             // 
+            this.telefono.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.telefono.DataPropertyName = "Telefono";
             this.telefono.HeaderText = "Telefono";
             this.telefono.Name = "telefono";
+            this.telefono.Width = 77;
             // 
             // fechaNacimiento
             // 
+            this.fechaNacimiento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.fechaNacimiento.DataPropertyName = "FechaNacimiento";
             this.fechaNacimiento.HeaderText = "Fecha de Nacimiento";
             this.fechaNacimiento.Name = "fechaNacimiento";
+            this.fechaNacimiento.Width = 132;
             // 
             // plan
             // 
+            this.plan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.plan.DataPropertyName = "Plan";
             this.plan.HeaderText = "Plan";
             this.plan.Name = "plan";
+            this.plan.Width = 55;
             // 
             // tipoPersona
             // 
+            this.tipoPersona.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.tipoPersona.DataPropertyName = "TipoPersona";
             this.tipoPersona.HeaderText = "Tipo";
             this.tipoPersona.Name = "tipoPersona";
+            this.tipoPersona.Width = 55;
             // 
             // Personas
             // 

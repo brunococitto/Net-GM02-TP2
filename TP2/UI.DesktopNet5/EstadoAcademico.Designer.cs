@@ -32,10 +32,10 @@ namespace UI.Desktop
             this.tscEstadoAcademico = new System.Windows.Forms.ToolStripContainer();
             this.tlEstadoAcademico = new System.Windows.Forms.TableLayoutPanel();
             this.dgvEstadoAcademico = new System.Windows.Forms.DataGridView();
+            this.btnActualizar = new System.Windows.Forms.Button();
             this.materia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.condicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nota = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnActualizar = new System.Windows.Forms.Button();
             this.tscEstadoAcademico.ContentPanel.SuspendLayout();
             this.tscEstadoAcademico.SuspendLayout();
             this.tlEstadoAcademico.SuspendLayout();
@@ -95,26 +95,6 @@ namespace UI.Desktop
             this.dgvEstadoAcademico.Size = new System.Drawing.Size(925, 371);
             this.dgvEstadoAcademico.TabIndex = 0;
             // 
-            // materia
-            // 
-            this.materia.DataPropertyName = "Materia";
-            this.materia.HeaderText = "Materia";
-            this.materia.Name = "materia";
-            this.materia.ReadOnly = true;
-            // 
-            // condicion
-            // 
-            this.condicion.DataPropertyName = "Condicion";
-            this.condicion.HeaderText = "Condicion";
-            this.condicion.Name = "condicion";
-            this.condicion.ReadOnly = true;
-            // 
-            // nota
-            // 
-            this.nota.DataPropertyName = "Nota";
-            this.nota.HeaderText = "Nota";
-            this.nota.Name = "nota";
-            // 
             // btnActualizar
             // 
             this.btnActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -126,6 +106,32 @@ namespace UI.Desktop
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = true;
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
+            // 
+            // materia
+            // 
+            this.materia.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.materia.DataPropertyName = "Materia";
+            this.materia.HeaderText = "Materia";
+            this.materia.Name = "materia";
+            this.materia.ReadOnly = true;
+            this.materia.Width = 72;
+            // 
+            // condicion
+            // 
+            this.condicion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.condicion.DataPropertyName = "Condicion";
+            this.condicion.HeaderText = "Condicion";
+            this.condicion.Name = "condicion";
+            this.condicion.ReadOnly = true;
+            this.condicion.Width = 87;
+            // 
+            // nota
+            // 
+            this.nota.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.nota.DataPropertyName = "Nota";
+            this.nota.HeaderText = "Nota";
+            this.nota.Name = "nota";
+            this.nota.Width = 58;
             // 
             // EstadoAcademico
             // 

@@ -172,44 +172,54 @@ namespace UI.Desktop
             // 
             // id
             // 
+            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.id.DataPropertyName = "ID";
             this.id.HeaderText = "ID";
             this.id.Name = "id";
             this.id.Visible = false;
+            this.id.Width = 43;
             // 
             // desc_curso
             // 
+            this.desc_curso.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.desc_curso.DataPropertyName = "DescripcionCur";
             this.desc_curso.HeaderText = "Descripcion";
             this.desc_curso.Name = "desc_curso";
             this.desc_curso.ReadOnly = true;
+            this.desc_curso.Width = 94;
             // 
             // desc_materia
             // 
+            this.desc_materia.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.desc_materia.DataPropertyName = "DescripcionMat";
             this.desc_materia.HeaderText = "Materia";
             this.desc_materia.Name = "desc_materia";
-            this.desc_materia.Width = 150;
+            this.desc_materia.Width = 72;
             // 
             // desc_comision
             // 
+            this.desc_comision.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.desc_comision.DataPropertyName = "DescripcionCom";
             this.desc_comision.HeaderText = "Comision";
             this.desc_comision.Name = "desc_comision";
+            this.desc_comision.Width = 83;
             // 
             // anio_calendario
             // 
+            this.anio_calendario.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.anio_calendario.DataPropertyName = "AnoCalendario";
             this.anio_calendario.HeaderText = "Anio Calendario";
             this.anio_calendario.Name = "anio_calendario";
+            this.anio_calendario.Width = 107;
             // 
             // cupo
             // 
+            this.cupo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.cupo.DataPropertyName = "Cupo";
             this.cupo.HeaderText = "Cupo";
             this.cupo.Name = "cupo";
             this.cupo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.cupo.Width = 300;
+            this.cupo.Width = 61;
             // 
             // Cursos
             // 

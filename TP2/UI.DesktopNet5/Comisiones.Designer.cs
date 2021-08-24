@@ -168,32 +168,40 @@ namespace UI.Desktop
             // 
             // id
             // 
+            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.id.DataPropertyName = "ID";
             this.id.HeaderText = "ID";
             this.id.Name = "id";
             this.id.ReadOnly = true;
             this.id.Visible = false;
+            this.id.Width = 43;
             // 
             // descripcion
             // 
+            this.descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.descripcion.DataPropertyName = "Descripcion";
             this.descripcion.HeaderText = "Descripcion";
             this.descripcion.Name = "descripcion";
             this.descripcion.ReadOnly = true;
+            this.descripcion.Width = 94;
             // 
             // anoespecialidad
             // 
+            this.anoespecialidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.anoespecialidad.DataPropertyName = "AnoEspecialidad";
             this.anoespecialidad.HeaderText = "Año Especialidad";
             this.anoespecialidad.Name = "anoespecialidad";
             this.anoespecialidad.ReadOnly = true;
+            this.anoespecialidad.Width = 112;
             // 
             // idplan
             // 
+            this.idplan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.idplan.DataPropertyName = "IDPlan";
             this.idplan.HeaderText = "ID Plan";
             this.idplan.Name = "idplan";
             this.idplan.ReadOnly = true;
+            this.idplan.Width = 64;
             // 
             // Comisiones
             // 

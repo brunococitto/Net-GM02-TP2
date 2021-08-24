@@ -170,37 +170,45 @@ namespace UI.Desktop
             // 
             // id
             // 
+            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.id.DataPropertyName = "ID";
             this.id.HeaderText = "ID";
             this.id.Name = "id";
             this.id.Visible = false;
+            this.id.Width = 43;
             // 
             // descripcion
             // 
+            this.descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.descripcion.DataPropertyName = "Descripcion";
             this.descripcion.HeaderText = "Descripcion";
             this.descripcion.Name = "descripcion";
-            this.descripcion.Width = 150;
+            this.descripcion.Width = 94;
             // 
             // horas_semanales
             // 
+            this.horas_semanales.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.horas_semanales.DataPropertyName = "horas_semanales";
             this.horas_semanales.HeaderText = "Horas semanales";
             this.horas_semanales.Name = "horas_semanales";
+            this.horas_semanales.Width = 111;
             // 
             // horas_totales
             // 
+            this.horas_totales.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.horas_totales.DataPropertyName = "horas_totales";
             this.horas_totales.HeaderText = "Horas totales";
             this.horas_totales.Name = "horas_totales";
+            this.horas_totales.Width = 93;
             // 
             // plan
             // 
+            this.plan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.plan.DataPropertyName = "Plan";
             this.plan.HeaderText = "Plan";
             this.plan.Name = "plan";
             this.plan.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.plan.Width = 300;
+            this.plan.Width = 55;
             // 
             // Materias
             // 

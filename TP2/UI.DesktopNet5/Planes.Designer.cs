@@ -166,24 +166,28 @@ namespace UI.Desktop
             // 
             // id
             // 
+            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.id.DataPropertyName = "ID";
             this.id.HeaderText = "ID";
             this.id.Name = "id";
             this.id.Visible = false;
+            this.id.Width = 43;
             // 
             // descripcion
             // 
+            this.descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.descripcion.DataPropertyName = "Descripcion";
             this.descripcion.HeaderText = "Descripcion";
             this.descripcion.Name = "descripcion";
-            this.descripcion.Width = 150;
+            this.descripcion.Width = 94;
             // 
             // especialidad
             // 
+            this.especialidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.especialidad.DataPropertyName = "Especialidad";
             this.especialidad.HeaderText = "Especialidad";
             this.especialidad.Name = "especialidad";
-            this.especialidad.Width = 300;
+            this.especialidad.Width = 97;
             // 
             // Planes
             // 
