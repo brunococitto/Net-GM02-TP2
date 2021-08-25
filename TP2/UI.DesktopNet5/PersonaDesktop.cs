@@ -11,6 +11,8 @@ using Business.Entities;
 using Business.Logic;
 using Data.Database;
 using System.Globalization;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace UI.Desktop
 {
@@ -109,48 +111,35 @@ namespace UI.Desktop
         public override void GuardarCambios()
         {
             MapearADatos();
-            _personaLogic.Save(PersonaActual);
+            if (Validar()) 
+            {
+                _personaLogic.Save(PersonaActual);
+                Close();
+            }       
         }
         public override bool Validar()
         {
-            try
+            ValidationResult result = new PersonaValidator().Validate(PersonaActual);
+            if (!result.IsValid)
             {
-                Validaciones.ValidarNulo(this.txtNombre.Text, "nombre");
-                Validaciones.ValidarLetras(this.txtNombre.Text, "nombre");
-                Validaciones.ValidarNulo(this.txtApellido.Text, "apellido");
-                Validaciones.ValidarLetras(this.txtApellido.Text, "apellido");
-                Validaciones.ValidarNulo(this.txtLegajo.Text, "legajo");
-                Validaciones.ValidarNumero(this.txtLegajo.Text, "legajo");
-                Validaciones.ValidarNulo(this.txtDireccion.Text, "dirección");
-                Validaciones.ValidarLetrasNumeros(this.txtDireccion.Text, "dirección");
-                Validaciones.ValidarNulo(this.txtTelefono.Text, "teléfono");
-                Validaciones.ValidarNumero(this.txtTelefono.Text, "teléfono");
-                Validaciones.ValidarNulo(this.txtEmail.Text, "email");
-                Validaciones.ValidarEmail(this.txtEmail.Text);
-                return true;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
+                string notificacion = string.Join(Environment.NewLine, result.Errors);
+                MessageBox.Show(notificacion);
                 return false;
             }
+            return true;
         }
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             switch (Modos)
             {
                 case ModoForm.Alta:
-                    if (Validar())
                     {
                         GuardarCambios();
-                        Close();
                     };
                     break;
                 case ModoForm.Modificacion:
-                    if (Validar())
                     {
                         GuardarCambios();
-                        Close();
                     };
                     break;
                 case ModoForm.Baja:

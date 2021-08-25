@@ -11,6 +11,8 @@ using Business.Entities;
 using Business.Logic;
 using Data.Database;
 using System.Globalization;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace UI.Desktop
 {
@@ -103,21 +105,24 @@ namespace UI.Desktop
         public override void GuardarCambios()
         {
             MapearADatos();
-            _docenteCursoLogic.Save(DocenteCursoActual);
+            if (Validar())
+            {
+                _docenteCursoLogic.Save(DocenteCursoActual);
+                Close();
+            }
+                
         }
         public override bool Validar()
         {
-            try
+            ValidationResult result = new DocenteCursoValidator().Validate(DocenteCursoActual);
+            if (!result.IsValid)
             {
-                Validaciones.ValidarNulo(this.txtLegajo.Text, "legajo");
-                Validaciones.ValidarNumero(this.txtLegajo.Text,"legajo");
-                return true;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
+                string notificacion = string.Join(Environment.NewLine, result.Errors);
+                MessageBox.Show(notificacion);
                 return false;
             }
+            return true;
+
         }
         private void cargarPersona()
         {
@@ -161,17 +166,13 @@ namespace UI.Desktop
             switch (Modos)
             {
                 case ModoForm.Alta:
-                    if (Validar())
                     {
                         GuardarCambios();
-                        Close();
                     };
                     break;
                 case ModoForm.Modificacion:
-                    if (Validar())
                     {
                         GuardarCambios();
-                        Close();
                     };
                     break;
                 case ModoForm.Baja:

@@ -17,6 +17,7 @@ namespace Data.Database
         {
             _context = context;
         }
+
         public List<Usuario> GetAll()
         {
             List<Usuario> usuarios = new List<Usuario>();

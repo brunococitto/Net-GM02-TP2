@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentValidation;
+using FluentValidation.Results;
 using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
@@ -76,39 +78,36 @@ namespace UI.Desktop
         public override void GuardarCambios()
         {
             MapearADatos();
-            _especialidadLogic.Save(EspecialidadActual);
+            if(Validar())
+            {
+                _especialidadLogic.Save(EspecialidadActual);
+                Close();
+            }
         }
         public override bool Validar()
         {
-            try
+            ValidationResult result = new EspecialidadValidator().Validate(EspecialidadActual);
+            if (!result.IsValid)
             {
-                Validaciones.ValidarNulo(this.txtDescripcion.Text, "descripcón");
-                Validaciones.ValidarLetras(this.txtDescripcion.Text, "descripcón");
-                return true;
-
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
+                string notificacion = string.Join(Environment.NewLine, result.Errors);
+                MessageBox.Show(notificacion);
                 return false;
             }
+            return true;  
         }
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             switch (Modos)
             {
                 case ModoForm.Alta:
-                    if (Validar())
                     {
                         GuardarCambios();
-                        Close();
                     };
                     break;
                 case ModoForm.Modificacion:
-                    if (Validar())
                     {
                         GuardarCambios();
-                        Close();
                     };
                     break;
                 case ModoForm.Baja:

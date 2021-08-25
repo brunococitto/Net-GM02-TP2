@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
 using Data.Database;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace UI.Desktop
 {
@@ -90,33 +92,23 @@ namespace UI.Desktop
         public override void GuardarCambios()
         {
             MapearADatos();
-            _usuarioLogic.Save(UsuarioActual);
+            if (Validar()) 
+            {
+                _usuarioLogic.Save(UsuarioActual);
+                Close();
+            }
         }
         public override bool Validar()
         {
-
-            try
+            ValidationResult result = new UsuarioValidator().Validate(UsuarioActual);
+            // Falta validar contraseñas coincidentes.
+            if (!result.IsValid)
             {
-                Validaciones.ValidarNulo(this.txtLegajo.Text, "legajo");
-                Validaciones.ValidarNumero(this.txtLegajo.Text, "legajo");
-                Validaciones.ValidarNulo(this.txtNombre.Text, "nombre");
-                Validaciones.ValidarLetras(this.txtNombre.Text, "nombre");
-                Validaciones.ValidarNulo(this.txtApellido.Text, "apellido");
-                Validaciones.ValidarLetras(this.txtApellido.Text, "apellido");
-                Validaciones.ValidarNulo(this.txtClave.Text, "contraseña");
-                Validaciones.ValidarNulo(this.txtUsuario.Text, "usuario");
-                Validaciones.ValidarLetras(this.txtUsuario.Text, "usuario");
-                Validaciones.ValidarClave(this.txtClave.Text);
-                Validaciones.ValidarNulo(this.txtConfirmarClave.Text, "confirmar clave");
-                Validaciones.ValidarConfirmacionClave(this.txtClave.Text, this.txtConfirmarClave.Text);
-
-                return true;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
+                string notificacion = string.Join(Environment.NewLine, result.Errors);
+                MessageBox.Show(notificacion);
                 return false;
             }
+            return true;
 
 
         }
@@ -175,17 +167,13 @@ namespace UI.Desktop
             switch (Modos)
             {
                 case ModoForm.Alta:
-                    if (Validar())
                     {
                         GuardarCambios();
-                        Close();
                     };
                     break;
                 case ModoForm.Modificacion:
-                    if (Validar())
                     {
                         GuardarCambios();
-                        Close();
                     };
                     break;
                 case ModoForm.Baja:

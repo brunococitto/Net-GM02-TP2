@@ -11,6 +11,8 @@ using Business.Entities;
 using Business.Logic;
 using Data.Database;
 using System.Text.RegularExpressions;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace UI.Desktop
 {
@@ -110,24 +112,24 @@ namespace UI.Desktop
         public override void GuardarCambios()
         {
             MapearADatos();
-            _comisionLogic.Save(ComisionActual);
+            if (Validar())
+            {
+                _comisionLogic.Save(ComisionActual);
+                Close();
+            }
+                
         }
 
          public override bool Validar()
          {
-            try
+            ValidationResult result = new ComisionValidator().Validate(ComisionActual);
+            if (!result.IsValid)
             {
-                Validaciones.ValidarNulo(this.txtBoxAnioEspecialidad.Text, "Año Especialidad");
-                Validaciones.ValidarNulo(this.txtBoxDesc.Text, "Descripcion");
-                Validaciones.ValidarNumero(this.txtBoxAnioEspecialidad.Text, "Año Especialidad");
-                Validaciones.ValidarLetrasNumeros(this.txtBoxDesc.Text, "Descripcion");
-                return true;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
+                string notificacion = string.Join(Environment.NewLine, result.Errors);
+                MessageBox.Show(notificacion);
                 return false;
             }
+            return true;
 
          }
 
@@ -136,17 +138,13 @@ namespace UI.Desktop
             switch (Modos)
             {
                 case ModoForm.Alta:
-                    if (Validar())
                     {
                         GuardarCambios();
-                        Close();
                     };
                     break;
                 case ModoForm.Modificacion:
-                    if (Validar())
                     {
                         GuardarCambios();
-                        Close();
                     };
                     break;
                 case ModoForm.Baja:

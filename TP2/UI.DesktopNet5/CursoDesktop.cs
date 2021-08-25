@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
 using Data.Database;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace UI.Desktop
 {
@@ -132,26 +134,22 @@ namespace UI.Desktop
         public override void GuardarCambios()
         {
             MapearADatos();
-            _cursoLogic.Save(CursoActual);
+            if (Validar()) //VALIDAR CUESTIONES DE LOS INT; FORZAR QUE SOLO PUEDA INGRESAR INTEGER
+            { 
+                _cursoLogic.Save(CursoActual);
+                Close();
+            }
         }
         public override bool Validar()
         {
-            try
+            ValidationResult result = new CursoValidator().Validate(CursoActual);
+            if (!result.IsValid)
             {
-                Validaciones.ValidarNulo(this.txtDescripcion.Text, "descripcón");
-                Validaciones.ValidarNulo(this.txtAnoCalendario.Text, "año calendario");
-                Validaciones.ValidarNulo(this.txtCupo.Text, "cupo");
-                Validaciones.ValidarNumero(this.txtAnoCalendario.Text, "año calendario");
-                Validaciones.ValidarLetrasNumeros(this.txtDescripcion.Text, "descripcón");
-                Validaciones.ValidarNumero(this.txtCupo.Text, "cupo");
-                return true;
-
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
+                string notificacion = string.Join(Environment.NewLine, result.Errors);
+                MessageBox.Show(notificacion);
                 return false;
             }
+            return true;
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -159,17 +157,13 @@ namespace UI.Desktop
             switch (Modos)
             {
                 case ModoForm.Alta:
-                    if (Validar())
                     {
                         GuardarCambios();
-                        Close();
                     };
                     break;
                 case ModoForm.Modificacion:
-                    if (Validar())
                     {
                         GuardarCambios();
-                        Close();
                     };
                     break;
                 case ModoForm.Baja:

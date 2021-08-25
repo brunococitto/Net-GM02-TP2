@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
 using Data.Database;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace UI.Desktop
 {
@@ -101,21 +103,22 @@ namespace UI.Desktop
         public override void GuardarCambios()
         {
             MapearADatos();
-            _planLogic.Save(PlanActual);
+            if (Validar())
+            { 
+                _planLogic.Save(PlanActual);
+                Close();
+            }
         }
         public override bool Validar()
         {
-            try 
+            ValidationResult result = new PlanValidator().Validate(PlanActual);
+            if (!result.IsValid)
             {
-                Validaciones.ValidarNulo(this.txtDescripcion.Text, "descripción");
-                Validaciones.ValidarLetrasNumeros(this.txtDescripcion.Text, "descripción");
-                return true;
-            }
-            catch(Exception e)
-            {
-                MessageBox.Show(e.Message);
+                string notificacion = string.Join(Environment.NewLine, result.Errors);
+                MessageBox.Show(notificacion);
                 return false;
             }
+            return true;
 
         }
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -123,17 +126,13 @@ namespace UI.Desktop
             switch (Modos)
             {
                 case ModoForm.Alta:
-                    if (Validar())
                     {
                         GuardarCambios();
-                        Close();
                     };
                     break;
                 case ModoForm.Modificacion:
-                    if (Validar())
                     {
                         GuardarCambios();
-                        Close();
                     };
                     break;
                 case ModoForm.Baja:
