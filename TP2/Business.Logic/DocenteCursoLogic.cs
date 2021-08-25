@@ -17,19 +17,55 @@ namespace Business.Logic
         }
         public List<DocenteCurso> GetAll()
         {
-            return AsignacionData.GetAll();
+            try
+            {
+                return AsignacionData.GetAll();
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar asignaciones", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public List<Object> GetAsignacionesFormateadas()
         {
-            return AsignacionData.GetAsignacionesFormateadas();
+            try
+            {
+                return AsignacionData.GetAsignacionesFormateadas();
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar asignaciones formateadas", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public DocenteCurso GetOne(int id)
         {
-            return AsignacionData.GetOne(id);
+            try
+            {
+                return AsignacionData.GetOne(id);
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar asignacion", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public void Delete(int id)
         {
-            AsignacionData.Delete(id);
+            try
+            {
+                AsignacionData.Delete(id);
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al eliminar asignacion", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public void Save(DocenteCurso inscripcion)
         {

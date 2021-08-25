@@ -33,25 +33,32 @@ namespace UI.Desktop
         }
         public void Listar()
         {
-            // Tengo que pedir la lista de especialidades y de planes
-            List<Plan> planes = _planLogic.GetAll();
-            List<Especialidad> especialidades = _especialidadLogic.GetAll();
-            // Tengo que cambiar el ID de la especialidad por su descripción para mostrarlo
-            // Puedo recorrer los arreglos y matchear o puedo usar LINQ y hacerlo mucho más fácil
-            var consulta =
-                            from p in planes
-                            join e in especialidades
-                            on p.IDEspecialidad equals e.ID
-                            select new
-                            {
-                                ID = p.ID,
-                                Descripcion = p.Descripcion,
-                                Especialidad = e.Descripcion
-                            };
-            // Cada uno de los objetos nuevos tiene ID (plan), Descripción (plan) y Especialidad (descripcion especialidad)
-            // El DataSource de un dgv espera algo que implemente la interfaz ILIST, como por ej una lista
-            // Entonces convierto lo que antes era algo anónimo a una lista
-            this.dgvPlanes.DataSource = consulta.ToList();
+            try
+            {
+                // Tengo que pedir la lista de especialidades y de planes
+                List<Plan> planes = _planLogic.GetAll();
+                List<Especialidad> especialidades = _especialidadLogic.GetAll();
+                // Tengo que cambiar el ID de la especialidad por su descripción para mostrarlo
+                // Puedo recorrer los arreglos y matchear o puedo usar LINQ y hacerlo mucho más fácil
+                var consulta =
+                                from p in planes
+                                join e in especialidades
+                                on p.IDEspecialidad equals e.ID
+                                select new
+                                {
+                                    ID = p.ID,
+                                    Descripcion = p.Descripcion,
+                                    Especialidad = e.Descripcion
+                                };
+                // Cada uno de los objetos nuevos tiene ID (plan), Descripción (plan) y Especialidad (descripcion especialidad)
+                // El DataSource de un dgv espera algo que implemente la interfaz ILIST, como por ej una lista
+                // Entonces convierto lo que antes era algo anónimo a una lista
+                this.dgvPlanes.DataSource = consulta.ToList();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Plan", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             this.dgvPlanes.AutoGenerateColumns = false;
         }
         private void btnActualizar_Click(object sender, EventArgs e)

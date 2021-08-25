@@ -33,26 +33,33 @@ namespace UI.Desktop
         }
         public void Listar()
         {
-            // Tengo que pedir la lista de planes y de materias
-            List<Materia> materias = _materiaLogic.GetAll();
-            List<Plan> planes = _planLogic.GetAll();
-            // Tengo que cambiar el ID del plan por su descripción para mostrarlo
-            // Puedo recorrer los arreglos y matchear o puedo usar LINQ y hacerlo mucho más fácil
-            var consulta =
-                            from m in materias
-                            join p in planes
-                            on m.IDPlan equals p.ID
-                            select new
-                            {
-                                ID = m.ID,
-                                Descripcion = m.Descripcion,
-                                Horas_semanales = m.HSSemanales,
-                                Horas_totales = m.HSTotales,
-                                Plan = p.Descripcion
-                            };
-            // El DataSource de un dgv espera algo que implemente la interfaz ILIST, como por ej una lista
-            // Entonces convierto lo que antes era algo anónimo a una lista
-            this.dgvMaterias.DataSource = consulta.ToList();
+            try
+            {
+                // Tengo que pedir la lista de planes y de materias
+                List<Materia> materias = _materiaLogic.GetAll();
+                List<Plan> planes = _planLogic.GetAll();
+                // Tengo que cambiar el ID del plan por su descripción para mostrarlo
+                // Puedo recorrer los arreglos y matchear o puedo usar LINQ y hacerlo mucho más fácil
+                var consulta =
+                                from m in materias
+                                join p in planes
+                                on m.IDPlan equals p.ID
+                                select new
+                                {
+                                    ID = m.ID,
+                                    Descripcion = m.Descripcion,
+                                    Horas_semanales = m.HSSemanales,
+                                    Horas_totales = m.HSTotales,
+                                    Plan = p.Descripcion
+                                };
+                // El DataSource de un dgv espera algo que implemente la interfaz ILIST, como por ej una lista
+                // Entonces convierto lo que antes era algo anónimo a una lista
+                this.dgvMaterias.DataSource = consulta.ToList();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Materias", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             this.dgvMaterias.AutoGenerateColumns = false;
         }
         private void btnActualizar_Click(object sender, EventArgs e)

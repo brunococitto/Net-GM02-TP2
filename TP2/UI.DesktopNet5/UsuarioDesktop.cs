@@ -41,11 +41,18 @@ namespace UI.Desktop
         public UsuarioDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            UsuarioActual = _usuarioLogic.GetOne(ID);
-            // Como estoy modificando o borrando el usuario, no tengo que poder modificar el legajo
-            // al cual está asociado
-            this.txtLegajo.Enabled = false;
-            MapearDeDatos();
+            try
+            {
+                UsuarioActual = _usuarioLogic.GetOne(ID);
+                // Como estoy modificando o borrando el usuario, no tengo que poder modificar el legajo
+                // al cual está asociado
+                this.txtLegajo.Enabled = false;
+                MapearDeDatos();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         public override void MapearDeDatos()
         {
@@ -54,10 +61,17 @@ namespace UI.Desktop
             this.txtUsuario.Text = this.UsuarioActual.NombreUsuario;
             // La clave no la tengo que cargar porque no se muestra, siempre se vuelve a poner de 0
             // Ahora tengo que cargar los datos de la persona también
-            Persona per = _personaLogic.GetOne(UsuarioActual.IDPersona);
-            this.txtLegajo.Text = per.Legajo.ToString();
-            this.txtNombre.Text = per.Nombre;
-            this.txtApellido.Text = per.Apellido;
+            try
+            {
+                Persona per = _personaLogic.GetOne(UsuarioActual.IDPersona);
+                this.txtLegajo.Text = per.Legajo.ToString();
+                this.txtNombre.Text = per.Nombre;
+                this.txtApellido.Text = per.Apellido;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Persona", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             switch (this.Modos)
             {
                 case ModoForm.Alta:
@@ -91,11 +105,18 @@ namespace UI.Desktop
         }
         public override void GuardarCambios()
         {
-            MapearADatos();
-            if (Validar()) 
+            try
             {
-                _usuarioLogic.Save(UsuarioActual);
-                Close();
+                MapearADatos();
+                if (Validar())
+                {
+                    _usuarioLogic.Save(UsuarioActual);
+                    Close();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public override bool Validar()
@@ -191,7 +212,14 @@ namespace UI.Desktop
         }
         public virtual void Eliminar()
         {
-            _usuarioLogic.Delete(UsuarioActual.ID);
+            try
+            {
+                _usuarioLogic.Delete(UsuarioActual.ID);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void txtLegajo_Leave(object sender, EventArgs e)

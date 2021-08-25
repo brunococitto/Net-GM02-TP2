@@ -32,22 +32,36 @@ namespace UI.Desktop
         public DocenteCursoDesktop(ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            // No te deja hacer nada hasta que no introduzcas un legajo válido, como en usuario
-            this.cbCurso.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.cbCargo.DropDownStyle = ComboBoxStyle.DropDownList;
-            // Cargo los cursos para mostrarlos en el combobox
-            List<Curso> cursos = _cursoLogic.GetAll();
-            this.cbCurso.DataSource = cursos;
-            // selecciono el curso de la posicion 0 como para seleccionar algo
-            this.cbCurso.SelectedIndex = 0;
-            // Cargos
-            this.cbCargo.DataSource = Enum.GetNames(typeof(Business.Entities.DocenteCurso.TiposCargo));
+            try
+            {
+                // No te deja hacer nada hasta que no introduzcas un legajo válido, como en usuario
+                this.cbCurso.DropDownStyle = ComboBoxStyle.DropDownList;
+                this.cbCargo.DropDownStyle = ComboBoxStyle.DropDownList;
+                // Cargo los cursos para mostrarlos en el combobox
+                List<Curso> cursos = _cursoLogic.GetAll();
+                this.cbCurso.DataSource = cursos;
+                // selecciono el curso de la posicion 0 como para seleccionar algo
+                this.cbCurso.SelectedIndex = 0;
+                // Cargos
+                this.cbCargo.DataSource = Enum.GetNames(typeof(Business.Entities.DocenteCurso.TiposCargo));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Curso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         public DocenteCursoDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            DocenteCursoActual = _docenteCursoLogic.GetOne(ID);
-            MapearDeDatos();
+            try
+            {
+                DocenteCursoActual = _docenteCursoLogic.GetOne(ID);
+                MapearDeDatos();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Docente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         public override void MapearDeDatos()
         {
@@ -57,13 +71,20 @@ namespace UI.Desktop
             this.txtApellido.Text = DocenteCursoActual.Persona.Apellido;
             // Tengo que cargar los cursos por si quiero seleccionar otro
             // Y seleccionar el actual
-            List<Curso> cursos = _cursoLogic.GetAll();
-            this.cbCurso.DataSource = cursos;
-            this.cbCurso.SelectedIndex = cbCurso.FindStringExact(DocenteCursoActual.Curso.Descripcion);
-            // Cargo
-            this.cbCargo.DataSource = Enum.GetNames(typeof(Business.Entities.DocenteCurso.TiposCargo));
-            // Tengo que seleccionar del combo de cargos el cargo del docente
-            this.cbCargo.SelectedIndex = cbCargo.FindStringExact(Enum.GetName(DocenteCursoActual.Cargo));
+            try
+            {
+                List<Curso> cursos = _cursoLogic.GetAll();
+                this.cbCurso.DataSource = cursos;
+                this.cbCurso.SelectedIndex = cbCurso.FindStringExact(DocenteCursoActual.Curso.Descripcion);
+                // Cargo
+                this.cbCargo.DataSource = Enum.GetNames(typeof(Business.Entities.DocenteCurso.TiposCargo));
+                // Tengo que seleccionar del combo de cargos el cargo del docente
+                this.cbCargo.SelectedIndex = cbCargo.FindStringExact(Enum.GetName(DocenteCursoActual.Cargo));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Cursos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             switch (this.Modos)
             {
                 case ModoForm.Alta:
@@ -85,32 +106,47 @@ namespace UI.Desktop
         }
         public override void MapearADatos()
         {
-            if (Modos == ModoForm.Alta)
+            try
             {
-                DocenteCursoActual = new DocenteCurso();
+                if (Modos == ModoForm.Alta)
+                {
+                    DocenteCursoActual = new DocenteCurso();
+                }
+                DocenteCursoActual.IDCurso = (int)this.cbCurso.SelectedValue;
+                DocenteCursoActual.IDDocente = _personaLogic.GetOneConLegajo(Int32.Parse(this.txtLegajo.Text)).ID;
+                DocenteCursoActual.Cargo = (Business.Entities.DocenteCurso.TiposCargo)Enum.Parse(typeof(Business.Entities.DocenteCurso.TiposCargo), cbCargo.SelectedItem.ToString());
+
+                switch (Modos)
+                {
+                    case ModoForm.Alta:
+                        DocenteCursoActual.State = BusinessEntity.States.New;
+                        break;
+                    case ModoForm.Modificacion:
+                        DocenteCursoActual.State = BusinessEntity.States.Modified;
+                        break;
+                }
             }
-            DocenteCursoActual.IDCurso = (int)this.cbCurso.SelectedValue;
-            DocenteCursoActual.IDDocente= _personaLogic.GetOneConLegajo(Int32.Parse(this.txtLegajo.Text)).ID;
-            DocenteCursoActual.Cargo = (Business.Entities.DocenteCurso.TiposCargo)Enum.Parse(typeof(Business.Entities.DocenteCurso.TiposCargo), cbCargo.SelectedItem.ToString());
-            switch (Modos)
+            catch (Exception e)
             {
-                case ModoForm.Alta:
-                    DocenteCursoActual.State = BusinessEntity.States.New;
-                    break;
-                case ModoForm.Modificacion:
-                    DocenteCursoActual.State = BusinessEntity.States.Modified;
-                    break;
+                MessageBox.Show(e.Message, "Docente", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public override void GuardarCambios()
         {
-            MapearADatos();
-            if (Validar())
+            try
             {
-                _docenteCursoLogic.Save(DocenteCursoActual);
-                Close();
+                MapearADatos();
+                if (Validar())
+                {
+                    _docenteCursoLogic.Save(DocenteCursoActual);
+                    Close();
+                }
             }
-                
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Docente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
         public override bool Validar()
         {
@@ -190,7 +226,14 @@ namespace UI.Desktop
         }
         public virtual void Eliminar()
         {
-            _docenteCursoLogic.Delete(DocenteCursoActual.ID);
+            try
+            {
+                _docenteCursoLogic.Delete(DocenteCursoActual.ID);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Docente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void txtLegajo_Leave(object sender, EventArgs e)
         {

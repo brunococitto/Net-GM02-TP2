@@ -17,15 +17,42 @@ namespace Business.Logic
         }
         public List<Materia> GetAll()
         {
-            return MateriaData.GetAll();
+            try
+            {
+                return MateriaData.GetAll();
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar lista de materias", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public Materia GetOne(int id)
         {
-            return MateriaData.GetOne(id);
+            try
+            {
+                return MateriaData.GetOne(id);
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al datos de materia", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public void Delete(int id)
         {
-            MateriaData.Delete(id);
+            try
+            {
+                MateriaData.Delete(id);
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al eliminar materia", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public void Save(Materia plan)
         {

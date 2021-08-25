@@ -31,17 +31,31 @@ namespace UI.Desktop
         {
             Modos = modo;
             // Cargo los planes para mostrarlos en el combobox
-            List<Plan> listaPlanes = _planLogic.GetAll();
-            this.cbPlan.DataSource = listaPlanes;
-            // selecciono el plan de la posicion 0 como para seleccionar algo
-            this.cbPlan.SelectedIndex = 0;
+            try
+            {
+                List<Plan> listaPlanes = _planLogic.GetAll();
+                this.cbPlan.DataSource = listaPlanes;
+                // selecciono el plan de la posicion 0 como para seleccionar algo
+                this.cbPlan.SelectedIndex = 0;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Planes", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         // Este es el constructor cuando se edita o elimina algo, ya que tiene dos args
         public MateriaDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            MateriaActual = _materiaLogic.GetOne(ID);
-            MapearDeDatos();
+            try
+            {
+                MateriaActual = _materiaLogic.GetOne(ID);
+                MapearDeDatos();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Materia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         public override void MapearDeDatos()
         {
@@ -49,14 +63,21 @@ namespace UI.Desktop
             this.txtDescripcion.Text = this.MateriaActual.Descripcion;
             this.txtHorasSemanales.Text = this.MateriaActual.HSSemanales.ToString();
             this.txtHorasTotales.Text = this.MateriaActual.HSTotales.ToString();
-            // Acá cuando cargo la materia tengo que buscar el plan asignado
-            Plan planActualMateria = _planLogic.GetOne(MateriaActual.IDPlan);
-            // A su vez tengo que cargar los otros planes por si quiero seleccionar otro
-            List<Plan> planes = _planLogic.GetAll();
-            // seteo como datasource del combobox la lista de planes anteriores
-            this.cbPlan.DataSource = planes;
-            // ahora tengo que seleccionar el plan correspondiente a la materia
-            this.cbPlan.SelectedIndex = cbPlan.FindStringExact(planActualMateria.Descripcion);
+            try
+            {
+                // Acá cuando cargo la materia tengo que buscar el plan asignado
+                Plan planActualMateria = _planLogic.GetOne(MateriaActual.IDPlan);
+                // A su vez tengo que cargar los otros planes por si quiero seleccionar otro
+                List<Plan> planes = _planLogic.GetAll();
+                // seteo como datasource del combobox la lista de planes anteriores
+                this.cbPlan.DataSource = planes;
+                // ahora tengo que seleccionar el plan correspondiente a la materia
+                this.cbPlan.SelectedIndex = cbPlan.FindStringExact(planActualMateria.Descripcion);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Materia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             switch (this.Modos)
             {
                 case ModoForm.Alta:
@@ -112,11 +133,18 @@ namespace UI.Desktop
         }
         public override void GuardarCambios()
         {
-            MapearADatos();
-            if (Validar())
-            {   
-                _materiaLogic.Save(MateriaActual);
-                Close();
+            try
+            {
+                MapearADatos();
+                if (Validar())
+                {
+                    _materiaLogic.Save(MateriaActual);
+                    Close();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Materia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public override bool Validar()
@@ -161,7 +189,14 @@ namespace UI.Desktop
         }
         public virtual void Eliminar()
         {
-            _materiaLogic.Delete(MateriaActual.ID);
+            try
+            {
+                _materiaLogic.Delete(MateriaActual.ID);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Materia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

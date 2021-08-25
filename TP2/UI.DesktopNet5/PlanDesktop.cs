@@ -31,30 +31,51 @@ namespace UI.Desktop
         {
             Modos = modo;
             // Cargo las especialidades para mostrarlas en el combobox
-            List<Especialidad> listaEsp = _especialidadLogic.GetAll();
-            this.cbEspecialidad.DataSource = listaEsp;
-            // this.cbEspecialidad.DataSource = listToDataTable(listaEsp).DefaultView;
-            this.cbEspecialidad.SelectedIndex = 0;
+            try
+            {
+                List<Especialidad> listaEsp = _especialidadLogic.GetAll();
+                this.cbEspecialidad.DataSource = listaEsp;
+                // this.cbEspecialidad.DataSource = listToDataTable(listaEsp).DefaultView;
+                this.cbEspecialidad.SelectedIndex = 0;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Especialidades", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         // Este es el constructor cuando se edita o elimina algo, ya que tiene dos args
         public PlanDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            PlanActual = _planLogic.GetOne(ID);
-            MapearDeDatos();
+            try
+            {
+                PlanActual = _planLogic.GetOne(ID);
+                MapearDeDatos();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Plan", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         public override void MapearDeDatos()
         {
             this.txtID.Text = this.PlanActual.ID.ToString();
             this.txtDescripcion.Text = this.PlanActual.Descripcion;
             // Acá cuando cargo el plan tengo que buscar la especialidad asignada al plan
-            Especialidad espActualPlan = _especialidadLogic.GetOne(PlanActual.IDEspecialidad);
-            // A su vez tengo que cargar las otras especialidades por si quiero seleccionar otra
-            List<Especialidad> especialidades = _especialidadLogic.GetAll();
-            // seteo como datasource del combobox la lista de especialidades anteriores
-            this.cbEspecialidad.DataSource = especialidades;
-            // ahora tengo que seleccionar la especialidad correspondiente al plan actual
-            this.cbEspecialidad.SelectedIndex = cbEspecialidad.FindStringExact(espActualPlan.Descripcion);
+            try
+            {
+                Especialidad espActualPlan = _especialidadLogic.GetOne(PlanActual.IDEspecialidad);
+                // A su vez tengo que cargar las otras especialidades por si quiero seleccionar otra
+                List<Especialidad> especialidades = _especialidadLogic.GetAll();
+                // seteo como datasource del combobox la lista de especialidades anteriores
+                this.cbEspecialidad.DataSource = especialidades;
+                // ahora tengo que seleccionar la especialidad correspondiente al plan actual
+                this.cbEspecialidad.SelectedIndex = cbEspecialidad.FindStringExact(espActualPlan.Descripcion);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Plan", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             switch (this.Modos)
             {
                 case ModoForm.Alta:
@@ -102,11 +123,18 @@ namespace UI.Desktop
         }
         public override void GuardarCambios()
         {
-            MapearADatos();
-            if (Validar())
-            { 
-                _planLogic.Save(PlanActual);
-                Close();
+            try
+            {
+                MapearADatos();
+                if (Validar())
+                {
+                    _planLogic.Save(PlanActual);
+                    Close();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Plan", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public override bool Validar()
@@ -150,7 +178,14 @@ namespace UI.Desktop
         }
         public virtual void Eliminar()
         {
-            _planLogic.Delete(PlanActual.ID);
+            try
+            {
+                _planLogic.Delete(PlanActual.ID);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Plan", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -31,17 +31,31 @@ namespace UI.Desktop
         {
             Modos = modo;
             // Cargo los planes para mostrarlos en el combobox
-            List<Plan> listaPlanes = _planLogic.GetAll();
-            this.comboBoxIDPlan.DataSource = listaPlanes;
-            // selecciono el plan de la posicion 0 como para seleccionar algo
-            this.comboBoxIDPlan.SelectedIndex = 0;
+            try
+            {
+                List<Plan> listaPlanes = _planLogic.GetAll();
+                this.comboBoxIDPlan.DataSource = listaPlanes;
+                // selecciono el plan de la posicion 0 como para seleccionar algo
+                this.comboBoxIDPlan.SelectedIndex = 0;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Planes", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public ComisionesDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            ComisionActual = _comisionLogic.GetOne(ID);
-            MapearDeDatos();
+            try
+            {
+                ComisionActual = _comisionLogic.GetOne(ID);
+                MapearDeDatos();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Comisión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public Comision ComisionActual { set; get; }
@@ -52,13 +66,20 @@ namespace UI.Desktop
             this.txtBoxDesc.Text = this.ComisionActual.Descripcion;
             this.txtBoxAnioEspecialidad.Text = this.ComisionActual.AnoEspecialidad.ToString();
             // Acá cuando cargo la comi tengo que buscar el plan 
-            Plan planActualComi = _planLogic.GetOne(ComisionActual.IDPlan);
-            // A su vez tengo que cargar los otros planes
-            List<Plan> planes = _planLogic.GetAll();
-            // seteo como datasource del combobox la lista de planes anteriores
-            this.comboBoxIDPlan.DataSource = planes;
-            // ahora tengo que seleccionar el plan correspondiente a la comi actual
-            this.comboBoxIDPlan.SelectedIndex = comboBoxIDPlan.FindStringExact(planActualComi.Descripcion);
+            try
+            {
+                Plan planActualComi = _planLogic.GetOne(ComisionActual.IDPlan);
+                // A su vez tengo que cargar los otros planes
+                List<Plan> planes = _planLogic.GetAll();
+                // seteo como datasource del combobox la lista de planes anteriores
+                this.comboBoxIDPlan.DataSource = planes;
+                // ahora tengo que seleccionar el plan correspondiente a la comi actual
+                this.comboBoxIDPlan.SelectedIndex = comboBoxIDPlan.FindStringExact(planActualComi.Descripcion);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Planes", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             switch (this.Modos)
             {
                 case ModoForm.Alta:
@@ -111,13 +132,20 @@ namespace UI.Desktop
 
         public override void GuardarCambios()
         {
-            MapearADatos();
-            if (Validar())
+            try
             {
-                _comisionLogic.Save(ComisionActual);
-                Close();
+                MapearADatos();
+                if (Validar())
+                {
+                    _comisionLogic.Save(ComisionActual);
+                    Close();
+                }
             }
-                
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Comision", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
          public override bool Validar()
@@ -161,7 +189,14 @@ namespace UI.Desktop
 
         public virtual void Eliminar()
         {
-            _comisionLogic.Delete(ComisionActual.ID);
+            try
+            {
+                _comisionLogic.Delete(ComisionActual.ID);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Comision", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void bCancelar_Click(object sender, EventArgs e)

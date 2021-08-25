@@ -34,7 +34,7 @@ namespace Data.Database
             }
             catch (Exception e)
             {
-                Exception ExceptionManejada = new Exception("Error al recuperar lista de planes", e);
+                Exception ExceptionManejada = new Exception("Error al recuperar listado de planes", e);
                 throw ExceptionManejada;
             }
             finally

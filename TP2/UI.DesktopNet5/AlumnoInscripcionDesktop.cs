@@ -34,17 +34,31 @@ namespace UI.Desktop
             Modos = modo;
             // No te deja hacer nada hasta que no introduzcas un legajo válido, como en usuario
             this.cbCurso.DropDownStyle = ComboBoxStyle.DropDownList;
-            // Cargo los cursos para mostrarlos en el combobox
-            List<Curso> cursos = _cursoLogic.GetAll();
-            this.cbCurso.DataSource = cursos;
-            // selecciono el curso de la posicion 0 como para seleccionar algo
-            this.cbCurso.SelectedIndex = 0;
+            try
+            {
+                // Cargo los cursos para mostrarlos en el combobox
+                List<Curso> cursos = _cursoLogic.GetAll();
+                this.cbCurso.DataSource = cursos;
+                // selecciono el curso de la posicion 0 como para seleccionar algo
+                this.cbCurso.SelectedIndex = 0;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message,"Cursos",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
         }
         public AlumnoInscripcionDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            AlumnoInscripcionActual = _alumnoInscripcionLogic.GetOne(ID);
-            MapearDeDatos();
+            try
+            {
+                AlumnoInscripcionActual = _alumnoInscripcionLogic.GetOne(ID);
+                MapearDeDatos();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Inscripción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         public override void MapearDeDatos()
         {
@@ -54,9 +68,17 @@ namespace UI.Desktop
             this.txtApellido.Text = AlumnoInscripcionActual.Persona.Apellido;
             // Tengo que cargar los cursos por si quiero seleccionar otro
             // Y seleccionar el actual
-            List<Curso> cursos = _cursoLogic.GetAll();
-            this.cbCurso.DataSource = cursos;
-            this.cbCurso.SelectedIndex = cbCurso.FindStringExact(AlumnoInscripcionActual.Curso.Descripcion);
+            try
+            {
+                List<Curso> cursos = _cursoLogic.GetAll();
+                this.cbCurso.DataSource = cursos;
+                this.cbCurso.SelectedIndex = cbCurso.FindStringExact(AlumnoInscripcionActual.Curso.Descripcion);
+            }
+            catch (Exception e)
+            {
+                this.btnAceptar.Enabled = false;
+                MessageBox.Show(e.Message, "Cursos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             switch (this.Modos)
             {
                 case ModoForm.Alta:
@@ -77,31 +99,45 @@ namespace UI.Desktop
         }
         public override void MapearADatos()
         {
-            if (Modos == ModoForm.Alta)
+            try
             {
-                AlumnoInscripcionActual = new AlumnoInscripcion();
-                AlumnoInscripcionActual.Condicion = "";
-                AlumnoInscripcionActual.Nota = 0;
+                if (Modos == ModoForm.Alta)
+                {
+                    AlumnoInscripcionActual = new AlumnoInscripcion();
+                    AlumnoInscripcionActual.Condicion = "";
+                    AlumnoInscripcionActual.Nota = 0;
+                }
+                AlumnoInscripcionActual.IDCurso = (int)this.cbCurso.SelectedValue;
+                AlumnoInscripcionActual.IDAlumno = _personaLogic.GetOneConLegajo(Int32.Parse(this.txtLegajo.Text)).ID;
+                switch (Modos)
+                {
+                    case ModoForm.Alta:
+                        AlumnoInscripcionActual.State = BusinessEntity.States.New;
+                        break;
+                    case ModoForm.Modificacion:
+                        AlumnoInscripcionActual.State = BusinessEntity.States.Modified;
+                        break;
+                }
             }
-            AlumnoInscripcionActual.IDCurso = (int)this.cbCurso.SelectedValue;
-            AlumnoInscripcionActual.IDAlumno = _personaLogic.GetOneConLegajo(Int32.Parse(this.txtLegajo.Text)).ID;
-            switch (Modos)
+            catch (Exception e)
             {
-                case ModoForm.Alta:
-                    AlumnoInscripcionActual.State = BusinessEntity.States.New;
-                    break;
-                case ModoForm.Modificacion:
-                    AlumnoInscripcionActual.State = BusinessEntity.States.Modified;
-                    break;
+                MessageBox.Show(e.Message, "Personas", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public override void GuardarCambios()
         {
-            MapearADatos();
-            if (Validar())
+            try
             {
-                _alumnoInscripcionLogic.Save(AlumnoInscripcionActual);
-                Close();
+                MapearADatos();
+                if (Validar())
+                {
+                    _alumnoInscripcionLogic.Save(AlumnoInscripcionActual);
+                    Close();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Inscripción", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public override bool Validar()
@@ -146,7 +182,7 @@ namespace UI.Desktop
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message, "Personas", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -179,7 +215,14 @@ namespace UI.Desktop
         }
         public virtual void Eliminar()
         {
-            _alumnoInscripcionLogic.Delete(AlumnoInscripcionActual.ID);
+            try
+            {
+                _alumnoInscripcionLogic.Delete(AlumnoInscripcionActual.ID);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Inscripción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void txtLegajo_Leave(object sender, EventArgs e)
         {

@@ -28,8 +28,15 @@ namespace UI.Desktop
         public ModuloDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            ModuloActual = _moduloLogic.GetOne(ID);
-            MapearDeDatos();
+            try
+            {
+                ModuloActual = _moduloLogic.GetOne(ID);
+                MapearDeDatos();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Modulo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         public Modulo ModuloActual { set; get; }
         public override void MapearDeDatos()
@@ -74,8 +81,15 @@ namespace UI.Desktop
         }
         public override void GuardarCambios()
         {
-            MapearADatos();
-            _moduloLogic.Save(ModuloActual);
+            try
+            {
+                MapearADatos();
+                _moduloLogic.Save(ModuloActual);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Modulo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void btnAceptar_Click(object sender, EventArgs e)
         {
@@ -107,7 +121,14 @@ namespace UI.Desktop
         }
         public virtual void Eliminar()
         {
-            _moduloLogic.Delete(ModuloActual.ID);
+            try
+            {
+                _moduloLogic.Delete(ModuloActual.ID);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Modulo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {

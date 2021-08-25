@@ -36,7 +36,7 @@ namespace Data.Database
             }
             catch (Exception e)
             {
-                Exception ExceptionManejada = new Exception("Error al recuperar lista de comisiones", e);
+                Exception ExceptionManejada = new Exception("Error al recuperar listado de comisiones", e);
                 throw ExceptionManejada;
             }
             finally

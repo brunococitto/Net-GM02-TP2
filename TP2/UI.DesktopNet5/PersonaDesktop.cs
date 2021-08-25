@@ -31,18 +31,32 @@ namespace UI.Desktop
         {
             Modos = modo;
             // Cargo los planes para mostrarlos en el combobox
-            List<Plan> planes = _planLogic.GetAll();
-            this.cbPlan.DataSource = planes;
-            // selecciono el plan de la posicion 0 como para seleccionar algo
-            this.cbPlan.SelectedIndex = 0;
-            // Tipos persona
-            this.cbTipoPersona.DataSource = Enum.GetNames(typeof(Business.Entities.Persona.TiposPersona));
+            try
+            {
+                List<Plan> planes = _planLogic.GetAll();
+                this.cbPlan.DataSource = planes;
+                // selecciono el plan de la posicion 0 como para seleccionar algo
+                this.cbPlan.SelectedIndex = 0;
+                // Tipos persona
+                this.cbTipoPersona.DataSource = Enum.GetNames(typeof(Business.Entities.Persona.TiposPersona));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Planes", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         public PersonaDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            PersonaActual = _personaLogic.GetOne(ID);
-            MapearDeDatos();
+            try
+            {
+                PersonaActual = _personaLogic.GetOne(ID);
+                MapearDeDatos();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Persona", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         public override void MapearDeDatos()
         {
@@ -53,20 +67,27 @@ namespace UI.Desktop
             this.txtEmail.Text = this.PersonaActual.Email;
             this.txtTelefono.Text = this.PersonaActual.Telefono;
             this.txtDireccion.Text = this.PersonaActual.Direccion;
-            // Acá cuando cargo la persona tengo que buscar el plan asignado
-            Plan planActualPersona = _planLogic.GetOne(PersonaActual.IDPlan);
-            // A su vez tengo que cargar los otros planes por si quiero seleccionar otro
-            List<Plan> planes = _planLogic.GetAll();
-            // seteo como datasource del combobox la lista de planes
-            this.cbPlan.DataSource = planes;
-            // ahora tengo que seleccionar el plan correspondiente a la persona
-            this.cbPlan.SelectedIndex = cbPlan.FindStringExact(planActualPersona.Descripcion);
-            // Cargo la fecha
-            this.dtpFechaNacimiento.Value = this.PersonaActual.FechaNacimiento;
-            // Tipos persona
-            this.cbTipoPersona.DataSource = Enum.GetNames(typeof(Business.Entities.Persona.TiposPersona));
-            // Tengo que seleccionar del combo de tipos el tipo de mi persona
-            this.cbTipoPersona.SelectedIndex = cbTipoPersona.FindStringExact(Enum.GetName(PersonaActual.TipoPersona));
+            try
+            {
+                // Acá cuando cargo la persona tengo que buscar el plan asignado
+                Plan planActualPersona = _planLogic.GetOne(PersonaActual.IDPlan);
+                // A su vez tengo que cargar los otros planes por si quiero seleccionar otro
+                List<Plan> planes = _planLogic.GetAll();
+                // seteo como datasource del combobox la lista de planes
+                this.cbPlan.DataSource = planes;
+                // ahora tengo que seleccionar el plan correspondiente a la persona
+                this.cbPlan.SelectedIndex = cbPlan.FindStringExact(planActualPersona.Descripcion);
+                // Cargo la fecha
+                this.dtpFechaNacimiento.Value = this.PersonaActual.FechaNacimiento;
+                // Tipos persona
+                this.cbTipoPersona.DataSource = Enum.GetNames(typeof(Business.Entities.Persona.TiposPersona));
+                // Tengo que seleccionar del combo de tipos el tipo de mi persona
+                this.cbTipoPersona.SelectedIndex = cbTipoPersona.FindStringExact(Enum.GetName(PersonaActual.TipoPersona));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Personas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             switch (this.Modos)
             {
                 case ModoForm.Alta:
@@ -110,12 +131,19 @@ namespace UI.Desktop
         }
         public override void GuardarCambios()
         {
-            MapearADatos();
-            if (Validar()) 
+            try
             {
-                _personaLogic.Save(PersonaActual);
-                Close();
-            }       
+                MapearADatos();
+                if (Validar())
+                {
+                    _personaLogic.Save(PersonaActual);
+                    Close();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Persona", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         public override bool Validar()
         {
@@ -157,7 +185,14 @@ namespace UI.Desktop
         }
         public virtual void Eliminar()
         {
-            _personaLogic.Delete(PersonaActual.ID);
+            try
+            {
+                _personaLogic.Delete(PersonaActual.ID);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Persona", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

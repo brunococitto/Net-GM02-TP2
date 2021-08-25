@@ -30,8 +30,15 @@ namespace UI.Desktop
         public EspecialidadDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            EspecialidadActual = _especialidadLogic.GetOne(ID);
-            MapearDeDatos();
+            try
+            {
+                EspecialidadActual = _especialidadLogic.GetOne(ID);
+                MapearDeDatos();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Especialidad", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         public Especialidad EspecialidadActual { set; get; }
         public override void MapearDeDatos()
@@ -77,11 +84,18 @@ namespace UI.Desktop
         }
         public override void GuardarCambios()
         {
-            MapearADatos();
-            if(Validar())
+            try
             {
-                _especialidadLogic.Save(EspecialidadActual);
-                Close();
+                MapearADatos();
+                if (Validar())
+                {
+                    _especialidadLogic.Save(EspecialidadActual);
+                    Close();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Especialidad", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public override bool Validar()
@@ -126,7 +140,14 @@ namespace UI.Desktop
         }
         public virtual void Eliminar()
         {
-            _especialidadLogic.Delete(EspecialidadActual.ID);
+            try
+            {
+                _especialidadLogic.Delete(EspecialidadActual.ID);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Especialidad", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -31,7 +31,14 @@ namespace UI.Desktop
         }
         public void Listar()
         {
-            this.dgvAlumnoInscripciones.DataSource = _alumnoInscripcionLogic.GetInscripcionesFormateadas();
+            try
+            {
+                this.dgvAlumnoInscripciones.DataSource = _alumnoInscripcionLogic.GetInscripcionesFormateadas();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Inscripciones", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             this.dgvAlumnoInscripciones.AutoGenerateColumns = false;
         }
         private void btnActualizar_Click(object sender, EventArgs e)

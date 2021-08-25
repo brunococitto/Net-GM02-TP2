@@ -32,7 +32,14 @@ namespace UI.Desktop
         public void Listar()
         {
             this.dgvEspecialidades.AutoGenerateColumns = false;
-            this.dgvEspecialidades.DataSource = _especialidadLogic.GetAll();
+            try
+            {
+                this.dgvEspecialidades.DataSource = _especialidadLogic.GetAll();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Especialidades", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void btnActualizar_Click(object sender, EventArgs e)
         {

@@ -33,23 +33,37 @@ namespace UI.Desktop
         {
             Modos = modo;
             // Cargo las materias para mostrarlos en el combobox
-            List<Materia> listaMaterias = _materiaLogic.GetAll();
-            this.cbMateria.DataSource = listaMaterias;
-            // selecciono la materia de la posicion 0 como para seleccionar algo
-            this.cbMateria.SelectedIndex = 0;
-            // Modos = modo;
-            // Cargo las comisiones para mostrarlos en el combobox
-            List<Comision> listaComisiones = _comisionLogic.GetAll();
-            this.cbComision.DataSource = listaComisiones;
-            // selecciono la comision de la posicion 0 como para seleccionar algo
-            this.cbComision.SelectedIndex = 0;
+            try
+            {
+                List<Materia> listaMaterias = _materiaLogic.GetAll();
+                this.cbMateria.DataSource = listaMaterias;
+                // selecciono la materia de la posicion 0 como para seleccionar algo
+                this.cbMateria.SelectedIndex = 0;
+                // Modos = modo;
+                // Cargo las comisiones para mostrarlos en el combobox
+                List<Comision> listaComisiones = _comisionLogic.GetAll();
+                this.cbComision.DataSource = listaComisiones;
+                // selecciono la comision de la posicion 0 como para seleccionar algo
+                this.cbComision.SelectedIndex = 0;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Cursos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         // Este es el constructor cuando se edita o elimina algo, ya que tiene dos args
         public CursoDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            CursoActual = _cursoLogic.GetOne(ID);
-            MapearDeDatos();
+            try
+            {
+                CursoActual = _cursoLogic.GetOne(ID);
+                MapearDeDatos();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Curso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         public override void MapearDeDatos()
         {
@@ -57,23 +71,29 @@ namespace UI.Desktop
             this.txtDescripcion.Text = this.CursoActual.Descripcion;
             this.txtAnoCalendario.Text = this.CursoActual.AnoCalendario.ToString();
             this.txtCupo.Text = this.CursoActual.Cupo.ToString();
-            // Acá cuando cargo el curso tengo que buscar la materia asignada
-            Materia materiaActualCurso = _materiaLogic.GetOne(CursoActual.IDMateria);
-            // A su vez tengo que cargar las otras materias por si quiero seleccionar otra
-            List<Materia> materias = _materiaLogic.GetAll();
-            // seteo como datasource del combobox la lista de materias anteriores
-            this.cbMateria.DataSource = materias;
-            // ahora tengo que seleccionar la materia correspondiente a el curso
-            this.cbMateria.SelectedIndex = cbMateria.FindStringExact(materiaActualCurso.Descripcion);
-            // Acá cuando cargo el curso tengo que buscar la materia asignada
-            Comision comisionActualCurso = _comisionLogic.GetOne(CursoActual.IDComision);
-            // A su vez tengo que cargar las otras materias por si quiero seleccionar otra
-            List<Comision> comisiones = _comisionLogic.GetAll();
-            // seteo como datasource del combobox la lista de materias anteriores
-            this.cbComision.DataSource = comisiones;
-            // ahora tengo que seleccionar la materia correspondiente a el curso
-            this.cbComision.SelectedIndex = cbComision.FindStringExact(comisionActualCurso.Descripcion);
-
+            try
+            {
+                // Acá cuando cargo el curso tengo que buscar la materia asignada
+                Materia materiaActualCurso = _materiaLogic.GetOne(CursoActual.IDMateria);
+                // A su vez tengo que cargar las otras materias por si quiero seleccionar otra
+                List<Materia> materias = _materiaLogic.GetAll();
+                // seteo como datasource del combobox la lista de materias anteriores
+                this.cbMateria.DataSource = materias;
+                // ahora tengo que seleccionar la materia correspondiente a el curso
+                this.cbMateria.SelectedIndex = cbMateria.FindStringExact(materiaActualCurso.Descripcion);
+                // Acá cuando cargo el curso tengo que buscar la materia asignada
+                Comision comisionActualCurso = _comisionLogic.GetOne(CursoActual.IDComision);
+                // A su vez tengo que cargar las otras materias por si quiero seleccionar otra
+                List<Comision> comisiones = _comisionLogic.GetAll();
+                // seteo como datasource del combobox la lista de materias anteriores
+                this.cbComision.DataSource = comisiones;
+                // ahora tengo que seleccionar la materia correspondiente a el curso
+                this.cbComision.SelectedIndex = cbComision.FindStringExact(comisionActualCurso.Descripcion);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Curso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             switch (this.Modos)
             {
                 case ModoForm.Alta:
@@ -133,11 +153,18 @@ namespace UI.Desktop
         }
         public override void GuardarCambios()
         {
-            MapearADatos();
-            if (Validar()) //VALIDAR CUESTIONES DE LOS INT; FORZAR QUE SOLO PUEDA INGRESAR INTEGER
-            { 
-                _cursoLogic.Save(CursoActual);
-                Close();
+            try
+            {
+                MapearADatos();
+                if (Validar()) //VALIDAR CUESTIONES DE LOS INT; FORZAR QUE SOLO PUEDA INGRESAR INTEGER
+                {
+                    _cursoLogic.Save(CursoActual);
+                    Close();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Curso", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public override bool Validar()
@@ -181,7 +208,14 @@ namespace UI.Desktop
         }
         public virtual void Eliminar()
         {
-            _cursoLogic.Delete(CursoActual.ID);
+            try
+            {
+                _cursoLogic.Delete(CursoActual.ID);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Curso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

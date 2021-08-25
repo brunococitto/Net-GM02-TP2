@@ -39,7 +39,7 @@ namespace Data.Database
             }
             catch (Exception e)
             {
-                Exception ExceptionManejada = new Exception("Error al recuperar asignación", e);
+                Exception ExceptionManejada = new Exception("Error al recuperar datos de asignación", e);
                 throw ExceptionManejada;
             }
             return asignacion;

@@ -24,7 +24,7 @@ namespace Data.Database
             }
             catch (Exception e)
             {
-                Exception ExceptionManejada = new Exception("Error al recuperar lista de personas", e);
+                Exception ExceptionManejada = new Exception("Error al recuperar listado de personas", e);
                 throw ExceptionManejada;
             }
             return personas;
