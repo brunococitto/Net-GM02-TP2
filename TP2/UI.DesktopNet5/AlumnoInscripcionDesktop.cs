@@ -180,6 +180,10 @@ namespace UI.Desktop
                 this.btnAceptar.Enabled = true;
                 this.cbCurso.DropDownStyle = ComboBoxStyle.DropDown;
             }
+            catch (FormatException)
+            {
+                MessageBox.Show("El legajo ingresado debe ser un número", "Persona", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Personas", MessageBoxButtons.OK, MessageBoxIcon.Error);

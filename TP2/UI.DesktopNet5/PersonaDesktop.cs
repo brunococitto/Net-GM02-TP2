@@ -140,6 +140,10 @@ namespace UI.Desktop
                     Close();
                 }
             }
+            catch (FormatException)
+            {
+                MessageBox.Show("El legajo ingresado debe ser un número", "Persona", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Persona", MessageBoxButtons.OK, MessageBoxIcon.Error);

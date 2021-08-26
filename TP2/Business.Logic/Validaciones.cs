@@ -214,7 +214,7 @@ namespace Business.Logic
     {
         public ComisionValidator()
         {
-            RuleFor(x => x.AnoEspecialidad).NotNull().GreaterThan(1960);
+            RuleFor(x => x.AnoEspecialidad).NotNull().GreaterThan(0);
             RuleFor(x => x.Descripcion).NotEmpty().MaximumLength(50).Matches("^[a-zA-Z1-9]+$").WithMessage("'Descripcion' debe contener solo letras y/o números"); // ValidarLetrasNumeros
         }
     }

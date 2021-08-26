@@ -88,7 +88,7 @@ namespace UI.Desktop
                 this.txtNombre.Text = per.Nombre;
                 this.txtApellido.Text = per.Apellido;
                 this.txtCondicion.Text = insc.Condicion;
-                this.txtNota.Text = insc.Nota.ToString();
+                this.nudNota.Value = insc.Nota;
             }
             catch (Exception e)
             {
@@ -120,14 +120,14 @@ namespace UI.Desktop
                 AlumnoInscripcion insc = _alumnoInscripcionLogic.GetOne((int)this.dgvRegistrarNotas.SelectedRows[0].Cells[0].Value);
 
                 insc.Condicion = this.txtCondicion.Text;
-                insc.Nota = Int32.Parse(this.txtNota.Text);
+                insc.Nota = (int)this.nudNota.Value;
                 insc.State = BusinessEntity.States.Modified;
                 _alumnoInscripcionLogic.Save(insc);
 
                 this.txtApellido.Text = "";
                 this.txtNombre.Text = "";
                 this.txtCondicion.Text = "";
-                this.txtNota.Text = "";
+                this.nudNota.Value = 0;
                 this.gbModificarInscripcion.Enabled = false;
                 this.Listar();
         }

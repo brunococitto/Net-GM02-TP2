@@ -38,11 +38,13 @@ namespace UI.Desktop
             this.lblMateria = new System.Windows.Forms.Label();
             this.cbMateria = new System.Windows.Forms.ComboBox();
             this.lblAnoCalendario = new System.Windows.Forms.Label();
-            this.txtAnoCalendario = new System.Windows.Forms.TextBox();
-            this.txtCupo = new System.Windows.Forms.TextBox();
             this.lblCupo = new System.Windows.Forms.Label();
             this.cbComision = new System.Windows.Forms.ComboBox();
             this.lblComision = new System.Windows.Forms.Label();
+            this.nudAnoCalendario = new System.Windows.Forms.NumericUpDown();
+            this.nudCupo = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAnoCalendario)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCupo)).BeginInit();
             this.SuspendLayout();
             // 
             // lblID
@@ -135,22 +137,6 @@ namespace UI.Desktop
             this.lblAnoCalendario.TabIndex = 15;
             this.lblAnoCalendario.Text = "Año Calendario";
             // 
-            // txtAnoCalendario
-            // 
-            this.txtAnoCalendario.Location = new System.Drawing.Point(118, 68);
-            this.txtAnoCalendario.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.txtAnoCalendario.Name = "txtAnoCalendario";
-            this.txtAnoCalendario.Size = new System.Drawing.Size(235, 23);
-            this.txtAnoCalendario.TabIndex = 16;
-            // 
-            // txtCupo
-            // 
-            this.txtCupo.Location = new System.Drawing.Point(118, 97);
-            this.txtCupo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.txtCupo.Name = "txtCupo";
-            this.txtCupo.Size = new System.Drawing.Size(235, 23);
-            this.txtCupo.TabIndex = 17;
-            // 
             // lblCupo
             // 
             this.lblCupo.AutoSize = true;
@@ -181,16 +167,50 @@ namespace UI.Desktop
             this.lblComision.TabIndex = 19;
             this.lblComision.Text = "Comision";
             // 
+            // nudAnoCalendario
+            // 
+            this.nudAnoCalendario.Location = new System.Drawing.Point(118, 69);
+            this.nudAnoCalendario.Maximum = new decimal(new int[] {
+            2050,
+            0,
+            0,
+            0});
+            this.nudAnoCalendario.Minimum = new decimal(new int[] {
+            1950,
+            0,
+            0,
+            0});
+            this.nudAnoCalendario.Name = "nudAnoCalendario";
+            this.nudAnoCalendario.Size = new System.Drawing.Size(235, 23);
+            this.nudAnoCalendario.TabIndex = 21;
+            this.nudAnoCalendario.Value = new decimal(new int[] {
+            1950,
+            0,
+            0,
+            0});
+            // 
+            // nudCupo
+            // 
+            this.nudCupo.Location = new System.Drawing.Point(118, 98);
+            this.nudCupo.Name = "nudCupo";
+            this.nudCupo.Size = new System.Drawing.Size(235, 23);
+            this.nudCupo.TabIndex = 22;
+            this.nudCupo.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
             // CursoDesktop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(366, 240);
+            this.Controls.Add(this.nudCupo);
+            this.Controls.Add(this.nudAnoCalendario);
             this.Controls.Add(this.cbComision);
             this.Controls.Add(this.lblComision);
             this.Controls.Add(this.lblCupo);
-            this.Controls.Add(this.txtCupo);
-            this.Controls.Add(this.txtAnoCalendario);
             this.Controls.Add(this.lblAnoCalendario);
             this.Controls.Add(this.cbMateria);
             this.Controls.Add(this.btnCancelar);
@@ -206,8 +226,11 @@ namespace UI.Desktop
             this.MinimizeBox = false;
             this.Name = "CursoDesktop";
             this.Text = "Curso";
+            ((System.ComponentModel.ISupportInitialize)(this.nudAnoCalendario)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCupo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
@@ -220,11 +243,11 @@ namespace UI.Desktop
         private System.Windows.Forms.Label lblMateria;
         private System.Windows.Forms.ComboBox cbMateria;
         private System.Windows.Forms.Label lblAnoCalendario;
-        private System.Windows.Forms.TextBox txtAnoCalendario;
-        private System.Windows.Forms.TextBox txtCupo;
         private System.Windows.Forms.Label lblCupo;
         private System.Windows.Forms.ComboBox cbComision;
         private System.Windows.Forms.Label lblComision;
+        private System.Windows.Forms.NumericUpDown nudAnoCalendario;
+        private System.Windows.Forms.NumericUpDown nudCupo;
     }
 }
 

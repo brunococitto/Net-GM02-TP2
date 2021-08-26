@@ -69,8 +69,8 @@ namespace UI.Desktop
         {
             this.txtID.Text = this.CursoActual.ID.ToString();
             this.txtDescripcion.Text = this.CursoActual.Descripcion;
-            this.txtAnoCalendario.Text = this.CursoActual.AnoCalendario.ToString();
-            this.txtCupo.Text = this.CursoActual.Cupo.ToString();
+            this.nudAnoCalendario.Value = this.CursoActual.AnoCalendario;
+            this.nudCupo.Value = this.CursoActual.Cupo;
             try
             {
                 // Acá cuando cargo el curso tengo que buscar la materia asignada
@@ -107,16 +107,16 @@ namespace UI.Desktop
                     this.cbMateria.Enabled = false;
                     this.cbComision.Enabled = false;
                     this.txtDescripcion.Enabled = false;
-                    this.txtAnoCalendario.Enabled = false;
-                    this.txtCupo.Enabled = false;
+                    this.nudAnoCalendario.Enabled = false;
+                    this.nudCupo.Enabled = false;
                     break;
                 case ModoForm.Consulta:
                     this.btnAceptar.Text = "Aceptar";
                     this.cbMateria.Enabled = false;
                     this.cbComision.Enabled = false;
                     this.txtDescripcion.Enabled = false;
-                    this.txtAnoCalendario.Enabled = false;
-                    this.txtCupo.Enabled = false;
+                    this.nudAnoCalendario.Enabled = false;
+                    this.nudCupo.Enabled = false;
                     break;
             }
         }
@@ -129,8 +129,8 @@ namespace UI.Desktop
                 // Recordar que el value member del combo es el ID de especialidad
                 CursoActual.IDMateria = (int)this.cbMateria.SelectedValue;
                 CursoActual.IDComision = (int)this.cbComision.SelectedValue;
-                CursoActual.AnoCalendario = Convert.ToInt32(this.txtAnoCalendario.Text);
-                CursoActual.Cupo = Convert.ToInt32(this.txtCupo.Text);
+                CursoActual.AnoCalendario = (int)this.nudAnoCalendario.Value;
+                CursoActual.Cupo = (int)this.nudCupo.Value;
             }
             if (Modos == ModoForm.Modificacion)
             {
@@ -138,8 +138,8 @@ namespace UI.Desktop
                 // Recordar que el value member del combo es el ID de especialidad
                 CursoActual.IDMateria = (int)this.cbMateria.SelectedValue;
                 CursoActual.IDComision = (int)this.cbComision.SelectedValue;
-                CursoActual.AnoCalendario = Convert.ToInt32(this.txtAnoCalendario.Text);
-                CursoActual.Cupo = Convert.ToInt32(this.txtCupo.Text);
+                CursoActual.AnoCalendario = (int)this.nudAnoCalendario.Value;
+                CursoActual.Cupo = (int)this.nudCupo.Value;
             }
             switch (Modos)
             {

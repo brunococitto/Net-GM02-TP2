@@ -61,8 +61,8 @@ namespace UI.Desktop
         {
             this.txtID.Text = this.MateriaActual.ID.ToString();
             this.txtDescripcion.Text = this.MateriaActual.Descripcion;
-            this.txtHorasSemanales.Text = this.MateriaActual.HSSemanales.ToString();
-            this.txtHorasTotales.Text = this.MateriaActual.HSTotales.ToString();
+            this.nudHorasSemanales.Value = this.MateriaActual.HSSemanales;
+            this.nudHorasTotales.Value = this.MateriaActual.HSTotales;
             try
             {
                 // Acá cuando cargo la materia tengo que buscar el plan asignado
@@ -90,15 +90,15 @@ namespace UI.Desktop
                     this.btnAceptar.Text = "Eliminar";
                     this.cbPlan.Enabled = false;
                     this.txtDescripcion.Enabled = false;
-                    this.txtHorasSemanales.Enabled = false;
-                    this.txtHorasTotales.Enabled = false;
+                    this.nudHorasSemanales.Enabled = false;
+                    this.nudHorasTotales.Enabled = false;
                     break;
                 case ModoForm.Consulta:
                     this.btnAceptar.Text = "Aceptar";
                     this.cbPlan.Enabled = false;
                     this.txtDescripcion.Enabled = false;
-                    this.txtHorasSemanales.Enabled = false;
-                    this.txtHorasTotales.Enabled = false;
+                    this.nudHorasSemanales.Enabled = false;
+                    this.nudHorasTotales.Enabled = false;
                     break;
             }
         }
@@ -110,16 +110,16 @@ namespace UI.Desktop
                 MateriaActual.Descripcion = this.txtDescripcion.Text;
                 // Recordar que el value member del combo es el ID de especialidad
                 MateriaActual.IDPlan = (int)this.cbPlan.SelectedValue;
-                MateriaActual.HSSemanales = Convert.ToInt32(this.txtHorasSemanales.Text);
-                MateriaActual.HSTotales = Convert.ToInt32(this.txtHorasTotales.Text);
+                MateriaActual.HSSemanales = (int)this.nudHorasSemanales.Value;
+                MateriaActual.HSTotales = (int)this.nudHorasTotales.Value;
             }
             if (Modos == ModoForm.Modificacion)
             {
                 MateriaActual.Descripcion = this.txtDescripcion.Text;
                 // Recordar que el value member del combo es el ID de especialidad
                 MateriaActual.IDPlan = (int)this.cbPlan.SelectedValue;
-                MateriaActual.HSSemanales = Convert.ToInt32(this.txtHorasSemanales.Text);
-                MateriaActual.HSTotales = Convert.ToInt32(this.txtHorasTotales.Text);
+                MateriaActual.HSSemanales = (int)this.nudHorasSemanales.Value;
+                MateriaActual.HSTotales = (int)this.nudHorasTotales.Value;
             }
             switch (Modos)
             {

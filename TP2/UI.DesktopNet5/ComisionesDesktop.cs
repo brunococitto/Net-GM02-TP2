@@ -64,7 +64,7 @@ namespace UI.Desktop
         {
             this.txtBoxID.Text = this.ComisionActual.ID.ToString();
             this.txtBoxDesc.Text = this.ComisionActual.Descripcion;
-            this.txtBoxAnioEspecialidad.Text = this.ComisionActual.AnoEspecialidad.ToString();
+            this.nudAnioEspecialidad.Value = this.ComisionActual.AnoEspecialidad;
             // Acá cuando cargo la comi tengo que buscar el plan 
             try
             {
@@ -92,13 +92,13 @@ namespace UI.Desktop
                     this.bAceptar.Text = "Eliminar";
                     this.comboBoxIDPlan.Enabled = false;
                     this.txtBoxDesc.Enabled = false;
-                    this.txtBoxAnioEspecialidad.Enabled = false;
+                    this.nudAnioEspecialidad.Enabled = false;
                     break;
                 case ModoForm.Consulta:
                     this.bAceptar.Text = "Aceptar";
                     this.comboBoxIDPlan.Enabled = false;
                     this.txtBoxDesc.Enabled = false;
-                    this.txtBoxAnioEspecialidad.Enabled = false;
+                    this.nudAnioEspecialidad.Enabled = false;
                     break;
             }
         }
@@ -110,13 +110,13 @@ namespace UI.Desktop
                 ComisionActual = new Comision();
                 ComisionActual.Descripcion = this.txtBoxDesc.Text;
                 ComisionActual.IDPlan = (int)this.comboBoxIDPlan.SelectedValue;
-                ComisionActual.AnoEspecialidad = Convert.ToInt32(this.txtBoxAnioEspecialidad.Text);
+                ComisionActual.AnoEspecialidad = (int)this.nudAnioEspecialidad.Value;
             }
             if (Modos == ModoForm.Modificacion)
             {
                 ComisionActual.Descripcion = this.txtBoxDesc.Text;
                 ComisionActual.IDPlan = (int)this.comboBoxIDPlan.SelectedValue;
-                ComisionActual.AnoEspecialidad = Convert.ToInt32(this.txtBoxAnioEspecialidad.Text);
+                ComisionActual.AnoEspecialidad = (int)this.nudAnioEspecialidad.Value;
 
             }
             switch (Modos)

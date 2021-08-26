@@ -39,11 +39,12 @@ namespace UI.Desktop
             this.bCancelar = new System.Windows.Forms.Button();
             this.bAceptar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtBoxAnioEspecialidad = new System.Windows.Forms.TextBox();
+            this.nudAnioEspecialidad = new System.Windows.Forms.NumericUpDown();
             this.TLPanelEspecialidades = new System.Windows.Forms.TableLayoutPanel();
             this.lblID = new System.Windows.Forms.Label();
             this.lblDescripcion = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAnioEspecialidad)).BeginInit();
             this.TLPanelEspecialidades.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,10 +59,10 @@ namespace UI.Desktop
             this.tableLayoutPanel1.Controls.Add(this.txtBoxID, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtBoxDesc, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxIDPlan, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.bCancelar, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.bAceptar, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.txtBoxAnioEspecialidad, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.nudAnioEspecialidad, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.bAceptar, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.bCancelar, 1, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -72,7 +73,7 @@ namespace UI.Desktop
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(411, 175);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(414, 175);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // label3
@@ -80,9 +81,9 @@ namespace UI.Desktop
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(3, 70);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 15);
+            this.label3.Size = new System.Drawing.Size(30, 15);
             this.label3.TabIndex = 4;
-            this.label3.Text = "ID Plan";
+            this.label3.Text = "Plan";
             // 
             // label1
             // 
@@ -105,14 +106,14 @@ namespace UI.Desktop
             // txtBoxID
             // 
             this.txtBoxID.Enabled = false;
-            this.txtBoxID.Location = new System.Drawing.Point(125, 3);
+            this.txtBoxID.Location = new System.Drawing.Point(126, 3);
             this.txtBoxID.Name = "txtBoxID";
             this.txtBoxID.Size = new System.Drawing.Size(283, 23);
             this.txtBoxID.TabIndex = 2;
             // 
             // txtBoxDesc
             // 
-            this.txtBoxDesc.Location = new System.Drawing.Point(125, 39);
+            this.txtBoxDesc.Location = new System.Drawing.Point(126, 39);
             this.txtBoxDesc.Name = "txtBoxDesc";
             this.txtBoxDesc.Size = new System.Drawing.Size(283, 23);
             this.txtBoxDesc.TabIndex = 3;
@@ -121,7 +122,7 @@ namespace UI.Desktop
             // 
             this.comboBoxIDPlan.DisplayMember = "Descripcion";
             this.comboBoxIDPlan.FormattingEnabled = true;
-            this.comboBoxIDPlan.Location = new System.Drawing.Point(125, 73);
+            this.comboBoxIDPlan.Location = new System.Drawing.Point(126, 73);
             this.comboBoxIDPlan.Name = "comboBoxIDPlan";
             this.comboBoxIDPlan.Size = new System.Drawing.Size(283, 23);
             this.comboBoxIDPlan.TabIndex = 5;
@@ -130,7 +131,7 @@ namespace UI.Desktop
             // 
             // bCancelar
             // 
-            this.bCancelar.Location = new System.Drawing.Point(3, 133);
+            this.bCancelar.Location = new System.Drawing.Point(126, 133);
             this.bCancelar.Name = "bCancelar";
             this.bCancelar.Size = new System.Drawing.Size(103, 30);
             this.bCancelar.TabIndex = 2;
@@ -140,9 +141,9 @@ namespace UI.Desktop
             // 
             // bAceptar
             // 
-            this.bAceptar.Location = new System.Drawing.Point(125, 133);
+            this.bAceptar.Location = new System.Drawing.Point(3, 133);
             this.bAceptar.Name = "bAceptar";
-            this.bAceptar.Size = new System.Drawing.Size(129, 30);
+            this.bAceptar.Size = new System.Drawing.Size(117, 30);
             this.bAceptar.TabIndex = 1;
             this.bAceptar.Text = "Aceptar";
             this.bAceptar.UseVisualStyleBackColor = true;
@@ -157,12 +158,27 @@ namespace UI.Desktop
             this.label4.TabIndex = 6;
             this.label4.Text = "Año Especialidad";
             // 
-            // txtBoxAnioEspecialidad
+            // nudAnioEspecialidad
             // 
-            this.txtBoxAnioEspecialidad.Location = new System.Drawing.Point(125, 106);
-            this.txtBoxAnioEspecialidad.Name = "txtBoxAnioEspecialidad";
-            this.txtBoxAnioEspecialidad.Size = new System.Drawing.Size(283, 23);
-            this.txtBoxAnioEspecialidad.TabIndex = 7;
+            this.nudAnioEspecialidad.Location = new System.Drawing.Point(126, 106);
+            this.nudAnioEspecialidad.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nudAnioEspecialidad.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudAnioEspecialidad.Name = "nudAnioEspecialidad";
+            this.nudAnioEspecialidad.Size = new System.Drawing.Size(283, 23);
+            this.nudAnioEspecialidad.TabIndex = 1;
+            this.nudAnioEspecialidad.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // TLPanelEspecialidades
             // 
@@ -208,12 +224,16 @@ namespace UI.Desktop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(411, 175);
+            this.ClientSize = new System.Drawing.Size(414, 175);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ComisionesDesktop";
             this.Text = "Comision";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAnioEspecialidad)).EndInit();
             this.TLPanelEspecialidades.ResumeLayout(false);
             this.TLPanelEspecialidades.PerformLayout();
             this.ResumeLayout(false);
@@ -235,6 +255,6 @@ namespace UI.Desktop
         private System.Windows.Forms.Button bAceptar;
         private System.Windows.Forms.Button bCancelar;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtBoxAnioEspecialidad;
+        private System.Windows.Forms.NumericUpDown nudAnioEspecialidad;
     }
 }
