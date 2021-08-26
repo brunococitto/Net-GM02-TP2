@@ -33,13 +33,10 @@ namespace UI.Desktop
         }
         public void Listar()
         {
-            // Tengo que pedir la lista de comisiones y de planes
             try
             {
                 List<Plan> planes = _planLogic.GetAll();
                 List<Comision> comisiones = _comisionLogic.GetAll();
-                // Tengo que cambiar el ID de la especialidad por su descripción para mostrarlo
-                // Puedo recorrer los arreglos y matchear o puedo usar LINQ y hacerlo mucho más fácil
                 var consulta =
                                 from p in planes
                                 join c in comisiones
@@ -49,10 +46,8 @@ namespace UI.Desktop
                                     ID = c.ID,
                                     Descripcion = c.Descripcion,
                                     AnoEspecialidad = c.AnoEspecialidad,
-                                    IDPlan = p.Descripcion
+                                    Plan = p.Descripcion
                                 };
-                // El DataSource de un dgv espera algo que implemente la interfaz ILIST, como por ej una lista
-                // Entonces convierto lo que antes era algo anónimo a una lista
                 this.dgvComisiones.DataSource = consulta.ToList();
             }
             catch (Exception e)
