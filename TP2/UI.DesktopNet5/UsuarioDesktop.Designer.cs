@@ -136,6 +136,7 @@ namespace UI.Desktop
             this.txtClave.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtClave.Name = "txtClave";
             this.txtClave.PasswordChar = '*';
+            this.txtClave.PlaceholderText = "Debe contener más de 8 caracteres";
             this.txtClave.Size = new System.Drawing.Size(242, 23);
             this.txtClave.TabIndex = 7;
             // 

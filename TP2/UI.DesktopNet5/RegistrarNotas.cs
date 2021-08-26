@@ -116,7 +116,8 @@ namespace UI.Desktop
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-
+            try
+            {
                 AlumnoInscripcion insc = _alumnoInscripcionLogic.GetOne((int)this.dgvRegistrarNotas.SelectedRows[0].Cells[0].Value);
 
                 insc.Condicion = this.txtCondicion.Text;
@@ -130,6 +131,11 @@ namespace UI.Desktop
                 this.nudNota.Value = 0;
                 this.gbModificarInscripcion.Enabled = false;
                 this.Listar();
+            }
+            catch(Exception ex)
+            { 
+                MessageBox.Show(ex.Message, "Datos Inscripción", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+            }
         }
 
         private void dgvRegistrarNotas_CellClick(object sender, DataGridViewCellEventArgs e)

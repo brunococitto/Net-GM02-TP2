@@ -176,7 +176,7 @@ namespace Data.Database
         public Usuario Login(string usuario, string contrasenia)
         {
             try
-            {
+            { 
                 contrasenia = hashearClave(contrasenia);
                 Usuario usr = new Usuario();
                 this.OpenConnection();

@@ -28,8 +28,16 @@ namespace UI.Desktop
             Usuario usr = _usuarioLogic.Login(this.txtUsuario.Text, this.txtPass.Text);
             if (usr != null)
             {
-                Singleton.setInstance(_personaLogic.GetOne(usr.IDPersona), usr);
-                this.DialogResult = DialogResult.OK;
+                if (usr.Habilitado == true)
+                {
+                    Singleton.setInstance(_personaLogic.GetOne(usr.IDPersona), usr);
+                    this.DialogResult = DialogResult.OK;
+                }
+                else
+                {
+                    MessageBox.Show("Usuario no habilitado, contactese con su administrador", "Login"
+                , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
