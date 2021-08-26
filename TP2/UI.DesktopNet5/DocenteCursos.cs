@@ -31,7 +31,14 @@ namespace UI.Desktop
         }
         public void Listar()
         {
-            this.dgvDocenteCursos.DataSource = _docenteCursoLogic.GetAsignacionesFormateadas();
+            try
+            {
+                this.dgvDocenteCursos.DataSource = _docenteCursoLogic.GetAsignacionesFormateadas();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Docente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             this.dgvDocenteCursos.AutoGenerateColumns = false;
         }
         private void btnActualizar_Click(object sender, EventArgs e)

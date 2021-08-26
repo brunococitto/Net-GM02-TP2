@@ -31,7 +31,14 @@ namespace UI.Desktop
         }
         public void Listar()
         {
-            this.dgvEstadoAcademico.DataSource = _alumnoInscripcionLogic.GetEstadoAcademico(Singleton.getInstance().PersonaLogged.ID);
+            try
+            {
+                this.dgvEstadoAcademico.DataSource = _alumnoInscripcionLogic.GetEstadoAcademico(Singleton.getInstance().PersonaLogged.ID);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Estado Academico", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             this.dgvEstadoAcademico.AutoGenerateColumns = false;
         }
         private void btnActualizar_Click(object sender, EventArgs e)

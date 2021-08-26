@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentValidation;
+using FluentValidation.Results;
 using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
@@ -28,8 +30,15 @@ namespace UI.Desktop
         public EspecialidadDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            EspecialidadActual = _especialidadLogic.GetOne(ID);
-            MapearDeDatos();
+            try
+            {
+                EspecialidadActual = _especialidadLogic.GetOne(ID);
+                MapearDeDatos();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Especialidad", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         public Especialidad EspecialidadActual { set; get; }
         public override void MapearDeDatos()
@@ -76,40 +85,44 @@ namespace UI.Desktop
         }
         public override void GuardarCambios()
         {
-            MapearADatos();
-            _especialidadLogic.Save(EspecialidadActual);
-        }
-        public override bool Validar()
-        {
             try
             {
-                Validaciones.ValidarNulo(this.txtDescripcion.Text, "descripcón");
-                Validaciones.ValidarLetras(this.txtDescripcion.Text, "descripcón");
-                return true;
-
+                MapearADatos();
+                if (Validar())
+                {
+                    _especialidadLogic.Save(EspecialidadActual);
+                    Close();
+                }
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
-                return false;
+                MessageBox.Show(e.Message, "Especialidad", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        public override bool Validar()
+        {
+            ValidationResult result = new EspecialidadValidator().Validate(EspecialidadActual);
+            if (!result.IsValid)
+            {
+                string notificacion = string.Join(Environment.NewLine, result.Errors);
+                MessageBox.Show(notificacion);
+                return false;
+            }
+            return true;  
+        }
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             switch (Modos)
             {
                 case ModoForm.Alta:
-                    if (Validar())
                     {
                         GuardarCambios();
-                        Close();
                     };
                     break;
                 case ModoForm.Modificacion:
-                    if (Validar())
                     {
                         GuardarCambios();
-                        Close();
                     };
                     break;
                 case ModoForm.Baja:
@@ -128,7 +141,14 @@ namespace UI.Desktop
         }
         public virtual void Eliminar()
         {
-            _especialidadLogic.Delete(EspecialidadActual.ID);
+            try
+            {
+                _especialidadLogic.Delete(EspecialidadActual.ID);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Especialidad", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

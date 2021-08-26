@@ -33,29 +33,36 @@ namespace UI.Desktop
         }
         public void Listar()
         {
-            // Pido las personas
-            List<Persona> personas = _personaLogic.GetAll();
-            // Pido los planes
-            List<Plan> planes = _planLogic.GetAll();
-            // Consulta para dejar la descripción del plan
-            var consulta =
-                            from per in personas
-                            join pl in planes
-                            on per.IDPlan equals pl.ID
-                            select new
-                            {
-                                ID = per.ID,
-                                Legajo = per.Legajo,
-                                Nombre = per.Nombre,
-                                Apellido = per.Apellido,
-                                Direccion = per.Direccion,
-                                Telefono = per.Telefono,
-                                Email = per.Email,
-                                FechaNacimiento = per.FechaNacimiento,
-                                Plan = pl.Descripcion,
-                                TipoPersona = per.TipoPersona
-                            };
-            this.dgvPersonas.DataSource = consulta.ToList();
+            try
+            {
+                // Pido las personas
+                List<Persona> personas = _personaLogic.GetAll();
+                // Pido los planes
+                List<Plan> planes = _planLogic.GetAll();
+                // Consulta para dejar la descripción del plan
+                var consulta =
+                                from per in personas
+                                join pl in planes
+                                on per.IDPlan equals pl.ID
+                                select new
+                                {
+                                    ID = per.ID,
+                                    Legajo = per.Legajo,
+                                    Nombre = per.Nombre,
+                                    Apellido = per.Apellido,
+                                    Direccion = per.Direccion,
+                                    Telefono = per.Telefono,
+                                    Email = per.Email,
+                                    FechaNacimiento = per.FechaNacimiento,
+                                    Plan = pl.Descripcion,
+                                    TipoPersona = per.TipoPersona
+                                };
+                this.dgvPersonas.DataSource = consulta.ToList();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Personas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             this.dgvPersonas.AutoGenerateColumns = false;
         }
         private void btnActualizar_Click(object sender, EventArgs e)

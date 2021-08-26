@@ -25,7 +25,7 @@ namespace Data.Database
             }
             catch (Exception e)
             {
-                Exception ExceptionManejada = new Exception("Error al recuperar inscripciones", e);
+                Exception ExceptionManejada = new Exception("Error al recuperar listado de inscripciones", e);
                 throw ExceptionManejada;
             }
             return inscripciones;
@@ -39,7 +39,7 @@ namespace Data.Database
             }
             catch (Exception e)
             {
-                Exception ExceptionManejada = new Exception("Error al recuperar inscripción", e);
+                Exception ExceptionManejada = new Exception("Error al recuperar datos de inscripción", e);
                 throw ExceptionManejada;
             }
             return inscripcion;
@@ -155,7 +155,7 @@ namespace Data.Database
             }
             catch (Exception e)
             {
-                Exception ExceptionManejada = new Exception("Error al recuperar inscripciones formateadas", e);
+                Exception ExceptionManejada = new Exception("Error al recuperar estado academico de alumno", e);
                 throw ExceptionManejada;
             }
 

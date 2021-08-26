@@ -51,35 +51,49 @@ namespace UI.Desktop
         }
         public void Listar()
         {
-            // Pido las alumnoInscripciones
-            List<AlumnoInscripcion> alumnoInscripciones = _alumnoInscripcionLogic.GetInscripcionesCurso((int)this.cbCursos.SelectedValue);
-            // Pido las personas
-            List<Persona> personas = _personaLogic.GetAll();
-            // Consulta para dejar la descripción del plan
-            var consulta =
-                            from insc in alumnoInscripciones
-                            join per in personas
-                            on insc.IDAlumno equals per.ID
-                            select new
-                            {
-                                ID = insc.ID,
-                                Legajo = per.Legajo,
-                                Nombre = per.Nombre,
-                                Apellido = per.Apellido,
-                                Condicion = insc.Condicion,
-                                Nota = insc.Nota
-                            };
-            this.dgvRegistrarNotas.DataSource = consulta.ToList();
+            try
+            {
+                // Pido las alumnoInscripciones
+                List<AlumnoInscripcion> alumnoInscripciones = _alumnoInscripcionLogic.GetInscripcionesCurso((int)this.cbCursos.SelectedValue);
+                // Pido las personas
+                List<Persona> personas = _personaLogic.GetAll();
+                // Consulta para dejar la descripción del plan
+                var consulta =
+                                from insc in alumnoInscripciones
+                                join per in personas
+                                on insc.IDAlumno equals per.ID
+                                select new
+                                {
+                                    ID = insc.ID,
+                                    Legajo = per.Legajo,
+                                    Nombre = per.Nombre,
+                                    Apellido = per.Apellido,
+                                    Condicion = insc.Condicion,
+                                    Nota = insc.Nota
+                                };
+                this.dgvRegistrarNotas.DataSource = consulta.ToList();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Notas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             this.dgvRegistrarNotas.AutoGenerateColumns = false;
         }
         private void CargarDatosInscripcion()
         {
-            AlumnoInscripcion insc = _alumnoInscripcionLogic.GetOne((int)this.dgvRegistrarNotas.SelectedRows[0].Cells[0].Value);
-            Persona per = _personaLogic.GetOne(insc.IDAlumno);
-            this.txtNombre.Text = per.Nombre;
-            this.txtApellido.Text = per.Apellido;
-            this.txtCondicion.Text = insc.Condicion;
-            this.txtNota.Text = insc.Nota.ToString();
+            try
+            {
+                AlumnoInscripcion insc = _alumnoInscripcionLogic.GetOne((int)this.dgvRegistrarNotas.SelectedRows[0].Cells[0].Value);
+                Persona per = _personaLogic.GetOne(insc.IDAlumno);
+                this.txtNombre.Text = per.Nombre;
+                this.txtApellido.Text = per.Apellido;
+                this.txtCondicion.Text = insc.Condicion;
+                this.nudNota.Value = insc.Nota;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Datos Inscripción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void btnActualizar_Click(object sender, EventArgs e)
         {
@@ -102,17 +116,20 @@ namespace UI.Desktop
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            AlumnoInscripcion insc = _alumnoInscripcionLogic.GetOne((int)this.dgvRegistrarNotas.SelectedRows[0].Cells[0].Value);
-            insc.Condicion = this.txtCondicion.Text;
-            insc.Nota = Int32.Parse(this.txtNota.Text);
-            insc.State = BusinessEntity.States.Modified;
-            _alumnoInscripcionLogic.Save(insc);
-            this.txtApellido.Text = "";
-            this.txtNombre.Text = "";
-            this.txtCondicion.Text = "";
-            this.txtNota.Text = "";
-            this.gbModificarInscripcion.Enabled = false;
-            this.Listar();
+
+                AlumnoInscripcion insc = _alumnoInscripcionLogic.GetOne((int)this.dgvRegistrarNotas.SelectedRows[0].Cells[0].Value);
+
+                insc.Condicion = this.txtCondicion.Text;
+                insc.Nota = (int)this.nudNota.Value;
+                insc.State = BusinessEntity.States.Modified;
+                _alumnoInscripcionLogic.Save(insc);
+
+                this.txtApellido.Text = "";
+                this.txtNombre.Text = "";
+                this.txtCondicion.Text = "";
+                this.nudNota.Value = 0;
+                this.gbModificarInscripcion.Enabled = false;
+                this.Listar();
         }
 
         private void dgvRegistrarNotas_CellClick(object sender, DataGridViewCellEventArgs e)

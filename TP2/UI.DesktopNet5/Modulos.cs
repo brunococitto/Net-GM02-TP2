@@ -32,7 +32,14 @@ namespace UI.Desktop
         public void Listar()
         {
             this.dgvModulos.AutoGenerateColumns = false;
-            this.dgvModulos.DataSource = _moduloLogic.GetAll();
+            try
+            {
+                this.dgvModulos.DataSource = _moduloLogic.GetAll();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Modulo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void btnActualizar_Click(object sender, EventArgs e)
         {

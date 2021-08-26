@@ -17,15 +17,42 @@ namespace Business.Logic
         }
         public List<Especialidad> GetAll()
         {
-            return EspecialidadData.GetAll();
+            try
+            {
+                return EspecialidadData.GetAll();
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar lista de especialidades", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public Especialidad GetOne(int id)
         {
-            return EspecialidadData.GetOne(id);
+            try
+            {
+                return EspecialidadData.GetOne(id);
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar datos de especialidad", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public void Delete(int id)
         {
-            EspecialidadData.Delete(id);
+            try
+            {
+                EspecialidadData.Delete(id);
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al eliminar especialidad", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public void Save(Especialidad especialidad)
         {

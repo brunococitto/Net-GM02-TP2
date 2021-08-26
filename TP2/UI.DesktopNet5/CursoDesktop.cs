@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
 using Data.Database;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace UI.Desktop
 {
@@ -31,47 +33,67 @@ namespace UI.Desktop
         {
             Modos = modo;
             // Cargo las materias para mostrarlos en el combobox
-            List<Materia> listaMaterias = _materiaLogic.GetAll();
-            this.cbMateria.DataSource = listaMaterias;
-            // selecciono la materia de la posicion 0 como para seleccionar algo
-            this.cbMateria.SelectedIndex = 0;
-            // Modos = modo;
-            // Cargo las comisiones para mostrarlos en el combobox
-            List<Comision> listaComisiones = _comisionLogic.GetAll();
-            this.cbComision.DataSource = listaComisiones;
-            // selecciono la comision de la posicion 0 como para seleccionar algo
-            this.cbComision.SelectedIndex = 0;
+            try
+            {
+                List<Materia> listaMaterias = _materiaLogic.GetAll();
+                this.cbMateria.DataSource = listaMaterias;
+                // selecciono la materia de la posicion 0 como para seleccionar algo
+                this.cbMateria.SelectedIndex = 0;
+                // Modos = modo;
+                // Cargo las comisiones para mostrarlos en el combobox
+                List<Comision> listaComisiones = _comisionLogic.GetAll();
+                this.cbComision.DataSource = listaComisiones;
+                // selecciono la comision de la posicion 0 como para seleccionar algo
+                this.cbComision.SelectedIndex = 0;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Cursos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         // Este es el constructor cuando se edita o elimina algo, ya que tiene dos args
         public CursoDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            CursoActual = _cursoLogic.GetOne(ID);
-            MapearDeDatos();
+            try
+            {
+                CursoActual = _cursoLogic.GetOne(ID);
+                MapearDeDatos();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Curso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         public override void MapearDeDatos()
         {
             this.txtID.Text = this.CursoActual.ID.ToString();
             this.txtDescripcion.Text = this.CursoActual.Descripcion;
-            this.txtAnoCalendario.Text = this.CursoActual.AnoCalendario.ToString();
-            this.txtCupo.Text = this.CursoActual.Cupo.ToString();
-            // Acá cuando cargo el curso tengo que buscar la materia asignada
-            Materia materiaActualCurso = _materiaLogic.GetOne(CursoActual.IDMateria);
-            // A su vez tengo que cargar las otras materias por si quiero seleccionar otra
-            List<Materia> materias = _materiaLogic.GetAll();
-            // seteo como datasource del combobox la lista de materias anteriores
-            this.cbMateria.DataSource = materias;
-            // ahora tengo que seleccionar la materia correspondiente a el curso
-            this.cbMateria.SelectedIndex = cbMateria.FindStringExact(materiaActualCurso.Descripcion);
-            // Acá cuando cargo el curso tengo que buscar la materia asignada
-            Comision comisionActualCurso = _comisionLogic.GetOne(CursoActual.IDComision);
-            // A su vez tengo que cargar las otras materias por si quiero seleccionar otra
-            List<Comision> comisiones = _comisionLogic.GetAll();
-            // seteo como datasource del combobox la lista de materias anteriores
-            this.cbComision.DataSource = comisiones;
-            // ahora tengo que seleccionar la materia correspondiente a el curso
-            this.cbComision.SelectedIndex = cbComision.FindStringExact(comisionActualCurso.Descripcion);
-
+            this.nudAnoCalendario.Value = this.CursoActual.AnoCalendario;
+            this.nudCupo.Value = this.CursoActual.Cupo;
+            try
+            {
+                // Acá cuando cargo el curso tengo que buscar la materia asignada
+                Materia materiaActualCurso = _materiaLogic.GetOne(CursoActual.IDMateria);
+                // A su vez tengo que cargar las otras materias por si quiero seleccionar otra
+                List<Materia> materias = _materiaLogic.GetAll();
+                // seteo como datasource del combobox la lista de materias anteriores
+                this.cbMateria.DataSource = materias;
+                // ahora tengo que seleccionar la materia correspondiente a el curso
+                this.cbMateria.SelectedIndex = cbMateria.FindStringExact(materiaActualCurso.Descripcion);
+                // Acá cuando cargo el curso tengo que buscar la materia asignada
+                Comision comisionActualCurso = _comisionLogic.GetOne(CursoActual.IDComision);
+                // A su vez tengo que cargar las otras materias por si quiero seleccionar otra
+                List<Comision> comisiones = _comisionLogic.GetAll();
+                // seteo como datasource del combobox la lista de materias anteriores
+                this.cbComision.DataSource = comisiones;
+                // ahora tengo que seleccionar la materia correspondiente a el curso
+                this.cbComision.SelectedIndex = cbComision.FindStringExact(comisionActualCurso.Descripcion);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Curso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             switch (this.Modos)
             {
                 case ModoForm.Alta:
@@ -85,16 +107,16 @@ namespace UI.Desktop
                     this.cbMateria.Enabled = false;
                     this.cbComision.Enabled = false;
                     this.txtDescripcion.Enabled = false;
-                    this.txtAnoCalendario.Enabled = false;
-                    this.txtCupo.Enabled = false;
+                    this.nudAnoCalendario.Enabled = false;
+                    this.nudCupo.Enabled = false;
                     break;
                 case ModoForm.Consulta:
                     this.btnAceptar.Text = "Aceptar";
                     this.cbMateria.Enabled = false;
                     this.cbComision.Enabled = false;
                     this.txtDescripcion.Enabled = false;
-                    this.txtAnoCalendario.Enabled = false;
-                    this.txtCupo.Enabled = false;
+                    this.nudAnoCalendario.Enabled = false;
+                    this.nudCupo.Enabled = false;
                     break;
             }
         }
@@ -107,8 +129,8 @@ namespace UI.Desktop
                 // Recordar que el value member del combo es el ID de especialidad
                 CursoActual.IDMateria = (int)this.cbMateria.SelectedValue;
                 CursoActual.IDComision = (int)this.cbComision.SelectedValue;
-                CursoActual.AnoCalendario = Convert.ToInt32(this.txtAnoCalendario.Text);
-                CursoActual.Cupo = Convert.ToInt32(this.txtCupo.Text);
+                CursoActual.AnoCalendario = (int)this.nudAnoCalendario.Value;
+                CursoActual.Cupo = (int)this.nudCupo.Value;
             }
             if (Modos == ModoForm.Modificacion)
             {
@@ -116,8 +138,8 @@ namespace UI.Desktop
                 // Recordar que el value member del combo es el ID de especialidad
                 CursoActual.IDMateria = (int)this.cbMateria.SelectedValue;
                 CursoActual.IDComision = (int)this.cbComision.SelectedValue;
-                CursoActual.AnoCalendario = Convert.ToInt32(this.txtAnoCalendario.Text);
-                CursoActual.Cupo = Convert.ToInt32(this.txtCupo.Text);
+                CursoActual.AnoCalendario = (int)this.nudAnoCalendario.Value;
+                CursoActual.Cupo = (int)this.nudCupo.Value;
             }
             switch (Modos)
             {
@@ -131,27 +153,30 @@ namespace UI.Desktop
         }
         public override void GuardarCambios()
         {
-            MapearADatos();
-            _cursoLogic.Save(CursoActual);
-        }
-        public override bool Validar()
-        {
             try
             {
-                Validaciones.ValidarNulo(this.txtDescripcion.Text, "descripcón");
-                Validaciones.ValidarNulo(this.txtAnoCalendario.Text, "año calendario");
-                Validaciones.ValidarNulo(this.txtCupo.Text, "cupo");
-                Validaciones.ValidarNumero(this.txtAnoCalendario.Text, "año calendario");
-                Validaciones.ValidarLetrasNumeros(this.txtDescripcion.Text, "descripcón");
-                Validaciones.ValidarNumero(this.txtCupo.Text, "cupo");
-                return true;
-
+                MapearADatos();
+                if (Validar()) //VALIDAR CUESTIONES DE LOS INT; FORZAR QUE SOLO PUEDA INGRESAR INTEGER
+                {
+                    _cursoLogic.Save(CursoActual);
+                    Close();
+                }
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message, "Curso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public override bool Validar()
+        {
+            ValidationResult result = new CursoValidator().Validate(CursoActual);
+            if (!result.IsValid)
+            {
+                string notificacion = string.Join(Environment.NewLine, result.Errors);
+                MessageBox.Show(notificacion);
                 return false;
             }
+            return true;
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -159,17 +184,13 @@ namespace UI.Desktop
             switch (Modos)
             {
                 case ModoForm.Alta:
-                    if (Validar())
                     {
                         GuardarCambios();
-                        Close();
                     };
                     break;
                 case ModoForm.Modificacion:
-                    if (Validar())
                     {
                         GuardarCambios();
-                        Close();
                     };
                     break;
                 case ModoForm.Baja:
@@ -187,7 +208,14 @@ namespace UI.Desktop
         }
         public virtual void Eliminar()
         {
-            _cursoLogic.Delete(CursoActual.ID);
+            try
+            {
+                _cursoLogic.Delete(CursoActual.ID);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Curso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

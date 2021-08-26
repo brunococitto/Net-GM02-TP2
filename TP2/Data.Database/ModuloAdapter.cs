@@ -33,7 +33,7 @@ namespace Data.Database
             }
             catch (Exception e)
             {
-                Exception ExceptionManejada = new Exception("Error al recuperar lista de modulos", e);
+                Exception ExceptionManejada = new Exception("Error al recuperar listado de modulos", e);
                 throw ExceptionManejada;
             }
             finally

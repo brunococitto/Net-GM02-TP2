@@ -17,15 +17,42 @@ namespace Business.Logic
         }
         public List<Plan> GetAll()
         {
-            return PlanData.GetAll();
+            try
+            {
+                return PlanData.GetAll();
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar listado de planes", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public Plan GetOne(int id)
         {
-            return PlanData.GetOne(id);
+            try
+            {
+                return PlanData.GetOne(id);
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar datos de plan", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public void Delete(int id)
         {
-            PlanData.Delete(id);
+            try
+            {
+                PlanData.Delete(id);
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al eliminar plan", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public void Save(Plan plan)
         {

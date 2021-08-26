@@ -11,6 +11,8 @@ using Business.Entities;
 using Business.Logic;
 using Data.Database;
 using System.Text.RegularExpressions;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace UI.Desktop
 {
@@ -29,17 +31,31 @@ namespace UI.Desktop
         {
             Modos = modo;
             // Cargo los planes para mostrarlos en el combobox
-            List<Plan> listaPlanes = _planLogic.GetAll();
-            this.comboBoxIDPlan.DataSource = listaPlanes;
-            // selecciono el plan de la posicion 0 como para seleccionar algo
-            this.comboBoxIDPlan.SelectedIndex = 0;
+            try
+            {
+                List<Plan> listaPlanes = _planLogic.GetAll();
+                this.comboBoxIDPlan.DataSource = listaPlanes;
+                // selecciono el plan de la posicion 0 como para seleccionar algo
+                this.comboBoxIDPlan.SelectedIndex = 0;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Planes", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public ComisionesDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            ComisionActual = _comisionLogic.GetOne(ID);
-            MapearDeDatos();
+            try
+            {
+                ComisionActual = _comisionLogic.GetOne(ID);
+                MapearDeDatos();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Comisión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public Comision ComisionActual { set; get; }
@@ -48,15 +64,22 @@ namespace UI.Desktop
         {
             this.txtBoxID.Text = this.ComisionActual.ID.ToString();
             this.txtBoxDesc.Text = this.ComisionActual.Descripcion;
-            this.txtBoxAnioEspecialidad.Text = this.ComisionActual.AnoEspecialidad.ToString();
+            this.nudAnioEspecialidad.Value = this.ComisionActual.AnoEspecialidad;
             // Acá cuando cargo la comi tengo que buscar el plan 
-            Plan planActualComi = _planLogic.GetOne(ComisionActual.IDPlan);
-            // A su vez tengo que cargar los otros planes
-            List<Plan> planes = _planLogic.GetAll();
-            // seteo como datasource del combobox la lista de planes anteriores
-            this.comboBoxIDPlan.DataSource = planes;
-            // ahora tengo que seleccionar el plan correspondiente a la comi actual
-            this.comboBoxIDPlan.SelectedIndex = comboBoxIDPlan.FindStringExact(planActualComi.Descripcion);
+            try
+            {
+                Plan planActualComi = _planLogic.GetOne(ComisionActual.IDPlan);
+                // A su vez tengo que cargar los otros planes
+                List<Plan> planes = _planLogic.GetAll();
+                // seteo como datasource del combobox la lista de planes anteriores
+                this.comboBoxIDPlan.DataSource = planes;
+                // ahora tengo que seleccionar el plan correspondiente a la comi actual
+                this.comboBoxIDPlan.SelectedIndex = comboBoxIDPlan.FindStringExact(planActualComi.Descripcion);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Planes", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             switch (this.Modos)
             {
                 case ModoForm.Alta:
@@ -69,13 +92,13 @@ namespace UI.Desktop
                     this.bAceptar.Text = "Eliminar";
                     this.comboBoxIDPlan.Enabled = false;
                     this.txtBoxDesc.Enabled = false;
-                    this.txtBoxAnioEspecialidad.Enabled = false;
+                    this.nudAnioEspecialidad.Enabled = false;
                     break;
                 case ModoForm.Consulta:
                     this.bAceptar.Text = "Aceptar";
                     this.comboBoxIDPlan.Enabled = false;
                     this.txtBoxDesc.Enabled = false;
-                    this.txtBoxAnioEspecialidad.Enabled = false;
+                    this.nudAnioEspecialidad.Enabled = false;
                     break;
             }
         }
@@ -87,13 +110,13 @@ namespace UI.Desktop
                 ComisionActual = new Comision();
                 ComisionActual.Descripcion = this.txtBoxDesc.Text;
                 ComisionActual.IDPlan = (int)this.comboBoxIDPlan.SelectedValue;
-                ComisionActual.AnoEspecialidad = Convert.ToInt32(this.txtBoxAnioEspecialidad.Text);
+                ComisionActual.AnoEspecialidad = (int)this.nudAnioEspecialidad.Value;
             }
             if (Modos == ModoForm.Modificacion)
             {
                 ComisionActual.Descripcion = this.txtBoxDesc.Text;
                 ComisionActual.IDPlan = (int)this.comboBoxIDPlan.SelectedValue;
-                ComisionActual.AnoEspecialidad = Convert.ToInt32(this.txtBoxAnioEspecialidad.Text);
+                ComisionActual.AnoEspecialidad = (int)this.nudAnioEspecialidad.Value;
 
             }
             switch (Modos)
@@ -109,25 +132,32 @@ namespace UI.Desktop
 
         public override void GuardarCambios()
         {
-            MapearADatos();
-            _comisionLogic.Save(ComisionActual);
+            try
+            {
+                MapearADatos();
+                if (Validar())
+                {
+                    _comisionLogic.Save(ComisionActual);
+                    Close();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Comision", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
          public override bool Validar()
          {
-            try
+            ValidationResult result = new ComisionValidator().Validate(ComisionActual);
+            if (!result.IsValid)
             {
-                Validaciones.ValidarNulo(this.txtBoxAnioEspecialidad.Text, "Año Especialidad");
-                Validaciones.ValidarNulo(this.txtBoxDesc.Text, "Descripcion");
-                Validaciones.ValidarNumero(this.txtBoxAnioEspecialidad.Text, "Año Especialidad");
-                Validaciones.ValidarLetrasNumeros(this.txtBoxDesc.Text, "Descripcion");
-                return true;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
+                string notificacion = string.Join(Environment.NewLine, result.Errors);
+                MessageBox.Show(notificacion);
                 return false;
             }
+            return true;
 
          }
 
@@ -136,17 +166,13 @@ namespace UI.Desktop
             switch (Modos)
             {
                 case ModoForm.Alta:
-                    if (Validar())
                     {
                         GuardarCambios();
-                        Close();
                     };
                     break;
                 case ModoForm.Modificacion:
-                    if (Validar())
                     {
                         GuardarCambios();
-                        Close();
                     };
                     break;
                 case ModoForm.Baja:
@@ -163,7 +189,14 @@ namespace UI.Desktop
 
         public virtual void Eliminar()
         {
-            _comisionLogic.Delete(ComisionActual.ID);
+            try
+            {
+                _comisionLogic.Delete(ComisionActual.ID);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Comision", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void bCancelar_Click(object sender, EventArgs e)

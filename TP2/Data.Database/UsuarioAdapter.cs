@@ -17,6 +17,7 @@ namespace Data.Database
         {
             _context = context;
         }
+
         public List<Usuario> GetAll()
         {
             List<Usuario> usuarios = new List<Usuario>();
@@ -39,7 +40,7 @@ namespace Data.Database
             }
             catch (Exception e)
             {
-                Exception ExceptionManejada = new Exception("Error al recuperar lista de usuarios", e);
+                Exception ExceptionManejada = new Exception("Error al recuperar listado de usuarios", e);
                 throw ExceptionManejada;
             }
             finally

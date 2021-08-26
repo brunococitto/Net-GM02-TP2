@@ -41,6 +41,10 @@ namespace UI.Desktop
             this.txtHorasSemanales = new System.Windows.Forms.TextBox();
             this.txtHorasTotales = new System.Windows.Forms.TextBox();
             this.lblHorasTotales = new System.Windows.Forms.Label();
+            this.nudHorasSemanales = new System.Windows.Forms.NumericUpDown();
+            this.nudHorasTotales = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHorasSemanales)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHorasTotales)).BeginInit();
             this.SuspendLayout();
             // 
             // lblID
@@ -159,11 +163,27 @@ namespace UI.Desktop
             this.lblHorasTotales.TabIndex = 18;
             this.lblHorasTotales.Text = "Horas totales";
             // 
+            // nudHorasSemanales
+            // 
+            this.nudHorasSemanales.Location = new System.Drawing.Point(98, 45);
+            this.nudHorasSemanales.Name = "nudHorasSemanales";
+            this.nudHorasSemanales.Size = new System.Drawing.Size(120, 23);
+            this.nudHorasSemanales.TabIndex = 19;
+            // 
+            // nudHorasTotales
+            // 
+            this.nudHorasTotales.Location = new System.Drawing.Point(123, 86);
+            this.nudHorasTotales.Name = "nudHorasTotales";
+            this.nudHorasTotales.Size = new System.Drawing.Size(120, 23);
+            this.nudHorasTotales.TabIndex = 20;
+            // 
             // MateriaDesktop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(366, 195);
+            this.Controls.Add(this.nudHorasTotales);
+            this.Controls.Add(this.nudHorasSemanales);
             this.Controls.Add(this.lblHorasTotales);
             this.Controls.Add(this.txtHorasTotales);
             this.Controls.Add(this.txtHorasSemanales);
@@ -182,6 +202,8 @@ namespace UI.Desktop
             this.MinimizeBox = false;
             this.Name = "MateriaDesktop";
             this.Text = "Materia";
+            ((System.ComponentModel.ISupportInitialize)(this.nudHorasSemanales)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHorasTotales)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -200,6 +222,8 @@ namespace UI.Desktop
         private System.Windows.Forms.TextBox txtHorasSemanales;
         private System.Windows.Forms.TextBox txtHorasTotales;
         private System.Windows.Forms.Label lblHorasTotales;
+        private System.Windows.Forms.NumericUpDown nudHorasSemanales;
+        private System.Windows.Forms.NumericUpDown nudHorasTotales;
     }
 }
 

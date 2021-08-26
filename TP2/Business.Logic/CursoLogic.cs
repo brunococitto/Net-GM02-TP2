@@ -17,19 +17,56 @@ namespace Business.Logic
         }
         public List<Curso> GetAll()
         {
-            return CursoData.GetAll();
+            try
+            {
+                return CursoData.GetAll();
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar lista de cursos", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public Curso GetOne(int id)
         {
-            return CursoData.GetOne(id);
+            try
+            {
+                return CursoData.GetOne(id);
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar datos de curso", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public List<Curso> GetCursosProfesor(int idProfesor)
         {
-            return CursoData.GetCursosProfesor(idProfesor);
+            try
+            {
+                return CursoData.GetCursosProfesor(idProfesor);
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar cursos para el profesor", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
+            
         }
         public void Delete(int id)
         {
-            CursoData.Delete(id);
+            try
+            {
+                CursoData.Delete(id);
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al eliminar curso", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public void Save(Curso curso)
         {

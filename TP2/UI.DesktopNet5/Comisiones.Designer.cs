@@ -41,7 +41,7 @@ namespace UI.Desktop
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.anoespecialidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idplan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.plan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tscComisiones.ContentPanel.SuspendLayout();
             this.tscComisiones.TopToolStripPanel.SuspendLayout();
             this.tscComisiones.SuspendLayout();
@@ -98,7 +98,7 @@ namespace UI.Desktop
             this.id,
             this.descripcion,
             this.anoespecialidad,
-            this.idplan});
+            this.plan});
             this.tlComisiones.SetColumnSpan(this.dgvComisiones, 2);
             this.dgvComisiones.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvComisiones.Location = new System.Drawing.Point(4, 3);
@@ -194,14 +194,14 @@ namespace UI.Desktop
             this.anoespecialidad.ReadOnly = true;
             this.anoespecialidad.Width = 112;
             // 
-            // idplan
+            // plan
             // 
-            this.idplan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.idplan.DataPropertyName = "IDPlan";
-            this.idplan.HeaderText = "ID Plan";
-            this.idplan.Name = "idplan";
-            this.idplan.ReadOnly = true;
-            this.idplan.Width = 64;
+            this.plan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.plan.DataPropertyName = "Plan";
+            this.plan.HeaderText = "Plan";
+            this.plan.Name = "plan";
+            this.plan.ReadOnly = true;
+            this.plan.Width = 55;
             // 
             // Comisiones
             // 
@@ -239,6 +239,6 @@ namespace UI.Desktop
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn anoespecialidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idplan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn plan;
     }
 }

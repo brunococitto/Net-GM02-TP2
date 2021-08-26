@@ -33,26 +33,33 @@ namespace UI.Desktop
         }
         public void Listar()
         {
-            // Pido las personas
-            List<Persona> personas = _personaLogic.GetAll();
-            // Pido los usuarios
-            List<Usuario> usuarios = _usuarioLogic.GetAll();
-            // Consulta para dejar la descripción del plan
-            var consulta =
-                            from u in usuarios
-                            join p in personas
-                            on u.IDPersona equals p.ID
-                            select new
-                            {
-                                ID = u.ID,
-                                Usuario = u.NombreUsuario,
-                                Legajo = p.Legajo,
-                                Nombre = p.Nombre,
-                                Apellido = p.Apellido,
-                                Habilitado = u.Habilitado
-                            };
-            this.dgvUsuarios.AutoGenerateColumns = false;
-            this.dgvUsuarios.DataSource = consulta.ToList(); ;
+            try
+            {
+                // Pido las personas
+                List<Persona> personas = _personaLogic.GetAll();
+                // Pido los usuarios
+                List<Usuario> usuarios = _usuarioLogic.GetAll();
+                // Consulta para dejar la descripción del plan
+                var consulta =
+                                from u in usuarios
+                                join p in personas
+                                on u.IDPersona equals p.ID
+                                select new
+                                {
+                                    ID = u.ID,
+                                    Usuario = u.NombreUsuario,
+                                    Legajo = p.Legajo,
+                                    Nombre = p.Nombre,
+                                    Apellido = p.Apellido,
+                                    Habilitado = u.Habilitado
+                                };
+                this.dgvUsuarios.AutoGenerateColumns = false;
+                this.dgvUsuarios.DataSource = consulta.ToList(); 
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Usuarios", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void btnActualizar_Click(object sender, EventArgs e)
         {

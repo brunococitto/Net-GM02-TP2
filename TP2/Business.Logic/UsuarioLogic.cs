@@ -17,15 +17,42 @@ namespace Business.Logic
         }
         public List<Usuario> GetAll()
         {
-            return UsuarioData.GetAll();
+            try
+            {
+                return UsuarioData.GetAll();
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar listado de usuarios", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public Usuario GetOne(int id)
         {
-            return UsuarioData.GetOne(id);
+            try
+            {
+                return UsuarioData.GetOne(id);
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar datos de usuario", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public void Delete(int id)
         {
-            UsuarioData.Delete(id);
+            try
+            {
+                UsuarioData.Delete(id);
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al eliminar usuario", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public void Save(Usuario usuario)
         {

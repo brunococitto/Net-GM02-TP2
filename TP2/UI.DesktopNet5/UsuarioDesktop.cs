@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
 using Data.Database;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace UI.Desktop
 {
@@ -39,11 +41,18 @@ namespace UI.Desktop
         public UsuarioDesktop(int ID, ModoForm modo, AcademyContext context) : this(context)
         {
             Modos = modo;
-            UsuarioActual = _usuarioLogic.GetOne(ID);
-            // Como estoy modificando o borrando el usuario, no tengo que poder modificar el legajo
-            // al cual está asociado
-            this.txtLegajo.Enabled = false;
-            MapearDeDatos();
+            try
+            {
+                UsuarioActual = _usuarioLogic.GetOne(ID);
+                // Como estoy modificando o borrando el usuario, no tengo que poder modificar el legajo
+                // al cual está asociado
+                this.txtLegajo.Enabled = false;
+                MapearDeDatos();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         public override void MapearDeDatos()
         {
@@ -52,10 +61,17 @@ namespace UI.Desktop
             this.txtUsuario.Text = this.UsuarioActual.NombreUsuario;
             // La clave no la tengo que cargar porque no se muestra, siempre se vuelve a poner de 0
             // Ahora tengo que cargar los datos de la persona también
-            Persona per = _personaLogic.GetOne(UsuarioActual.IDPersona);
-            this.txtLegajo.Text = per.Legajo.ToString();
-            this.txtNombre.Text = per.Nombre;
-            this.txtApellido.Text = per.Apellido;
+            try
+            {
+                Persona per = _personaLogic.GetOne(UsuarioActual.IDPersona);
+                this.txtLegajo.Text = per.Legajo.ToString();
+                this.txtNombre.Text = per.Nombre;
+                this.txtApellido.Text = per.Apellido;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Persona", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             switch (this.Modos)
             {
                 case ModoForm.Alta:
@@ -90,34 +106,31 @@ namespace UI.Desktop
         }
         public override void GuardarCambios()
         {
-            MapearADatos();
-            _usuarioLogic.Save(UsuarioActual);
-        }
-        public override bool Validar()
-        {
-
             try
             {
-                Validaciones.ValidarNulo(this.txtLegajo.Text, "legajo");
-                Validaciones.ValidarNumero(this.txtLegajo.Text, "legajo");
-                Validaciones.ValidarNulo(this.txtNombre.Text, "nombre");
-                Validaciones.ValidarLetras(this.txtNombre.Text, "nombre");
-                Validaciones.ValidarNulo(this.txtApellido.Text, "apellido");
-                Validaciones.ValidarLetras(this.txtApellido.Text, "apellido");
-                Validaciones.ValidarNulo(this.txtClave.Text, "contraseña");
-                Validaciones.ValidarNulo(this.txtUsuario.Text, "usuario");
-                Validaciones.ValidarLetras(this.txtUsuario.Text, "usuario");
-                Validaciones.ValidarClave(this.txtClave.Text);
-                Validaciones.ValidarNulo(this.txtConfirmarClave.Text, "confirmar clave");
-                Validaciones.ValidarConfirmacionClave(this.txtClave.Text, this.txtConfirmarClave.Text);
-
-                return true;
+                MapearADatos();
+                if (Validar())
+                {
+                    _usuarioLogic.Save(UsuarioActual);
+                    Close();
+                }
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message, "Usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public override bool Validar()
+        {
+            ValidationResult result = new UsuarioValidator().Validate(UsuarioActual);
+            // Falta validar contraseñas coincidentes.
+            if (!result.IsValid)
+            {
+                string notificacion = string.Join(Environment.NewLine, result.Errors);
+                MessageBox.Show(notificacion);
                 return false;
             }
+            return true;
 
 
         }
@@ -176,17 +189,13 @@ namespace UI.Desktop
             switch (Modos)
             {
                 case ModoForm.Alta:
-                    if (Validar())
                     {
                         GuardarCambios();
-                        Close();
                     };
                     break;
                 case ModoForm.Modificacion:
-                    if (Validar())
                     {
                         GuardarCambios();
-                        Close();
                     };
                     break;
                 case ModoForm.Baja:
@@ -204,7 +213,14 @@ namespace UI.Desktop
         }
         public virtual void Eliminar()
         {
-            _usuarioLogic.Delete(UsuarioActual.ID);
+            try
+            {
+                _usuarioLogic.Delete(UsuarioActual.ID);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void txtLegajo_Leave(object sender, EventArgs e)

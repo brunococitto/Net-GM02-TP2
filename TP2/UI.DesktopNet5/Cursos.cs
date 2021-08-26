@@ -33,30 +33,37 @@ namespace UI.Desktop
         }
         public void Listar()
         {
-            // Tengo que pedir la lista de cursos de materias y comisiones
-            List<Materia> materias = _materiaLogic.GetAll();
-            List<Comision> comisiones = _comisionLogic.GetAll();
-            List<Curso> cursos = _cursoLogic.GetAll();
-            // Tengo que cambiar el ID del plan por su descripción para mostrarlo
-            // Puedo recorrer los arreglos y matchear o puedo usar LINQ y hacerlo mucho más fácil
-            var consulta =
-                            from c in cursos
-                            join m in materias
-                            on c.IDMateria equals m.ID
-                            join com in comisiones on c.IDComision equals com.ID
-                            select new
-                            {
-                                ID = c.ID,
-                                DescripcionCur = c.Descripcion,
-                                DescripcionMat = m.Descripcion,
-                                DescripcionCom = com.Descripcion,
-                                AnoCalendario = c.AnoCalendario,
-                                Cupo = c.Cupo,
-                              
-                            };
-            // El DataSource de un dgv espera algo que implemente la interfaz ILIST, como por ej una lista
-            // Entonces convierto lo que antes era algo anónimo a una lista
-            this.dgvCursos.DataSource = consulta.ToList();
+            try
+            {
+                // Tengo que pedir la lista de cursos de materias y comisiones
+                List<Materia> materias = _materiaLogic.GetAll();
+                List<Comision> comisiones = _comisionLogic.GetAll();
+                List<Curso> cursos = _cursoLogic.GetAll();
+                // Tengo que cambiar el ID del plan por su descripción para mostrarlo
+                // Puedo recorrer los arreglos y matchear o puedo usar LINQ y hacerlo mucho más fácil
+                var consulta =
+                                from c in cursos
+                                join m in materias
+                                on c.IDMateria equals m.ID
+                                join com in comisiones on c.IDComision equals com.ID
+                                select new
+                                {
+                                    ID = c.ID,
+                                    DescripcionCur = c.Descripcion,
+                                    DescripcionMat = m.Descripcion,
+                                    DescripcionCom = com.Descripcion,
+                                    AnoCalendario = c.AnoCalendario,
+                                    Cupo = c.Cupo,
+
+                                };
+                // El DataSource de un dgv espera algo que implemente la interfaz ILIST, como por ej una lista
+                // Entonces convierto lo que antes era algo anónimo a una lista
+                this.dgvCursos.DataSource = consulta.ToList();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Cursos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             this.dgvCursos.AutoGenerateColumns = false;
         }
         private void btnActualizar_Click(object sender, EventArgs e)

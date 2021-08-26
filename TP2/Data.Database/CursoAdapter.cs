@@ -39,7 +39,7 @@ namespace Data.Database
             }
             catch (Exception e)
             {
-                Exception ExceptionManejada = new Exception("Error al recuperar lista de cursos", e);
+                Exception ExceptionManejada = new Exception("Error al recuperar listado de cursos", e);
                 throw ExceptionManejada;
             }
             finally

@@ -17,27 +17,81 @@ namespace Business.Logic
         }
         public List<AlumnoInscripcion> GetAll()
         {
-            return InscripcionData.GetAll();
+            try
+            {
+                return InscripcionData.GetAll();
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar inscripciones", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public List<AlumnoInscripcion> GetInscripcionesCurso(int idCurso)
         {
-            return InscripcionData.GetInscripcionesCurso(idCurso);
+            try
+            {
+                return InscripcionData.GetInscripcionesCurso(idCurso);
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar inscripciones para el curso seleccionado", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public List<Object> GetInscripcionesFormateadas()
         {
-            return InscripcionData.GetInscripcionesFormateadas();
+            try
+            {
+                return InscripcionData.GetInscripcionesFormateadas();
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar inscripciones formateadas", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public List<Object> GetEstadoAcademico(int idAlumno)
         {
-            return InscripcionData.GetEstadoAcademico(idAlumno);
+            try
+            {
+                return InscripcionData.GetEstadoAcademico(idAlumno);
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar estado academico del alumno", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public AlumnoInscripcion GetOne(int id)
         {
-            return InscripcionData.GetOne(id);
+            try
+            {
+                return InscripcionData.GetOne(id);
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar inscripción", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public void Delete(int id)
         {
-            InscripcionData.Delete(id);
+            try
+            {
+                InscripcionData.Delete(id);
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al eliminar inscripción", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public void Save(AlumnoInscripcion inscripcion)
         {

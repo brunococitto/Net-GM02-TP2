@@ -17,19 +17,55 @@ namespace Business.Logic
         }
         public List<Persona> GetAll()
         {
-            return PersonaData.GetAll();
+            try
+            {
+                return PersonaData.GetAll();
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar lista de personas", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public Persona GetOne(int id)
         {
-            return PersonaData.GetOne(id);
+            try
+            {
+                return PersonaData.GetOne(id);
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar datos de persona", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public Persona GetOneConLegajo(int legajo)
         {
-            return PersonaData.GetOneConLegajo(legajo);
+            try
+            {
+                return PersonaData.GetOneConLegajo(legajo);
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar datos de persona", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public void Delete(int id)
         {
-            PersonaData.Delete(id);
+            try
+            {
+                PersonaData.Delete(id);
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al eliminar persona", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
         public void Save(Persona persona)
         {

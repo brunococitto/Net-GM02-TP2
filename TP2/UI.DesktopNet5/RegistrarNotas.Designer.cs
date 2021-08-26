@@ -34,7 +34,6 @@ namespace UI.Desktop
             this.gbModificarInscripcion = new System.Windows.Forms.GroupBox();
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblNota = new System.Windows.Forms.Label();
-            this.txtNota = new System.Windows.Forms.TextBox();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblApellido = new System.Windows.Forms.Label();
@@ -51,11 +50,13 @@ namespace UI.Desktop
             this.cbCursos = new System.Windows.Forms.ComboBox();
             this.lblSeleccionarCurso = new System.Windows.Forms.Label();
             this.btnActualizar = new System.Windows.Forms.Button();
+            this.nudNota = new System.Windows.Forms.NumericUpDown();
             this.tscRegistrarNotas.ContentPanel.SuspendLayout();
             this.tscRegistrarNotas.SuspendLayout();
             this.tlRegistrarNotas.SuspendLayout();
             this.gbModificarInscripcion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistrarNotas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudNota)).BeginInit();
             this.SuspendLayout();
             // 
             // tscRegistrarNotas
@@ -107,9 +108,9 @@ namespace UI.Desktop
             // gbModificarInscripcion
             // 
             this.tlRegistrarNotas.SetColumnSpan(this.gbModificarInscripcion, 3);
+            this.gbModificarInscripcion.Controls.Add(this.nudNota);
             this.gbModificarInscripcion.Controls.Add(this.lblNombre);
             this.gbModificarInscripcion.Controls.Add(this.lblNota);
-            this.gbModificarInscripcion.Controls.Add(this.txtNota);
             this.gbModificarInscripcion.Controls.Add(this.btnGuardar);
             this.gbModificarInscripcion.Controls.Add(this.txtNombre);
             this.gbModificarInscripcion.Controls.Add(this.lblApellido);
@@ -147,15 +148,6 @@ namespace UI.Desktop
             this.lblNota.TabIndex = 11;
             this.lblNota.Text = "Nota";
             this.lblNota.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txtNota
-            // 
-            this.txtNota.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtNota.Location = new System.Drawing.Point(709, 16);
-            this.txtNota.Name = "txtNota";
-            this.txtNota.Size = new System.Drawing.Size(42, 23);
-            this.txtNota.TabIndex = 12;
             // 
             // btnGuardar
             // 
@@ -341,6 +333,18 @@ namespace UI.Desktop
             this.btnActualizar.UseVisualStyleBackColor = true;
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
+            // nudNota
+            // 
+            this.nudNota.Location = new System.Drawing.Point(712, 16);
+            this.nudNota.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nudNota.Name = "nudNota";
+            this.nudNota.Size = new System.Drawing.Size(56, 23);
+            this.nudNota.TabIndex = 14;
+            // 
             // RegistrarNotas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -359,6 +363,7 @@ namespace UI.Desktop
             this.gbModificarInscripcion.ResumeLayout(false);
             this.gbModificarInscripcion.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistrarNotas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudNota)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -372,7 +377,6 @@ namespace UI.Desktop
         private System.Windows.Forms.GroupBox gbModificarInscripcion;
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label lblNota;
-        private System.Windows.Forms.TextBox txtNota;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label lblApellido;
@@ -387,6 +391,7 @@ namespace UI.Desktop
         private System.Windows.Forms.DataGridViewTextBoxColumn apellido;
         private System.Windows.Forms.DataGridViewTextBoxColumn condicion;
         private System.Windows.Forms.DataGridViewTextBoxColumn nota;
+        private System.Windows.Forms.NumericUpDown nudNota;
     }
 }
 
