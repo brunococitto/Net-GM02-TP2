@@ -108,10 +108,17 @@ namespace UI.Desktop
             try
             {
                 MapearADatos();
-                if (Validar())
+                if (this.txtConfirmarClave == this.txtClave)
                 {
-                    _usuarioLogic.Save(UsuarioActual);
-                    Close();
+                    if (Validar())
+                    {
+                        _usuarioLogic.Save(UsuarioActual);
+                        Close();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Las contraseñas no coinciden", "Usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception e)
@@ -122,7 +129,7 @@ namespace UI.Desktop
         public override bool Validar()
         {
             ValidationResult result = new UsuarioValidator().Validate(UsuarioActual);
-            // Falta validar contraseñas coincidentes.
+            
             if (!result.IsValid)
             {
                 string notificacion = string.Join(Environment.NewLine, result.Errors);
