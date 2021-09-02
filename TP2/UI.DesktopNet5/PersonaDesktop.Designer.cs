@@ -99,7 +99,7 @@ namespace UI.Desktop
             this.txtNombre.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(133, 23);
-            this.txtNombre.TabIndex = 5;
+            this.txtNombre.TabIndex = 1;
             // 
             // txtEmail
             // 
@@ -107,7 +107,7 @@ namespace UI.Desktop
             this.txtEmail.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(133, 23);
-            this.txtEmail.TabIndex = 6;
+            this.txtEmail.TabIndex = 2;
             // 
             // txtID
             // 
@@ -125,7 +125,7 @@ namespace UI.Desktop
             this.txtLegajo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtLegajo.Name = "txtLegajo";
             this.txtLegajo.Size = new System.Drawing.Size(131, 23);
-            this.txtLegajo.TabIndex = 8;
+            this.txtLegajo.TabIndex = 5;
             // 
             // txtApellido
             // 
@@ -133,7 +133,7 @@ namespace UI.Desktop
             this.txtApellido.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(131, 23);
-            this.txtApellido.TabIndex = 9;
+            this.txtApellido.TabIndex = 6;
             // 
             // txtTelefono
             // 
@@ -149,7 +149,7 @@ namespace UI.Desktop
             this.btnAceptar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(133, 36);
-            this.btnAceptar.TabIndex = 11;
+            this.btnAceptar.TabIndex = 10;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -160,7 +160,7 @@ namespace UI.Desktop
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(133, 36);
-            this.btnCancelar.TabIndex = 12;
+            this.btnCancelar.TabIndex = 11;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -211,7 +211,7 @@ namespace UI.Desktop
             this.txtDireccion.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(131, 23);
-            this.txtDireccion.TabIndex = 17;
+            this.txtDireccion.TabIndex = 8;
             // 
             // dtpFechaNacimiento
             // 
@@ -221,7 +221,7 @@ namespace UI.Desktop
             this.dtpFechaNacimiento.Location = new System.Drawing.Point(140, 105);
             this.dtpFechaNacimiento.Name = "dtpFechaNacimiento";
             this.dtpFechaNacimiento.Size = new System.Drawing.Size(134, 23);
-            this.dtpFechaNacimiento.TabIndex = 18;
+            this.dtpFechaNacimiento.TabIndex = 3;
             // 
             // cbTipoPersona
             // 
@@ -229,7 +229,7 @@ namespace UI.Desktop
             this.cbTipoPersona.Location = new System.Drawing.Point(140, 134);
             this.cbTipoPersona.Name = "cbTipoPersona";
             this.cbTipoPersona.Size = new System.Drawing.Size(134, 23);
-            this.cbTipoPersona.TabIndex = 19;
+            this.cbTipoPersona.TabIndex = 4;
             this.cbTipoPersona.SelectionChangeCommitted += new System.EventHandler(this.cbTipoPersona_SelectionChangeCommitted);
             // 
             // lblTipoPersona
@@ -259,7 +259,7 @@ namespace UI.Desktop
             this.cbPlan.Location = new System.Drawing.Point(345, 133);
             this.cbPlan.Name = "cbPlan";
             this.cbPlan.Size = new System.Drawing.Size(132, 23);
-            this.cbPlan.TabIndex = 22;
+            this.cbPlan.TabIndex = 9;
             this.cbPlan.ValueMember = "ID";
             // 
             // PersonaDesktop
