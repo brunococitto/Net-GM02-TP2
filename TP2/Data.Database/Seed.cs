@@ -67,7 +67,7 @@ namespace Data.Database
                 },
                 new()
                 {
-                    Descripcion = "Administrativo",
+                    Descripcion = "2003",
                     IDEspecialidad = 1
                 }
             };
@@ -203,7 +203,7 @@ namespace Data.Database
                     Email = "bcocitto@gmail.com",
                     FechaNacimiento = new DateTime(2011, 12, 01),
                     Legajo = 45214,
-                    IDPlan = 1,
+                    IDPlan = null,
                     TipoPersona = Persona.TiposPersona.Administrativo
                 },
                 new()

@@ -230,6 +230,7 @@ namespace UI.Desktop
             this.cbTipoPersona.Name = "cbTipoPersona";
             this.cbTipoPersona.Size = new System.Drawing.Size(134, 23);
             this.cbTipoPersona.TabIndex = 19;
+            this.cbTipoPersona.SelectionChangeCommitted += new System.EventHandler(this.cbTipoPersona_SelectionChangeCommitted);
             // 
             // lblTipoPersona
             // 

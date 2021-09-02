@@ -69,14 +69,20 @@ namespace UI.Desktop
             this.txtDireccion.Text = this.PersonaActual.Direccion;
             try
             {
-                // Acá cuando cargo la persona tengo que buscar el plan asignado
-                Plan planActualPersona = _planLogic.GetOne(PersonaActual.IDPlan);
-                // A su vez tengo que cargar los otros planes por si quiero seleccionar otro
                 List<Plan> planes = _planLogic.GetAll();
-                // seteo como datasource del combobox la lista de planes
                 this.cbPlan.DataSource = planes;
-                // ahora tengo que seleccionar el plan correspondiente a la persona
-                this.cbPlan.SelectedIndex = cbPlan.FindStringExact(planActualPersona.Descripcion);
+                if (PersonaActual.TipoPersona == Persona.TiposPersona.Administrativo)
+                {
+                    this.cbPlan.Enabled = false;
+                }
+                else
+                {
+                    this.cbPlan.Enabled = true;
+                    // Acá cuando cargo la persona tengo que buscar el plan asignado
+                    Plan planActualPersona = _planLogic.GetOne((int)PersonaActual.IDPlan);
+                    // ahora tengo que seleccionar el plan correspondiente a la persona
+                    this.cbPlan.SelectedIndex = cbPlan.FindStringExact(planActualPersona.Descripcion);
+                }
                 // Cargo la fecha
                 this.dtpFechaNacimiento.Value = this.PersonaActual.FechaNacimiento;
                 // Tipos persona
@@ -116,9 +122,16 @@ namespace UI.Desktop
             PersonaActual.Legajo = Int32.Parse(this.txtLegajo.Text);
             PersonaActual.Telefono = this.txtTelefono.Text;
             PersonaActual.Direccion = this.txtDireccion.Text;
-            PersonaActual.IDPlan = (int)this.cbPlan.SelectedValue;
             PersonaActual.FechaNacimiento = this.dtpFechaNacimiento.Value.Date;
             PersonaActual.TipoPersona = (Business.Entities.Persona.TiposPersona)Enum.Parse(typeof(Business.Entities.Persona.TiposPersona), cbTipoPersona.SelectedItem.ToString());
+            if (PersonaActual.TipoPersona == Persona.TiposPersona.Administrativo)
+            {
+                PersonaActual.IDPlan = null;
+            }
+            else
+            {
+                PersonaActual.IDPlan = (int)this.cbPlan.SelectedValue;
+            }
             switch (Modos)
             {
                 case ModoForm.Alta:
@@ -196,6 +209,18 @@ namespace UI.Desktop
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Persona", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void cbTipoPersona_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            
+            if ((Business.Entities.Persona.TiposPersona)Enum.Parse(typeof(Business.Entities.Persona.TiposPersona), this.cbTipoPersona.SelectedItem.ToString()) == Persona.TiposPersona.Administrativo)
+            {
+                this.cbPlan.Enabled = false;
+            } else
+            {
+                this.cbPlan.Enabled = true;
             }
         }
     }
