@@ -282,11 +282,11 @@ namespace UI.Desktop
             this.ClientSize = new System.Drawing.Size(1094, 519);
             this.Controls.Add(this.lblMain);
             this.Controls.Add(this.tlMain);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.mnsPrincipal;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.MinimizeBox = false;
             this.Name = "formMain";
             this.Text = "Academia";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

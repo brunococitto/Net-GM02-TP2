@@ -19,7 +19,7 @@ namespace Business.Entities
         private string _direccion;
         private string _email;
         private string _telefono;
-        private int _idPlan;
+        private int? _idPlan;
         private int _legajo;
         private DateTime _fechaNacimiento;
         public TiposPersona _tipoPersona;
@@ -78,7 +78,7 @@ namespace Business.Entities
                 _telefono = value;
             }
         }
-        public int IDPlan
+        public int? IDPlan
         {
             get
             {

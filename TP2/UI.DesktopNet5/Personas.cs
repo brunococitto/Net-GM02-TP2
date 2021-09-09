@@ -43,7 +43,8 @@ namespace UI.Desktop
                 var consulta =
                                 from per in personas
                                 join pl in planes
-                                on per.IDPlan equals pl.ID
+                                on per.IDPlan equals pl.ID into PersonasPlanes
+                                from pp in PersonasPlanes.DefaultIfEmpty(new Plan())
                                 select new
                                 {
                                     ID = per.ID,
@@ -54,7 +55,7 @@ namespace UI.Desktop
                                     Telefono = per.Telefono,
                                     Email = per.Email,
                                     FechaNacimiento = per.FechaNacimiento,
-                                    Plan = pl.Descripcion,
+                                    Plan = pp.Descripcion,
                                     TipoPersona = per.TipoPersona
                                 };
                 this.dgvPersonas.DataSource = consulta.ToList();

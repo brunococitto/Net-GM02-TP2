@@ -28,7 +28,6 @@ namespace Business.Logic
                 throw ExceptionManejada;
             }
         }
-
         static public void ValidarNulo(string campo, string tipo)
         {
             try
@@ -44,7 +43,6 @@ namespace Business.Logic
                 throw ExceptionManejada;
             }
         }
-
         static public void ValidarClave(string clave)
         {
             try
@@ -60,7 +58,6 @@ namespace Business.Logic
                 throw ExceptionManejada;
             }
         }
-
         static public void ValidarConfirmacionClave(string clave, string clave2)
         {
             try
@@ -77,7 +74,6 @@ namespace Business.Logic
                 throw ExceptionManejada;
             }
         }
-
         static public void ValidarNumero(string campo, string tipo)
         {
             Regex regex = new Regex("^[0-9]+$");
@@ -93,9 +89,7 @@ namespace Business.Logic
                 Exception ExceptionManejada = new Exception($"El campo {tipo} debe ser numerico", e);
                 throw ExceptionManejada;
             }
-
         }
-
         static public void ValidarLetras(string campo, string tipo)
         {
             Regex regex = new Regex("^[a-zA-Z]+$");
@@ -112,9 +106,7 @@ namespace Business.Logic
                 Exception ExceptionManejada = new Exception($"El campo {tipo} contener solo letras", e);
                 throw ExceptionManejada;
             }
-
         }
-
         static public void ValidarLetrasNumeros(string campo, string tipo)
         {
             Regex regex = new Regex("^[a-zA-Z 1-9]+$");
@@ -132,7 +124,6 @@ namespace Business.Logic
             }
         }
     }
-
     public class UsuarioValidator : AbstractValidator<Usuario>
     {
         public UsuarioValidator()
@@ -142,20 +133,18 @@ namespace Business.Logic
         }
 
     }
-
     public class PersonaValidator : AbstractValidator<Persona>
     {
         public PersonaValidator()
         {
-            RuleFor(x => x.Nombre).NotEmpty().MaximumLength(50).Matches("^[a-zA-Z]+$").WithMessage("'Nombre' debe contener solo letras"); // ValidarLetras
-            RuleFor(x => x.Apellido).NotEmpty().MaximumLength(50).Matches("^[a-zA-Z]+$").WithMessage("'Apellido' debe contener solo letras"); // ValidarLetras
-            RuleFor(x => x.Direccion).NotEmpty().MaximumLength(50).Matches("^[a-zA-Z1-9]+$").WithMessage("'Dirección' debe contener solo letras y/o números"); // ValidarLetrasNumeros
+            RuleFor(x => x.Nombre).NotEmpty().MaximumLength(50).Matches("^[a-zA-Z ]+$").WithMessage("'Nombre' debe contener solo letras"); // ValidarLetras
+            RuleFor(x => x.Apellido).NotEmpty().MaximumLength(50).Matches("^[a-zA-Z ]+$").WithMessage("'Apellido' debe contener solo letras"); // ValidarLetras
+            RuleFor(x => x.Direccion).NotEmpty().MaximumLength(50).Matches("^[a-zA-Z1-9 ]+$").WithMessage("'Dirección' debe contener solo letras y/o números"); // ValidarLetrasNumeros
             RuleFor(x => x.Email).NotEmpty().EmailAddress();
             RuleFor(x => x.Legajo).NotNull();
-            RuleFor(x => x.Telefono).NotEmpty().Matches("^[1-9]+$").WithMessage("'Teléfono' debe contener solo números");
+            RuleFor(x => x.Telefono).NotEmpty().Matches("^[0-9]+$").WithMessage("'Teléfono' debe contener solo números");
         }
     }
-
     public class PlanValidator : AbstractValidator<Plan>
     {
         public PlanValidator()
@@ -163,7 +152,6 @@ namespace Business.Logic
             RuleFor(x => x.Descripcion).NotEmpty().MaximumLength(50).Matches("^[a-zA-Z1-9]+$").WithMessage("'Descripcion' debe contener solo letras y/o números"); // ValidarLetrasNumeros
         }
     }
-
     public class ModuloValidator : AbstractValidator<Modulo>
     {
         public ModuloValidator()
@@ -180,7 +168,6 @@ namespace Business.Logic
             RuleFor(x => x.HSTotales).NotEmpty().GreaterThan(0);
         }
     }
-
     public class EspecialidadValidator : AbstractValidator<Especialidad>
     {
         public EspecialidadValidator()
@@ -188,7 +175,6 @@ namespace Business.Logic
             RuleFor(x => x.Descripcion).NotEmpty().MaximumLength(50).Matches("^[a-zA-Z1-9]+$").WithMessage("'Descripcion' debe contener solo letras y/o números"); // ValidarLetrasNumeros
         }
     }
-
     public class DocenteCursoValidator : AbstractValidator<DocenteCurso>
     {
         public DocenteCursoValidator()
@@ -197,7 +183,6 @@ namespace Business.Logic
             RuleFor(x => x.IDCurso).NotNull();
         }
     }
-
     public class CursoValidator : AbstractValidator<Curso>
     {
         public CursoValidator()
@@ -209,7 +194,6 @@ namespace Business.Logic
             RuleFor(x => x.IDMateria).NotNull();
         }
     }
-
     public class ComisionValidator : AbstractValidator<Comision>
     {
         public ComisionValidator()
@@ -218,7 +202,6 @@ namespace Business.Logic
             RuleFor(x => x.Descripcion).NotEmpty().MaximumLength(50).Matches("^[a-zA-Z1-9]+$").WithMessage("'Descripcion' debe contener solo letras y/o números"); // ValidarLetrasNumeros
         }
     }
-
     public class AlumnoInscripcionValidator : AbstractValidator<AlumnoInscripcion>
     {
         public AlumnoInscripcionValidator()
@@ -226,5 +209,4 @@ namespace Business.Logic
 
         }
     }
-
 }

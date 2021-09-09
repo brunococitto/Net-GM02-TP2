@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Business.Entities;
-using Business.Logic;
 using Data.Database;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
+using iText.Kernel.Pdf;
+using iText.Layout.Element;
+using iText.Layout.Properties;
+using iText.Layout;
 
 namespace UI.Desktop
 {
@@ -175,16 +168,18 @@ namespace UI.Desktop
                     {
                         try
                         {
-                            PdfPTable pdfTable = new PdfPTable(Singleton.getInstance().DgvActual.Columns.Count - 1);
-                            pdfTable.DefaultCell.Padding = 3;
-                            pdfTable.WidthPercentage = 100;
-                            pdfTable.HorizontalAlignment = Element.ALIGN_LEFT;
+                            Table pdfTable = new Table(Singleton.getInstance().DgvActual.Columns.Count - 1);
+                            pdfTable.SetPadding(3);
+                            pdfTable.SetWidth(UnitValue.CreatePercentValue(100));
+                            pdfTable.SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.CENTER);
 
                             foreach (DataGridViewColumn column in Singleton.getInstance().DgvActual.Columns)
                             {
                                 if (column.Visible == true)
                                 {
-                                    PdfPCell cell = new PdfPCell(new Phrase(column.HeaderText));
+                                    Cell cell = new Cell().Add(new Paragraph(column.HeaderText).SetBold());
+                                    cell.SetBackgroundColor(iText.Kernel.Colors.ColorConstants.LIGHT_GRAY);
+                                    cell.SetTextAlignment(TextAlignment.CENTER);
                                     pdfTable.AddCell(cell);
                                 }                                
                             }
@@ -202,16 +197,20 @@ namespace UI.Desktop
 
                             using (FileStream stream = new FileStream(sfd.FileName, FileMode.Create))
                             {
-                                Document pdfDoc = new Document(PageSize.A4, 10f, 20f, 20f, 10f);
-                                PdfWriter.GetInstance(pdfDoc, stream);
-                                pdfDoc.Open();
+                                PdfWriter writer = new PdfWriter(stream);
+                                PdfDocument pdf = new PdfDocument(writer);
+                                Document document = new Document(pdf);
+                                pdf.SetDefaultPageSize(iText.Kernel.Geom.PageSize.A4);
+                                document.SetMargins(10f, 20f, 20f, 10f);
                                 Paragraph p = new Paragraph();
-                                p.Alignment = Element.ALIGN_CENTER;
-                                p.Add($"Reporte de {Singleton.getInstance().ModuloActual}");
-                                pdfDoc.Add(p);
-                                pdfDoc.Add(Chunk.NEWLINE);
-                                pdfDoc.Add(pdfTable);
-                                pdfDoc.Close();
+                                p.SetTextAlignment(TextAlignment.CENTER);
+                                p.Add($"Reporte de {Singleton.getInstance().ModuloActual} \n");
+                                p.SetBold();
+                                p.SetUnderline();
+                                p.SetFontSize(18);
+                                document.Add(p);
+                                document.Add(pdfTable);
+                                document.Close();
                                 stream.Close();
                             }
 
