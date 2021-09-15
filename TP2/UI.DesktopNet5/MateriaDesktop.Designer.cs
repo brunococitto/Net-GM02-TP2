@@ -73,7 +73,7 @@ namespace UI.Desktop
             this.txtDescripcion.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(235, 23);
-            this.txtDescripcion.TabIndex = 5;
+            this.txtDescripcion.TabIndex = 1;
             // 
             // txtID
             // 
@@ -91,7 +91,7 @@ namespace UI.Desktop
             this.btnAceptar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(145, 36);
-            this.btnAceptar.TabIndex = 11;
+            this.btnAceptar.TabIndex = 5;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -102,7 +102,7 @@ namespace UI.Desktop
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(145, 36);
-            this.btnCancelar.TabIndex = 12;
+            this.btnCancelar.TabIndex = 6;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -124,7 +124,7 @@ namespace UI.Desktop
             this.cbPlan.Location = new System.Drawing.Point(118, 126);
             this.cbPlan.Name = "cbPlan";
             this.cbPlan.Size = new System.Drawing.Size(235, 23);
-            this.cbPlan.TabIndex = 14;
+            this.cbPlan.TabIndex = 4;
             this.cbPlan.ValueMember = "ID";
             // 
             // lblHorasSemanales
@@ -165,17 +165,17 @@ namespace UI.Desktop
             // 
             // nudHorasSemanales
             // 
-            this.nudHorasSemanales.Location = new System.Drawing.Point(98, 45);
+            this.nudHorasSemanales.Location = new System.Drawing.Point(118, 69);
             this.nudHorasSemanales.Name = "nudHorasSemanales";
-            this.nudHorasSemanales.Size = new System.Drawing.Size(120, 23);
-            this.nudHorasSemanales.TabIndex = 19;
+            this.nudHorasSemanales.Size = new System.Drawing.Size(235, 23);
+            this.nudHorasSemanales.TabIndex = 2;
             // 
             // nudHorasTotales
             // 
-            this.nudHorasTotales.Location = new System.Drawing.Point(123, 86);
+            this.nudHorasTotales.Location = new System.Drawing.Point(118, 97);
             this.nudHorasTotales.Name = "nudHorasTotales";
-            this.nudHorasTotales.Size = new System.Drawing.Size(120, 23);
-            this.nudHorasTotales.TabIndex = 20;
+            this.nudHorasTotales.Size = new System.Drawing.Size(235, 23);
+            this.nudHorasTotales.TabIndex = 3;
             // 
             // MateriaDesktop
             // 

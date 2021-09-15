@@ -73,7 +73,7 @@ namespace UI.Desktop
             this.txtDescripcion.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(235, 23);
-            this.txtDescripcion.TabIndex = 5;
+            this.txtDescripcion.TabIndex = 1;
             // 
             // txtID
             // 
@@ -91,7 +91,7 @@ namespace UI.Desktop
             this.btnAceptar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(145, 36);
-            this.btnAceptar.TabIndex = 11;
+            this.btnAceptar.TabIndex = 6;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -102,7 +102,7 @@ namespace UI.Desktop
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(145, 36);
-            this.btnCancelar.TabIndex = 12;
+            this.btnCancelar.TabIndex = 7;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -124,7 +124,7 @@ namespace UI.Desktop
             this.cbMateria.Location = new System.Drawing.Point(118, 126);
             this.cbMateria.Name = "cbMateria";
             this.cbMateria.Size = new System.Drawing.Size(235, 23);
-            this.cbMateria.TabIndex = 14;
+            this.cbMateria.TabIndex = 4;
             this.cbMateria.ValueMember = "ID";
             // 
             // lblAnoCalendario
@@ -154,7 +154,7 @@ namespace UI.Desktop
             this.cbComision.Location = new System.Drawing.Point(118, 156);
             this.cbComision.Name = "cbComision";
             this.cbComision.Size = new System.Drawing.Size(235, 23);
-            this.cbComision.TabIndex = 20;
+            this.cbComision.TabIndex = 5;
             this.cbComision.ValueMember = "ID";
             // 
             // lblComision
@@ -182,7 +182,7 @@ namespace UI.Desktop
             0});
             this.nudAnoCalendario.Name = "nudAnoCalendario";
             this.nudAnoCalendario.Size = new System.Drawing.Size(235, 23);
-            this.nudAnoCalendario.TabIndex = 21;
+            this.nudAnoCalendario.TabIndex = 2;
             this.nudAnoCalendario.Value = new decimal(new int[] {
             1950,
             0,
@@ -194,7 +194,7 @@ namespace UI.Desktop
             this.nudCupo.Location = new System.Drawing.Point(118, 98);
             this.nudCupo.Name = "nudCupo";
             this.nudCupo.Size = new System.Drawing.Size(235, 23);
-            this.nudCupo.TabIndex = 22;
+            this.nudCupo.TabIndex = 3;
             this.nudCupo.Value = new decimal(new int[] {
             100,
             0,

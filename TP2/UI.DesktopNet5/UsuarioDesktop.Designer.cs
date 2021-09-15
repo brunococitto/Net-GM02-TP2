@@ -190,7 +190,7 @@ namespace UI.Desktop
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.ReadOnly = true;
             this.txtApellido.Size = new System.Drawing.Size(145, 23);
-            this.txtApellido.TabIndex = 4;
+            this.txtApellido.TabIndex = 3;
             // 
             // txtNombre
             // 
@@ -200,7 +200,7 @@ namespace UI.Desktop
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.ReadOnly = true;
             this.txtNombre.Size = new System.Drawing.Size(142, 23);
-            this.txtNombre.TabIndex = 1;
+            this.txtNombre.TabIndex = 2;
             // 
             // lblNombre
             // 
@@ -229,7 +229,7 @@ namespace UI.Desktop
             this.txtUsuario.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(142, 23);
-            this.txtUsuario.TabIndex = 2;
+            this.txtUsuario.TabIndex = 4;
             // 
             // lblUsuario
             // 
@@ -248,7 +248,7 @@ namespace UI.Desktop
             this.txtLegajo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtLegajo.Name = "txtLegajo";
             this.txtLegajo.Size = new System.Drawing.Size(145, 23);
-            this.txtLegajo.TabIndex = 3;
+            this.txtLegajo.TabIndex = 1;
             this.txtLegajo.Leave += new System.EventHandler(this.txtLegajo_Leave);
             // 
             // lblLegajo

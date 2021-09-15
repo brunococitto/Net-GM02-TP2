@@ -95,7 +95,7 @@ namespace UI.Desktop
             this.txtDescripcion.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(235, 23);
-            this.txtDescripcion.TabIndex = 5;
+            this.txtDescripcion.TabIndex = 1;
             // 
             // txtID
             // 
@@ -113,7 +113,7 @@ namespace UI.Desktop
             this.btnAceptar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(145, 36);
-            this.btnAceptar.TabIndex = 11;
+            this.btnAceptar.TabIndex = 2;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -124,7 +124,7 @@ namespace UI.Desktop
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(145, 36);
-            this.btnCancelar.TabIndex = 12;
+            this.btnCancelar.TabIndex = 3;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -145,6 +145,7 @@ namespace UI.Desktop
             this.TLPanelEspecialidades.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
