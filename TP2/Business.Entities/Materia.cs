@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace Business.Entities
 {
@@ -27,6 +28,7 @@ namespace Business.Entities
             }
         }
         [Column("hs_semanales")]
+        [Display(Name="Horas semanales")]
         public int HSSemanales
         {
             get
@@ -39,6 +41,7 @@ namespace Business.Entities
             }
         }
         [Column("hs_totales")]
+        [Display(Name = "Horas totales")]
         public int HSTotales
         {
             get
