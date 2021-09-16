@@ -163,9 +163,10 @@ namespace Business.Logic
     {
         public MateriaValidator()
         {
-            RuleFor(x => x.Descripcion).NotEmpty().MaximumLength(50).Matches("^[a-zA-Z1-9]+$").WithMessage("'Descripcion' debe contener solo letras y/o números"); // ValidarLetrasNumeros
-            RuleFor(x => x.HSSemanales).NotEmpty().GreaterThan(0);
-            RuleFor(x => x.HSTotales).NotEmpty().GreaterThan(0);
+            RuleFor(x => x.Descripcion).NotEmpty().Length(min: 3, max: 20).Matches("^[a-zA-Z1-9]+$").WithMessage("'Descripcion' debe contener solo letras y/o números"); // ValidarLetrasNumeros
+            RuleFor(x => x.HSSemanales).NotEmpty().InclusiveBetween(from: 2, to: 6);
+            RuleFor(x => x.HSTotales).NotEmpty().InclusiveBetween(from: 90, to: 150);
+            RuleFor(x => x.IDPlan).NotEmpty();
         }
     }
     public class EspecialidadValidator : AbstractValidator<Especialidad>

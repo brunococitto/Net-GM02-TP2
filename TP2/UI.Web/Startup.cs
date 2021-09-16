@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Data.Database;
 using Business.Logic;
+using FluentValidation.AspNetCore;
 
 namespace UI.Web
 {
@@ -27,7 +28,7 @@ namespace UI.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<MateriaValidator>());
             services.AddScoped<MateriaAdapter>();
             services.AddScoped<PlanAdapter>();
             services.AddScoped<MateriaLogic>();
