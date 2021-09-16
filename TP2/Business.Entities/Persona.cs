@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Business.Entities
 {
@@ -23,6 +24,7 @@ namespace Business.Entities
         private int _legajo;
         private DateTime _fechaNacimiento;
         public TiposPersona _tipoPersona;
+        private Plan? _plan;
         public string Apellido
         {
             get
@@ -78,6 +80,7 @@ namespace Business.Entities
                 _telefono = value;
             }
         }
+        [ForeignKey("Plan")]
         public int? IDPlan
         {
             get
@@ -122,6 +125,16 @@ namespace Business.Entities
                 _tipoPersona = value;
             }
         }
-
+        public Plan? Plan
+        {
+            get
+            {
+                return _plan;
+            }
+            set
+            {
+                _plan = value;
+            }
+        }
     }
 }

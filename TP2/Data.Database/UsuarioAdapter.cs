@@ -34,6 +34,7 @@ namespace Data.Database
                     usr.Clave = drUsuarios["clave"].ToString();
                     usr.Habilitado = (bool)drUsuarios["habilitado"];
                     usr.IDPersona = (int)drUsuarios["id_persona"];
+                    usr.Persona = _context.Personas.Find(usr.IDPersona);
                     usuarios.Add(usr);
                 }
                 drUsuarios.Close();
@@ -66,6 +67,7 @@ namespace Data.Database
                     usr.Clave = drUsuarios["clave"].ToString();
                     usr.Habilitado = (bool)drUsuarios["habilitado"];
                     usr.IDPersona = (int)drUsuarios["id_persona"];
+                    usr.Persona = _context.Personas.Find(usr.IDPersona);
                 }
                 drUsuarios.Close();
             }

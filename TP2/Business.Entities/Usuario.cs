@@ -13,6 +13,7 @@ namespace Business.Entities
         private string _clave;
         private bool _habilitado;
         private int _idPersona;
+        private Persona _persona;
         [Column("nombre_usuario")]
         public string NombreUsuario
         {
@@ -50,6 +51,7 @@ namespace Business.Entities
             }
         }
         [Column("id_persona")]
+        [ForeignKey("Persona")]
         public int IDPersona
         {
             get
@@ -59,6 +61,17 @@ namespace Business.Entities
             set
             {
                 _idPersona = value;
+            }
+        }
+        public Persona Persona
+        {
+            get
+            {
+                return Persona;
+            }
+            set
+            {
+                _persona = value;
             }
         }
     }

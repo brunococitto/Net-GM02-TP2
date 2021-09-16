@@ -33,6 +33,8 @@ namespace Data.Database
                     curso.Cupo = (int)drCursos["cupo"];
                     curso.IDComision = (int)drCursos["id_comision"];
                     curso.IDMateria = (int)drCursos["id_materia"];
+                    curso.Comision = _context.Comisiones.Find(curso.IDComision);
+                    curso.Materia = _context.Materias.Find(curso.IDMateria);
                     cursos.Add(curso);
                 }
                 drCursos.Close();
@@ -65,6 +67,8 @@ namespace Data.Database
                     curso.Cupo = (int)drCursos["cupo"];
                     curso.IDComision = (int)drCursos["id_comision"];
                     curso.IDMateria = (int)drCursos["id_materia"];
+                    curso.Comision = _context.Comisiones.Find(curso.IDComision);
+                    curso.Materia = _context.Materias.Find(curso.IDMateria);
                 }
                 drCursos.Close();
             }

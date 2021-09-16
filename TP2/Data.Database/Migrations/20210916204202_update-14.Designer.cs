@@ -4,14 +4,16 @@ using Data.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Database.Migrations
 {
     [DbContext(typeof(AcademyContext))]
-    partial class AcademyContextModelSnapshot : ModelSnapshot
+    [Migration("20210916204202_update-14")]
+    partial class update14
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,11 +94,11 @@ namespace Data.Database.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("desc_curso");
 
-                    b.Property<int>("IDComision")
+                    b.Property<int?>("IDComision")
                         .HasColumnType("int")
                         .HasColumnName("id_comision");
 
-                    b.Property<int>("IDMateria")
+                    b.Property<int?>("IDMateria")
                         .HasColumnType("int")
                         .HasColumnName("id_materia");
 
@@ -350,15 +352,11 @@ namespace Data.Database.Migrations
                 {
                     b.HasOne("Business.Entities.Comision", "Comision")
                         .WithMany()
-                        .HasForeignKey("IDComision")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IDComision");
 
                     b.HasOne("Business.Entities.Materia", "Materia")
                         .WithMany()
-                        .HasForeignKey("IDMateria")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IDMateria");
 
                     b.Navigation("Comision");
 

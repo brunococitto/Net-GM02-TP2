@@ -15,6 +15,8 @@ namespace Business.Entities
         private string _descripcion;
         private int _idComision;
         private int _idMateria;
+        private Comision _comision;
+        private Materia _materia;
         [Column("anio_calendario")]
         [Display(Name = "Año calendario")]
         public int AnoCalendario
@@ -53,6 +55,7 @@ namespace Business.Entities
             }
         }
         [Column("id_comision")]
+        [ForeignKey("Comision")]
         public int IDComision
         {
             get
@@ -65,6 +68,7 @@ namespace Business.Entities
             }
         }
         [Column("id_materia")]
+        [ForeignKey("Materia")]
         public int IDMateria
         {
             get
@@ -74,6 +78,28 @@ namespace Business.Entities
             set
             {
                 _idMateria = value;
+            }
+        }
+        public Comision Comision
+        {
+            get
+            {
+                return _comision;
+            }
+            set
+            {
+                _comision = value;
+            }
+        }
+        public Materia Materia
+        {
+            get
+            {
+                return _materia;
+            }
+            set
+            {
+                _materia = value;
             }
         }
     }
