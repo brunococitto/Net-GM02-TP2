@@ -11,6 +11,7 @@ namespace Business.Entities
     {
         private string _descripcion;
         private int _idEspecialidad;
+        private Especialidad _especialidad;
         [Column("desc_plan")]
         public string Descripcion
         {
@@ -24,6 +25,7 @@ namespace Business.Entities
             }
         }
         [Column("id_especialidad")]
+        [ForeignKey("Especialidad")]
         public int IDEspecialidad
         {
             get
@@ -33,6 +35,17 @@ namespace Business.Entities
             set
             {
                 _idEspecialidad = value;
+            }
+        }
+        public Especialidad Especialidad
+        {
+            get
+            {
+                return _especialidad;
+            }
+            set
+            {
+                _especialidad = value;
             }
         }
     }

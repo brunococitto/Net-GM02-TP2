@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Business.Entities.Materia>
+
+    <a class="btn btn-outline-success" asp-action="Create">Agregar materia</a>
+
+<ul class="list-group">
+    @foreach  (Business.Entities.Materia mat in Model)
+            {
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@mat.Descripcion</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            Horas semanales: @mat.HSSemanales -
+                            Horas totales: @mat.HSTotales
+                        </h6>
+                        <p class="card-text">Especialidad: @mat.Plan.Especialidad.Descripcion <span class="text-info">Plan: @mat.Plan.Descripcion</span></p>
+                        <a class="btn btn-primary" asp-area="" asp-action="Edit" asp-route-id="@mat.ID">Editar</a>
+                        <a class="btn btn-danger" asp-area="" asp-action="Delete" asp-route-id="@mat.ID">Eliminar</a>
+                    </div>
+                </div>
+            }
+</ul>

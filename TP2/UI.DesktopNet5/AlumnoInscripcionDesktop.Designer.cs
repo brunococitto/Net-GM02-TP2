@@ -71,7 +71,7 @@ namespace UI.Desktop
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.ReadOnly = true;
             this.txtNombre.Size = new System.Drawing.Size(133, 23);
-            this.txtNombre.TabIndex = 5;
+            this.txtNombre.TabIndex = 2;
             // 
             // txtID
             // 
@@ -89,7 +89,7 @@ namespace UI.Desktop
             this.txtLegajo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtLegajo.Name = "txtLegajo";
             this.txtLegajo.Size = new System.Drawing.Size(131, 23);
-            this.txtLegajo.TabIndex = 8;
+            this.txtLegajo.TabIndex = 1;
             this.txtLegajo.Leave += new System.EventHandler(this.txtLegajo_Leave);
             // 
             // txtApellido
@@ -100,7 +100,7 @@ namespace UI.Desktop
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.ReadOnly = true;
             this.txtApellido.Size = new System.Drawing.Size(131, 23);
-            this.txtApellido.TabIndex = 9;
+            this.txtApellido.TabIndex = 3;
             // 
             // btnAceptar
             // 
@@ -108,7 +108,7 @@ namespace UI.Desktop
             this.btnAceptar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(133, 36);
-            this.btnAceptar.TabIndex = 11;
+            this.btnAceptar.TabIndex = 5;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -119,7 +119,7 @@ namespace UI.Desktop
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(133, 36);
-            this.btnCancelar.TabIndex = 12;
+            this.btnCancelar.TabIndex = 6;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -163,7 +163,7 @@ namespace UI.Desktop
             this.cbCurso.Location = new System.Drawing.Point(79, 70);
             this.cbCurso.Name = "cbCurso";
             this.cbCurso.Size = new System.Drawing.Size(337, 23);
-            this.cbCurso.TabIndex = 22;
+            this.cbCurso.TabIndex = 4;
             this.cbCurso.ValueMember = "ID";
             // 
             // AlumnoInscripcionDesktop

@@ -36,7 +36,7 @@ namespace Business.Logic
             }
             catch (Exception e)
             {
-                Exception ExceptionManejada = new Exception("Error al datos de materia", e);
+                Exception ExceptionManejada = new Exception("Error al recuperar datos de materia", e);
                 Logger.Log(ExceptionManejada.Message);
                 throw ExceptionManejada;
             }

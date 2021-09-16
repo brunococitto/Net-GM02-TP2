@@ -13,6 +13,7 @@ namespace Business.Entities
         private int _hsSemanales;
         private int _hsTotales;
         private int _idPlan;
+        private Plan _plan;
         [Column("desc_materia")]
         public string Descripcion
         {
@@ -50,6 +51,7 @@ namespace Business.Entities
             }
         }
         [Column("id_plan")]
+        [ForeignKey("Plan")]
         public int IDPlan
         {
             get
@@ -59,6 +61,17 @@ namespace Business.Entities
             set
             {
                 _idPlan = value;
+            }
+        }
+        public Plan Plan
+        {
+            get
+            {
+                return _plan;
+            }
+            set
+            {
+                _plan = value;
             }
         }
     }

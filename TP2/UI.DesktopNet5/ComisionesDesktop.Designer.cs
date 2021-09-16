@@ -36,10 +36,10 @@ namespace UI.Desktop
             this.txtBoxID = new System.Windows.Forms.TextBox();
             this.txtBoxDesc = new System.Windows.Forms.TextBox();
             this.comboBoxIDPlan = new System.Windows.Forms.ComboBox();
-            this.bCancelar = new System.Windows.Forms.Button();
-            this.bAceptar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.nudAnioEspecialidad = new System.Windows.Forms.NumericUpDown();
+            this.bAceptar = new System.Windows.Forms.Button();
+            this.bCancelar = new System.Windows.Forms.Button();
             this.TLPanelEspecialidades = new System.Windows.Forms.TableLayoutPanel();
             this.lblID = new System.Windows.Forms.Label();
             this.lblDescripcion = new System.Windows.Forms.Label();
@@ -116,7 +116,7 @@ namespace UI.Desktop
             this.txtBoxDesc.Location = new System.Drawing.Point(126, 39);
             this.txtBoxDesc.Name = "txtBoxDesc";
             this.txtBoxDesc.Size = new System.Drawing.Size(283, 23);
-            this.txtBoxDesc.TabIndex = 3;
+            this.txtBoxDesc.TabIndex = 1;
             // 
             // comboBoxIDPlan
             // 
@@ -125,29 +125,9 @@ namespace UI.Desktop
             this.comboBoxIDPlan.Location = new System.Drawing.Point(126, 73);
             this.comboBoxIDPlan.Name = "comboBoxIDPlan";
             this.comboBoxIDPlan.Size = new System.Drawing.Size(283, 23);
-            this.comboBoxIDPlan.TabIndex = 5;
+            this.comboBoxIDPlan.TabIndex = 2;
             this.comboBoxIDPlan.ValueMember = "ID";
             this.comboBoxIDPlan.SelectedIndexChanged += new System.EventHandler(this.comboBoxIDPlan_SelectedIndexChanged);
-            // 
-            // bCancelar
-            // 
-            this.bCancelar.Location = new System.Drawing.Point(126, 133);
-            this.bCancelar.Name = "bCancelar";
-            this.bCancelar.Size = new System.Drawing.Size(103, 30);
-            this.bCancelar.TabIndex = 2;
-            this.bCancelar.Text = "Cancelar";
-            this.bCancelar.UseVisualStyleBackColor = true;
-            this.bCancelar.Click += new System.EventHandler(this.bCancelar_Click);
-            // 
-            // bAceptar
-            // 
-            this.bAceptar.Location = new System.Drawing.Point(3, 133);
-            this.bAceptar.Name = "bAceptar";
-            this.bAceptar.Size = new System.Drawing.Size(117, 30);
-            this.bAceptar.TabIndex = 1;
-            this.bAceptar.Text = "Aceptar";
-            this.bAceptar.UseVisualStyleBackColor = true;
-            this.bAceptar.Click += new System.EventHandler(this.bAceptar_Click);
             // 
             // label4
             // 
@@ -173,12 +153,32 @@ namespace UI.Desktop
             0});
             this.nudAnioEspecialidad.Name = "nudAnioEspecialidad";
             this.nudAnioEspecialidad.Size = new System.Drawing.Size(283, 23);
-            this.nudAnioEspecialidad.TabIndex = 1;
+            this.nudAnioEspecialidad.TabIndex = 3;
             this.nudAnioEspecialidad.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
+            // 
+            // bAceptar
+            // 
+            this.bAceptar.Location = new System.Drawing.Point(3, 133);
+            this.bAceptar.Name = "bAceptar";
+            this.bAceptar.Size = new System.Drawing.Size(117, 30);
+            this.bAceptar.TabIndex = 4;
+            this.bAceptar.Text = "Aceptar";
+            this.bAceptar.UseVisualStyleBackColor = true;
+            this.bAceptar.Click += new System.EventHandler(this.bAceptar_Click);
+            // 
+            // bCancelar
+            // 
+            this.bCancelar.Location = new System.Drawing.Point(126, 133);
+            this.bCancelar.Name = "bCancelar";
+            this.bCancelar.Size = new System.Drawing.Size(103, 30);
+            this.bCancelar.TabIndex = 5;
+            this.bCancelar.Text = "Cancelar";
+            this.bCancelar.UseVisualStyleBackColor = true;
+            this.bCancelar.Click += new System.EventHandler(this.bCancelar_Click);
             // 
             // TLPanelEspecialidades
             // 
