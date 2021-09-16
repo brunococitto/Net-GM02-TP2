@@ -28,7 +28,11 @@ namespace UI.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<MateriaValidator>());
+            services.AddControllersWithViews().AddFluentValidation(
+                fv => { fv.RegisterValidatorsFromAssemblyContaining<MateriaValidator>();
+                    //fv.ValidatorOptions.LanguageManager.Culture = new System.Globalization.CultureInfo("es");
+                }
+                );
             services.AddScoped<MateriaAdapter>();
             services.AddScoped<PlanAdapter>();
             services.AddScoped<MateriaLogic>();

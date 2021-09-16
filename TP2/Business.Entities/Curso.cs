@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace Business.Entities
 {
@@ -15,6 +16,7 @@ namespace Business.Entities
         private int _idComision;
         private int _idMateria;
         [Column("anio_calendario")]
+        [Display(Name = "Año calendario")]
         public int AnoCalendario
         {
             get

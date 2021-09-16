@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace Business.Entities
 {
@@ -13,6 +14,7 @@ namespace Business.Entities
         private string _descripcion;
         private int _idPlan;
         [Column("anio_especialidad")]
+        [Display(Name = "Año especialidad")]
         public int AnoEspecialidad
         {
             get
