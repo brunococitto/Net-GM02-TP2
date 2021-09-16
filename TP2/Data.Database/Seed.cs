@@ -48,27 +48,32 @@ namespace Data.Database
                 new()
                 {
                     Descripcion = "2008",
-                    IDEspecialidad = 1
+                    IDEspecialidad = 1,
+                    Especialidad = especialidades[0]
                 },
                 new()
                 {
                     Descripcion = "1995",
-                    IDEspecialidad = 1
+                    IDEspecialidad = 1,
+                    Especialidad = especialidades[0]
                 },
                 new()
                 {
                     Descripcion = "1994",
-                    IDEspecialidad = 4
+                    IDEspecialidad = 4,
+                    Especialidad = especialidades[3]
                 },
                 new()
                 {
                     Descripcion = "2009",
-                    IDEspecialidad = 3
+                    IDEspecialidad = 3,
+                    Especialidad = especialidades[2]
                 },
                 new()
                 {
                     Descripcion = "2003",
-                    IDEspecialidad = 1
+                    IDEspecialidad = 1,
+                    Especialidad = especialidades[0]
                 }
             };
             var comisiones = new List<Comision>
@@ -132,14 +137,16 @@ namespace Data.Database
                     Descripcion = "Sistemas de Gestión",
                     HSSemanales = 4,
                     HSTotales = 136,
-                    IDPlan = 1
+                    IDPlan = 1,
+                    Plan = planes[0]
                 },
                 new()
                 {
                     Descripcion = "Administración Gerencial",
                     HSSemanales = 6,
                     HSTotales = 102,
-                    IDPlan = 1
+                    IDPlan = 1,
+                    Plan = planes[0]
                 }
             };
             var usuarios = new List<Usuario>()

@@ -20,7 +20,9 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand sqlPlanes = new SqlCommand("select * from planes", sqlConn);
+                SqlCommand sqlPlanes = new SqlCommand("" +
+                    "select * from planes as P join especialidades as E on P.id_especialidad = E.ID"
+                    , sqlConn);
                 SqlDataReader drPlanes = sqlPlanes.ExecuteReader();
                 while (drPlanes.Read())
                 {
@@ -28,6 +30,10 @@ namespace Data.Database
                     plan.ID = (int)drPlanes["ID"];
                     plan.Descripcion = drPlanes["desc_plan"].ToString();
                     plan.IDEspecialidad = (int)drPlanes["id_especialidad"];
+                    plan.Especialidad = new Especialidad()
+                    {
+                        Descripcion = drPlanes["desc_especialidad"].ToString(),
+                    };
                     planes.Add(plan);
                 }
                 drPlanes.Close();
@@ -50,7 +56,9 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand sqlPlanes = new SqlCommand("select * from planes where ID = @id", sqlConn);
+                SqlCommand sqlPlanes = new SqlCommand(
+                    "select * from planes as P join especialidades as E on P.id_especialidad = E.ID where P.ID = @id"
+                    , sqlConn);
                 sqlPlanes.Parameters.Add("@id", SqlDbType.Int).Value = ID;
                 SqlDataReader drPlanes = sqlPlanes.ExecuteReader();
                 if (drPlanes.Read())
@@ -58,6 +66,10 @@ namespace Data.Database
                     plan.ID = (int)drPlanes["ID"];
                     plan.Descripcion = drPlanes["desc_plan"].ToString();
                     plan.IDEspecialidad = (int)drPlanes["id_especialidad"];
+                    plan.Especialidad = new Especialidad()
+                    {
+                        Descripcion = drPlanes["desc_especialidad"].ToString(),
+                    };
                 }
                 drPlanes.Close();
             }

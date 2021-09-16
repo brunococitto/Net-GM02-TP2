@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace Data.Database
 {
@@ -20,7 +21,9 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand sqlMaterias = new SqlCommand("select * from materias", sqlConn);
+                SqlCommand sqlMaterias = new SqlCommand(
+                    "select * from materias as M join planes as P on M.id_plan = P.ID join especialidades as E on P.id_especialidad = E.ID"
+                    , sqlConn);
                 SqlDataReader drMaterias = sqlMaterias.ExecuteReader();
                 while (drMaterias.Read())
                 {
@@ -30,6 +33,14 @@ namespace Data.Database
                     materia.HSSemanales = (int)drMaterias["hs_semanales"];
                     materia.HSTotales = (int)drMaterias["hs_totales"];
                     materia.IDPlan = (int)drMaterias["id_plan"];
+                    materia.Plan = new Plan()
+                    {
+                        Descripcion = drMaterias["desc_plan"].ToString(),
+                        Especialidad = new Especialidad()
+                        {
+                            Descripcion = drMaterias["desc_especialidad"].ToString(),
+                        }
+                    };
                     materias.Add(materia);
                 }
                 drMaterias.Close();
@@ -52,7 +63,9 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand sqlMaterias = new SqlCommand("select * from materias where ID = @id", sqlConn);
+                SqlCommand sqlMaterias = new SqlCommand(
+                    "select * from materias as M join planes as P on M.id_plan = P.ID join especialidades as E on P.id_especialidad = E.ID where M.ID = @id"
+                    , sqlConn);
                 sqlMaterias.Parameters.Add("@id", SqlDbType.Int).Value = ID;
                 SqlDataReader drMaterias = sqlMaterias.ExecuteReader();
                 if (drMaterias.Read())
@@ -62,6 +75,14 @@ namespace Data.Database
                     materia.HSSemanales = (int)drMaterias["hs_semanales"];
                     materia.HSTotales = (int)drMaterias["hs_totales"];
                     materia.IDPlan = (int)drMaterias["id_plan"];
+                    materia.Plan = new Plan()
+                    {
+                        Descripcion = drMaterias["desc_plan"].ToString(),
+                        Especialidad = new Especialidad()
+                        {
+                            Descripcion = drMaterias["desc_especialidad"].ToString(),
+                        }
+                    };
                 }
                 drMaterias.Close();
             }
@@ -151,7 +172,6 @@ namespace Data.Database
                 this.CloseConnection();
             }
         }
-
         public void Save(Materia materia)
         {
             if (materia.State == BusinessEntity.States.New)
