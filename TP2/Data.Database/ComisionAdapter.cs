@@ -20,7 +20,10 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand sqlComisiones = new SqlCommand("select * from comisiones", sqlConn);
+                SqlCommand sqlComisiones = new SqlCommand(
+                    "select * from comisiones as C join planes as P on C.id_plan = P.ID " +
+                    "join especialidades as E on P.id_especialidad = E.ID"
+                    , sqlConn);
                 SqlDataReader drComisiones = sqlComisiones.ExecuteReader();
                 while (drComisiones.Read())
                 {
@@ -29,6 +32,14 @@ namespace Data.Database
                     comi.Descripcion = drComisiones["desc_comision"].ToString();
                     comi.AnoEspecialidad = (int)drComisiones["anio_especialidad"];
                     comi.IDPlan = (int)drComisiones["id_plan"];
+                    comi.Plan = new Plan()
+                    {
+                        Descripcion = drComisiones["desc_plan"].ToString(),
+                        Especialidad = new Especialidad()
+                        {
+                            Descripcion = drComisiones["desc_especialidad"].ToString(),
+                        }
+                    };
                     comisiones.Add(comi);
                     
                 }
@@ -52,7 +63,10 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand sqlComisiones = new SqlCommand("select * from comisiones where ID = @id", sqlConn);
+                SqlCommand sqlComisiones = new SqlCommand(
+                    "select * from comisiones as C join planes as P on C.id_plan = P.ID " +
+                    "join especialidades as E on P.id_especialidad = E.ID where ID = @id"
+                    , sqlConn);
                 sqlComisiones.Parameters.Add("@id", SqlDbType.Int).Value = ID;
                 SqlDataReader drComisiones = sqlComisiones.ExecuteReader();
                 if (drComisiones.Read())
@@ -61,6 +75,14 @@ namespace Data.Database
                     comi.Descripcion = drComisiones["desc_comision"].ToString();
                     comi.AnoEspecialidad = (int)drComisiones["anio_especialidad"];
                     comi.IDPlan = (int)drComisiones["id_plan"];
+                    comi.Plan = new Plan()
+                    {
+                        Descripcion = drComisiones["desc_plan"].ToString(),
+                        Especialidad = new Especialidad()
+                        {
+                            Descripcion = drComisiones["desc_especialidad"].ToString(),
+                        }
+                    };
                 }
                 drComisiones.Close();
             }
