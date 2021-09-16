@@ -5,6 +5,7 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Database
 {
@@ -20,7 +21,10 @@ namespace Data.Database
             List<Persona> personas = new List<Persona>();
             try
             {
-                personas = _context.Personas.ToList();
+                personas = _context.Personas.
+                    Include(p => p.Plan?? new Plan()).
+                    ThenInclude(p => p.Especialidad ?? new Especialidad()).
+                    ToList();
             }
             catch (Exception e)
             {
