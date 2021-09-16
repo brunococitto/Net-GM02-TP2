@@ -35,8 +35,10 @@ namespace UI.Web
                 );
             services.AddScoped<MateriaAdapter>();
             services.AddScoped<PlanAdapter>();
+            services.AddScoped<EspecialidadAdapter>();
             services.AddScoped<MateriaLogic>();
             services.AddScoped<PlanLogic>();
+            services.AddScoped<EspecialidadLogic>();
             services.AddDbContext<AcademyContext>(opt =>
            {
                opt.UseSqlServer(config.GetConnectionString("ConnStringLocal"));

@@ -1,0 +1,17 @@
+﻿@model Business.Entities.Especialidad
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Delete">
+            <input asp-for="ID" type="hidden" />
+            <div class="form-group">
+                <label asp-for="Descripcion" class="form-label">Descripcion</label>
+                <input disabled asp-for="Descripcion" class="form-control" placeholder="@Model.Descripcion" value="@Model.Descripcion" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Confirmar</button>
+                <a class="btn btn-danger" asp-action="Index">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>

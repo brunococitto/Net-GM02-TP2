@@ -13,6 +13,7 @@ namespace Business.Entities
         private int _anoEspecialidad;
         private string _descripcion;
         private int _idPlan;
+        private Plan _plan;
         [Column("anio_especialidad")]
         [Display(Name = "Año especialidad")]
         public int AnoEspecialidad
@@ -39,6 +40,7 @@ namespace Business.Entities
             }
         }
         [Column("id_plan")]
+        [ForeignKey("Plan")]
         public int IDPlan
         {
             get
@@ -48,6 +50,17 @@ namespace Business.Entities
             set
             {
                 _idPlan = value;
+            }
+        }
+        public Plan Plan
+        {
+            get
+            {
+                return _plan;
+            }
+            set
+            {
+                _plan = value;
             }
         }
     }

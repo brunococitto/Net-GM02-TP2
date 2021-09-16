@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<Business.Entities.Materia>
 
-    <a class="btn btn-outline-success" asp-action="Create">Agregar materia</a>
+    <a class="btn btn-outline-success mb-2" asp-action="Create">Agregar materia</a>
 
 <ul class="list-group">
     @foreach  (Business.Entities.Materia mat in Model)
             {
-                <div class="card">
+                <div class="card mb-2">
                     <div class="card-body">
                         <h5 class="card-title">@mat.Descripcion</h5>
                         <h6 class="card-subtitle mb-2 text-muted">
