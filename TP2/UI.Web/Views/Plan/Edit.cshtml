@@ -1,0 +1,24 @@
+﻿@model EditPlanViewModel
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="Plan.ID" type="hidden" />
+            <div class="form-group">
+                <label asp-for="Plan.Descripcion" class="form-label">Descripcion</label>
+                <input maxlength="20" minlength="3" asp-for="Plan.Descripcion" class="form-control" placeholder="@Model.Plan.Descripcion" value="@Model.Plan.Descripcion" />
+                <span asp-validation-for="Plan.Descripcion" class="text-danger"></span>
+            </div>
+            <select class="form-group" asp-for="Plan.IDEspecialidad" asp-items="Model.Especialidades"></select>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a class="btn btn-danger" asp-action="Index">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

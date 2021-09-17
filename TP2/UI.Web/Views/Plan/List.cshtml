@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Business.Entities.Plan>
+
+    <a class="btn btn-outline-success mb-2" asp-action="Create">Agregar Plan</a>
+
+<ul class="list-group">
+    @foreach  (Business.Entities.Plan pl in Model)
+            {
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h5 class="card-title">@pl.Descripcion</h5>
+                        
+                        <p class="card-text">Especialidad: @pl.Especialidad.Descripcion </p>
+                        <a class="btn btn-primary" asp-area="" asp-action="Edit" asp-route-id="@pl.ID">Editar</a>
+                        <a class="btn btn-danger" asp-area="" asp-action="Delete" asp-route-id="@pl.ID">Eliminar</a>
+                    </div>
+                </div>
+            }
+</ul>
