@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Database.Migrations
 {
     [DbContext(typeof(AcademyContext))]
-    [Migration("20210916182256_update-12")]
-    partial class update12
+    [Migration("20210917162447_INICIAL")]
+    partial class INICIAL
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,6 +70,8 @@ namespace Data.Database.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("IDPlan");
+
                     b.ToTable("Comisiones");
                 });
 
@@ -101,6 +103,10 @@ namespace Data.Database.Migrations
                         .HasColumnName("id_materia");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("IDComision");
+
+                    b.HasIndex("IDMateria");
 
                     b.ToTable("Cursos");
                 });
@@ -255,6 +261,8 @@ namespace Data.Database.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("IDPlan");
+
                     b.ToTable("Personas");
                 });
 
@@ -305,6 +313,8 @@ namespace Data.Database.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("IDPersona");
+
                     b.ToTable("Usuarios");
                 });
 
@@ -313,13 +323,13 @@ namespace Data.Database.Migrations
                     b.HasOne("Business.Entities.Persona", "Persona")
                         .WithMany()
                         .HasForeignKey("IDAlumno")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Business.Entities.Curso", "Curso")
                         .WithMany()
                         .HasForeignKey("IDCurso")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Curso");
@@ -327,18 +337,48 @@ namespace Data.Database.Migrations
                     b.Navigation("Persona");
                 });
 
+            modelBuilder.Entity("Business.Entities.Comision", b =>
+                {
+                    b.HasOne("Business.Entities.Plan", "Plan")
+                        .WithMany()
+                        .HasForeignKey("IDPlan")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Plan");
+                });
+
+            modelBuilder.Entity("Business.Entities.Curso", b =>
+                {
+                    b.HasOne("Business.Entities.Comision", "Comision")
+                        .WithMany()
+                        .HasForeignKey("IDComision")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Business.Entities.Materia", "Materia")
+                        .WithMany()
+                        .HasForeignKey("IDMateria")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Comision");
+
+                    b.Navigation("Materia");
+                });
+
             modelBuilder.Entity("Business.Entities.DocenteCurso", b =>
                 {
                     b.HasOne("Business.Entities.Curso", "Curso")
                         .WithMany()
                         .HasForeignKey("IDCurso")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Business.Entities.Persona", "Persona")
                         .WithMany()
                         .HasForeignKey("IDDocente")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Curso");
@@ -351,8 +391,18 @@ namespace Data.Database.Migrations
                     b.HasOne("Business.Entities.Plan", "Plan")
                         .WithMany()
                         .HasForeignKey("IDPlan")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("Plan");
+                });
+
+            modelBuilder.Entity("Business.Entities.Persona", b =>
+                {
+                    b.HasOne("Business.Entities.Plan", "Plan")
+                        .WithMany()
+                        .HasForeignKey("IDPlan")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Plan");
                 });
@@ -362,10 +412,21 @@ namespace Data.Database.Migrations
                     b.HasOne("Business.Entities.Especialidad", "Especialidad")
                         .WithMany()
                         .HasForeignKey("IDEspecialidad")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Especialidad");
+                });
+
+            modelBuilder.Entity("Business.Entities.Usuario", b =>
+                {
+                    b.HasOne("Business.Entities.Persona", "Persona")
+                        .WithMany()
+                        .HasForeignKey("IDPersona")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Persona");
                 });
 #pragma warning restore 612, 618
         }

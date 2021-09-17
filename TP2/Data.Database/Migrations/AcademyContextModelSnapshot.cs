@@ -321,13 +321,13 @@ namespace Data.Database.Migrations
                     b.HasOne("Business.Entities.Persona", "Persona")
                         .WithMany()
                         .HasForeignKey("IDAlumno")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Business.Entities.Curso", "Curso")
                         .WithMany()
                         .HasForeignKey("IDCurso")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Curso");
@@ -340,7 +340,7 @@ namespace Data.Database.Migrations
                     b.HasOne("Business.Entities.Plan", "Plan")
                         .WithMany()
                         .HasForeignKey("IDPlan")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Plan");
@@ -351,13 +351,13 @@ namespace Data.Database.Migrations
                     b.HasOne("Business.Entities.Comision", "Comision")
                         .WithMany()
                         .HasForeignKey("IDComision")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Business.Entities.Materia", "Materia")
                         .WithMany()
                         .HasForeignKey("IDMateria")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Comision");
@@ -370,13 +370,13 @@ namespace Data.Database.Migrations
                     b.HasOne("Business.Entities.Curso", "Curso")
                         .WithMany()
                         .HasForeignKey("IDCurso")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Business.Entities.Persona", "Persona")
                         .WithMany()
                         .HasForeignKey("IDDocente")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Curso");
@@ -389,7 +389,7 @@ namespace Data.Database.Migrations
                     b.HasOne("Business.Entities.Plan", "Plan")
                         .WithMany()
                         .HasForeignKey("IDPlan")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Plan");
@@ -399,7 +399,8 @@ namespace Data.Database.Migrations
                 {
                     b.HasOne("Business.Entities.Plan", "Plan")
                         .WithMany()
-                        .HasForeignKey("IDPlan");
+                        .HasForeignKey("IDPlan")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Plan");
                 });
@@ -409,7 +410,7 @@ namespace Data.Database.Migrations
                     b.HasOne("Business.Entities.Especialidad", "Especialidad")
                         .WithMany()
                         .HasForeignKey("IDEspecialidad")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Especialidad");
@@ -420,7 +421,7 @@ namespace Data.Database.Migrations
                     b.HasOne("Business.Entities.Persona", "Persona")
                         .WithMany()
                         .HasForeignKey("IDPersona")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Persona");
