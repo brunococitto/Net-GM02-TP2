@@ -15,7 +15,7 @@ namespace Data.Database
         {
             //var connectionString = ConfigurationManager.ConnectionStrings[consKeyDefaultCnnString].ConnectionString;
             var connectionString = @"Server=(localdb)\mssqllocaldb;Database=academia;Trusted_Connection=True;MultipleActiveResultSets=true";
-            //var connectionString = @"Server=.\LOCALHOST;Database=Academia; User=net; Password=net";
+            //var connectionString = @"Server=.\LOCALHOST;Database=academia; User=net; Password=net";
             this.sqlConn = new SqlConnection(connectionString);
             sqlConn.Open();
         }
