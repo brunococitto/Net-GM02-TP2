@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Text;
-using System.Configuration;
 using Microsoft.Extensions.Configuration;
 
 namespace Data.Database
@@ -13,8 +11,11 @@ namespace Data.Database
         protected SqlConnection sqlConn;
         protected void OpenConnection()
         {
-            //var connectionString = ConfigurationManager.ConnectionStrings[consKeyDefaultCnnString].ConnectionString;
-            var connectionString = @"Server=(localdb)\mssqllocaldb;Database=academia;Trusted_Connection=True;MultipleActiveResultSets=true";
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .Build();
+            string connectionString = configuration.GetConnectionString("ConnStringLocal");
+            //var connectionString = @"Server=(localdb)\mssqllocaldb;Database=academia;Trusted_Connection=True;MultipleActiveResultSets=true";
             //var connectionString = @"Server=.\LOCALHOST;Database=academia; User=net; Password=net";
             this.sqlConn = new SqlConnection(connectionString);
             sqlConn.Open();
