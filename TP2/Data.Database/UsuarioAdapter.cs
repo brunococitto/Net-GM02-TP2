@@ -5,6 +5,8 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Data.Database
 {
@@ -23,29 +25,14 @@ namespace Data.Database
             List<Usuario> usuarios = new List<Usuario>();
             try
             {
-                this.OpenConnection();
-                SqlCommand sqlUsuarios = new SqlCommand("select * from usuarios", sqlConn);
-                SqlDataReader drUsuarios = sqlUsuarios.ExecuteReader();
-                while (drUsuarios.Read())
-                {
-                    Usuario usr = new Usuario();
-                    usr.ID = (int)drUsuarios["ID"];
-                    usr.NombreUsuario = (string)drUsuarios["nombre_usuario"];
-                    usr.Clave = drUsuarios["clave"].ToString();
-                    usr.Habilitado = (bool)drUsuarios["habilitado"];
-                    usr.IDPersona = (int)drUsuarios["id_persona"];
-                    usuarios.Add(usr);
-                }
-                drUsuarios.Close();
+                usuarios = _context.Usuarios
+                    .Include(u => u.Persona)
+                    .ToList();
             }
             catch (Exception e)
             {
                 Exception ExceptionManejada = new Exception("Error al recuperar listado de usuarios", e);
                 throw ExceptionManejada;
-            }
-            finally
-            {
-                this.CloseConnection();
             }
             return usuarios;
         }
@@ -55,28 +42,12 @@ namespace Data.Database
             Usuario usr = new Usuario();
             try
             {
-                this.OpenConnection();
-                SqlCommand sqlUsuarios = new SqlCommand("select * from usuarios where ID = @id", sqlConn);
-                sqlUsuarios.Parameters.Add("@id", SqlDbType.Int).Value = ID;
-                SqlDataReader drUsuarios = sqlUsuarios.ExecuteReader();
-                if (drUsuarios.Read())
-                {
-                    usr.ID = (int)drUsuarios["ID"];
-                    usr.NombreUsuario = drUsuarios["nombre_usuario"].ToString();
-                    usr.Clave = drUsuarios["clave"].ToString();
-                    usr.Habilitado = (bool)drUsuarios["habilitado"];
-                    usr.IDPersona = (int)drUsuarios["id_persona"];
-                }
-                drUsuarios.Close();
+                usr = _context.Usuarios.Find(ID);
             }
             catch (Exception e)
             {
                 Exception ExceptionManejada = new Exception("Error al recuperar datos de usuario", e);
                 throw ExceptionManejada;
-            }
-            finally
-            {
-                this.CloseConnection();
             }
             return usr;
         }
