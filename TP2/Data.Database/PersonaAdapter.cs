@@ -22,8 +22,8 @@ namespace Data.Database
             try
             {
                 personas = _context.Personas.
-                    Include(p => p.Plan?? new Plan()).
-                    ThenInclude(p => p.Especialidad ?? new Especialidad()).
+                    Include(p => p.Plan).
+                    ThenInclude(p => p.Especialidad).
                     ToList();
             }
             catch (Exception e)

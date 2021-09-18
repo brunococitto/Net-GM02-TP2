@@ -65,7 +65,7 @@ namespace Data.Database
                 this.OpenConnection();
                 SqlCommand sqlComisiones = new SqlCommand(
                     "select * from comisiones as C join planes as P on C.id_plan = P.ID " +
-                    "join especialidades as E on P.id_especialidad = E.ID where ID = @id"
+                    "join especialidades as E on P.id_especialidad = E.ID where C.ID = @id"
                     , sqlConn);
                 sqlComisiones.Parameters.Add("@id", SqlDbType.Int).Value = ID;
                 SqlDataReader drComisiones = sqlComisiones.ExecuteReader();

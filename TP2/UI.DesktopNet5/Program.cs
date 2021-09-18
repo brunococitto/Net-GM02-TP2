@@ -9,6 +9,7 @@ using Data.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace UI.Desktop
 {
@@ -25,10 +26,15 @@ namespace UI.Desktop
 
             var host = Host.CreateDefaultBuilder().ConfigureServices((hostContext, services) =>
             {
+                var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .Build();
+
                 services.AddSingleton<formMain>();
                 services.AddDbContext<AcademyContext>(opt =>
                 {
-                    opt.UseSqlServer(ConfigurationManager.ConnectionStrings["ConnStringLocal"].ConnectionString);
+                    //opt.UseSqlServer(ConfigurationManager.ConnectionStrings["ConnStringLocal"].ConnectionString);
+                    opt.UseSqlServer(configuration.GetConnectionString("ConnStringLocal"));
                 });
             }).Build();
 

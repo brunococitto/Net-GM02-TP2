@@ -21,32 +21,15 @@ namespace Data.Database
             List<Curso> cursos = new List<Curso>();
             try
             {
-                this.OpenConnection();
-                SqlCommand sqlCursos = new SqlCommand("select * from cursos", sqlConn);
-                SqlDataReader drCursos = sqlCursos.ExecuteReader();
-                while (drCursos.Read())
-                {
-                    Curso curso = new Curso();
-                    curso.ID = (int)drCursos["ID"];
-                    curso.Descripcion = drCursos["desc_curso"].ToString();
-                    curso.AnoCalendario = (int)drCursos["anio_calendario"];
-                    curso.Cupo = (int)drCursos["cupo"];
-                    curso.IDComision = (int)drCursos["id_comision"];
-                    curso.IDMateria = (int)drCursos["id_materia"];
-                    curso.Comision = _context.Comisiones.Find(curso.IDComision);
-                    curso.Materia = _context.Materias.Find(curso.IDMateria);
-                    cursos.Add(curso);
-                }
-                drCursos.Close();
+                cursos = _context.Cursos
+                    .Include(c => c.Materia)
+                    .Include(c => c.Comision)
+                    .ToList();
             }
             catch (Exception e)
             {
                 Exception ExceptionManejada = new Exception("Error al recuperar listado de cursos", e);
                 throw ExceptionManejada;
-            }
-            finally
-            {
-                this.CloseConnection();
             }
             return cursos;
         }
@@ -55,31 +38,12 @@ namespace Data.Database
             Curso curso = new Curso();
             try
             {
-                this.OpenConnection();
-                SqlCommand sqlCursos = new SqlCommand("select * from cursos where ID = @id", sqlConn);
-                sqlCursos.Parameters.Add("@id", SqlDbType.Int).Value = ID;
-                SqlDataReader drCursos = sqlCursos.ExecuteReader();
-                if (drCursos.Read())
-                {
-                    curso.ID = (int)drCursos["ID"];
-                    curso.Descripcion = drCursos["desc_curso"].ToString();
-                    curso.AnoCalendario = (int)drCursos["anio_calendario"];
-                    curso.Cupo = (int)drCursos["cupo"];
-                    curso.IDComision = (int)drCursos["id_comision"];
-                    curso.IDMateria = (int)drCursos["id_materia"];
-                    curso.Comision = _context.Comisiones.Find(curso.IDComision);
-                    curso.Materia = _context.Materias.Find(curso.IDMateria);
-                }
-                drCursos.Close();
+                curso = _context.Cursos.Find(ID);
             }
             catch (Exception e)
             {
                 Exception ExceptionManejada = new Exception("Error al recuperar datos de curso", e);
                 throw ExceptionManejada;
-            }
-            finally
-            {
-                this.CloseConnection();
             }
             return curso;
         }
@@ -182,7 +146,9 @@ namespace Data.Database
             List<Curso> cursos = new List<Curso>();
             try
             {
-                cursos = _context.DocentesCursos.Where(dc => dc.IDDocente == idProfesor).Select(dc => dc.Curso).ToList();
+                cursos = _context.DocentesCursos
+                    .Where(dc => dc.IDDocente == idProfesor)
+                    .Select(dc => dc.Curso).ToList();
             }
             catch (Exception e)
             {

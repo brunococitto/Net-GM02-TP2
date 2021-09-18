@@ -149,7 +149,7 @@ namespace Business.Logic
     {
         public PlanValidator()
         {
-            RuleFor(x => x.Descripcion).NotEmpty().MaximumLength(50).Matches("^[a-zA-Z1-9]+$").WithMessage("'Descripcion' debe contener solo letras y/o números"); // ValidarLetrasNumeros
+            RuleFor(x => x.Descripcion).NotEmpty().MaximumLength(50).Matches("^[a-zA-Z1-9 ]+$").WithMessage("'Descripcion' debe contener solo letras y/o números"); // ValidarLetrasNumeros
         }
     }
     public class ModuloValidator : AbstractValidator<Modulo>
@@ -201,6 +201,13 @@ namespace Business.Logic
         {
             RuleFor(x => x.AnoEspecialidad).NotNull().GreaterThan(0);
             RuleFor(x => x.Descripcion).NotEmpty().MaximumLength(50).Matches("^[a-zA-Z1-9]+$").WithMessage("'Descripcion' debe contener solo letras y/o números"); // ValidarLetrasNumeros
+        }
+    }
+    public class AlumnoInscripcionValidator : AbstractValidator<AlumnoInscripcion>
+    {
+        public AlumnoInscripcionValidator()
+        {
+
         }
     }
 }
