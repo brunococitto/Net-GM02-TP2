@@ -145,7 +145,7 @@ namespace UI.Desktop
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(151, 162);
+            this.btnAceptar.Location = new System.Drawing.Point(140, 159);
             this.btnAceptar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(133, 36);
@@ -156,7 +156,7 @@ namespace UI.Desktop
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(292, 162);
+            this.btnCancelar.Location = new System.Drawing.Point(281, 159);
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(133, 36);

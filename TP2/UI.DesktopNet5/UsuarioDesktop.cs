@@ -91,7 +91,10 @@ namespace UI.Desktop
         public override void MapearADatos()
         {
             UsuarioActual.Habilitado = this.chkHabilitado.Checked;
-            UsuarioActual.Clave = this.txtClave.Text;
+            if (this.txtClave.Text != "")
+            {
+                UsuarioActual.Clave = this.txtClave.Text;
+            }
             UsuarioActual.NombreUsuario = this.txtUsuario.Text;
             switch (Modos)
             {
@@ -108,7 +111,7 @@ namespace UI.Desktop
             try
             {
                 MapearADatos();
-                if (this.txtConfirmarClave == this.txtClave)
+                if (this.txtConfirmarClave.Text == this.txtClave.Text)
                 {
                     if (Validar())
                     {
