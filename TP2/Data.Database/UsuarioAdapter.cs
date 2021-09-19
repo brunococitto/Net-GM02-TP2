@@ -56,7 +56,10 @@ namespace Data.Database
         {
             try
             {
-                usuario.Clave = hashearClave(usuario.Clave);
+                if (usuario.Clave != GetOne(usuario.ID).Clave)
+                {
+                    usuario.Clave = hashearClave(usuario.Clave);
+                }
                 this.OpenConnection();
                 SqlCommand sqlSave = new SqlCommand(
                     "UPDATE usuarios SET nombre_usuario = @NombreUsuario, clave = @Clave, " +
