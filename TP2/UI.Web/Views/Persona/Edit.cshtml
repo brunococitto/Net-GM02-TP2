@@ -7,37 +7,37 @@
             <input asp-for="Persona.ID" type="hidden" />
             <div class="form-group">
                 <label asp-for="Persona.Legajo" class="form-label">Legajo</label>
-                <input class="form-control" placeholder="@Model.Persona.Legajo" value="@Model.Persona.Legajo" />
+                <input asp-for="Persona.Legajo" class="form-control" placeholder="@Model.Persona.Legajo" value="@Model.Persona.Legajo" />
                 <span asp-validation-for="Persona.Legajo" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Persona.Nombre" class="form-label">Nombre</label>
-                <input class="form-control" placeholder="@Model.Persona.Nombre" value="@Model.Persona.Nombre" />
+                <input asp-for="Persona.Nombre" class="form-control" placeholder="@Model.Persona.Nombre" value="@Model.Persona.Nombre" />
                 <span asp-validation-for="Persona.Nombre" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Persona.Apellido" class="form-label">Apellido</label>
-                <input class="form-control" placeholder="@Model.Persona.Apellido" value="@Model.Persona.Apellido" />
+                <input asp-for="Persona.Apellido" class="form-control" placeholder="@Model.Persona.Apellido" value="@Model.Persona.Apellido" />
                 <span asp-validation-for="Persona.Apellido" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Persona.Direccion" class="form-label">Direccion</label>
-                <input class="form-control" placeholder="@Model.Persona.Direccion" value="@Model.Persona.Direccion" />
+                <input asp-for="Persona.Direccion" class="form-control" placeholder="@Model.Persona.Direccion" value="@Model.Persona.Direccion" />
                 <span asp-validation-for="Persona.Direccion" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Persona.Email" class="form-label">Email</label>
-                <input class="form-control" placeholder="@Model.Persona.Email" value="@Model.Persona.Email" />
+                <input asp-for="Persona.Email" class="form-control" placeholder="@Model.Persona.Email" value="@Model.Persona.Email" />
                 <span asp-validation-for="Persona.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Persona.Telefono" class="form-label">Telefono</label>
-                <input class="form-control" placeholder="@Model.Persona.Telefono" value="@Model.Persona.Telefono" />
+                <input asp-for="Persona.Telefono" class="form-control" placeholder="@Model.Persona.Telefono" value="@Model.Persona.Telefono" />
                 <span asp-validation-for="Persona.Telefono" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Persona.FechaNacimiento" class="form-label">Fecha de Nacimiento</label>
-                <input class="form-control" placeholder="@Model.Persona.FechaNacimiento" value="@Model.Persona.FechaNacimiento" />
+                <input asp-for="Persona.FechaNacimiento" class="form-control" placeholder="@Model.Persona.FechaNacimiento" value="@Model.Persona.FechaNacimiento" />
                 <span asp-validation-for="Persona.FechaNacimiento" class="text-danger"></span>
             </div>
             <select class="form-group" asp-for="Persona.IDPlan" asp-items="Model.Planes"></select>
