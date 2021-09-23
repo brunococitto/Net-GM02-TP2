@@ -41,10 +41,13 @@ namespace UI.Web
             services.AddScoped<PlanLogic>();
             services.AddScoped<EspecialidadLogic>();
             services.AddScoped<ComisionLogic>();
+            services.AddScoped<PersonaLogic>();
+            services.AddScoped<PersonaAdapter>();
+
             services.AddDbContext<AcademyContext>(opt =>
-           {
+            {
                opt.UseSqlServer(config.GetConnectionString("ConnStringLocal"));
-           });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -20,23 +20,23 @@ namespace Data.Database
             {
                 new()
                 {
-                    Descripcion = "Ingeniería en Sistemas de Información"
+                    Descripcion = "Ingenierï¿½a en Sistemas de Informaciï¿½n"
                 },
                 new()
                 {
-                    Descripcion = "Ingeniería Química"
+                    Descripcion = "Ingenierï¿½a Quï¿½mica"
                 },
                 new()
                 {
-                    Descripcion = "Ingeniería Eléctrica"
+                    Descripcion = "Ingenierï¿½a Elï¿½ctrica"
                 },
                 new()
                 {
-                    Descripcion = "Ingeniería Mecánica"
+                    Descripcion = "Ingenierï¿½a Mecï¿½nica"
                 },
                 new()
                 {
-                    Descripcion = "Ingeniería Civil"
+                    Descripcion = "Ingenierï¿½a Civil"
                 },
                 new()
                 {
@@ -129,14 +129,14 @@ namespace Data.Database
             {
                 new()
                 {
-                    Descripcion = "Sistemas de Gestión",
+                    Descripcion = "Sistemas de Gestiï¿½n",
                     HSSemanales = 4,
                     HSTotales = 136,
                     Plan = planes[0]
                 },
                 new()
                 {
-                    Descripcion = "Administración Gerencial",
+                    Descripcion = "Administraciï¿½n Gerencial",
                     HSSemanales = 6,
                     HSTotales = 102,
                     Plan = planes[0]
