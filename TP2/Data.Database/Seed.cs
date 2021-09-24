@@ -20,28 +20,24 @@ namespace Data.Database
             {
                 new()
                 {
-                    Descripcion = "Ingenier�a en Sistemas de Informaci�n"
+                    Descripcion = "Ingeniería en Sistemas de Información"
                 },
                 new()
                 {
-                    Descripcion = "Ingenier�a Qu�mica"
+                    Descripcion = "Ingeniería Química"
                 },
                 new()
                 {
-                    Descripcion = "Ingenier�a El�ctrica"
+                    Descripcion = "Ingeniería Eléctrica"
                 },
                 new()
                 {
-                    Descripcion = "Ingenier�a Mec�nica"
+                    Descripcion = "Ingeniería Mecánica"
                 },
                 new()
                 {
-                    Descripcion = "Ingenier�a Civil"
+                    Descripcion = "Ingeniería Civil"
                 },
-                new()
-                {
-                    Descripcion = "Administrativo"
-                }
             };
             var planes = new List<Plan>()
             {
@@ -129,14 +125,14 @@ namespace Data.Database
             {
                 new()
                 {
-                    Descripcion = "Sistemas de Gesti�n",
+                    Descripcion = "Sistemas de Gestión",
                     HSSemanales = 4,
                     HSTotales = 136,
                     Plan = planes[0]
                 },
                 new()
                 {
-                    Descripcion = "Administraci�n Gerencial",
+                    Descripcion = "Administración Gerencial",
                     HSSemanales = 6,
                     HSTotales = 102,
                     Plan = planes[0]
@@ -147,15 +143,15 @@ namespace Data.Database
                 new()
                 {
                     AnoCalendario = 2021,
-                    Descripcion = "AG_2021_502",
+                    Descripcion = "AG 2021 502",
                     Comision = comisiones[0],
                     Materia = materias[0],
-                    Cupo = 10
+                    Cupo = 1
                 },
                 new()
                 {
                     AnoCalendario = 2021,
-                    Descripcion = "SdG_2021_502",
+                    Descripcion = "SdG 2021 502",
                     Comision = comisiones[0],
                     Materia = materias[1],
                     Cupo = 10
