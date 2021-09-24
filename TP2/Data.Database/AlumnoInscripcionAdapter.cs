@@ -30,12 +30,15 @@ namespace Data.Database
             }
             return inscripciones;
         }
-        public Business.Entities.AlumnoInscripcion GetOne(int ID)
+        public Business.Entities.AlumnoInscripcion GetOne(int id)
         {
             AlumnoInscripcion inscripcion = new AlumnoInscripcion();
             try
             {
-                inscripcion = _context.AlumnoInscripciones.Find(ID);
+                inscripcion = _context.AlumnoInscripciones
+                    .Include(i => i.Curso)
+                    .Include(i => i.Persona)
+                    .FirstOrDefault(i => i.ID == id);
             }
             catch (Exception e)
             {
@@ -159,6 +162,21 @@ namespace Data.Database
                 throw ExceptionManejada;
             }
 
+        }
+        public bool CursoTieneCupo(int idCurso)
+        {
+            try
+            {
+                CursoAdapter cursoAdapter = new CursoAdapter(_context);
+                Curso curso = cursoAdapter.GetOne(idCurso);
+                List<AlumnoInscripcion> inscripciones = GetInscripcionesCurso(idCurso);
+                return curso.Cupo > inscripciones.Count;
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al chequear cupo del curso", e);
+                throw ExceptionManejada;
+            }
         }
     }
 }

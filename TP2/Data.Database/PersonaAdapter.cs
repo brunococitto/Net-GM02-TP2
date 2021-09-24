@@ -47,10 +47,11 @@ namespace Data.Database
             }
             return persona;
         }
-        protected void Update()
+        protected void Update(Persona persona)
         {
             try
             {
+                _context.Personas.Update(persona);
                 _context.SaveChanges();
             }
             catch (Exception e)
@@ -100,7 +101,7 @@ namespace Data.Database
             }
             else if (persona.State == BusinessEntity.States.Modified)
             {
-                this.Update();
+                this.Update(persona);
             }
             persona.State = BusinessEntity.States.Unmodified;
         }
