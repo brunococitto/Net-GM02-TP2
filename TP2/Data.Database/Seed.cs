@@ -172,7 +172,7 @@ namespace Data.Database
                     Email = "bcocitto@gmail.com",
                     FechaNacimiento = new DateTime(2011, 12, 01),
                     Legajo = 45214,
-                    Plan = planes[0],
+                    Plan = null,
                     TipoPersona = Persona.TiposPersona.Administrativo
                 },
                 new()

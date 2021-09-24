@@ -14,22 +14,22 @@ namespace UI.Web.Controllers
     public class PersonaController : Controller
     {
         private readonly ILogger<PersonaController> _logger;
-        private readonly PersonaLogic _peronaLogic;
+        private readonly PersonaLogic _personaLogic;
         private readonly PlanLogic _planLogic;
         public PersonaController(ILogger<PersonaController> logger, PersonaLogic personaLogic, PlanLogic planLogic) 
         {
             _logger = logger;
             _logger.LogDebug("Inicializado controlador ComisionController");
-            _peronaLogic = personaLogic;
+            _personaLogic = personaLogic;
             _planLogic = planLogic;
         }
         public IActionResult Index() => RedirectToAction("List");
-        public IActionResult List() => View(_peronaLogic.GetAll());
+        public IActionResult List() => View(_personaLogic.GetAll());
         [HttpGet]
         public IActionResult Edit(int? id)
         {
             if (id == null) return NotFound();
-            Persona? persona = _peronaLogic.GetOne((int)id);
+            Persona? persona = _personaLogic.GetOne((int)id);
             if (persona == null) return NotFound();
             return View(new EditPersonaViewModel(persona, _planLogic.GetAll()));
         }
@@ -37,11 +37,16 @@ namespace UI.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("ID, Legajo, Nombre, Apellido, Direccion, Email, Telefono, FechaNacimiento, IDPlan, TipoPersona")] Persona persona)
         {
+            Console.WriteLine($"asd");
             if (id != persona.ID) return NotFound();
             if (ModelState.IsValid)
             {
+                if (persona.TipoPersona == Persona.TiposPersona.Administrativo)
+                {
+                    persona.IDPlan = null;
+                }
                 persona.State = BusinessEntity.States.Modified;
-                _peronaLogic.Save(persona);
+                _personaLogic.Save(persona);
                 return RedirectToAction("List");
             }
             return View(new EditPersonaViewModel(persona, _planLogic.GetAll()));
@@ -54,8 +59,12 @@ namespace UI.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (persona.TipoPersona == Persona.TiposPersona.Administrativo)
+                {
+                    persona.IDPlan = null;
+                }
                 persona.State = BusinessEntity.States.New;
-                _peronaLogic.Save(persona);
+                _personaLogic.Save(persona);
                 return RedirectToAction("List");
             }
             return View(new CreatePersonaViewModel(persona, _planLogic.GetAll()));
@@ -64,7 +73,7 @@ namespace UI.Web.Controllers
         public IActionResult Delete(int? id)
         {
             if (id == null) return NotFound();
-            Persona? persona = _peronaLogic.GetOne((int)id);
+            Persona? persona = _personaLogic.GetOne((int)id);
             if (persona == null) return NotFound();
             return View(persona);
         }
@@ -73,7 +82,7 @@ namespace UI.Web.Controllers
         {
             if (id != persona.ID) return NotFound();
             persona.State = BusinessEntity.States.Deleted;
-            _peronaLogic.Save(persona);
+            _personaLogic.Save(persona);
             return RedirectToAction("List");
         }
     }

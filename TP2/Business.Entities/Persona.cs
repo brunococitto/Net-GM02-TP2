@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace Business.Entities
 {
@@ -22,6 +23,7 @@ namespace Business.Entities
         private string _telefono;
         private int? _idPlan;
         private int _legajo;
+        [DataType(DataType.Date)]
         private DateTime _fechaNacimiento;
         public TiposPersona _tipoPersona;
         private Plan? _plan;
@@ -103,6 +105,7 @@ namespace Business.Entities
                 _legajo = value;
             }
         }
+        [DataType(DataType.Date)]
         public DateTime FechaNacimiento
         {
             get
@@ -129,7 +132,7 @@ namespace Business.Entities
         {
             get
             {
-                return _plan;
+                return _plan ?? new Plan();
             }
             set
             {

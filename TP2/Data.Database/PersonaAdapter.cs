@@ -47,7 +47,7 @@ namespace Data.Database
             }
             return persona;
         }
-        protected void Update(Persona persona)
+        protected void Update()
         {
             try
             {
@@ -100,7 +100,7 @@ namespace Data.Database
             }
             else if (persona.State == BusinessEntity.States.Modified)
             {
-                this.Update(persona);
+                this.Update();
             }
             persona.State = BusinessEntity.States.Unmodified;
         }

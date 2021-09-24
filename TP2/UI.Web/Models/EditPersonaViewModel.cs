@@ -24,8 +24,8 @@ namespace UI.Web.Models
             TiposPersona = Enum.GetValues(typeof(Persona.TiposPersona)).Cast<Persona.TiposPersona>().Select
             (p => new SelectListItem
             {
-                Text = $"{p}",
-                Value = p.ToString(),
+                Text = p.ToString(),
+                Value = ((int)p).ToString(),
                 Selected = p == persona?.TipoPersona
             }).ToList();
         }
