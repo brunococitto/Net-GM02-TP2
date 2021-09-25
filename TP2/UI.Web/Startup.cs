@@ -43,6 +43,8 @@ namespace UI.Web
             services.AddScoped<ComisionLogic>();
             services.AddScoped<PersonaLogic>();
             services.AddScoped<PersonaAdapter>();
+            services.AddScoped<CursoLogic>();
+            services.AddScoped<CursoAdapter>();
 
             services.AddDbContext<AcademyContext>(opt =>
             {
