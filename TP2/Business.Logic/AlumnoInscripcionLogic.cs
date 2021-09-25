@@ -95,7 +95,20 @@ namespace Business.Logic
         }
         public void Save(AlumnoInscripcion inscripcion)
         {
-            InscripcionData.Save(inscripcion);
+            try
+            {
+                if (inscripcion.State == BusinessEntity.States.New & !InscripcionData.CursoTieneCupo(inscripcion.IDCurso))
+                {
+                    throw new Exception();
+                }
+                InscripcionData.Save(inscripcion);
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("El curso no tiene cupo o se produjo un error", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
         }
     }
 }

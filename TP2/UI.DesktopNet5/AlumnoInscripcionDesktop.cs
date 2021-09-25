@@ -85,12 +85,14 @@ namespace UI.Desktop
                     this.btnAceptar.Text = "Guardar";
                     break;
                 case ModoForm.Modificacion:
+                    this.btnAceptar.Enabled = false;
                     this.btnAceptar.Text = "Guardar";
                     break;
                 case ModoForm.Baja:
                     this.btnAceptar.Text = "Eliminar";
                     this.txtLegajo.Enabled = false;
                     this.cbCurso.Enabled = false;
+                    this.btnAceptar.Enabled = true;
                     break;
                 case ModoForm.Consulta:
                     this.btnAceptar.Text = "Aceptar";
@@ -231,6 +233,21 @@ namespace UI.Desktop
         private void txtLegajo_Leave(object sender, EventArgs e)
         {
             cargarPersona();
+        }
+
+        private void cbCurso_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.AlumnoInscripcionActual != null)
+            {
+                if (this.cbCurso.SelectedItem != this.AlumnoInscripcionActual.Curso)
+                {
+                    this.btnAceptar.Enabled = true;
+                }
+                else
+                {
+                    this.btnAceptar.Enabled = false;
+                }
+            }
         }
     }
 }

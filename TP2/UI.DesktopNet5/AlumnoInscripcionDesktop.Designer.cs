@@ -165,6 +165,7 @@ namespace UI.Desktop
             this.cbCurso.Size = new System.Drawing.Size(337, 23);
             this.cbCurso.TabIndex = 4;
             this.cbCurso.ValueMember = "ID";
+            this.cbCurso.SelectedIndexChanged += new System.EventHandler(this.cbCurso_SelectedIndexChanged);
             // 
             // AlumnoInscripcionDesktop
             // 

@@ -41,7 +41,7 @@ namespace Business.Entities
         {
             get
             {
-                return _especialidad;
+                return _especialidad ?? new Especialidad();
             }
             set
             {

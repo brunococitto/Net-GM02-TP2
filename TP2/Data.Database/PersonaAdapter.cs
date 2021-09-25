@@ -38,7 +38,7 @@ namespace Data.Database
             Persona persona = new Persona();
             try
             {
-                persona = _context.Personas.Find(ID);
+                persona = _context.Personas.Include(p => p.Plan).FirstOrDefault(p => p.ID == ID);
             }
             catch (Exception e)
             {
@@ -51,6 +51,7 @@ namespace Data.Database
         {
             try
             {
+                _context.Personas.Update(persona);
                 _context.SaveChanges();
             }
             catch (Exception e)

@@ -12,10 +12,13 @@
                         <p class="card-text">Apellido: @per.Apellido</p>
                         <p class="card-text">Direccion: @per.Direccion</p>
                         <p class="card-text">Email: @per.Email</p>
-                        <p class="card-text">Fecha Nacimiento: @per.FechaNacimiento</p>
+                        <p class="card-text">Fecha Nacimiento: @per.FechaNacimiento.ToString("dd/MM/yyyy")</p>
                         <p class="card-text">Telefono: @per.Telefono</p>
-                        <p class="card-text">Plan: @per.Plan.Descripcion</p>
                         <p class="card-text">Tipo persona: @per.TipoPersona</p>
+                        @if (per.IDPlan != null)
+                        {
+                            <p class="card-text">Plan: @per.Plan.Descripcion</p>
+                        }
                         <a class="btn btn-primary" asp-area="" asp-action="Edit" asp-route-id="@per.ID">Editar</a>
                         <a class="btn btn-danger" asp-area="" asp-action="Delete" asp-route-id="@per.ID">Eliminar</a>
                     </div>

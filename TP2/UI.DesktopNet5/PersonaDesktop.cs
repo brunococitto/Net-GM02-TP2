@@ -74,6 +74,10 @@ namespace UI.Desktop
                 if (PersonaActual.TipoPersona == Persona.TiposPersona.Administrativo)
                 {
                     this.cbPlan.Enabled = false;
+                    if (PersonaActual == Singleton.getInstance().PersonaLogged)
+                    {
+                        this.cbTipoPersona.Enabled = false;
+                    }
                 }
                 else
                 {
