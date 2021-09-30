@@ -17,7 +17,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Curso.Cupo" class="form-label">Cupo</label>
-                <input min="10" max="100" asp-for="Curso.Cupo" type="number" class="form-control" />
+                <input min="0" max="100" asp-for="Curso.Cupo" type="number" class="form-control" />
                 <span asp-validation-for="Curso.Cupo" class="text-danger"></span>
             </div>
             <select class="form-group" asp-for="Curso.IDMateria" asp-items="Model.Materias"></select>
