@@ -152,13 +152,6 @@ namespace Business.Logic
             RuleFor(x => x.Descripcion).NotEmpty().MaximumLength(50).Matches("^[a-zA-Z0-9 ]+$").WithMessage("'Descripcion' debe contener solo letras y/o números"); // ValidarLetrasNumeros
         }
     }
-    public class ModuloValidator : AbstractValidator<Modulo>
-    {
-        public ModuloValidator()
-        {
-            RuleFor(x => x.Descripcion).NotEmpty().MaximumLength(50).Matches("^[a-zA-Z0-9 ]+$").WithMessage("'Descripcion' debe contener solo letras y/o números"); // ValidarLetrasNumeros
-        }
-    }
     public class MateriaValidator : AbstractValidator<Materia>
     {
         public MateriaValidator()

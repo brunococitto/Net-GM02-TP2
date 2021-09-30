@@ -103,10 +103,6 @@ namespace UI.Desktop
         {
             setForm(new Materias(_context));
         }
-        private void mnuModulos_Click(object sender, EventArgs e)
-        {
-            setForm(new Modulos(_context));
-        }
         private void mnuPersonas_Click(object sender, EventArgs e)
         {
             setForm(new Personas(_context));

@@ -106,21 +106,6 @@ namespace Data.Database
                     Descripcion = "502"
                 }
             };
-            var modulos = new List<Modulo>
-            {
-                new()
-                {
-                    Descripcion = "ABMC Usuarios"
-                },
-                new()
-                {
-                    Descripcion = "ABMC Personas"
-                },
-                new()
-                {
-                    Descripcion = "ABMC Cursos"
-                }
-            };
             var materias = new List<Materia>
             {
                 new()
@@ -265,7 +250,6 @@ namespace Data.Database
             context.AddRange(especialidades);
             context.AddRange(planes);
             context.AddRange(comisiones);
-            context.AddRange(modulos);
             context.AddRange(materias);
             context.AddRange(cursos);
             context.AddRange(usuarios);
