@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Business.Entities.Usuario>
+
+    <a class="btn btn-outline-success mb-2" asp-action="Create">Agregar</a>
+
+<ul class="list-group">
+    @foreach  (Business.Entities.Usuario usr in Model)
+            {
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h5 class="card-title">@usr.NombreUsuario</h5>
+                        <p class="card-text">Legajo: @usr.Persona.Legajo </p>
+                        <p class="card-text">Nombre: @usr.Persona.Nombre </p>
+                        <p class="card-text">Nombre: @usr.Persona.Apellido </p>
+                        <p class="card-text">Habilitado: @usr.Habilitado.ToString() </p>
+                        <a class="btn btn-primary" asp-area="" asp-action="Edit" asp-route-id="@usr.ID">Editar</a>
+                        <a class="btn btn-danger" asp-area="" asp-action="Delete" asp-route-id="@usr.ID">Eliminar</a>
+                    </div>
+                </div>
+            }
+</ul>
