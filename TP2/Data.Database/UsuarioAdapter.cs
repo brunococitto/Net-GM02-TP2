@@ -42,7 +42,7 @@ namespace Data.Database
             Usuario usr = new Usuario();
             try
             {
-                usr = _context.Usuarios.Find(ID);
+                usr = _context.Usuarios.Include(u => u.Persona).FirstOrDefault(u => u.ID == ID);
             }
             catch (Exception e)
             {
