@@ -8,25 +8,25 @@
             <div class="form-group">
                 <label asp-for="DocenteCurso.Persona.Legajo" class="form-label">Legajo</label>
                 <input asp-for="DocenteCurso.Persona.Legajo" class="form-control" placeholder="@Model.DocenteCurso.Persona.Legajo" value="@Model.DocenteCurso.Persona.Legajo" />
-                
+
             </div>
             <div class="form-group">
                 <label asp-for="DocenteCurso.Persona.Nombre" class="form-label">Nombre</label>
                 <input disabled asp-for="DocenteCurso.Persona.Nombre" class="form-control" placeholder="@Model.DocenteCurso.Persona.Nombre" value="@Model.DocenteCurso.Persona.Nombre" />
-                
+
             </div>
             <div class="form-group">
                 <label asp-for="DocenteCurso.Persona.Apellido" class="form-label">Apellido</label>
                 <input disabled asp-for="DocenteCurso.Persona.Apellido" class="form-control" placeholder="@Model.DocenteCurso.Persona.Apellido" value="@Model.DocenteCurso.Persona.Apellido" />
-                
+
             </div>
             <div class="form-group">
-                <label asp-for="DocenteCurso.Cargo" class="form-label">Cargo</label><br />
-                <select class="form-group" id="ComboCargo" asp-for="DocenteCurso.Cargo" asp-items="Model.Cargo"></select>
+                <label asp-for="DocenteCurso.Cargo" class="form-label">Cargo</label>
+                <select class="form-group ml-2" id="ComboCargo" asp-for="DocenteCurso.Cargo" asp-items="Model.TiposCargo"></select>
             </div>
             <div class="form-group">
-                <label asp-for="DocenteCurso.IDCurso" class="form-label">Cursos</label>
-                <select class="form-group" asp-for="DocenteCurso.IDCurso" asp-items="Model.Cursos"></select>
+                <label asp-for="DocenteCurso.IDCurso" class="form-label">Curso</label>
+                <select class="form-group ml-2" asp-for="DocenteCurso.IDCurso" asp-items="Model.Cursos"></select>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Guardar</button>
@@ -35,3 +35,7 @@
         </form>
     </div>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

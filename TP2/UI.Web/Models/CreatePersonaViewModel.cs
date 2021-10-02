@@ -11,10 +11,7 @@ namespace UI.Web.Models
     {
         public Persona? Persona { get; }
         public List<SelectListItem> Planes { get; }
-
         public List<SelectListItem> TiposPersona { get; }
-
-
         public CreatePersonaViewModel(Persona? persona, IEnumerable<Plan> planes)
         {
             Persona = persona;

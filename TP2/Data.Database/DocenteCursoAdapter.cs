@@ -35,7 +35,7 @@ namespace Data.Database
             DocenteCurso asignacion = new DocenteCurso();
             try
             {
-                asignacion = _context.DocentesCursos.Find(ID);
+                asignacion = _context.DocentesCursos.Include(dc => dc.Curso).Include(dc => dc.Persona).FirstOrDefault(dc => dc.ID == ID);
             }
             catch (Exception e)
             {

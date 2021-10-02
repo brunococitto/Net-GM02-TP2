@@ -33,7 +33,7 @@ namespace UI.Web.Controllers
             if (id == null) return NotFound();
             DocenteCurso? docenteCurso = _docenteCursoLogic.GetOne((int)id);
             if (docenteCurso == null) return NotFound();
-            return View(new EditDocenteCursoViewModel(docenteCurso, _personaLogic.GetAll(),_cursoLogic.GetAll()));
+            return View(new EditDocenteCursoViewModel(docenteCurso, _cursoLogic.GetAll()));
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -47,10 +47,10 @@ namespace UI.Web.Controllers
                 _docenteCursoLogic.Save(docenteCurso);
                 return RedirectToAction("List");
             }
-            return View(new EditDocenteCursoViewModel(docenteCurso, _personaLogic.GetAll(), _cursoLogic.GetAll()));
+            return View(new EditDocenteCursoViewModel(docenteCurso, _cursoLogic.GetAll()));
         }
         [HttpGet]
-        public IActionResult Create() => View(new CreateDocenteCursoViewModel(null, _personaLogic.GetAll(), _cursoLogic.GetAll()));
+        public IActionResult Create() => View(new CreateDocenteCursoViewModel(null, _cursoLogic.GetAll()));
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Cargo, Curso, IDCurso, IDDocente,Persona")] DocenteCurso docenteCurso)
@@ -62,7 +62,7 @@ namespace UI.Web.Controllers
                 _docenteCursoLogic.Save(docenteCurso);
                 return RedirectToAction("List");
             }
-            return View(new CreateDocenteCursoViewModel(docenteCurso, _personaLogic.GetAll(), _cursoLogic.GetAll()));
+            return View(new CreateDocenteCursoViewModel(docenteCurso, _cursoLogic.GetAll()));
         }
         [HttpGet]
         public IActionResult Delete(int? id)
