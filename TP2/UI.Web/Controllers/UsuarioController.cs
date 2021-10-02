@@ -20,12 +20,12 @@ namespace UI.Web.Controllers
         public UsuarioController(ILogger<UsuarioController> logger,UsuarioLogic usuarioLogic ,PersonaLogic personaLogic) 
         {
             _logger = logger;
-            _logger.LogDebug("Inicializado controlador ComisionController");
+            _logger.LogDebug("Inicializado controlador UsuarioController");
             _usuarioLogic = usuarioLogic;
             _personaLogic = personaLogic;
         }
         public IActionResult Index() => RedirectToAction("List");
-        public IActionResult List() => View(_personaLogic.GetAll());
+        public IActionResult List() => View(_usuarioLogic.GetAll());
         [HttpGet]
         public IActionResult Edit(int? id)
         {

@@ -42,6 +42,9 @@ namespace UI.Web
             services.AddScoped<PersonaAdapter>();
             services.AddScoped<CursoLogic>();
             services.AddScoped<CursoAdapter>();
+            services.AddScoped<UsuarioAdapter>();
+            services.AddScoped<UsuarioLogic>();
+
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
                 options.LoginPath = "/Account/Login";
