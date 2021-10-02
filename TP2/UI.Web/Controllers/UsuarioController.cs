@@ -47,7 +47,7 @@ namespace UI.Web.Controllers
             }
             return View(new EditUsuarioViewModel(usuario));
         }
-        [HttpGet]
+        /*[HttpGet]
         public IActionResult Create() => View(new CreateUsuarioViewModel(null, _personaLogic.GetAll()));
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -60,7 +60,7 @@ namespace UI.Web.Controllers
                 return RedirectToAction("List");
             }
             return View(new CreateUsuarioViewModel(usuario, _personaLogic.GetAll()));
-        }
+        }*/
         [HttpGet]
         public IActionResult Delete(int? id)
         {

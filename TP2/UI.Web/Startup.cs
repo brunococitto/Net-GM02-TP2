@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Data.Database;
 using Business.Logic;
 using FluentValidation.AspNetCore;
@@ -29,8 +25,9 @@ namespace UI.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews().AddFluentValidation(
-                fv => { fv.RegisterValidatorsFromAssemblyContaining<MateriaValidator>();
-                    //fv.ValidatorOptions.LanguageManager.Culture = new System.Globalization.CultureInfo("es");
+                fv => {
+                    fv.RegisterValidatorsFromAssemblyContaining<MateriaValidator>();
+                    fv.ValidatorOptions.LanguageManager.Culture = new System.Globalization.CultureInfo("es");
                 }
                 );
             services.AddScoped<MateriaAdapter>();
@@ -45,6 +42,12 @@ namespace UI.Web
             services.AddScoped<PersonaAdapter>();
             services.AddScoped<CursoLogic>();
             services.AddScoped<CursoAdapter>();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
+                options.AccessDeniedPath = "/Error/401";
+            });
 
             services.AddDbContext<AcademyContext>(opt =>
             {
@@ -72,6 +75,8 @@ namespace UI.Web
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
