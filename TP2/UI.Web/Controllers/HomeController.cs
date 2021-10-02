@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UI.Web.Controllers
 {
@@ -10,6 +11,7 @@ namespace UI.Web.Controllers
         {
             _logger = logger;
         }
+        [Authorize]
         public IActionResult Index() => View(); //RedirectToAction("List", "Materia");
     }
 }

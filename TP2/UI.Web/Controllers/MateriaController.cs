@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Business.Logic;
 using Business.Entities;
 using UI.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UI.Web.Controllers
 {
@@ -24,9 +25,10 @@ namespace UI.Web.Controllers
             _planLogic = planLogic;
         }
         public IActionResult Index() => RedirectToAction("List");
+        [Authorize(Roles = "Administrativo")]
         public IActionResult List() => View(_materiaLogic.GetAll());
-
         [HttpGet]
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -34,8 +36,8 @@ namespace UI.Web.Controllers
             if (materia == null) return NotFound();
             return View(new EditMateriaViewModel(materia, _planLogic.GetAll()));
         }
-
         [HttpPost]
+        [Authorize(Roles = "Administrativo")]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("ID, Descripcion, HSSemanales, HSTotales, IDPlan")] Materia materia)
         {
@@ -49,8 +51,10 @@ namespace UI.Web.Controllers
             return View(new EditMateriaViewModel(materia, _planLogic.GetAll()));
         }
         [HttpGet]
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Create() => View(new CreateMateriaViewModel(null, _planLogic.GetAll()));
         [HttpPost]
+        [Authorize(Roles = "Administrativo")]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("ID, Descripcion, HSSemanales, HSTotales, IDPlan")] Materia materia)
         {
@@ -63,6 +67,7 @@ namespace UI.Web.Controllers
             return View(new CreateMateriaViewModel(materia, _planLogic.GetAll()));
         }
         [HttpGet]
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -71,6 +76,7 @@ namespace UI.Web.Controllers
             return View(materia);
         }
         [HttpPost]
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Delete(int id, Materia materia)
         {
             if (id != materia.ID) return NotFound();

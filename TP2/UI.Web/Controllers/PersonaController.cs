@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Business.Logic;
 using Business.Entities;
 using UI.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UI.Web.Controllers
 {
@@ -24,8 +25,10 @@ namespace UI.Web.Controllers
             _planLogic = planLogic;
         }
         public IActionResult Index() => RedirectToAction("List");
+        [Authorize(Roles = "Administrativo")]
         public IActionResult List() => View(_personaLogic.GetAll());
         [HttpGet]
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -34,6 +37,7 @@ namespace UI.Web.Controllers
             return View(new EditPersonaViewModel(persona, _planLogic.GetAll()));
         }
         [HttpPost]
+        [Authorize(Roles = "Administrativo")]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("ID, Legajo, Nombre, Apellido, Direccion, Email, Telefono, FechaNacimiento, IDPlan, TipoPersona")] Persona persona)
         {
@@ -52,8 +56,10 @@ namespace UI.Web.Controllers
             return View(new EditPersonaViewModel(persona, _planLogic.GetAll()));
         }
         [HttpGet]
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Create() => View(new CreatePersonaViewModel(null, _planLogic.GetAll()));
         [HttpPost]
+        [Authorize(Roles = "Administrativo")]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("ID, Legajo, Nombre, Apellido, Direccion, Email, Telefono, FechaNacimiento, IDPlan, TipoPersona")] Persona persona)
         {
@@ -70,6 +76,7 @@ namespace UI.Web.Controllers
             return View(new CreatePersonaViewModel(persona, _planLogic.GetAll()));
         }
         [HttpGet]
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -78,6 +85,7 @@ namespace UI.Web.Controllers
             return View(persona);
         }
         [HttpPost]
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Delete(int id, Persona persona)
         {
             if (id != persona.ID) return NotFound();

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Business.Logic;
 using Business.Entities;
 using UI.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UI.Web.Controllers
 {
@@ -24,8 +25,10 @@ namespace UI.Web.Controllers
             _planLogic = planLogic;
         }
         public IActionResult Index() => RedirectToAction("List");
+        [Authorize(Roles = "Administrativo")]
         public IActionResult List() => View(_comisionLogic.GetAll());
         [HttpGet]
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -34,6 +37,7 @@ namespace UI.Web.Controllers
             return View(new EditComisionViewModel(comision, _planLogic.GetAll()));
         }
         [HttpPost]
+        [Authorize(Roles = "Administrativo")]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("ID, Descripcion, AnoEspecialidad, IDPlan")] Comision comision)
         {
@@ -47,8 +51,10 @@ namespace UI.Web.Controllers
             return View(new EditComisionViewModel(comision, _planLogic.GetAll()));
         }
         [HttpGet]
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Create() => View(new CreateComisionViewModel(null, _planLogic.GetAll()));
         [HttpPost]
+        [Authorize(Roles = "Administrativo")]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("ID, Descripcion, AnoEspecialidad, IDPlan")] Comision comision)
         {
@@ -61,6 +67,7 @@ namespace UI.Web.Controllers
             return View(new CreateComisionViewModel(comision, _planLogic.GetAll()));
         }
         [HttpGet]
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -69,6 +76,7 @@ namespace UI.Web.Controllers
             return View(comision);
         }
         [HttpPost]
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Delete(int id, Comision comision)
         {
             if (id != comision.ID) return NotFound();

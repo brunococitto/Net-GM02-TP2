@@ -54,12 +54,12 @@ namespace Data.Database
 
         protected void Update(Usuario usuario)
         {
+            if (usuario.Clave != usuario.Clave)
+            {
+                usuario.Clave = new Hasher().GenerateHash(usuario.Clave, usuario.Salt);
+            }
             try
             {
-                if (usuario.Clave != GetOne(usuario.ID).Clave)
-                {
-                    usuario.Clave = hashearClave(usuario.Clave);
-                }
                 this.OpenConnection();
                 SqlCommand sqlSave = new SqlCommand(
                     "UPDATE usuarios SET nombre_usuario = @NombreUsuario, clave = @Clave, " +
@@ -85,9 +85,9 @@ namespace Data.Database
         }
         protected void Insert(Usuario usuario)
         {
+            usuario.Clave = new Hasher().GenerateHash(usuario.Clave, usuario.Salt);
             try
             {
-                usuario.Clave = hashearClave(usuario.Clave);
                 this.OpenConnection();
                 SqlCommand sqlSave = new SqlCommand(
                     "INSERT INTO usuarios(nombre_usuario, clave, habilitado, id_persona) " +
@@ -150,49 +150,17 @@ namespace Data.Database
         public Usuario Login(string usuario, string contrasenia)
         {
             try
-            { 
-                contrasenia = hashearClave(contrasenia);
-                Usuario usr = new Usuario();
-                this.OpenConnection();
-                SqlCommand cmdLogin = new SqlCommand("SELECT * FROM usuarios WHERE nombre_usuario=@usuario and clave=@contrasenia", sqlConn);
-                cmdLogin.Parameters.Add("@usuario", SqlDbType.VarChar, 50).Value = usuario;
-                cmdLogin.Parameters.Add("@contrasenia", SqlDbType.VarChar, 50).Value = contrasenia;
-                SqlDataReader drLogin = cmdLogin.ExecuteReader();
-                if (drLogin.Read())
-                {
-                    usr.ID = (int)drLogin["ID"];
-                    usr.NombreUsuario = drLogin["nombre_usuario"].ToString();
-                    usr.Clave = drLogin["clave"].ToString();
-                    usr.Habilitado = (bool)drLogin["habilitado"];
-                    usr.IDPersona = (int)drLogin["id_persona"];
-                    drLogin.Close();
-                    return usr;
-                } else
-                {
-                    return null;
-                }
+            {
+                Usuario usr = _context.Usuarios.Include(u => u.Persona).First(u => u.NombreUsuario == usuario);
+                if (usr == null) return null;
+                contrasenia = new Hasher().GenerateHash(contrasenia, usr.Salt);
+                if (usr.Clave != contrasenia) return null;
+                return usr;
             }
             catch (Exception Ex)
             {
                 Exception ExcepcionManejada = new Exception("Error al recuperar usuario", Ex);
                 throw ExcepcionManejada;
-            }
-            finally
-            {
-                this.CloseConnection();
-            }
-        }
-        private string hashearClave(string claveOriginal)
-        {
-            using (SHA1Managed sha1 = new SHA1Managed())
-            {
-                var claveHasheada = sha1.ComputeHash(Encoding.UTF8.GetBytes(claveOriginal));
-                var salida = new StringBuilder(claveHasheada.Length * 2);
-                foreach (byte b in claveHasheada)
-                {
-                    salida.Append(b.ToString("X2"));
-                }
-                return salida.ToString();
             }
         }
     }

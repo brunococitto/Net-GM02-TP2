@@ -30,6 +30,7 @@ namespace UI.Desktop
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .Build();
 
+                services.AddSingleton<Hasher>();
                 services.AddSingleton<formMain>();
                 services.AddDbContext<AcademyContext>(opt =>
                 {
@@ -41,7 +42,7 @@ namespace UI.Desktop
             using (var services = host.Services.CreateScope())
             {
                 var dbContext = services.ServiceProvider.GetRequiredService<AcademyContext>();
-                Seed.SeedData(dbContext);
+                Seed.SeedData(dbContext, new Hasher());
 
                 var formMain = services.ServiceProvider.GetRequiredService<formMain>();
                 Application.Run(formMain);

@@ -13,7 +13,7 @@ namespace UI.Web
             using (var services = host.Services.CreateScope())
             {
                 var dbContext = services.ServiceProvider.GetRequiredService<AcademyContext>();
-                Seed.SeedData(dbContext);
+                Seed.SeedData(dbContext, new Hasher());
             }
             host.Run();
         }

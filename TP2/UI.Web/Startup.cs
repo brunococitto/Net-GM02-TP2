@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Data.Database;
 using Business.Logic;
 using FluentValidation.AspNetCore;
+using UI.Web.Providers;
 
 namespace UI.Web
 {
@@ -45,6 +46,8 @@ namespace UI.Web
             services.AddScoped<UsuarioAdapter>();
             services.AddScoped<UsuarioLogic>();
 
+            services.AddScoped<IHasher, Hasher>();
+            services.AddScoped<IUsuarioManager, UsuarioManager>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
                 options.LoginPath = "/Account/Login";

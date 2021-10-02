@@ -74,5 +74,6 @@ namespace Business.Entities
                 _persona = value;
             }
         }
+        public string Salt { get; set; }
     }
 }

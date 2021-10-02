@@ -1,8 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Text;
-using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Business.Entities;
 
@@ -10,7 +7,7 @@ namespace Data.Database
 {
     public class Seed
     {
-        public static void SeedData(AcademyContext context)
+        public static void SeedData(AcademyContext context, IHasher hasher)
         {
 
             context.Database.EnsureDeleted();
@@ -193,37 +190,49 @@ namespace Data.Database
                     TipoPersona = Persona.TiposPersona.Alumno
                 }
             };
-            var usuarios = new List<Usuario>()
+            var usuarios = new List<Usuario>();
+
+            string salt = hasher.GenerateSalt();
+            usuarios.Add(new()
             {
-                new()
-                {
-                    NombreUsuario = "bcocitto",
-                    Clave = "C7C3ECFF956CE64056F4BBC9453C8CA853AFA68E",
-                    Persona = personas[0],
-                    Habilitado = true
-                },
-                new()
-                {
-                    NombreUsuario = "smasetto",
-                    Clave = "83762B2C48D3BBA8A4DA6EF5493CA9DAA527FCFA",
-                    Persona = personas[1],
-                    Habilitado = true
-                },
-                new()
-                {
-                    NombreUsuario = "fschiavoni",
-                    Clave = "AAEF5F07A9DCB37E082D23871E558B3FBDC13EE2",
-                    Persona = personas[2],
-                    Habilitado = true
-                },
-                new()
-                {
-                    NombreUsuario = "mdorado",
-                    Clave = "83E83B756D616723B0C53754387AA0647BDF7CDC",
-                    Persona = personas[3],
-                    Habilitado = true
-                }
-            };
+                NombreUsuario = "bcocitto",
+                Clave = hasher.GenerateHash("bcocitto", salt),
+                Salt = salt,
+                Persona = personas[0],
+                Habilitado = true
+            });
+
+            salt = hasher.GenerateSalt();
+            usuarios.Add(new()
+            {
+                NombreUsuario = "smasetto",
+                Clave = hasher.GenerateHash("smasetto", salt),
+                Salt = salt,
+                Persona = personas[1],
+                Habilitado = true
+            });
+
+
+            salt = hasher.GenerateSalt();
+            usuarios.Add(new()
+            {
+                NombreUsuario = "fschiavoni",
+                Clave = hasher.GenerateHash("fschiavoni", salt),
+                Salt = salt,
+                Persona = personas[2],
+                Habilitado = true
+            });
+
+            salt = hasher.GenerateSalt();
+            usuarios.Add(new()
+            {
+                NombreUsuario = "mdorado",
+                Clave = hasher.GenerateHash("mdorado", salt),
+                Salt = salt,
+                Persona = personas[3],
+                Habilitado = true
+            });
+
             var inscripciones = new List<AlumnoInscripcion>
             {
                 new()

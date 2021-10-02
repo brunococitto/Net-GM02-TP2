@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
@@ -25,24 +18,32 @@ namespace UI.Desktop
         }
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            Usuario usr = _usuarioLogic.Login(this.txtUsuario.Text, this.txtPass.Text);
-            if (usr != null)
+            try
             {
-                if (usr.Habilitado == true)
+                Usuario usr = _usuarioLogic.Login(this.txtUsuario.Text, this.txtPass.Text);
+                if (usr != null)
                 {
-                    Singleton.setInstance(_personaLogic.GetOne(usr.IDPersona), usr);
-                    this.DialogResult = DialogResult.OK;
+                    if (usr.Habilitado == true)
+                    {
+                        Singleton.setInstance(_personaLogic.GetOne(usr.IDPersona), usr);
+                        this.DialogResult = DialogResult.OK;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Usuario no habilitado, contactese con su administrador", "Login"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Usuario no habilitado, contactese con su administrador", "Login"
-                , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Contraseña incorrecta", "Login"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Usuario y/o contraseña incorrectos", "Login"
-                , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Usuario incorrecto", "Login"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void lnkOlvidaPass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
