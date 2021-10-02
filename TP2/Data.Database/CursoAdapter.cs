@@ -38,7 +38,7 @@ namespace Data.Database
             Curso curso = new Curso();
             try
             {
-                curso = _context.Cursos.Find(ID);
+                curso = _context.Cursos.Include(c => c.Materia).Include(c => c.Comision).FirstOrDefault(p => p.ID == ID);
             }
             catch (Exception e)
             {

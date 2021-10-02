@@ -108,6 +108,15 @@ namespace UI.Desktop
                     break;
                 case ModoForm.Baja:
                     this.btnAceptar.Text = "Eliminar";
+                    this.txtNombre.Enabled = false;
+                    this.txtEmail.Enabled = false;
+                    this.dtpFechaNacimiento.Enabled = false;
+                    this.cbTipoPersona.Enabled = false;
+                    this.txtLegajo.Enabled = false;
+                    this.txtApellido.Enabled = false;
+                    this.txtTelefono.Enabled = false;
+                    this.txtDireccion.Enabled = false;
+                    this.cbPlan.Enabled = false;
                     break;
                 case ModoForm.Consulta:
                     this.btnAceptar.Text = "Aceptar";
