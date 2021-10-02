@@ -45,6 +45,8 @@ namespace UI.Web
             services.AddScoped<CursoAdapter>();
             services.AddScoped<UsuarioAdapter>();
             services.AddScoped<UsuarioLogic>();
+            services.AddScoped<DocenteCursoLogic>();
+            services.AddScoped<DocenteCursoAdapter>();
 
             services.AddScoped<IHasher, Hasher>();
             services.AddScoped<IUsuarioManager, UsuarioManager>();

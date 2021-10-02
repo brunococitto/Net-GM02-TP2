@@ -1,0 +1,37 @@
+﻿@model CreateDocenteCursoViewModel
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DocenteCurso.Persona.Legajo" class="form-label">Legajo</label>
+                <input asp-for="DocenteCurso.Persona.Legajo" class="form-control" />
+                
+            </div>
+            <div class="form-group">
+                <label asp-for="DocenteCurso.Persona.Nombre" class="form-label">Nombre</label>
+                <input asp-for="DocenteCurso.Persona.Nombre" class="form-control" />
+                
+            </div>
+            <div class="form-group">
+                <label asp-for="DocenteCurso.Persona.Apellido" class="form-label">Apellido</label>
+                <input asp-for="DocenteCurso.Persona.Apellido" class="form-control" />
+                
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="DocenteCurso.Cargo" class="form-label">Cargo</label><br />
+                <select class="form-group" id="ComboCargo" asp-for="DocenteCurso.Cargo" asp-items="Model.Cargo"></select>
+            </div>
+            <div class="form-group" id="DivPlan">
+                <label asp-for="Cursos" class="form-label">Curso</label>
+                <select class="form-group" asp-for="DocenteCurso.IDCurso" asp-items="Model.Cursos"></select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" id="botonCrear">Crear</button>
+                <a class="btn btn-danger" asp-action="Index">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>

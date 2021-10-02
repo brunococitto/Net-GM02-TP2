@@ -1,0 +1,37 @@
+﻿@model Business.Entities.DocenteCurso
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Delete">
+            <input asp-for="ID" type="hidden" />
+            <div class="form-group">
+                <label asp-for="Persona.Legajo" class="form-label">Legajo</label>
+                <input disabled asp-for="Persona.Legajo" class="form-control" placeholder="@Model.Persona.Legajo" value="@Model.Persona.Legajo" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Persona.Nombre" class="form-label">Nombre</label>
+                <input disabled asp-for="Persona.Nombre" class="form-control" placeholder="@Model.Persona.Nombre" value="@Model.Persona.Nombre" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Persona.Apellido" class="form-label">Apellido</label>
+                <input disabled asp-for="Persona.Apellido" class="form-control" placeholder="@Model.Persona.Apellido" value="@Model.Persona.Apellido" />
+            </div>
+            
+            @if (Model.IDCurso != null)
+            {
+                <div class="form-group">
+                    <label asp-for="Curso" class="form-label">Curso</label>
+                    <input disabled asp-for="Curso" class="form-control" placeholder="@Model.Curso.Descripcion" value="@Model.Curso.Descripcion" />
+                </div>
+            }
+            <div class="form-group">
+                <label asp-for="Cargo" class="form-label">Cargo</label>
+                <input disabled asp-for="Cargo" class="form-control" placeholder="@Model.Cargo" value="@Model.Cargo" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Confirmar</button>
+                <a class="btn btn-danger" asp-action="Index">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>

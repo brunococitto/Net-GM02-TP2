@@ -1,0 +1,37 @@
+﻿@model EditDocenteCursoViewModel
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="DocenteCurso.ID" type="hidden" />
+            <div class="form-group">
+                <label asp-for="DocenteCurso.Persona.Legajo" class="form-label">Legajo</label>
+                <input asp-for="DocenteCurso.Persona.Legajo" class="form-control" placeholder="@Model.DocenteCurso.Persona.Legajo" value="@Model.DocenteCurso.Persona.Legajo" />
+                
+            </div>
+            <div class="form-group">
+                <label asp-for="DocenteCurso.Persona.Nombre" class="form-label">Nombre</label>
+                <input disabled asp-for="DocenteCurso.Persona.Nombre" class="form-control" placeholder="@Model.DocenteCurso.Persona.Nombre" value="@Model.DocenteCurso.Persona.Nombre" />
+                
+            </div>
+            <div class="form-group">
+                <label asp-for="DocenteCurso.Persona.Apellido" class="form-label">Apellido</label>
+                <input disabled asp-for="DocenteCurso.Persona.Apellido" class="form-control" placeholder="@Model.DocenteCurso.Persona.Apellido" value="@Model.DocenteCurso.Persona.Apellido" />
+                
+            </div>
+            <div class="form-group">
+                <label asp-for="DocenteCurso.Cargo" class="form-label">Cargo</label><br />
+                <select class="form-group" id="ComboCargo" asp-for="DocenteCurso.Cargo" asp-items="Model.Cargo"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DocenteCurso.IDCurso" class="form-label">Cursos</label>
+                <select class="form-group" asp-for="DocenteCurso.IDCurso" asp-items="Model.Cursos"></select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a class="btn btn-danger" asp-action="Index">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
