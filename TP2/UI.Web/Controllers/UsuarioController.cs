@@ -32,11 +32,11 @@ namespace UI.Web.Controllers
             if (id == null) return NotFound();
             Usuario? usuario = _usuarioLogic.GetOne((int)id);
             if (usuario == null) return NotFound();
-            return View(new EditUsuarioViewModel(usuario));
+            return View(usuario);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("ID, Legajo, Usuario, Habilitado, Clave")] Usuario usuario)
+        public IActionResult Edit(int id, [Bind("ID, NombreUsuario, Habilitado, Clave, IDPersona")] Usuario usuario)
         {
             if (id != usuario.ID) return NotFound();
             if (ModelState.IsValid)
@@ -45,13 +45,13 @@ namespace UI.Web.Controllers
                 _usuarioLogic.Save(usuario);
                 return RedirectToAction("List");
             }
-            return View(new EditUsuarioViewModel(usuario));
+            return View((usuario));
         }
-        /*[HttpGet]
+        [HttpGet]
         public IActionResult Create() => View(new CreateUsuarioViewModel(null, _personaLogic.GetAll()));
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("ID, Legajo, Usuario, Habilitado, Clave")] Usuario usuario)
+        public IActionResult Create([Bind("ID, NombreUsuario, Habilitado, Clave, IDPersona")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -60,7 +60,7 @@ namespace UI.Web.Controllers
                 return RedirectToAction("List");
             }
             return View(new CreateUsuarioViewModel(usuario, _personaLogic.GetAll()));
-        }*/
+        }
         [HttpGet]
         public IActionResult Delete(int? id)
         {
@@ -77,5 +77,20 @@ namespace UI.Web.Controllers
             _usuarioLogic.Save(usuario);
             return RedirectToAction("List");
         }
+        [HttpPost]
+        public IActionResult GetPersona(int legajo)
+        {
+            Persona persona = _personaLogic.GetOneConLegajo(legajo)
+            if (persona == null) 
+            {
+                return StatusCode(500);
+            }
+            else
+            {
+                return PartialView("Partial_Usuario",persona);
+            }
+            
+        }
+
     }
 }

@@ -10,10 +10,11 @@ namespace UI.Web.Models
     public class CreateUsuarioViewModel
     {
         public Usuario? Usuario { get; }
-        public List<SelectListItem> Personas { get; }
+        public List<Persona> Personas { get; }
         public CreateUsuarioViewModel(Usuario? usuario, IEnumerable<Persona> personas)
         {
             Usuario = usuario;
+            Personas = personas.ToList();
         }
     }
 }

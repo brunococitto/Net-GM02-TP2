@@ -1,28 +1,48 @@
-﻿@model CreateComisionViewModel
+﻿@model CreateUsuarioViewModel
 
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
             <div class="form-group">
-                <label asp-for="Comision.Descripcion" class="form-label">Descripción</label>
-                <input maxlength="20" minlength="3" asp-for="Comision.Descripcion" class="form-control" />
-                <span asp-validation-for="Comision.Descripcion" class="text-danger"></span>
+                <label asp-for="Usuario.NombreUsuario" class="form-label">Nombre Usuario</label>
+                <input maxlength="20" minlength="3" asp-for="Usuario.NombreUsuario" class="form-control" />
+                <span asp-validation-for="Usuario.NombreUsuario" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Comision.AnoEspecialidad" class="form-label">Año especialidad</label>
-                <input maxlength="20" minlength="3" asp-for="Comision.AnoEspecialidad" class="form-control" />
-                <span asp-validation-for="Comision.AnoEspecialidad" class="text-danger"></span>
+                <label class="form-label">Ingrese Legajo</label>
+                <input maxlength="20" minlength="3" id="legajo" name="legajo" class="form-control" onfocusout='buscaPersona();' />
+                <span id='message'></span>
             </div>
-            <select class="form-group" asp-for="Comision.IDPlan" asp-items="Model.Planes"></select>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Crear</button>
-                <a class="btn btn-danger" asp-action="Index">Cancelar</a>
+
+            <div id="partialUsuario" name ="partialUsuario">
+                
             </div>
+
+
         </form>
     </div>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script type="text/javascript">
+    var buscaPersona = function () {
+        
+        $.ajax(
+            {
+                type: 'POST',
+                url: '@Url.Action("GetPersona", "Usuario")',
+                data: { legajo: document.getElementById('legajo').value },
+                success: function (data) { $("#partialUsuario").html(data); alert('se encuentra persona con el legajo indicado'); },
+                error: function (data)
+                {
+                    alert('No se encuentra persona con el legajo indicado');
+                    $("#partialUsuario").fadeOut(200);
+                }
+            });
+    };
+</script>
 }

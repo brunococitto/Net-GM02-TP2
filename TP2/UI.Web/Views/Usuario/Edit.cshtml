@@ -1,33 +1,44 @@
-﻿@model EditUsuarioViewModel
-
+﻿@model Business.Entities.Usuario
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input asp-for="Usuario.ID" type="hidden" />
+            <input asp-for="ID" type="hidden" />
+            <input asp-for="IDPersona" type="hidden" />
             <div class="form-group">
-                <label asp-for="Usuario.NombreUsuario" class="form-label">Nombre Usuario</label>
-                <input maxlength="20" minlength="3" asp-for="Usuario.NombreUsuario" class="form-control" placeholder="@Model.Usuario.NombreUsuario" value="@Model.Usuario.NombreUsuario" />
-                <span asp-validation-for="Usuario.NombreUsuario" class="text-danger"></span>
+                <label asp-for="NombreUsuario" class="form-label">Nombre Usuario</label>
+                <input maxlength="20" minlength="3" asp-for="NombreUsuario" class="form-control" placeholder="@Model.NombreUsuario" value="@Model.NombreUsuario" />
             </div>
             <div class="form-group">
-                <label asp-for="Usuario.Persona.Nombre" class="form-label">Nombre</label>
-                <input maxlength="20" minlength="3" asp-for="Usuario.Persona.Nombre" class="form-control" placeholder="@Model.Usuario.Persona.Nombre" value="@Model.Usuario.Persona.Nombre" />
-                <span asp-validation-for="Usuario.Persona.Nombre" class="text-danger"></span>
+                <label asp-for="Persona.Nombre" class="form-label">Nombre</label>
+                <input disabled asp-for="Persona.Nombre" class="form-control" placeholder="@Model.Persona.Nombre" value="@Model.Persona.Nombre" />
             </div>
             <div class="form-group">
-                <label asp-for="Usuario.Persona.Apellido" class="form-label">Apellido</label>
-                <input maxlength="20" minlength="3" asp-for="Usuario.Persona.Apellido" class="form-control" placeholder="@Model.Usuario.Persona.Apellido" value="@Model.Usuario.Persona.Apellido" />
-                <span asp-validation-for="Usuario.Persona.Apellido" class="text-danger"></span>
+                <label asp-for="Persona.Apellido" class="form-label">Nombre</label>
+                <input disabled asp-for="Persona.Apellido" class="form-control" placeholder="@Model.Persona.Apellido" value="@Model.Persona.Apellido" />
             </div>
+
             <div class="form-group">
-                <label asp-for="Usuario.Clave" class="form-label">Clave</label>
-                <input maxlength="20" minlength="3" asp-for="Usuario.Clave" class="form-control" />
-                <span asp-validation-for="Usuario.Clave" class="text-danger"></span>
+                <label asp-for="Clave" class="form-label">Clave</label>
+                <input maxlength="20" asp-for="Clave" class="form-control" type="text" id="password" onkeyup='check();'/>
+                <span asp-validation-for="Clave" class="text-danger"></span>
             </div>
-            <input type="checkbox" asp-for="Usuario.Habilitado"></input>
+
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Guardar</button>
+                <label class="form-label">Confirmar Clave</label>
+                <input maxlength="20" class="form-control" type="text" id="confirm_password" name="confirm_password" onkeyup='check();' />
+                <span id='message'></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <label class="form-label">Usuario Habilitado</label>
+                <input type="checkbox" asp-for="Habilitado"></input>
+            </div>
+
+            <div class="form-group">
+                <button disabled type="submit" class="btn btn-primary" id="btn_guardar">Guardar</button>
                 <a class="btn btn-danger" asp-action="Index">Cancelar</a>
             </div>
         </form>
@@ -36,4 +47,17 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        var check = function () {
+            if (document.getElementById('password').value ==
+                document.getElementById('confirm_password').value) {
+                document.getElementById('message').style.color = 'green';
+                document.getElementById('message').innerHTML = 'matching';
+                document.getElementById('btn_guardar').removeAttribute("disabled");
+            } else {
+                document.getElementById('message').style.color = 'red';
+                document.getElementById('message').innerHTML = 'not matching';
+            }
+        }
+    </script>
 }
