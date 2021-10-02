@@ -67,7 +67,7 @@ namespace Business.Entities
         {
             get
             {
-                return Persona;
+                return _persona;
             }
             set
             {
