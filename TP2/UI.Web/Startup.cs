@@ -43,6 +43,8 @@ namespace UI.Web
             services.AddScoped<PersonaAdapter>();
             services.AddScoped<CursoLogic>();
             services.AddScoped<CursoAdapter>();
+            services.AddScoped<AlumnoInscripcionAdapter>();
+            services.AddScoped<AlumnoInscripcionLogic>();
             services.AddScoped<UsuarioAdapter>();
             services.AddScoped<UsuarioLogic>();
             services.AddScoped<DocenteCursoLogic>();

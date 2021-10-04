@@ -54,7 +54,7 @@ namespace UI.Web.Controllers
         public IActionResult Create() => View(new CreateAlumnoInscripcionViewModel(null, _cursoLogic.GetAll(), _personaLogic.GetAll()));
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("ID, IDAlumno, Condicion, Curso, Nota, IDCurso, IDPersona, Persona")] AlumnoInscripcion alumnoinscripcion)
+        public IActionResult Create([Bind("ID, Condicion, Curso, Nota, IDCurso, IDPersona, Persona")] AlumnoInscripcion alumnoinscripcion)
         {
             if (ModelState.IsValid)
             {
