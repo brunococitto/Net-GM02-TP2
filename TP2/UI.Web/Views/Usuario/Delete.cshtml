@@ -1,21 +1,28 @@
-﻿@model Business.Entities.Comision
+﻿@model Business.Entities.Usuario
 
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Delete">
             <input asp-for="ID" type="hidden" />
             <div class="form-group">
-                <label asp-for="Descripcion" class="form-label">Descripcion</label>
-                <input disabled asp-for="Descripcion" class="form-control" placeholder="@Model.Descripcion" value="@Model.Descripcion" />
+                <label asp-for="NombreUsuario" class="form-label">Nombre Usuario</label>
+                <input disabled asp-for="NombreUsuario" class="form-control" placeholder="@Model.NombreUsuario" value="@Model.NombreUsuario" />
             </div>
             <div class="form-group">
-                <label asp-for="AnoEspecialidad" class="form-label">Año especialidad</label>
-                <input disabled asp-for="AnoEspecialidad" class="form-control" placeholder="@Model.AnoEspecialidad" value="@Model.AnoEspecialidad" />
+                <label asp-for="Persona.Nombre" class="form-label">Nombre</label>
+                <input disabled asp-for="Persona.Nombre" class="form-control" placeholder="@Model.Persona.Nombre" value="@Model.Persona.Nombre" />
             </div>
+
             <div class="form-group">
-                <label asp-for="Plan" class="form-label">Plan</label>
-                <input disabled asp-for="Plan" class="form-control" placeholder="@Model.Plan.Descripcion" value="@Model.Plan.Descripcion" />
+                <label asp-for="Persona.Apellido" class="form-label">Año especialidad</label>
+                <input disabled asp-for="Persona.Apellido" class="form-control" placeholder="@Model.Persona.Apellido" value="@Model.Persona.Apellido" />
             </div>
+
+            <div class="form-group">
+                <label class="form-label">Usuario Habilitado</label>
+                <input disabled type="checkbox" asp-for="Habilitado" id="habilitado"></input>
+            </div>
+
             <div class="form-group">
                 <button type="submit" class="btn btn-success">Confirmar</button>
                 <a class="btn btn-danger" asp-action="Index">Cancelar</a>

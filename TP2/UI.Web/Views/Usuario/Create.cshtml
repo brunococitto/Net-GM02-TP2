@@ -5,22 +5,43 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-
-            <div class="form-group">
-                <label asp-for="Usuario.NombreUsuario" class="form-label">Nombre Usuario</label>
-                <input maxlength="20" minlength="3" asp-for="Usuario.NombreUsuario" class="form-control" />
-                <span asp-validation-for="Usuario.NombreUsuario" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label class="form-label">Ingrese Legajo</label>
                 <input maxlength="20" minlength="3" id="legajo" name="legajo" class="form-control" onfocusout='buscaPersona();' />
                 <span id='message'></span>
             </div>
 
-            <div id="partialUsuario" name ="partialUsuario">
-                
+            <div id="partialUsuario" name="partialUsuario">
+
             </div>
 
+            <div class="form-group">
+                <label asp-for="Usuario.NombreUsuario" class="form-label">Nombre Usuario</label>
+                <input disabled maxlength="20" minlength="3" asp-for="Usuario.NombreUsuario" class="form-control" id="nombreUsuario" />
+                <span asp-validation-for="Usuario.NombreUsuario" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Usuario.Clave" class="form-label">Clave</label>
+                <input disabled maxlength="20" asp-for="Usuario.Clave" class="form-control" type="password" id="password" onkeyup='check();' />
+                <span asp-validation-for="Usuario.Clave" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Confirmar Clave</label>
+                <input disabled maxlength="20" class="form-control" type="password" id="confirm_password" name="confirm_password" onkeyup='check();' />
+                <span id='message_password'></span>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Usuario Habilitado</label>
+                <input disabled type="checkbox" asp-for="Usuario.Habilitado" id="habilitado"></input>
+            </div>
+
+            <div class="form-group">
+                <button disabled type="submit" class="btn btn-primary" id="botonCrear">Crear</button>
+                <a class="btn btn-danger" asp-action="Index">Cancelar</a>
+            </div>
 
         </form>
     </div>
@@ -35,8 +56,18 @@
             {
                 type: 'POST',
                 url: '@Url.Action("GetPersona", "Usuario")',
-                data: { legajo: document.getElementById('legajo').value },
-                success: function (data) { $("#partialUsuario").html(data); alert('se encuentra persona con el legajo indicado'); },
+                data:
+                {
+                    legajo: document.getElementById('legajo').value
+                },
+                success: function (data)
+                {
+                    $("#partialUsuario").html(data);
+                    document.getElementById('nombreUsuario').removeAttribute("disabled");
+                    document.getElementById('password').removeAttribute("disabled");
+                    document.getElementById('confirm_password').removeAttribute("disabled");
+                    document.getElementById('habilitado').removeAttribute("disabled");
+                },
                 error: function (data)
                 {
                     alert('No se encuentra persona con el legajo indicado');
@@ -45,4 +76,19 @@
             });
     };
 </script>
+<script type="text/javascript">
+    var check = function () {
+        if (document.getElementById('password').value ==
+            document.getElementById('confirm_password').value) {
+            document.getElementById('message_password').style.color = 'green';
+            document.getElementById('message_password').innerHTML = 'matching';
+            document.getElementById('botonCrear').disabled = false;
+        } else {
+            document.getElementById('message_password').style.color = 'red';
+            document.getElementById('message_password').innerHTML = 'not matching';
+            document.getElementById('botonCrear').disabled = true;
+        }
+    }
+</script>
+
 }
