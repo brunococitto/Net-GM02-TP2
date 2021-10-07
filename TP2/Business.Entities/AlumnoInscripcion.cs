@@ -48,6 +48,7 @@ namespace Business.Entities
                 _condicion = value;
             }
         }
+        
         [ForeignKey("Persona")]
         public int IDAlumno
         {

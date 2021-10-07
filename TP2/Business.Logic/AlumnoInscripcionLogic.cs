@@ -97,9 +97,12 @@ namespace Business.Logic
         {
             try
             {
-                if (inscripcion.State == BusinessEntity.States.New & !InscripcionData.CursoTieneCupo(inscripcion.IDCurso))
+                if (inscripcion.State == BusinessEntity.States.New)
                 {
-                    throw new Exception();
+                    if (!InscripcionData.CursoTieneCupo(inscripcion.IDCurso))
+                    {
+                        throw new Exception();
+                    }
                 }
                 InscripcionData.Save(inscripcion);
             }

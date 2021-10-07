@@ -39,7 +39,7 @@ namespace UI.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("ID, Condicion, Curso, Nota, IDCurso, IDPersona, Persona")] AlumnoInscripcion alumnoinscripcion)
+        public IActionResult Edit(int id, [Bind("ID, IDAlumno,IDCurso, Condicion, Curso, Nota, IDPersona, Persona")] AlumnoInscripcion alumnoinscripcion)
         {
             if (id != alumnoinscripcion.ID) return NotFound();
             if (ModelState.IsValid)
@@ -51,10 +51,10 @@ namespace UI.Web.Controllers
             return View(new EditAlumnoInscripcionViewModel(alumnoinscripcion, _cursoLogic.GetAll(), _personaLogic.GetAll()));
         }
         [HttpGet]
-        public IActionResult Create() => View(new CreateAlumnoInscripcionViewModel(null, _cursoLogic.GetAll(), _personaLogic.GetAll()));
+        public IActionResult Create() => View(new CreateAlumnoInscripcionViewModel(null, _cursoLogic.GetAll()));
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("ID, Condicion, Curso, Nota, IDCurso, IDPersona, Persona")] AlumnoInscripcion alumnoinscripcion)
+        public IActionResult Create([Bind("ID, IDAlumno, IDCurso, Condicion, Nota")] AlumnoInscripcion alumnoinscripcion)
         {
             if (ModelState.IsValid)
             {
@@ -62,7 +62,7 @@ namespace UI.Web.Controllers
                 _alumnoInscripcionLogic.Save(alumnoinscripcion);
                 return RedirectToAction("List");
             }
-            return View(new CreateAlumnoInscripcionViewModel(alumnoinscripcion, _cursoLogic.GetAll(), _personaLogic.GetAll()));
+            return View(new CreateAlumnoInscripcionViewModel(alumnoinscripcion, _cursoLogic.GetAll()));
         }
         [HttpGet]
         public IActionResult Delete(int? id)
@@ -90,7 +90,7 @@ namespace UI.Web.Controllers
             }
             else
             {
-                return PartialView("Partial_AlumnoInscripcion", persona);
+                return PartialView("Partial_AlumnoInscripcion", new CreateAlumnoInscripcionPartialViewModel(persona));
             }
 
         }

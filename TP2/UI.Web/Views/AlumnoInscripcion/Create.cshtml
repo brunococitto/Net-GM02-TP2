@@ -13,9 +13,20 @@
             <div id="partialAlumnoInscripcion" name="partialAlumnoInscripcion">
 
             </div>
-            <select class="form-group" asp-for="AlumnoInscripcion.IDCurso" asp-items="Model.Cursos"></select>
+            <select disabled class="form-group" id="cursos" asp-for="AlumnoInscripcion.IDCurso" asp-items="Model.Cursos"></select>
+            <div class="form-group" hidden>
+                <label asp-for="Condicion" class="form-label">Condicion</label>
+                <input disabled asp-for="Condicion" class="form-control" placeholder="@Model.Condicion" value="@Model.Condicion" />
+                <span asp-validation-for="Condicion" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="Nota" class="form-label">Nota</label>
+                <input disabled asp-for="Nota" class="form-control" placeholder="@Model.Nota" value="@Model.Nota" />
+                <span asp-validation-for="Nota" class="text-danger"></span>
+            </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Crear</button>
+                
+                <button disabled type="submit" class="btn btn-primary" id="botonCrear">Crear</button>
                 <a class="btn btn-danger" asp-action="Index">Cancelar</a>
             </div>
         </form>
@@ -32,7 +43,11 @@
                 type: 'POST',
                 url: '@Url.Action("GetPersona", "AlumnoInscripcion")',
                 data: { legajo: document.getElementById('legajo').value },
-                success: function (data) { $("#partialAlumnoInscripcion").html(data); alert('se encuentra persona con el legajo indicado'); },
+                success: function (data) {
+                    $("#partialAlumnoInscripcion").html(data);
+                    document.getElementById('cursos').removeAttribute("disabled");
+                    document.getElementById('botonCrear').removeAttribute("disabled");
+                },
                 error: function (data)
                 {
                     alert('No se encuentra persona con el legajo indicado');
@@ -41,4 +56,5 @@
             });
     };
     </script>
-}
+    
+    }
