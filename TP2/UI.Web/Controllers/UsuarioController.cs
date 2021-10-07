@@ -48,7 +48,7 @@ namespace UI.Web.Controllers
             return View((usuario));
         }
         [HttpGet]
-        public IActionResult Create() => View(new CreateUsuarioViewModel(null, _personaLogic.GetAll()));
+        public IActionResult Create() => View(null);
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("ID, NombreUsuario, Habilitado, Clave, IDPersona")] Usuario usuario)
@@ -59,7 +59,7 @@ namespace UI.Web.Controllers
                 _usuarioLogic.Save(usuario);
                 return RedirectToAction("List");
             }
-            return View(new CreateUsuarioViewModel(usuario, _personaLogic.GetAll()));
+            return View(usuario);
         }
         [HttpGet]
         public IActionResult Delete(int? id)
@@ -87,7 +87,7 @@ namespace UI.Web.Controllers
             }
             else
             {
-                return PartialView("Partial_Usuario",persona);
+                return PartialView("Partial_Usuario",new CreateUsuarioPartialViewModel(persona));
             }
             
         }
