@@ -56,7 +56,6 @@ namespace UI.Web.Controllers
             if (ModelState.IsValid)
             {
                 usuario.State = BusinessEntity.States.New;
-                var PER = usuario.Persona;
                 _usuarioLogic.Save(usuario);
                 return RedirectToAction("List");
             }
@@ -88,7 +87,7 @@ namespace UI.Web.Controllers
             }
             else
             {
-                return PartialView("Partial_Usuario",persona);
+                return PartialView("Partial_Usuario",new CreateUsuarioPartialViewModel(persona));
             }
             
         }

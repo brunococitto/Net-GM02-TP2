@@ -18,11 +18,11 @@ namespace Web.Controllers
         [Route("/error/404")]
         public IActionResult NotFoundError() => View();
 
-        [Route("/error/{code:int}")]
+        /*[Route("/error/{code:int}")]
         public IActionResult GenericError(int code)
         {
             _logger.LogInformation($"Error codigo {code}");
             return View();
-        }
+        }*/
     }
 }

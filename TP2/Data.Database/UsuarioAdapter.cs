@@ -85,6 +85,7 @@ namespace Data.Database
         }
         protected void Insert(Usuario usuario)
         {
+            usuario.Salt = new Hasher().GenerateSalt();
             usuario.Clave = new Hasher().GenerateHash(usuario.Clave, usuario.Salt);
             try
             {

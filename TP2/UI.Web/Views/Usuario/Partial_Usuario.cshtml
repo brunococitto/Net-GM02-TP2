@@ -1,9 +1,8 @@
-﻿@model Business.Entities.Persona 
+﻿@model CreateUsuarioPartialViewModel
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+            <input asp-for="IDPersona" type="hidden" />
             <div class="form-group">
                 <label asp-for="Nombre" class="form-label">Nombre</label>
                 <input disabled asp-for="Nombre" class="form-control" placeholder="@Model.Nombre" value="@Model.Nombre" />
@@ -14,7 +13,6 @@
                 <input disabled asp-for="Apellido" class="form-control" placeholder="@Model.Apellido" value="@Model.Apellido" />
                 <span asp-validation-for="Apellido" class="text-danger"></span>
             </div>
-
-        </form>
+        
     </div>
 </div>
