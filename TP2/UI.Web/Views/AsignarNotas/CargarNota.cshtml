@@ -1,0 +1,42 @@
+﻿@model Business.Entities.AlumnoInscripcion
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CargarNota">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="ID" type="hidden" />
+            <input asp-for="IDCurso" type="hidden" />
+            <input asp-for="IDAlumno" type="hidden" />
+            <div class="form-group">
+                <label asp-for="Persona.Nombre" class="form-label">Nombre</label>
+                <input disabled asp-for="Persona.Nombre" class="form-control" placeholder="@Model.Persona.Nombre" value="@Model.Persona.Nombre" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Persona.Apellido" class="form-label">Nombre</label>
+                <input disabled asp-for="Persona.Apellido" class="form-control" placeholder="@Model.Persona.Apellido" value="@Model.Persona.Apellido" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Condicion" class="form-label">Condición</label>
+                <br>
+                <select asp-for="Condicion" class="form-select">
+                    <option value="Aprobación Directa">Aprobación Directa</option>
+                    <option value="Regular">Regular</option>
+                    <option value="Libre">Libre</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nota" class="form-label">Nota</label>
+                <input min="0" max="10" asp-for="Nota" type="number" class="form-control" placeholder="@Model.Nota" value="@Model.Nota" />
+                <span asp-validation-for="Nota" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a class="btn btn-danger" asp-action="ListaAlumnos" asp-route-id="@Model.IDCurso">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

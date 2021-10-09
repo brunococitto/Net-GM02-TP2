@@ -5,20 +5,15 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12 text-center">
-                <div class="mb-4 lead">Bienvenido al sistema</div>
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                <div class="mb-4 lead">¡Bienvenido al sistema @User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Name)?.Value!</div>
+                }
+                else
+                {
+                    <div class="mb-4 lead">Bienvenido al sistema, por favor inicie sesión.</div>
+                }
             </div>
         </div>
-    </div>
-</div>
-<div class="card mb-2">
-    <div class="card-body">
-        <h5 class="card-title">DocenteCursos</h5>
-        <a class="btn btn-primary" asp-controller="DocenteCurso" asp-action="Index">Listar DocenteCurso</a>
-    </div>
-</div>
-<div class="card mb-2">
-    <div class="card-body">
-        <h5 class="card-title">Alumno Inscripcion</h5>
-        <a class="btn btn-primary" asp-controller="AlumnoInscripcion" asp-action="Index">Listar Inscripciones</a>
     </div>
 </div>

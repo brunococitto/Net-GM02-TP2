@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Business.Entities.Curso>
+
+<ul class="list-group">
+    @foreach (Business.Entities.Curso cur in Model)
+    {
+        <div class="card mb-2">
+            <div class="card-body">
+                <h5 class="card-title">@cur.Descripcion</h5>
+                <h6 class="card-subtitle mb-2 text-muted">@cur.Materia.Descripcion</h6>
+                <p class="card-text">@cur.Materia.Plan.Especialidad.Descripcion - @cur.Materia.Plan.Descripcion</p>
+                <a class="btn btn-info" asp-area="" asp-action="ListaAlumnos" asp-route-id="@cur.ID">Seleccionar</a>
+            </div>
+        </div>
+    }
+</ul>

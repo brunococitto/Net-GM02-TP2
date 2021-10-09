@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Business.Logic;
 using Business.Entities;
 using UI.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UI.Web.Controllers
 {
@@ -26,8 +27,10 @@ namespace UI.Web.Controllers
             _cursoLogic = cursoLogic;
         }
         public IActionResult Index() => RedirectToAction("List");
+        [Authorize(Roles = "Administrativo")]
         public IActionResult List() => View(_docenteCursoLogic.GetAll());
         [HttpGet]
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -36,6 +39,7 @@ namespace UI.Web.Controllers
             return View(new EditDocenteCursoViewModel(docenteCurso, _cursoLogic.GetAll()));
         }
         [HttpPost]
+        [Authorize(Roles = "Administrativo")]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("Cargo, Curso, IDCurso, IDDocente,Persona")] DocenteCurso docenteCurso)
         {
@@ -50,8 +54,10 @@ namespace UI.Web.Controllers
             return View(new EditDocenteCursoViewModel(docenteCurso, _cursoLogic.GetAll()));
         }
         [HttpGet]
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Create() => View(new CreateDocenteCursoViewModel(null, _cursoLogic.GetAll()));
         [HttpPost]
+        [Authorize(Roles = "Administrativo")]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Cargo, Curso, IDCurso, IDDocente,Persona")] DocenteCurso docenteCurso)
         {
@@ -65,6 +71,7 @@ namespace UI.Web.Controllers
             return View(new CreateDocenteCursoViewModel(docenteCurso, _cursoLogic.GetAll()));
         }
         [HttpGet]
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -73,6 +80,7 @@ namespace UI.Web.Controllers
             return View(docenteCurso);
         }
         [HttpPost]
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Delete(int id, DocenteCurso docenteCurso)
         {
             if (id != docenteCurso.ID) return NotFound();

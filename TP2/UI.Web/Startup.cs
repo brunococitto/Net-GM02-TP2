@@ -10,6 +10,10 @@ using Data.Database;
 using Business.Logic;
 using FluentValidation.AspNetCore;
 using UI.Web.Providers;
+using jsreport.AspNetCore;
+using jsreport.Binary;
+using jsreport.Local;
+
 
 namespace UI.Web
 {
@@ -52,6 +56,12 @@ namespace UI.Web
 
             services.AddScoped<IHasher, Hasher>();
             services.AddScoped<IUsuarioManager, UsuarioManager>();
+
+            services.AddJsReport(new LocalReporting()
+                .UseBinary(JsReportBinary.GetBinary())
+                .KillRunningJsReportProcesses()
+                .AsUtility()
+                .Create());
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
                 options.LoginPath = "/Account/Login";

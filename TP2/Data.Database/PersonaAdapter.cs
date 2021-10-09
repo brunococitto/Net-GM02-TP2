@@ -38,7 +38,7 @@ namespace Data.Database
             Persona persona = new Persona();
             try
             {
-                persona = _context.Personas.Include(p => p.Plan).FirstOrDefault(p => p.ID == ID);
+                persona = _context.Personas.Include(p => p.Plan).ThenInclude(p => p.Especialidad).FirstOrDefault(p => p.ID == ID);
             }
             catch (Exception e)
             {

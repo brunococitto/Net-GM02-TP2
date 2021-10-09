@@ -141,21 +141,5 @@ namespace Data.Database
             }
             curso.State = BusinessEntity.States.Unmodified;
         }
-        public List<Curso> GetCursosProfesor(int idProfesor)
-        {
-            List<Curso> cursos = new List<Curso>();
-            try
-            {
-                cursos = _context.DocentesCursos
-                    .Where(dc => dc.IDDocente == idProfesor)
-                    .Select(dc => dc.Curso).ToList();
-            }
-            catch (Exception e)
-            {
-                Exception ExceptionManejada = new Exception("Error al recuperar cursos para el profesor", e);
-                throw ExceptionManejada;
-            }
-            return cursos;
-        }
     }
 }

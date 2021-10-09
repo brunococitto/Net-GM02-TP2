@@ -239,7 +239,7 @@ namespace Data.Database
                 {
                     Condicion = "Regular",
                     Nota = 0,
-                    Persona = personas[0],
+                    Persona = personas[3],
                     Curso = cursos[0]
                 }
             };

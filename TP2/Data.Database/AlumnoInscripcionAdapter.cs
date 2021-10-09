@@ -37,6 +37,7 @@ namespace Data.Database
             {
                 inscripcion = _context.AlumnoInscripciones
                     .Include(i => i.Curso)
+                    .ThenInclude(c => c.Materia)
                     .Include(i => i.Persona)
                     .FirstOrDefault(i => i.ID == id);
             }
@@ -51,6 +52,7 @@ namespace Data.Database
         {
             try
             {
+                _context.AlumnoInscripciones.Update(inscripcion);
                 _context.SaveChanges();
             }
             catch (Exception e)
@@ -108,7 +110,7 @@ namespace Data.Database
             List<AlumnoInscripcion> inscripciones = new List<AlumnoInscripcion>();
             try
             {
-                inscripciones = _context.AlumnoInscripciones.Where(i => i.IDCurso == idCurso).ToList();
+                inscripciones = _context.AlumnoInscripciones.Include(i => i.Persona).Where(i => i.IDCurso == idCurso).ToList();
             }
             catch (Exception e)
             {
@@ -144,7 +146,7 @@ namespace Data.Database
         {
             try
             {
-                List<AlumnoInscripcion> inscripciones = _context.AlumnoInscripciones.Where(i => i.IDAlumno == idAlumno).ToList();
+                List<AlumnoInscripcion> inscripciones = _context.AlumnoInscripciones.Include(i => i.Curso).Where(i => i.IDAlumno == idAlumno).ToList();
                 var consulta = from insc in inscripciones
                                join m in new MateriaAdapter(_context).GetAll()
                                on insc.Curso.IDMateria equals m.ID

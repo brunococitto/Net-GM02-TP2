@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Business.Logic;
 using Business.Entities;
 using UI.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UI.Web.Controllers
 {
@@ -26,9 +27,11 @@ namespace UI.Web.Controllers
             _personaLogic = personaLogic;
         }
         public IActionResult Index() => RedirectToAction("List");
+        [Authorize(Roles = "Administrativo")]
         public IActionResult List() => View(_alumnoInscripcionLogic.GetAll());
 
         [HttpGet]
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -38,6 +41,7 @@ namespace UI.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrativo")]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("ID, IDAlumno,IDCurso, Condicion, Curso, Nota, IDPersona, Persona")] AlumnoInscripcion alumnoinscripcion)
         {
@@ -51,8 +55,10 @@ namespace UI.Web.Controllers
             return View(new EditAlumnoInscripcionViewModel(alumnoinscripcion, _cursoLogic.GetAll(), _personaLogic.GetAll()));
         }
         [HttpGet]
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Create() => View(new CreateAlumnoInscripcionViewModel(null, _cursoLogic.GetAll()));
         [HttpPost]
+        [Authorize(Roles = "Administrativo")]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("ID, IDAlumno, IDCurso, Condicion, Nota")] AlumnoInscripcion alumnoinscripcion)
         {
@@ -65,6 +71,7 @@ namespace UI.Web.Controllers
             return View(new CreateAlumnoInscripcionViewModel(alumnoinscripcion, _cursoLogic.GetAll()));
         }
         [HttpGet]
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -73,6 +80,7 @@ namespace UI.Web.Controllers
             return View(alumnoinscripcion);
         }
         [HttpPost]
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Delete(int id, AlumnoInscripcion alumnoinscripcion)
         {
             if (id != alumnoinscripcion.ID) return NotFound();
@@ -81,6 +89,7 @@ namespace UI.Web.Controllers
             return RedirectToAction("List");
         }
         [HttpPost]
+        [Authorize(Roles = "Administrativo")]
         public IActionResult GetPersona(int legajo)
         {
             Persona persona = _personaLogic.GetOneConLegajo(legajo);
@@ -92,7 +101,6 @@ namespace UI.Web.Controllers
             {
                 return PartialView("Partial_AlumnoInscripcion", new CreateAlumnoInscripcionPartialViewModel(persona));
             }
-
         }
     }
 }

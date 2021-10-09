@@ -122,5 +122,25 @@ namespace Data.Database
                 throw ExceptionManejada;
             }            
         }
+        public List<Curso> GetCursosProfesor(int idProfesor)
+        {
+            List<Curso> cursos = new List<Curso>();
+            try
+            {
+                cursos = _context.DocentesCursos
+                    .Include(c => c.Curso)
+                    .ThenInclude(c => c.Materia)
+                    .ThenInclude(m => m.Plan)
+                    .ThenInclude(p => p.Especialidad)
+                    .Where(dc => dc.IDDocente == idProfesor)
+                    .Select(dc => dc.Curso).ToList();
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar cursos para el profesor", e);
+                throw ExceptionManejada;
+            }
+            return cursos;
+        }
     }
 }

@@ -1,0 +1,40 @@
+﻿@model ListEstadoAcademicoViewModel
+
+<h4 class="h4 text-center mb-2">Estado académico de @Model.Nombre @Model.Apellido (@Model.Legajo) al @DateTime.Now.Date</h4>
+<h5 class="h5 text-center mb-4">@Model.Especialidad - Plan @Model.Plan</h5>
+
+<table class="table table-sm table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th class="text-center" scope="col">Materia</th>
+            <th class="text-center" scope="col">Condición</th>
+            <th class="text-center" scope="col">Nota</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Object insc in Model.EstadoAcademico)
+        {
+            var type = insc.GetType();
+            var props = type.GetProperties();
+        <tr>
+            <td>@props[0].GetValue(insc, null)</td>
+            @if ((string)@props[1].GetValue(insc, null) == "" || @props[1].GetValue(insc, null) == null)
+            {
+                <td>-</td>
+            }
+            else
+            {
+                <td>@props[1].GetValue(insc, null)</td>
+            }
+            @if ((int)props[2].GetValue(insc, null) == 0)
+            {
+                <td>-</td>
+            }
+            else
+            {
+                <td>@props[2].GetValue(insc, null)</td>
+            }
+        </tr>
+        }
+    </tbody>
+</table>

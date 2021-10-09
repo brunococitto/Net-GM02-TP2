@@ -18,11 +18,13 @@ namespace UI.Desktop
         private readonly AlumnoInscripcionLogic _alumnoInscripcionLogic;
         private readonly CursoLogic _cursoLogic;
         private readonly PersonaLogic _personaLogic;
+        private readonly DocenteCursoLogic _docenteCursoLogic;
         private readonly AcademyContext _context;
         public RegistrarNotas(AcademyContext context)
         {
             InitializeComponent();
             _alumnoInscripcionLogic = new AlumnoInscripcionLogic(new AlumnoInscripcionAdapter(context));
+            _docenteCursoLogic = new DocenteCursoLogic(new DocenteCursoAdapter(context));
             _cursoLogic = new CursoLogic(new CursoAdapter(context));
             _personaLogic = new PersonaLogic(new PersonaAdapter(context));
             _context = context;
@@ -37,7 +39,7 @@ namespace UI.Desktop
         public void ListarCursos()
         {
             // Solo cargo los cursos del profe logueado
-            List<Curso> cursos = _cursoLogic.GetCursosProfesor(Singleton.getInstance().PersonaLogged.ID);
+            List<Curso> cursos = _docenteCursoLogic.GetCursosProfesor(Singleton.getInstance().PersonaLogged.ID);
             cbCursos.DataSource = cursos;
             if (cursos.Count > 0 )
             {

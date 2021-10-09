@@ -1,0 +1,33 @@
+﻿@model List<Business.Entities.AlumnoInscripcion>
+
+<ul class="list-group">
+    @foreach (Business.Entities.AlumnoInscripcion insc in Model)
+    {
+        <div class="card mb-2">
+            <div class="card-body">
+                <h5 class="card-title">@insc.Persona.Apellido @insc.Persona.Nombre</h5>
+                @if (insc.Condicion == "" || insc.Condicion == null)
+                {
+                    <p class="card-title">Condición: -</p>
+                }
+                else
+                {
+                    <p class="card-title">Condición: @insc.Condicion</p>
+                }
+                @if (insc.Nota == 0 || insc.Condicion == null)
+                {
+                    <p class="card-title">Nota: -</p>
+                }
+                else
+                {
+                    <p class="card-title">Nota: @insc.Nota</p>
+                }
+                <a class="btn btn-outline-info" asp-action="CargarNota" asp-route-id="@insc.ID">Modificar</a>
+            </div>
+        </div>
+    }
+</ul>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

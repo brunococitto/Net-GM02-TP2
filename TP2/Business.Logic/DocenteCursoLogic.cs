@@ -67,6 +67,20 @@ namespace Business.Logic
                 throw ExceptionManejada;
             }
         }
+        public List<Curso> GetCursosProfesor(int idProfesor)
+        {
+            try
+            {
+                return AsignacionData.GetCursosProfesor(idProfesor);
+            }
+            catch (Exception e)
+            {
+                Exception ExceptionManejada = new Exception("Error al recuperar cursos para el profesor", e);
+                Logger.Log(ExceptionManejada.Message);
+                throw ExceptionManejada;
+            }
+
+        }
         public void Save(DocenteCurso inscripcion)
         {
             AsignacionData.Save(inscripcion);

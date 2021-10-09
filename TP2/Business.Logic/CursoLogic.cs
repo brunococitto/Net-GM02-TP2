@@ -41,20 +41,6 @@ namespace Business.Logic
                 throw ExceptionManejada;
             }
         }
-        public List<Curso> GetCursosProfesor(int idProfesor)
-        {
-            try
-            {
-                return CursoData.GetCursosProfesor(idProfesor);
-            }
-            catch (Exception e)
-            {
-                Exception ExceptionManejada = new Exception("Error al recuperar cursos para el profesor", e);
-                Logger.Log(ExceptionManejada.Message);
-                throw ExceptionManejada;
-            }
-            
-        }
         public void Delete(int id)
         {
             try
