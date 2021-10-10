@@ -93,7 +93,7 @@ namespace UI.Web.Controllers
         public IActionResult GetPersona(int legajo)
         {
             Persona persona = _personaLogic.GetOneConLegajo(legajo);
-            if (persona == null)
+            if (persona == null | ((int)persona.TipoPersona) != 1)
             {
                 return StatusCode(500);
             }
