@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Business.Entities.Plan>
+
+<h4 class="h4 text-center mb-4 mt-5">Reporte de planes al @DateTime.Now.Date.ToShortDateString()</h4>
+
+<table class="table table-sm table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th class="text-center" scope="col">Descripción</th>
+            <th class="text-center" scope="col">Especialidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Business.Entities.Plan plan in Model)
+        {
+        <tr>
+            <td class="text-center">@plan.Descripcion</td>
+            <td class="text-center">@plan.Especialidad.Descripcion</td>
+        </tr>
+        }
+    </tbody>
+</table>

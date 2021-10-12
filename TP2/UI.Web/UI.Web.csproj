@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\AccountController - Copy.cs" />
+    <Compile Remove="Models\ListEstadoAcademicoViewModel - Copy.cs" />
+    <Compile Remove="Models\LoginViewModel - Copy.cs" />
   </ItemGroup>
 
   <ItemGroup>

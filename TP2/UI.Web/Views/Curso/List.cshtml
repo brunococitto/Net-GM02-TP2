@@ -1,6 +1,9 @@
 ﻿@model IEnumerable<Business.Entities.Curso>
 
+    <h2 class="mb-3 text-center">Cursos</h2>
+
     <a class="btn btn-outline-success mb-2" asp-action="Create">Agregar</a>
+    <a class="btn btn-outline-dark ml-2 mb-2 justify-content-md-start" asp-controller="Curso" asp-action="DescargarPDF">Descargar como PDF</a>
 
 <ul class="list-group">
     @foreach  (Business.Entities.Curso cur in Model)

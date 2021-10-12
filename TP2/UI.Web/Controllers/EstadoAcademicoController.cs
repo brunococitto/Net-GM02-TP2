@@ -41,13 +41,13 @@ namespace UI.Web.Controllers
         public IActionResult DescargarPDF()
         {
             HttpContext.JsReportFeature().Recipe(Recipe.ChromePdf)
-                .OnAfterRender((r) => HttpContext.Response.Headers["Content-Disposition"] = "attachment; filename=\"estadoAcademico.pdf\"");
+                .OnAfterRender((r) => HttpContext.Response.Headers["Content-Disposition"] = $"attachment; filename=\"estadoAcademico-{DateTime.Now.ToString("yyyyMMddHHmmss")}.pdf\"");
             int idAlumno = Convert.ToInt32(
                     User.Claims.FirstOrDefault(
                         c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier
                         )?.Value
                     );
-            return View("Index", new ListEstadoAcademicoViewModel(_alumnoInscripcionLogic.GetEstadoAcademico(idAlumno), _personaLogic.GetOne(idAlumno)));
+            return View("Reporte", new ListEstadoAcademicoViewModel(_alumnoInscripcionLogic.GetEstadoAcademico(idAlumno), _personaLogic.GetOne(idAlumno)));
         }
     }
 }

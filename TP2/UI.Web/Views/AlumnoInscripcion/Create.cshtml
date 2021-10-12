@@ -1,5 +1,7 @@
 ﻿@model CreateAlumnoInscripcionViewModel
 
+    <h2 class="mb-3 text-center">Inscribir alumno</h2>
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -45,13 +47,21 @@
                 data: { legajo: document.getElementById('legajo').value },
                 success: function (data) {
                     $("#partialAlumnoInscripcion").html(data);
+                    if ($("#partialAlumnoInscripcion").is(":hidden")) {
+                        $("#partialAlumnoInscripcion").toggle(200);
+                    }
                     document.getElementById('cursos').removeAttribute("disabled");
                     document.getElementById('botonCrear').removeAttribute("disabled");
                 },
                 error: function (data)
                 {
+                    document.getElementById('cursos').setAttribute("disabled", "");
+                    document.getElementById('botonCrear').setAttribute("disabled", "");
                     alert('El legajo ingresado no corresponde a un Alumno');
-                    $("#partialAlumnoInscripcion").fadeOut(200);
+                    if ($("#partialAlumnoInscripcion").is(":visible")) {
+                        $("#partialAlumnoInscripcion").toggle(200);
+                    }
+                    $("#partialAlumnoInscripcion").html(null);
                 }
             });
     };

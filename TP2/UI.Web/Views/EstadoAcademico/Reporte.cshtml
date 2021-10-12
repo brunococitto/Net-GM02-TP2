@@ -1,6 +1,6 @@
 ﻿@model ListEstadoAcademicoViewModel
 
-<h4 class="h4 text-center mb-2">Estado académico de @Model.Nombre @Model.Apellido (@Model.Legajo) al @DateTime.Now.Date</h4>
+<h4 class="h4 text-center mb-2 mt-5">Estado académico de @Model.Nombre @Model.Apellido (@Model.Legajo) al @DateTime.Now.Date.ToShortDateString()</h4>
 <h5 class="h5 text-center mb-4">@Model.Especialidad - Plan @Model.Plan</h5>
 
 <table class="table table-sm table-bordered">
@@ -17,26 +17,24 @@
             var type = insc.GetType();
             var props = type.GetProperties();
         <tr>
-            <td>@props[0].GetValue(insc, null)</td>
+            <td class="text-center">@props[0].GetValue(insc, null)</td>
             @if ((string)@props[1].GetValue(insc, null) == "" || @props[1].GetValue(insc, null) == null)
             {
-                <td>-</td>
+                <td class="text-center">-</td>
             }
             else
             {
-                <td>@props[1].GetValue(insc, null)</td>
+                <td class="text-center">@props[1].GetValue(insc, null)</td>
             }
             @if ((int)props[2].GetValue(insc, null) == 0)
             {
-                <td>-</td>
+                <td class="text-center">-</td>
             }
             else
             {
-                <td>@props[2].GetValue(insc, null)</td>
+                <td class="text-center">@props[2].GetValue(insc, null)</td>
             }
         </tr>
         }
     </tbody>
 </table>
-
-<a class="btn btn-outline-dark mt-2 justify-content-md-start" asp-controller="EstadoAcademico" asp-action="DescargarPDF">Descargar como PDF</a>

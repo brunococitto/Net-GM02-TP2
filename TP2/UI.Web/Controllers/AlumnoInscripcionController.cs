@@ -28,7 +28,7 @@ namespace UI.Web.Controllers
         }
         public IActionResult Index() => RedirectToAction("List");
         [Authorize(Roles = "Administrativo")]
-        public IActionResult List() => View(_alumnoInscripcionLogic.GetAll());
+        public IActionResult List() => View(new ListAlumnoInscripcionViewModel(_alumnoInscripcionLogic.GetAll(), _cursoLogic.GetAll()));
 
         [HttpGet]
         [Authorize(Roles = "Administrativo")]
@@ -93,7 +93,7 @@ namespace UI.Web.Controllers
         public IActionResult GetPersona(int legajo)
         {
             Persona persona = _personaLogic.GetOneConLegajo(legajo);
-            if (persona == null | ((int)persona.TipoPersona) != 1)
+            if (persona == null || ((int)persona.TipoPersona) != 1)
             {
                 return StatusCode(500);
             }

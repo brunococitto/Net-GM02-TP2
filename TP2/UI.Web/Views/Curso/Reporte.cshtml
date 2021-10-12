@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Business.Entities.Curso>
+
+<h4 class="h4 text-center mb-4 mt-5">Reporte de cursos al @DateTime.Now.Date.ToShortDateString()</h4>
+
+<table class="table table-sm table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th class="text-center" scope="col">Descripción</th>
+            <th class="text-center" scope="col">Materia</th>
+            <th class="text-center" scope="col">Comisión</th>
+            <th class="text-center" scope="col">Año calendario</th>
+            <th class="text-center" scope="col">Cupo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Business.Entities.Curso cur in Model)
+        {
+        <tr>
+            <td class="text-center">@cur.Descripcion</td>
+            <td class="text-center">@cur.Materia.Descripcion</td>
+            <td class="text-center">@cur.Comision.Descripcion</td>
+            <td class="text-center">@cur.AnoCalendario</td>
+            <td class="text-center">@cur.Cupo</td>
+        </tr>
+        }
+    </tbody>
+</table>

@@ -9,6 +9,8 @@ using Business.Logic;
 using Business.Entities;
 using UI.Web.Models;
 using Microsoft.AspNetCore.Authorization;
+using jsreport.AspNetCore;
+using jsreport.Types;
 
 namespace UI.Web.Controllers
 {
@@ -83,6 +85,19 @@ namespace UI.Web.Controllers
             plan.State = BusinessEntity.States.Deleted;
             _planLogic.Save(plan);
             return RedirectToAction("List");
+        }
+        [MiddlewareFilter(typeof(JsReportPipeline))]
+        [Authorize(Roles = "Administrativo")]
+        public IActionResult DescargarPDF()
+        {
+            HttpContext.JsReportFeature().Recipe(Recipe.ChromePdf)
+                .OnAfterRender((r) => HttpContext.Response.Headers["Content-Disposition"] = $"attachment; filename=\"planes-{DateTime.Now.ToString("yyyyMMddHHmmss")}.pdf\"");
+            int idAlumno = Convert.ToInt32(
+                    User.Claims.FirstOrDefault(
+                        c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier
+                        )?.Value
+                    );
+            return View("Reporte", _planLogic.GetAll());
         }
     }
 }

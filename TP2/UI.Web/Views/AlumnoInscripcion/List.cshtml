@@ -1,23 +1,30 @@
-﻿@model IEnumerable<Business.Entities.AlumnoInscripcion>
+﻿@model ListAlumnoInscripcionViewModel
 
-    <a class="btn btn-outline-success mb-2" asp-action="Create">Agregar</a>
+<h2 class="mb-3 text-center">Inscribir alumnos</h2>
+<a class="btn btn-outline-success mb-3" asp-action="Create">Agregar</a>
 
-<ul class="list-group">
-    @foreach  (Business.Entities.AlumnoInscripcion ai in Model)
-            {
-                <div class="card mb-2">
-                    <div class="card-body">
-                        <h5 class="card-title">@ai.Persona.Legajo</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">
-                            Nombre: @ai.Persona.Nombre -
-                            Apellido: @ai.Persona.Apellido
 
-                        </h6>
-                        <p class="card-text">Curso: @ai.Curso.Descripcion </p>
-                        <p class="card-text">Condicion: @ai.Condicion </p>
-                        <p class="card-text">Nota: @ai.Nota </p>
-                        <a class="btn btn-danger" asp-area="" asp-action="Delete" asp-route-id="@ai.ID">Eliminar</a>
-                    </div>
+@foreach (Business.Entities.Curso cur in Model.Cursos)
+{
+    List<Business.Entities.AlumnoInscripcion> inscCurso = Model.Inscripciones.FindAll(i => i.IDCurso == cur.ID);
+<ul class="list-group mb-2">
+    @if (inscCurso.Count > 0)
+    {
+        <h5 class="mb-2 text-left">Curso: @cur.Descripcion</h5>
+        @foreach (Business.Entities.AlumnoInscripcion ai in inscCurso)
+        {
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">@ai.Persona.Legajo</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        Nombre: @ai.Persona.Nombre -
+                        Apellido: @ai.Persona.Apellido
+                    </h6>
+                    <p class="card-text">Condicion: @ai.Condicion - Nota: @ai.Nota</p>
+                    <a class="btn btn-danger" asp-area="" asp-action="Delete" asp-route-id="@ai.ID">Eliminar</a>
                 </div>
-            }
+            </div>
+        }
+    }
 </ul>
+    }
