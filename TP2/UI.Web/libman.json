@@ -1,0 +1,28 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "destination": "wwwroot/lib/bootstrap/dist/",
+      "files": [
+        "css/bootstrap.css",
+        "css/bootstrap.css.map",
+        "css/bootstrap.min.css",
+        "css/bootstrap.min.css.map"
+      ],
+      "library": "twitter-bootstrap@5.1.1"
+    },
+    {
+      "destination": "wwwroot/lib/bootstrap/dist/js/",
+      "files": [
+        "bootstrap-native.esm.js",
+        "bootstrap-native.esm.min.js",
+        "bootstrap-native.js",
+        "bootstrap-native.min.js",
+        "polyfill.js",
+        "polyfill.min.js"
+      ],
+      "library": "bootstrap.native@4.0.6"
+    }
+  ]
+}

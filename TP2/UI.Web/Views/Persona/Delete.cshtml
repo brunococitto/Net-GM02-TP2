@@ -6,46 +6,46 @@
     <div class="col-md-4">
         <form asp-action="Delete">
             <input asp-for="ID" type="hidden" />
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Legajo" class="form-label">Legajo</label>
                 <input disabled asp-for="Legajo" class="form-control" placeholder="@Model.Legajo" value="@Model.Legajo" />
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Nombre" class="form-label">Nombre</label>
                 <input disabled asp-for="Nombre" class="form-control" placeholder="@Model.Nombre" value="@Model.Nombre" />
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Apellido" class="form-label">Apellido</label>
                 <input disabled asp-for="Apellido" class="form-control" placeholder="@Model.Apellido" value="@Model.Apellido" />
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Direccion" class="form-label">Direccion</label>
                 <input disabled asp-for="Direccion" class="form-control" placeholder="@Model.Direccion" value="@Model.Direccion" />
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Email" class="form-label">Email</label>
                 <input disabled asp-for="Email" class="form-control" placeholder="@Model.Email" value="@Model.Email" />
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="FechaNacimiento" class="form-label">Fecha de Nacimiento</label>
                 <input disabled type="date" asp-for="FechaNacimiento" class="form-control" placeholder="@Model.FechaNacimiento.ToString("yyyy-MM-dd")" value="@Model.FechaNacimiento.ToString("yyyy-MM-dd")" />
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Telefono" class="form-label">Teléfono</label>
                 <input disabled asp-for="Telefono" class="form-control" placeholder="@Model.Telefono" value="@Model.Telefono" />
             </div>
             @if (Model.IDPlan != null)
             {
-                <div class="form-group">
+                <div class="mb-3">
                     <label asp-for="Plan" class="form-label">Plan</label>
                     <input disabled asp-for="Plan" class="form-control" placeholder="@Model.Plan.Descripcion" value="@Model.Plan.Descripcion" />
                 </div>
             }
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="TipoPersona" class="form-label">Tipo Persona</label>
                 <input disabled asp-for="TipoPersona" class="form-control" placeholder="@Model.TipoPersona" value="@Model.TipoPersona" />
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <button type="submit" class="btn btn-success">Confirmar</button>
                 <a class="btn btn-danger" asp-action="Index">Cancelar</a>
             </div>

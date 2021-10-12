@@ -6,23 +6,23 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Materia.Descripcion" class="form-label">Descripción</label>
                 <input maxlength="20" minlength="3" asp-for="Materia.Descripcion" class="form-control" />
                 <span asp-validation-for="Materia.Descripcion" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Materia.HSSemanales" class="form-label">Horas semanales</label>
                 <input min="2" max="6" asp-for="Materia.HSSemanales" type="number" class="form-control" />
                 <span asp-validation-for="Materia.HSSemanales" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Materia.HSTotales" class="form-label">Horas totales</label>
                 <input min="90" max="150" asp-for="Materia.HSTotales" type="number" class="form-control" />
                 <span asp-validation-for="Materia.HSSemanales" class="text-danger"></span>
             </div>
-            <select class="form-group" asp-for="Materia.IDPlan" asp-items="Model.Planes"></select>
-            <div class="form-group">
+            <select class="form-select mb-3" asp-for="Materia.IDPlan" asp-items="Model.Planes"></select>
+            <div class="mb-3">
                 <button type="submit" class="btn btn-primary">Crear</button>
                 <a class="btn btn-danger" asp-action="Index">Cancelar</a>
             </div>

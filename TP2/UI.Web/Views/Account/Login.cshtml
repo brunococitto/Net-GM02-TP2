@@ -4,21 +4,21 @@
     <div class="col-md-4 col-md-8">
         <form asp-action="Login">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="NombreUsuario" class="form-label"></label>
                 <input asp-for="NombreUsuario" class="form-control">
                 <span asp-validation-for="NombreUsuario" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Clave" class="form-label"></label>
                 <input asp-for="Clave" type="password" class="form-control">
                 <span asp-validation-for="Clave" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
+            <div class="mb-3 form-check">
                 <input asp-for="IsPersistent" type="checkbox" class="form-check-input">
                 <label asp-for="IsPersistent" class="form-check-label">Mantener la sesion abierta</label>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>

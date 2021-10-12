@@ -6,50 +6,50 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Persona.Legajo" class="form-label">Legajo</label>
                 <input asp-for="Persona.Legajo" class="form-control" />
                 <span asp-validation-for="Persona.Legajo" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Persona.Nombre" class="form-label">Nombre</label>
                 <input asp-for="Persona.Nombre" class="form-control" />
                 <span asp-validation-for="Persona.Nombre" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Persona.Apellido" class="form-label">Apellido</label>
                 <input asp-for="Persona.Apellido" class="form-control" />
                 <span asp-validation-for="Persona.Apellido" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Persona.Direccion" class="form-label">Direccion</label>
                 <input asp-for="Persona.Direccion" class="form-control" />
                 <span asp-validation-for="Persona.Direccion" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Persona.Email" class="form-label">Email</label>
                 <input asp-for="Persona.Email" class="form-control" />
                 <span asp-validation-for="Persona.Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Persona.Telefono" class="form-label">Telefono</label>
                 <input asp-for="Persona.Telefono" class="form-control" />
                 <span asp-validation-for="Persona.Telefono" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Persona.FechaNacimiento" class="form-label">FechaNacimiento</label>
                 <input asp-for="Persona.FechaNacimiento" class="form-control" />
                 <span asp-validation-for="Persona.FechaNacimiento" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Persona.TipoPersona" class="form-label">Tipo</label><br />
-                <select class="form-group" id="ComboTipoPersona" asp-for="Persona.TipoPersona" asp-items="Model.TiposPersona"></select>
+                <select class="form-select mb-3" id="ComboTipoPersona" asp-for="Persona.TipoPersona" asp-items="Model.TiposPersona"></select>
             </div>
-            <div class="form-group" id="DivPlan">
+            <div class="mb-3" id="DivPlan">
                 <label asp-for="Planes" class="form-label">Plan</label>
-                <select class="form-group" asp-for="Persona.IDPlan" asp-items="Model.Planes"></select>
+                <select class="form-select mb-3" asp-for="Persona.IDPlan" asp-items="Model.Planes"></select>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <button type="submit" class="btn btn-primary" id="botonCrear">Crear</button>
                 <a class="btn btn-danger" asp-action="Index">Cancelar</a>
             </div>
