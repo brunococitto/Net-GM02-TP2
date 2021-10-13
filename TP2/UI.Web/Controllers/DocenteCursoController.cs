@@ -41,7 +41,7 @@ namespace UI.Web.Controllers
         [HttpPost]
         [Authorize(Roles = "Administrativo")]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("Cargo, Curso, IDCurso, IDDocente,Persona")] DocenteCurso docenteCurso)
+        public IActionResult Edit(int id, [Bind("ID,Cargo, IDCurso, IDDocente")] DocenteCurso docenteCurso)
         {
             Console.WriteLine($"asd");
             if (id != docenteCurso.ID) return NotFound();
@@ -59,7 +59,7 @@ namespace UI.Web.Controllers
         [HttpPost]
         [Authorize(Roles = "Administrativo")]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Cargo, Curso, IDCurso, IDDocente,Persona")] DocenteCurso docenteCurso)
+        public IActionResult Create([Bind("Cargo, IDCurso, IDDocente")] DocenteCurso docenteCurso)
         {
             if (ModelState.IsValid)
             {
@@ -87,6 +87,20 @@ namespace UI.Web.Controllers
             docenteCurso.State = BusinessEntity.States.Deleted;
             _docenteCursoLogic.Save(docenteCurso);
             return RedirectToAction("List");
+        }
+        [HttpPost]
+        public IActionResult GetPersona(int legajo)
+        {
+            Persona persona = _personaLogic.GetOneConLegajo(legajo);
+            if (persona == null | ((int)persona.TipoPersona) != 2)
+            {
+                return StatusCode(500);
+            }
+            else
+            {
+                return PartialView("Partial_DocenteCurso", new CreateDocenteCursoPartialViewModel(persona));
+            }
+
         }
     }
 }

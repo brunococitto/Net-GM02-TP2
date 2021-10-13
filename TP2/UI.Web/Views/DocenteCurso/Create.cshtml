@@ -1,0 +1,58 @@
+﻿@model CreateDocenteCursoViewModel
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="form-label">Ingrese Legajo</label>
+                <input maxlength="20" minlength="3" id="legajo" name="legajo" class="form-control" onfocusout='buscaPersona();' />
+                <span id='message'></span>
+            </div>
+
+            <div id="partialDocenteCurso" name="partialDocenteCurso">
+
+            </div>
+            <select disabled class="form-group" id="cursos" asp-for="DocenteCurso.IDCurso" asp-items="Model.Cursos"></select>
+            <div class="form-group">
+                <label asp-for="DocenteCurso.Cargo" class="form-label">Cargo</label><br />
+                <select class="form-group" asp-for="DocenteCurso.Cargo" asp-items="Model.TiposCargo"></select>
+            </div>
+            <div class="form-group">
+                
+                <button disabled type="submit" class="btn btn-primary" id="botonCrear">Crear</button>
+                <a class="btn btn-danger" asp-action="Index">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+    var buscaPersona = function () {
+
+        $.ajax(
+            {
+                type: 'POST',
+                url: '@Url.Action("GetPersona", "DocenteCurso")',
+                data: {
+                    legajo: document.getElementById('legajo').value,
+                    
+                },
+                success: function (data) {
+                    $("#partialDocenteCurso").html(data);
+                    document.getElementById('cursos').removeAttribute("disabled");
+                    document.getElementById('botonCrear').removeAttribute("disabled");
+                },
+                error: function (data)
+                {
+                    alert('No se encuentra un docente con el legajo indicado');
+                    $("#partialDocenteCurso").fadeOut(200);
+                }
+            });
+        };
+
+    </script>
+    
+    }
