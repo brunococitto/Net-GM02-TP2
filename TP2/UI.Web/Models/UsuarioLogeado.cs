@@ -21,6 +21,7 @@ namespace UI.Web.Models
 
         public static UsuarioLogeado MapearUsuario (Business.Entities.Usuario usuario)
         {
+            if (usuario == null) return null;
             return new UsuarioLogeado(
                 id: usuario.ID,
                 nombre: $"{usuario.Persona.Nombre} {usuario.Persona.Apellido}",

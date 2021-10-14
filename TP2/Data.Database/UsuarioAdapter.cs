@@ -157,7 +157,7 @@ namespace Data.Database
         {
             try
             {
-                Usuario usr = _context.Usuarios.Include(u => u.Persona).First(u => u.NombreUsuario == usuario);
+                Usuario usr = _context.Usuarios.Include(u => u.Persona).FirstOrDefault(u => u.NombreUsuario == usuario);
                 if (usr == null) return null;
                 contrasenia = new Hasher().GenerateHash(contrasenia, usr.Salt);
                 if (usr.Clave != contrasenia) return null;
