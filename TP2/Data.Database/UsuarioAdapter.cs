@@ -54,9 +54,14 @@ namespace Data.Database
 
         protected void Update(Usuario usuario)
         {
-            if (usuario.Clave != usuario.Clave)
+            Usuario userAnterior = GetOne(usuario.ID);
+            if (usuario.Clave != null && usuario.Clave != userAnterior.Clave)
             {
-                usuario.Clave = new Hasher().GenerateHash(usuario.Clave, usuario.Salt);
+                usuario.Clave = new Hasher().GenerateHash(usuario.Clave, userAnterior.Salt);
+            }
+            else
+            {
+                usuario.Clave = userAnterior.Clave;
             }
             try
             {

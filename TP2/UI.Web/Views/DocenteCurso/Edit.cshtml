@@ -5,6 +5,7 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input asp-for="DocenteCurso.ID" type="hidden" />
+            <input asp-for="DocenteCurso.IDDocente" type="hidden" />
             <div class="mb-3">
                 <label asp-for="DocenteCurso.Persona.Legajo" class="form-label">Legajo</label>
                 <input asp-for="DocenteCurso.Persona.Legajo" class="form-control" placeholder="@Model.DocenteCurso.Persona.Legajo" />
@@ -20,10 +21,7 @@
                 <input disabled asp-for="DocenteCurso.Persona.Apellido" class="form-control" placeholder="@Model.DocenteCurso.Persona.Apellido" />
             </div>
 
-            <div class="mb-3">
-                <label asp-for="DocenteCurso.IDDocente" class="form-label">ID Docente</label>
-                <input disabled asp-for="DocenteCurso.IDDocente" class="form-control" placeholder="@Model.DocenteCurso.IDDocente" value="@Model.DocenteCurso.IDDocente"/>
-            </div>
+
 
             <div class="mb-3">
                 <label asp-for="DocenteCurso.Cargo" class="form-label">Cargo</label><br />

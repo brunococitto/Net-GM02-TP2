@@ -44,11 +44,13 @@ namespace Data.Database
             }
             return asignacion;
         }
-        protected void Update()
+        protected void Update(DocenteCurso asignacion)
         {
             try
             {
+                _context.Update(asignacion);
                 _context.SaveChanges();
+                
             }
             catch (Exception e)
             {
@@ -96,7 +98,7 @@ namespace Data.Database
             }
             else if (asignacion.State == BusinessEntity.States.Modified)
             {
-                this.Update();
+                this.Update(asignacion);
             }
             asignacion.State = BusinessEntity.States.Unmodified;
         }
