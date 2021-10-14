@@ -1,11 +1,16 @@
 ﻿@model EditDocenteCursoViewModel
 
+    <h2 class="mb-3 text-center">Editar docente</h2>
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <input asp-for="DocenteCurso.ID" type="hidden" />
+
             <input asp-for="DocenteCurso.IDDocente" type="hidden" />
+
             <div class="mb-3">
                 <label asp-for="DocenteCurso.Persona.Legajo" class="form-label">Legajo</label>
                 <input asp-for="DocenteCurso.Persona.Legajo" class="form-control" placeholder="@Model.DocenteCurso.Persona.Legajo" />
@@ -21,16 +26,15 @@
                 <input disabled asp-for="DocenteCurso.Persona.Apellido" class="form-control" placeholder="@Model.DocenteCurso.Persona.Apellido" />
             </div>
 
-
-
             <div class="mb-3">
                 <label asp-for="DocenteCurso.Cargo" class="form-label">Cargo</label><br />
                 <select class="form-select mb-3" asp-for="DocenteCurso.Cargo" asp-items="Model.TiposCargo"></select>
             </div>
             <div class="mb-3">
                 <label asp-for="DocenteCurso.IDCurso" class="form-label">Curso</label>
-                <select class="mb-3 ms-2" asp-for="DocenteCurso.IDCurso" asp-items="Model.Cursos"></select>
+                <select class="form-select mb-3" asp-for="DocenteCurso.IDCurso" asp-items="Model.Cursos"></select>
             </div>
+
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary">Guardar</button>
                 <a class="btn btn-danger" asp-action="Index">Cancelar</a>

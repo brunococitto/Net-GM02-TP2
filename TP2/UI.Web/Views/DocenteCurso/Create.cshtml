@@ -1,25 +1,31 @@
 ﻿@model CreateDocenteCursoViewModel
 
+    <h2 class="mb-3 text-center">Crear docente</h2>
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+
+            <div class="mb-3">
                 <label class="form-label">Ingrese Legajo</label>
                 <input maxlength="20" minlength="3" id="legajo" name="legajo" class="form-control" onfocusout='buscaPersona();' />
                 <span id='message'></span>
             </div>
 
-            <div id="partialDocenteCurso" name="partialDocenteCurso">
+            <div id="partialDocenteCurso" name="partialDocenteCurso"></div>
 
+            <div class="mb-3">
+                <label asp-for="DocenteCurso.IDCurso" class="form-label">Cursos</label><br />
+                <select disabled class="form-select mb-3" id="cursos" asp-for="DocenteCurso.IDCurso" asp-items="Model.Cursos"></select>
             </div>
-            <select disabled class="form-group" id="cursos" asp-for="DocenteCurso.IDCurso" asp-items="Model.Cursos"></select>
-            <div class="form-group">
+
+            <div class="mb-3">
                 <label asp-for="DocenteCurso.Cargo" class="form-label">Cargo</label><br />
-                <select class="form-group" asp-for="DocenteCurso.Cargo" asp-items="Model.TiposCargo"></select>
+                <select disable class="form-select mb-3" id="cargos" asp-for="DocenteCurso.Cargo" asp-items="Model.TiposCargo"></select>
             </div>
-            <div class="form-group">
-                
+
+            <div class="mb-3">
                 <button disabled type="submit" class="btn btn-primary" id="botonCrear">Crear</button>
                 <a class="btn btn-danger" asp-action="Index">Cancelar</a>
             </div>
@@ -42,13 +48,23 @@
                 },
                 success: function (data) {
                     $("#partialDocenteCurso").html(data);
+                    if ($("#partialDocenteCurso").is(":hidden")) {
+                        $("#partialDocenteCurso").toggle(200);
+                    }
                     document.getElementById('cursos').removeAttribute("disabled");
+                    document.getElementById('cargos').removeAttribute("disabled");
                     document.getElementById('botonCrear').removeAttribute("disabled");
                 },
                 error: function (data)
                 {
-                    alert('No se encuentra un docente con el legajo indicado');
-                    $("#partialDocenteCurso").fadeOut(200);
+                    document.getElementById('cursos').setAttribute("disabled", "");
+                    document.getElementById('cargos').setAttribute("disabled","");
+                    document.getElementById('botonCrear').setAttribute("disabled", "");
+                    alert('El legajo ingresado no corresponde a un Docente');
+                    if ($("#partialDocenteCurso").is(":visible")) {
+                        $("#partialDocenteCurso").toggle(200);
+                    }
+                    $("#partialDocenteCurso").html(null);
                 }
             });
         };
