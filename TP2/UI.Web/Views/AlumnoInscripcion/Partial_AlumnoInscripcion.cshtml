@@ -1,7 +1,9 @@
 ﻿@model CreateAlumnoInscripcionPartialViewModel
 <div class="row">
     <div class="col-md-4">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
         <input asp-for="AlumnoInscripcion.IDAlumno" type="hidden" />
         <div class="mb-3">
             <label asp-for="Nombre" class="form-label">Nombre</label>

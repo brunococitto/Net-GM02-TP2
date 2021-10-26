@@ -35,17 +35,16 @@ namespace Data.Database
         }
         public Business.Entities.Curso GetOne(int ID)
         {
-            Curso curso = new Curso();
             try
             {
-                curso = _context.Cursos.Include(c => c.Materia).Include(c => c.Comision).FirstOrDefault(p => p.ID == ID);
+                return _context.Cursos.Include(c => c.Materia).Include(c => c.Comision).FirstOrDefault(p => p.ID == ID);
             }
             catch (Exception e)
             {
                 Exception ExceptionManejada = new Exception("Error al recuperar datos de curso", e);
                 throw ExceptionManejada;
             }
-            return curso;
+            return null;
         }
 
         protected void Update(Curso curso)

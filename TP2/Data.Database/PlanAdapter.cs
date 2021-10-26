@@ -52,9 +52,9 @@ namespace Data.Database
 
         public Business.Entities.Plan GetOne(int ID)
         {
-            Plan plan = new Plan();
             try
             {
+                Plan plan = new Plan();
                 this.OpenConnection();
                 SqlCommand sqlPlanes = new SqlCommand(
                     "select * from planes as P join especialidades as E on P.id_especialidad = E.ID where P.ID = @id"
@@ -72,6 +72,7 @@ namespace Data.Database
                     };
                 }
                 drPlanes.Close();
+                return plan;
             }
             catch (Exception e)
             {
@@ -82,7 +83,7 @@ namespace Data.Database
             {
                 this.CloseConnection();
             }
-            return plan;
+            return null;
         }
 
         protected void Update(Plan plan)

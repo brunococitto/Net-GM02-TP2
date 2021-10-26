@@ -39,17 +39,16 @@ namespace Data.Database
 
         public Business.Entities.Usuario GetOne(int ID)
         {
-            Usuario usr = new Usuario();
             try
             {
-                usr = _context.Usuarios.Include(u => u.Persona).FirstOrDefault(u => u.ID == ID);
+                return _context.Usuarios.Include(u => u.Persona).FirstOrDefault(u => u.ID == ID);
             }
             catch (Exception e)
             {
                 Exception ExceptionManejada = new Exception("Error al recuperar datos de usuario", e);
                 throw ExceptionManejada;
             }
-            return usr;
+            return null;
         }
 
         protected void Update(Usuario usuario)

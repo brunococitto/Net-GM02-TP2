@@ -45,9 +45,9 @@ namespace Data.Database
 
         public Business.Entities.Especialidad GetOne(int ID)
         {
-            Especialidad esp = new Especialidad();
             try
             {
+                Especialidad esp = new Especialidad();
                 this.OpenConnection();
                 SqlCommand sqlEspecialidades = new SqlCommand("select * from especialidades where ID = @id", sqlConn);
                 sqlEspecialidades.Parameters.Add("@id", SqlDbType.Int).Value = ID;
@@ -58,6 +58,7 @@ namespace Data.Database
                     esp.Descripcion = drEspecialidades["desc_especialidad"].ToString();
                 }
                 drEspecialidades.Close();
+                return esp;
             }
             catch (Exception e)
             {
@@ -68,7 +69,7 @@ namespace Data.Database
             {
                 this.CloseConnection();
             }
-            return esp;
+            return null;
         }
 
         protected void Update(Especialidad especialidad)

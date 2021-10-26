@@ -59,9 +59,9 @@ namespace Data.Database
 
         public Business.Entities.Comision GetOne(int ID)
         {
-            Comision comi = new Comision();
             try
             {
+                Comision comi = new Comision();
                 this.OpenConnection();
                 SqlCommand sqlComisiones = new SqlCommand(
                     "select * from comisiones as C join planes as P on C.id_plan = P.ID " +
@@ -85,6 +85,7 @@ namespace Data.Database
                     };
                 }
                 drComisiones.Close();
+                return comi;
             }
             catch (Exception e)
             {
@@ -95,7 +96,7 @@ namespace Data.Database
             {
                 this.CloseConnection();
             }
-            return comi;
+            return null;
         }
 
         protected void Update(Comision comision)

@@ -32,17 +32,16 @@ namespace Data.Database
         }
         public Business.Entities.DocenteCurso GetOne(int ID)
         {
-            DocenteCurso asignacion = new DocenteCurso();
             try
             {
-                asignacion = _context.DocentesCursos.Include(dc => dc.Curso).Include(dc => dc.Persona).FirstOrDefault(dc => dc.ID == ID);
+                return _context.DocentesCursos.Include(dc => dc.Curso).Include(dc => dc.Persona).FirstOrDefault(dc => dc.ID == ID);
             }
             catch (Exception e)
             {
                 Exception ExceptionManejada = new Exception("Error al recuperar datos de asignación", e);
                 throw ExceptionManejada;
             }
-            return asignacion;
+            return null;
         }
         protected void Update(DocenteCurso asignacion)
         {

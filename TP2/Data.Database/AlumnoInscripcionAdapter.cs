@@ -32,21 +32,22 @@ namespace Data.Database
         }
         public Business.Entities.AlumnoInscripcion GetOne(int id)
         {
-            AlumnoInscripcion inscripcion = new AlumnoInscripcion();
             try
             {
+                AlumnoInscripcion inscripcion = new AlumnoInscripcion();
                 inscripcion = _context.AlumnoInscripciones
                     .Include(i => i.Curso)
                     .ThenInclude(c => c.Materia)
                     .Include(i => i.Persona)
                     .FirstOrDefault(i => i.ID == id);
+                return inscripcion;
             }
             catch (Exception e)
             {
                 Exception ExceptionManejada = new Exception("Error al recuperar datos de inscripción", e);
                 throw ExceptionManejada;
             }
-            return inscripcion;
+            return null;
         }
         protected void Update(AlumnoInscripcion inscripcion)
         {

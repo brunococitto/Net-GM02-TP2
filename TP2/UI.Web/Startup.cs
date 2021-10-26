@@ -13,7 +13,7 @@ using UI.Web.Providers;
 using jsreport.AspNetCore;
 using jsreport.Binary;
 using jsreport.Local;
-
+using UI.Web.Models;
 
 namespace UI.Web
 {
@@ -32,6 +32,7 @@ namespace UI.Web
             services.AddControllersWithViews().AddFluentValidation(
                 fv => {
                     fv.RegisterValidatorsFromAssemblyContaining<MateriaValidator>();
+                    fv.RegisterValidatorsFromAssemblyContaining<UsuarioEditValidator>();
                     fv.ValidatorOptions.LanguageManager.Culture = new System.Globalization.CultureInfo("es");
                 }
                 );

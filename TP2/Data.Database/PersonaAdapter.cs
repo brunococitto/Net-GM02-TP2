@@ -35,17 +35,16 @@ namespace Data.Database
         }
         public Business.Entities.Persona GetOne(int ID)
         {
-            Persona persona = new Persona();
             try
             {
-                persona = _context.Personas.Include(p => p.Plan).ThenInclude(p => p.Especialidad).FirstOrDefault(p => p.ID == ID);
+                return _context.Personas.Include(p => p.Plan).ThenInclude(p => p.Especialidad).FirstOrDefault(p => p.ID == ID);
             }
             catch (Exception e)
             {
                 Exception ExceptionManejada = new Exception("Error al recuperar datos de persona", e);
                 throw ExceptionManejada;
             }
-            return persona;
+            return null;
         }
         protected void Update(Persona persona)
         {

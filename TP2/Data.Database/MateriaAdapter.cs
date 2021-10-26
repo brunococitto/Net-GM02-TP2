@@ -59,9 +59,9 @@ namespace Data.Database
 
         public Business.Entities.Materia GetOne(int ID)
         {
-            Materia materia = new Materia();
             try
             {
+                Materia materia = new Materia();
                 this.OpenConnection();
                 SqlCommand sqlMaterias = new SqlCommand(
                     "select * from materias as M join planes as P on M.id_plan = P.ID join especialidades as E on P.id_especialidad = E.ID where M.ID = @id"
@@ -85,6 +85,7 @@ namespace Data.Database
                     };
                 }
                 drMaterias.Close();
+                return materia;
             }
             catch (Exception e)
             {
@@ -95,7 +96,7 @@ namespace Data.Database
             {
                 this.CloseConnection();
             }
-            return materia;
+            return null;
         }
 
         protected void Update(Materia materia)

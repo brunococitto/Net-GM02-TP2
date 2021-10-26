@@ -32,20 +32,21 @@ namespace UI.Web.Controllers
             if (id == null) return NotFound();
             Usuario? usuario = _usuarioLogic.GetOne((int)id);
             if (usuario == null) return NotFound();
-            return View(usuario);
+            return View(parsearEdit(usuario));
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("ID, NombreUsuario, Habilitado, Clave, IDPersona")] Usuario usuario)
+        public IActionResult Edit(int id, [Bind("ID, NombreUsuario, Habilitado, Clave, IDPersona")] UsuarioEdit edit)
         {
-            if (id != usuario.ID) return NotFound();
+            if (id != edit.ID) return NotFound();
             if (ModelState.IsValid)
             {
-                usuario.State = BusinessEntity.States.Modified;
-                _usuarioLogic.Save(usuario);
+                Usuario usr = parsearUsr(edit);
+                usr.State = BusinessEntity.States.Modified;
+                _usuarioLogic.Save(usr);
                 return RedirectToAction("List");
             }
-            return View((usuario));
+            return View((edit));
         }
         [HttpGet]
         public IActionResult Create() => View(null);
@@ -91,6 +92,29 @@ namespace UI.Web.Controllers
             }
             
         }
-
+        private UsuarioEdit parsearEdit(Usuario usr)
+        {
+            UsuarioEdit ue = new UsuarioEdit();
+            ue.ID = usr.ID;
+            ue.NombreUsuario = usr.NombreUsuario;
+            ue.Habilitado = usr.Habilitado;
+            ue.Clave = usr.Clave;
+            ue.IDPersona = usr.IDPersona;
+            ue.Persona = usr.Persona;
+            ue.Salt = usr.Salt;
+            return ue;
+        }
+        private Usuario parsearUsr(UsuarioEdit ue)
+        {
+            Usuario usr = new Usuario();
+            usr.ID = ue.ID;
+            usr.NombreUsuario = ue.NombreUsuario;
+            usr.Habilitado = ue.Habilitado;
+            usr.Clave = ue.Clave;
+            usr.IDPersona = ue.IDPersona;
+            usr.Persona = ue.Persona;
+            usr.Salt = ue.Salt;
+            return usr;
+        }
     }
 }
