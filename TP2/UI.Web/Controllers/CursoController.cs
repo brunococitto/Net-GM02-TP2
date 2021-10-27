@@ -48,13 +48,18 @@ namespace UI.Web.Controllers
         public IActionResult Edit(int id, [Bind("ID, AnoCalendario, Comision, Cupo, Descripcion, IDComision, IDMateria, Materia")] Curso curso)
         {
             if (id != curso.ID) return NotFound();
-            if (ModelState.IsValid)
+            try 
             {
+                if (!ModelState.IsValid) return View(new EditCursoViewModel(curso, _materiaLogic.GetAll(), _comisionLogic.GetAll()));
                 curso.State = BusinessEntity.States.Modified;
                 _cursoLogic.Save(curso);
-                return RedirectToAction("List");
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al editar el curso.");
+                View(new EditCursoViewModel(curso, _materiaLogic.GetAll(), _comisionLogic.GetAll()));
             }
-            return View(new EditCursoViewModel(curso, _materiaLogic.GetAll(), _comisionLogic.GetAll()));
+                return RedirectToAction("List");
         }
         [HttpGet]
         [Authorize(Roles = "Administrativo")]
@@ -64,13 +69,18 @@ namespace UI.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("ID, AnoCalendario, Comision, Cupo, Descripcion, IDComision, IDMateria, Materia")] Curso curso)
         {
-            if (ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid) return View(new CreateCursoViewModel(curso, _materiaLogic.GetAll(), _comisionLogic.GetAll()));
                 curso.State = BusinessEntity.States.New;
                 _cursoLogic.Save(curso);
-                return RedirectToAction("List");
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al crear el curso");
+                return View(new CreateCursoViewModel(curso, _materiaLogic.GetAll(), _comisionLogic.GetAll()));
             }
-            return View(new CreateCursoViewModel(curso, _materiaLogic.GetAll(), _comisionLogic.GetAll()));
+                return RedirectToAction("List");
         }
         [HttpGet]
         [Authorize(Roles = "Administrativo")]
@@ -86,8 +96,16 @@ namespace UI.Web.Controllers
         public IActionResult Delete(int id, Curso curso)
         {
             if (id != curso.ID) return NotFound();
-            curso.State = BusinessEntity.States.Deleted;
-            _cursoLogic.Save(curso);
+            try
+            {
+                curso.State = BusinessEntity.States.Deleted;
+                _cursoLogic.Save(curso);
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al eliminar el curso.");
+                return View(_cursoLogic.GetOne(id));
+            }
             return RedirectToAction("List");
         }
         [MiddlewareFilter(typeof(JsReportPipeline))]

@@ -42,13 +42,19 @@ namespace UI.Web.Controllers
         public IActionResult Edit(int id, [Bind("ID, Descripcion, HSSemanales, HSTotales, IDPlan")] Materia materia)
         {
             if (id != materia.ID) return NotFound();
-            if (ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid) return View(new EditMateriaViewModel(materia, _planLogic.GetAll()));
                 materia.State = BusinessEntity.States.Modified;
                 _materiaLogic.Save(materia);
-                return RedirectToAction("List");
             }
-            return View(new EditMateriaViewModel(materia, _planLogic.GetAll()));
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al editar la materia.");
+                return View(new EditMateriaViewModel(materia, _planLogic.GetAll()));
+            }
+                return RedirectToAction("List");
         }
         [HttpGet]
         [Authorize(Roles = "Administrativo")]
@@ -58,13 +64,18 @@ namespace UI.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("ID, Descripcion, HSSemanales, HSTotales, IDPlan")] Materia materia)
         {
-            if (ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid) return View(new CreateMateriaViewModel(materia, _planLogic.GetAll()));
                 materia.State = BusinessEntity.States.New;
                 _materiaLogic.Save(materia);
-                return RedirectToAction("List");
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al crear la materia.");
+                return View(new CreateMateriaViewModel(materia, _planLogic.GetAll()));
             }
-            return View(new CreateMateriaViewModel(materia, _planLogic.GetAll()));
+            return RedirectToAction("List");
         }
         [HttpGet]
         [Authorize(Roles = "Administrativo")]
@@ -80,9 +91,19 @@ namespace UI.Web.Controllers
         public IActionResult Delete(int id, Materia materia)
         {
             if (id != materia.ID) return NotFound();
-            materia.State = BusinessEntity.States.Deleted;
-            _materiaLogic.Save(materia);
+            try
+            {
+                materia.State = BusinessEntity.States.Deleted;
+                _materiaLogic.Save(materia);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al eliminar la materia.");
+                return View(_materiaLogic.GetOne(id));
+            }
             return RedirectToAction("List");
+            
         }
     }
 }

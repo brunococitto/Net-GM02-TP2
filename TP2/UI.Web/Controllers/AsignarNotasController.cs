@@ -58,13 +58,19 @@ namespace UI.Web.Controllers
         public IActionResult CargarNota(int id, [Bind("ID, IDAlumno, IDCurso, Condicion, Nota")] AlumnoInscripcion inscripcion)
         {
             if (id != inscripcion.ID) return NotFound();
-            if (ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid) return View(inscripcion);
                 inscripcion.State = BusinessEntity.States.Modified;
                 _alumnoInscripcionLogic.Save(inscripcion);
-                return RedirectToAction("ListaAlumnos", "AsignarNotas", new { id = inscripcion.IDCurso });
+                
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al cargar la nota");
+                return View(inscripcion);
             }
-            return View(inscripcion);
+            return RedirectToAction("ListaAlumnos", "AsignarNotas", new { id = inscripcion.IDCurso });
         }
     }
 }

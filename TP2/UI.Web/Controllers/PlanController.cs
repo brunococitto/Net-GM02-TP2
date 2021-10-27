@@ -44,13 +44,19 @@ namespace UI.Web.Controllers
         public IActionResult Edit(int id, [Bind("ID, Descripcion, IDEspecialidad")] Plan plan)
         {
             if (id != plan.ID) return NotFound();
-            if (ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid) return View(new EditPlanViewModel(plan, _especialidadLogic.GetAll()));
                 plan.State = BusinessEntity.States.Modified;
                 _planLogic.Save(plan);
-                return RedirectToAction("List");
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al editar el plan.");
+                return View(new EditPlanViewModel(plan, _especialidadLogic.GetAll()));
             }
-            return View(new EditPlanViewModel(plan, _especialidadLogic.GetAll()));
+            return RedirectToAction("List");
+
         }
         [HttpGet]
         [Authorize(Roles = "Administrativo")]
@@ -60,13 +66,20 @@ namespace UI.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("ID, Descripcion, IDEspecialidad")] Plan plan)
         {
-            if (ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid) return View(new CreatePlanViewModel(plan, _especialidadLogic.GetAll()));
                 plan.State = BusinessEntity.States.New;
                 _planLogic.Save(plan);
-                return RedirectToAction("List");
             }
-            return View(new CreatePlanViewModel(plan, _especialidadLogic.GetAll()));
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al crear el plan");
+                return View(new CreatePlanViewModel(plan, _especialidadLogic.GetAll()));
+            }
+            return RedirectToAction("List");
+
         }
         [HttpGet]
         [Authorize(Roles = "Administrativo")]
@@ -82,8 +95,16 @@ namespace UI.Web.Controllers
         public IActionResult Delete(int id, Plan plan)
         {
             if (id != plan.ID) return NotFound();
-            plan.State = BusinessEntity.States.Deleted;
-            _planLogic.Save(plan);
+            try
+            {
+                plan.State = BusinessEntity.States.Deleted;
+                _planLogic.Save(plan);
+            } catch(Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al eliminar el plan.");
+                return View(_planLogic.GetOne(id));
+            }
             return RedirectToAction("List");
         }
         [MiddlewareFilter(typeof(JsReportPipeline))]

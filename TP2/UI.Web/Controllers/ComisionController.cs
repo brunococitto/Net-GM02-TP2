@@ -42,13 +42,19 @@ namespace UI.Web.Controllers
         public IActionResult Edit(int id, [Bind("ID, Descripcion, AnoEspecialidad, IDPlan")] Comision comision)
         {
             if (id != comision.ID) return NotFound();
-            if (ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid) return View(new EditComisionViewModel(comision, _planLogic.GetAll()));
                 comision.State = BusinessEntity.States.Modified;
                 _comisionLogic.Save(comision);
-                return RedirectToAction("List");
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al editar la comision.");
+                return View(new EditComisionViewModel(comision, _planLogic.GetAll()));
             }
-            return View(new EditComisionViewModel(comision, _planLogic.GetAll()));
+                return RedirectToAction("List");
+            
         }
         [HttpGet]
         [Authorize(Roles = "Administrativo")]
@@ -58,13 +64,18 @@ namespace UI.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("ID, Descripcion, AnoEspecialidad, IDPlan")] Comision comision)
         {
-            if (ModelState.IsValid)
-            {
+            try 
+            { 
+                if (!ModelState.IsValid) return View(new CreateComisionViewModel(comision, _planLogic.GetAll()));
                 comision.State = BusinessEntity.States.New;
                 _comisionLogic.Save(comision);
-                return RedirectToAction("List");
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al crear la comision.");
+                return View(new CreateComisionViewModel(comision, _planLogic.GetAll()));
             }
-            return View(new CreateComisionViewModel(comision, _planLogic.GetAll()));
+                return RedirectToAction("List");
         }
         [HttpGet]
         [Authorize(Roles = "Administrativo")]
@@ -80,8 +91,16 @@ namespace UI.Web.Controllers
         public IActionResult Delete(int id, Comision comision)
         {
             if (id != comision.ID) return NotFound();
-            comision.State = BusinessEntity.States.Deleted;
-            _comisionLogic.Save(comision);
+            try
+            {
+                comision.State = BusinessEntity.States.Deleted;
+                _comisionLogic.Save(comision);
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al eliminar la comisión.");
+                return View(_comisionLogic.GetOne(id));
+            }
             return RedirectToAction("List");
         }
     }

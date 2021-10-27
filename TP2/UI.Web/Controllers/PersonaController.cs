@@ -43,17 +43,23 @@ namespace UI.Web.Controllers
         {
             Console.WriteLine($"asd");
             if (id != persona.ID) return NotFound();
-            if (ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid) return View(new EditPersonaViewModel(persona, _planLogic.GetAll()));
                 if (persona.TipoPersona == Persona.TiposPersona.Administrativo)
                 {
                     persona.IDPlan = null;
                 }
                 persona.State = BusinessEntity.States.Modified;
                 _personaLogic.Save(persona);
-                return RedirectToAction("List");
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al editar la persona.");
+                return View(new EditPersonaViewModel(persona, _planLogic.GetAll()));
             }
-            return View(new EditPersonaViewModel(persona, _planLogic.GetAll()));
+                return RedirectToAction("List");
+            
         }
         [HttpGet]
         [Authorize(Roles = "Administrativo")]
@@ -63,17 +69,22 @@ namespace UI.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("ID, Legajo, Nombre, Apellido, Direccion, Email, Telefono, FechaNacimiento, IDPlan, TipoPersona")] Persona persona)
         {
-            if (ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid) return View(new CreatePersonaViewModel(persona, _planLogic.GetAll()));
                 if (persona.TipoPersona == Persona.TiposPersona.Administrativo)
                 {
                     persona.IDPlan = null;
                 }
                 persona.State = BusinessEntity.States.New;
                 _personaLogic.Save(persona);
-                return RedirectToAction("List");
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al crear la persona");
+                return View(new CreatePersonaViewModel(persona, _planLogic.GetAll()));
             }
-            return View(new CreatePersonaViewModel(persona, _planLogic.GetAll()));
+                return RedirectToAction("List");
         }
         [HttpGet]
         [Authorize(Roles = "Administrativo")]
@@ -89,8 +100,16 @@ namespace UI.Web.Controllers
         public IActionResult Delete(int id, Persona persona)
         {
             if (id != persona.ID) return NotFound();
-            persona.State = BusinessEntity.States.Deleted;
-            _personaLogic.Save(persona);
+            try
+            {
+                persona.State = BusinessEntity.States.Deleted;
+                _personaLogic.Save(persona);
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al eliminar la persona.");
+                return View(_personaLogic.GetOne(id));
+            }
             return RedirectToAction("List");
         }
     }

@@ -45,13 +45,18 @@ namespace UI.Web.Controllers
         {
             Console.WriteLine($"asd");
             if (id != docenteCurso.ID) return NotFound();
-            if (ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid) return View(new EditDocenteCursoViewModel(docenteCurso, _cursoLogic.GetAll()));
                 docenteCurso.State = BusinessEntity.States.Modified;
                 _docenteCursoLogic.Save(docenteCurso);
-                return RedirectToAction("List");
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al editar el docente curso.");
+                return View(new EditDocenteCursoViewModel(docenteCurso, _cursoLogic.GetAll()));
             }
-            return View(new EditDocenteCursoViewModel(docenteCurso, _cursoLogic.GetAll()));
+                return RedirectToAction("List");
         }
         [HttpGet]
         [Authorize(Roles = "Administrativo")]
@@ -61,14 +66,18 @@ namespace UI.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Cargo, IDCurso, IDDocente")] DocenteCurso docenteCurso)
         {
-            if (ModelState.IsValid)
+            try
             {
-                
+                if (!ModelState.IsValid) return View(new CreateDocenteCursoViewModel(docenteCurso, _cursoLogic.GetAll()));
                 docenteCurso.State = BusinessEntity.States.New;
                 _docenteCursoLogic.Save(docenteCurso);
-                return RedirectToAction("List");
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al crear el docente curso.");
+                return View(new CreateDocenteCursoViewModel(docenteCurso, _cursoLogic.GetAll()));
             }
-            return View(new CreateDocenteCursoViewModel(docenteCurso, _cursoLogic.GetAll()));
+                return RedirectToAction("List");
         }
         [HttpGet]
         [Authorize(Roles = "Administrativo")]
@@ -84,8 +93,16 @@ namespace UI.Web.Controllers
         public IActionResult Delete(int id, DocenteCurso docenteCurso)
         {
             if (id != docenteCurso.ID) return NotFound();
-            docenteCurso.State = BusinessEntity.States.Deleted;
-            _docenteCursoLogic.Save(docenteCurso);
+            try
+            {
+                docenteCurso.State = BusinessEntity.States.Deleted;
+                _docenteCursoLogic.Save(docenteCurso);
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al eliminar el docente curso.");
+                return View(_docenteCursoLogic.GetOne(id));
+            }
             return RedirectToAction("List");
         }
         [HttpPost]

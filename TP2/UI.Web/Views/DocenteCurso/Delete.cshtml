@@ -5,6 +5,9 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Delete">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger alert-dismissible fade show">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
             <input asp-for="ID" type="hidden" />
             <div class="mb-3">
                 <label asp-for="Persona.Legajo" class="form-label">Legajo</label>
@@ -18,12 +21,12 @@
                 <label asp-for="Persona.Apellido" class="form-label">Apellido</label>
                 <input disabled asp-for="Persona.Apellido" class="form-control" placeholder="@Model.Persona.Apellido" value="@Model.Persona.Apellido" />
             </div>
-        
+
             <div class="mb-3">
                 <label asp-for="Curso" class="form-label">Curso</label>
                 <input disabled asp-for="Curso" class="form-control" placeholder="@Model.Curso.Descripcion" value="@Model.Curso.Descripcion" />
             </div>
-            
+
             <div class="mb-3">
                 <label asp-for="Cargo" class="form-label">Cargo</label>
                 <input disabled asp-for="Cargo" class="form-control" placeholder="@Model.Cargo" value="@Model.Cargo" />

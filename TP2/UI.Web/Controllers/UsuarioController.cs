@@ -39,14 +39,19 @@ namespace UI.Web.Controllers
         public IActionResult Edit(int id, [Bind("ID, NombreUsuario, Habilitado, Clave, IDPersona")] UsuarioEdit edit)
         {
             if (id != edit.ID) return NotFound();
-            if (ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid) return View((edit));
                 Usuario usr = parsearUsr(edit);
                 usr.State = BusinessEntity.States.Modified;
                 _usuarioLogic.Save(usr);
-                return RedirectToAction("List");
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al editar el usuario.");
+                return View((edit));
             }
-            return View((edit));
+                return RedirectToAction("List");
         }
         [HttpGet]
         public IActionResult Create() => View(null);
@@ -54,13 +59,19 @@ namespace UI.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("ID, NombreUsuario, Habilitado, Clave, IDPersona")] Usuario usuario)
         {
-            if (ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid) return View(usuario);
+
                 usuario.State = BusinessEntity.States.New;
                 _usuarioLogic.Save(usuario);
-                return RedirectToAction("List");
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al crear el usuario");
+                return View(usuario);
             }
-            return View(usuario);
+                return RedirectToAction("List");
         }
         [HttpGet]
         public IActionResult Delete(int? id)
@@ -74,8 +85,16 @@ namespace UI.Web.Controllers
         public IActionResult Delete(int id, Usuario usuario)
         {
             if (id != usuario.ID) return NotFound();
-            usuario.State = BusinessEntity.States.Deleted;
-            _usuarioLogic.Save(usuario);
+            try
+            {
+                usuario.State = BusinessEntity.States.Deleted;
+                _usuarioLogic.Save(usuario);
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al eliminar el usuario.");
+                return View(_usuarioLogic.GetOne(id));
+            }
             return RedirectToAction("List");
         }
         [HttpPost]
