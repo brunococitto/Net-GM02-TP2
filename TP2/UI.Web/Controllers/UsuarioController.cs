@@ -41,7 +41,7 @@ namespace UI.Web.Controllers
             if (id != edit.ID) return NotFound();
             try
             {
-                if (!ModelState.IsValid) return View((edit));
+                if (!ModelState.IsValid) return View(parsearEdit(_usuarioLogic.GetOne(edit.ID)));
                 Usuario usr = parsearUsr(edit);
                 usr.State = BusinessEntity.States.Modified;
                 _usuarioLogic.Save(usr);

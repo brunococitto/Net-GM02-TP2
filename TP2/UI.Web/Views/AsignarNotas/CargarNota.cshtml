@@ -30,7 +30,7 @@
             </div>
             <div class="mb-3">
                 <label asp-for="Nota" class="form-label">Nota</label>
-                <input min="0" max="10" asp-for="Nota" type="number" class="form-control" placeholder="@Model.Nota" value="@Model.Nota" />
+                <input min="0" max="10" step="1" asp-for="Nota" type="number" class="form-control" placeholder="@Model.Nota" value="@Model.Nota" />
                 <span asp-validation-for="Nota" class="text-danger"></span>
             </div>
             <div class="mb-3">
