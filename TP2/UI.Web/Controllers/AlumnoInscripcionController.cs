@@ -29,7 +29,7 @@ namespace UI.Web.Controllers
         public IActionResult Index() => RedirectToAction("List");
         [Authorize(Roles = "Administrativo")]
         public IActionResult List() => View(new ListAlumnoInscripcionViewModel(_alumnoInscripcionLogic.GetAll(), _cursoLogic.GetAll()));
-
+        /* ESTO NO VA PORQUE NO SE PUEDE EDITAR INSCRIPCION
         [HttpGet]
         [Authorize(Roles = "Administrativo")]
         public IActionResult Edit(int? id)
@@ -46,14 +46,22 @@ namespace UI.Web.Controllers
         public IActionResult Edit(int id, [Bind("ID, IDAlumno,IDCurso, Condicion, Curso, Nota, IDPersona, Persona")] AlumnoInscripcion alumnoinscripcion)
         {
             if (id != alumnoinscripcion.ID) return NotFound();
-            if (ModelState.IsValid)
+            try
             {
-                alumnoinscripcion.State = BusinessEntity.States.Modified;
-                _alumnoInscripcionLogic.Save(alumnoinscripcion);
-                return RedirectToAction("List");
+                if (ModelState.IsValid)
+                {
+                    alumnoinscripcion.State = BusinessEntity.States.Modified;
+                    _alumnoInscripcionLogic.Save(alumnoinscripcion);
+                }
+                else throw new Exception("Error en el modelo");
+            } catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al editar la inscripción.");
+                return View(new EditAlumnoInscripcionViewModel(alumnoinscripcion, _cursoLogic.GetAll(), _personaLogic.GetAll()));
             }
-            return View(new EditAlumnoInscripcionViewModel(alumnoinscripcion, _cursoLogic.GetAll(), _personaLogic.GetAll()));
-        }
+            return RedirectToAction("List");
+        } */
         [HttpGet]
         [Authorize(Roles = "Administrativo")]
         public IActionResult Create() => View(new CreateAlumnoInscripcionViewModel(null, _cursoLogic.GetAll()));
@@ -62,13 +70,21 @@ namespace UI.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("ID, IDAlumno, IDCurso, Condicion, Nota")] AlumnoInscripcion alumnoinscripcion)
         {
-            if (ModelState.IsValid)
+            try
             {
-                alumnoinscripcion.State = BusinessEntity.States.New;
-                _alumnoInscripcionLogic.Save(alumnoinscripcion);
-                return RedirectToAction("List");
+                if (ModelState.IsValid)
+                {
+                    alumnoinscripcion.State = BusinessEntity.States.New;
+                    _alumnoInscripcionLogic.Save(alumnoinscripcion);
+                }
+                else throw new Exception("Error en el modelo");
+            } catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al crear la inscripción.");
+                return View(new CreateAlumnoInscripcionViewModel(alumnoinscripcion, _cursoLogic.GetAll()));
             }
-            return View(new CreateAlumnoInscripcionViewModel(alumnoinscripcion, _cursoLogic.GetAll()));
+            return RedirectToAction("List");
         }
         [HttpGet]
         [Authorize(Roles = "Administrativo")]
@@ -84,8 +100,16 @@ namespace UI.Web.Controllers
         public IActionResult Delete(int id, AlumnoInscripcion alumnoinscripcion)
         {
             if (id != alumnoinscripcion.ID) return NotFound();
-            alumnoinscripcion.State = BusinessEntity.States.Deleted;
-            _alumnoInscripcionLogic.Save(alumnoinscripcion);
+            try
+            {
+                alumnoinscripcion.State = BusinessEntity.States.Deleted;
+                _alumnoInscripcionLogic.Save(alumnoinscripcion);
+            } catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ModelState.AddModelError("", "Se produjo un error al eliminar la inscripción.");
+                return View(_alumnoInscripcionLogic.GetOne(id));
+            }
             return RedirectToAction("List");
         }
         [HttpPost]
