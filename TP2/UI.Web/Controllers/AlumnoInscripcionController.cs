@@ -48,12 +48,9 @@ namespace UI.Web.Controllers
             if (id != alumnoinscripcion.ID) return NotFound();
             try
             {
-                if (ModelState.IsValid)
-                {
-                    alumnoinscripcion.State = BusinessEntity.States.Modified;
-                    _alumnoInscripcionLogic.Save(alumnoinscripcion);
-                }
-                else throw new Exception("Error en el modelo");
+                if (!ModelState.IsValid) return View(new EditAlumnoInscripcionViewModel(alumnoinscripcion, _cursoLogic.GetAll(), _personaLogic.GetAll()));
+                alumnoinscripcion.State = BusinessEntity.States.Modified;
+                _alumnoInscripcionLogic.Save(alumnoinscripcion);
             } catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
@@ -61,7 +58,7 @@ namespace UI.Web.Controllers
                 return View(new EditAlumnoInscripcionViewModel(alumnoinscripcion, _cursoLogic.GetAll(), _personaLogic.GetAll()));
             }
             return RedirectToAction("List");
-        } */
+        }*/
         [HttpGet]
         [Authorize(Roles = "Administrativo")]
         public IActionResult Create() => View(new CreateAlumnoInscripcionViewModel(null, _cursoLogic.GetAll()));
@@ -72,12 +69,9 @@ namespace UI.Web.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    alumnoinscripcion.State = BusinessEntity.States.New;
-                    _alumnoInscripcionLogic.Save(alumnoinscripcion);
-                }
-                else throw new Exception("Error en el modelo");
+                if (!ModelState.IsValid) return View(new CreateAlumnoInscripcionViewModel(alumnoinscripcion, _cursoLogic.GetAll()));
+                alumnoinscripcion.State = BusinessEntity.States.New;
+                _alumnoInscripcionLogic.Save(alumnoinscripcion);
             } catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
