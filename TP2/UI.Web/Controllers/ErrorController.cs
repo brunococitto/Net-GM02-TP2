@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Diagnostics;
 
 namespace Web.Controllers
 {
@@ -22,6 +23,7 @@ namespace Web.Controllers
         public IActionResult GenericError(int code)
         {
             _logger.LogInformation($"Error codigo {code}");
+            _logger.LogError($"Mensaje exception: {HttpContext.Features.Get<IExceptionHandlerPathFeature>()?.Error}");
             return View();
         }
     }
