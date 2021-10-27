@@ -14,7 +14,7 @@
                 <span id='message'></span>
             </div>
 
-            <div id="partialAlumnoInscripcion" name="partialAlumnoInscripcion">
+            <div class="mb-3" id="partialAlumnoInscripcion" name="partialAlumnoInscripcion">
 
             </div>
             <select disabled class="form-select mb-3" id="cursos" asp-for="AlumnoInscripcion.IDCurso" asp-items="Model.Cursos"></select>
@@ -29,7 +29,6 @@
                 <span asp-validation-for="Nota" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                
                 <button disabled type="submit" class="btn btn-primary" id="botonCrear">Crear</button>
                 <a class="btn btn-danger" asp-action="Index">Cancelar</a>
             </div>
@@ -49,8 +48,9 @@
                 data: { legajo: document.getElementById('legajo').value },
                 success: function (data) {
                     $("#partialAlumnoInscripcion").html(data);
+                    $("#partialDocenteCurso").fadeOut();
                     if ($("#partialAlumnoInscripcion").is(":hidden")) {
-                        $("#partialAlumnoInscripcion").toggle(200);
+                        $("#partialAlumnoInscripcion").fadeIn();
                     }
                     document.getElementById('cursos').removeAttribute("disabled");
                     document.getElementById('botonCrear').removeAttribute("disabled");
@@ -61,9 +61,9 @@
                     document.getElementById('botonCrear').setAttribute("disabled", "");
                     alert('El legajo ingresado no corresponde a un Alumno');
                     if ($("#partialAlumnoInscripcion").is(":visible")) {
-                        $("#partialAlumnoInscripcion").toggle(200);
+                        $("#partialAlumnoInscripcion").fadeOut();
                     }
-                    $("#partialAlumnoInscripcion").html(null);
+                    $("#partialAlumnoInscripcion").promise().html(null);
                 }
             });
     };

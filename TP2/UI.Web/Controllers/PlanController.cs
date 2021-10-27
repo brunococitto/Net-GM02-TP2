@@ -28,7 +28,7 @@ namespace UI.Web.Controllers
         }
         public IActionResult Index() => RedirectToAction("List");
         [Authorize(Roles = "Administrativo")]
-        public IActionResult List() => View(_planLogic.GetAll());
+        public IActionResult List() => View(_planLogic.GetAll().OrderBy(p => p.Descripcion).ToList());
         [HttpGet]
         [Authorize(Roles = "Administrativo")]
         public IActionResult Edit(int? id)
@@ -97,7 +97,7 @@ namespace UI.Web.Controllers
                         c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier
                         )?.Value
                     );
-            return View("Reporte", _planLogic.GetAll());
+            return View("Reporte", _planLogic.GetAll().OrderBy(p => p.Descripcion).ToList());
         }
     }
 }

@@ -28,7 +28,7 @@ namespace UI.Web.Controllers
         }
         public IActionResult Index() => RedirectToAction("List");
         [Authorize(Roles = "Administrativo")]
-        public IActionResult List() => View(new ListAlumnoInscripcionViewModel(_alumnoInscripcionLogic.GetAll(), _cursoLogic.GetAll()));
+        public IActionResult List() => View(new ListAlumnoInscripcionViewModel(_alumnoInscripcionLogic.GetAll().OrderBy(i => i.Persona.Apellido).ToList(), _cursoLogic.GetAll().OrderBy(c => c.Descripcion).ToList()));
         /* ESTO NO VA PORQUE NO SE PUEDE EDITAR INSCRIPCION
         [HttpGet]
         [Authorize(Roles = "Administrativo")]

@@ -30,7 +30,7 @@ namespace UI.Web.Controllers
         }
         public IActionResult Index() => RedirectToAction("List");
         [Authorize(Roles = "Administrativo")]
-        public IActionResult List() => View(_cursoLogic.GetAll());
+        public IActionResult List() => View(_cursoLogic.GetAll().OrderBy(c => c.Descripcion).ToList());
 
         [HttpGet]
         [Authorize(Roles = "Administrativo")]
@@ -101,7 +101,7 @@ namespace UI.Web.Controllers
                         c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier
                         )?.Value
                     );
-            return View("Reporte", _cursoLogic.GetAll());
+            return View("Reporte", _cursoLogic.GetAll().OrderBy(c => c.Descripcion).ToList());
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Business.Entities.DocenteCurso>
 
-    <h2 class="mb-3 text-center">Docentes</h2>
+    <h2 class="mb-3 text-center">Asignar docentes</h2>
 
     <a class="btn btn-outline-success mb-2" asp-action="Create">Agregar</a>
 
@@ -9,7 +9,7 @@
             {
                 <div class="card mb-2">
                     <div class="card-body">
-                        <h5 class="card-title">Cargo : @dc.Cargo</h5>
+                        <h5 class="card-title">Cargo: @dc.Cargo</h5>
                         <p class="card-text">Curso: @dc.Curso.Descripcion</p>
                         @if (dc.Persona != null)
                         {

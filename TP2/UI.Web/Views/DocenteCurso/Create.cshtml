@@ -14,7 +14,7 @@
                 <span id='message'></span>
             </div>
 
-            <div id="partialDocenteCurso" name="partialDocenteCurso"></div>
+            <div class="mb-3" id="partialDocenteCurso" name="partialDocenteCurso"></div>
 
             <div class="mb-3">
                 <label asp-for="DocenteCurso.IDCurso" class="form-label">Cursos</label><br />
@@ -49,8 +49,9 @@
                 },
                 success: function (data) {
                     $("#partialDocenteCurso").html(data);
+                    $("#partialDocenteCurso").fadeOut();
                     if ($("#partialDocenteCurso").is(":hidden")) {
-                        $("#partialDocenteCurso").toggle(200);
+                        $("#partialDocenteCurso").fadeIn();
                     }
                     document.getElementById('cursos').removeAttribute("disabled");
                     document.getElementById('cargos').removeAttribute("disabled");
@@ -63,9 +64,9 @@
                     document.getElementById('botonCrear').setAttribute("disabled", "");
                     alert('El legajo ingresado no corresponde a un Docente');
                     if ($("#partialDocenteCurso").is(":visible")) {
-                        $("#partialDocenteCurso").toggle(200);
+                        $("#partialDocenteCurso").fadeOut();
                     }
-                    $("#partialDocenteCurso").html(null);
+                    $("#partialDocenteCurso").promise().html(null);
                 }
             });
         };

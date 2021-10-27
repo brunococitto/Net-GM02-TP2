@@ -25,7 +25,7 @@ namespace UI.Web.Controllers
             _personaLogic = personaLogic;
         }
         public IActionResult Index() => RedirectToAction("List");
-        public IActionResult List() => View(_usuarioLogic.GetAll());
+        public IActionResult List() => View(_usuarioLogic.GetAll().OrderBy(u => u.NombreUsuario).ToList());
         [HttpGet]
         public IActionResult Edit(int? id)
         {

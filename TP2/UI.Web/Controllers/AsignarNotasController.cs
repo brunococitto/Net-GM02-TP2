@@ -32,7 +32,7 @@ namespace UI.Web.Controllers
                         c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier
                         )?.Value
                     );
-            return View(_docenteCursoLogic.GetCursosProfesor(idProfesor));
+            return View(_docenteCursoLogic.GetCursosProfesor(idProfesor).OrderBy(c => c.Descripcion).ToList());
         }
         [HttpGet]
         [Authorize(Roles = "Profesor")]
@@ -41,7 +41,7 @@ namespace UI.Web.Controllers
             if (id == null) return NotFound();
             List<AlumnoInscripcion> listaAlumnos = _alumnoInscripcionLogic.GetInscripcionesCurso((int)id);
             if (listaAlumnos == null) return NotFound();
-            return View(listaAlumnos);
+            return View(listaAlumnos.OrderBy(a => a.Persona.Apellido).ToList());
         }
         [HttpGet]
         [Authorize(Roles = "Profesor")]

@@ -26,7 +26,7 @@ namespace UI.Web.Controllers
         }
         public IActionResult Index() => RedirectToAction("List");
         [Authorize(Roles = "Administrativo")]
-        public IActionResult List() => View(_materiaLogic.GetAll());
+        public IActionResult List() => View(_materiaLogic.GetAll().OrderBy(m => m.Descripcion).ToList());
         [HttpGet]
         [Authorize(Roles = "Administrativo")]
         public IActionResult Edit(int? id)

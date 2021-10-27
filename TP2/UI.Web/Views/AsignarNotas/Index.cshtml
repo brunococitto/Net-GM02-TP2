@@ -10,7 +10,7 @@
                 <h5 class="card-title">@cur.Descripcion</h5>
                 <h6 class="card-subtitle mb-2 text-muted">@cur.Materia.Descripcion</h6>
                 <p class="card-text">@cur.Materia.Plan.Especialidad.Descripcion - @cur.Materia.Plan.Descripcion</p>
-                <a class="btn btn-info" asp-area="" asp-action="ListaAlumnos" asp-route-id="@cur.ID">Seleccionar</a>
+                <a class="btn btn-primary" asp-area="" asp-action="ListaAlumnos" asp-route-id="@cur.ID">Seleccionar</a>
             </div>
         </div>
     }

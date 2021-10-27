@@ -32,7 +32,7 @@
             <div class="mb-3">
                 <label class="form-label">Confirmar Clave</label>
                 <input maxlength="20" class="form-control"  id="confirm_password" name="confirm_password" type="password" onkeyup='check();' />
-                <span id='message'></span>
+                <span class="mt-1 fw-bold" id='message'></span>
             </div>
 
             <div class="mb-3">
@@ -55,11 +55,11 @@
             if (document.getElementById('password').value ==
                 document.getElementById('confirm_password').value) {
                 document.getElementById('message').style.color = 'green';
-                document.getElementById('message').innerHTML = 'matching';
+                document.getElementById('message').innerHTML = 'Las contraseñas coinciden.';
                 document.getElementById('btn_guardar').disabled = false;
             } else {
                 document.getElementById('message').style.color = 'red';
-                document.getElementById('message').innerHTML = 'not matching';
+                document.getElementById('message').innerHTML = 'Las contraseñas no coinciden.';
                 document.getElementById('btn_guardar').disabled = true;
             }
         }

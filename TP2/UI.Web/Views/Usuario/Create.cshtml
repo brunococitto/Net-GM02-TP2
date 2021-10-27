@@ -14,8 +14,7 @@
                 <span id='message'></span>
             </div>
 
-            <div id="partialUsuario" name="partialUsuario">
-
+            <div class="mb-3" id="partialUsuario" name="partialUsuario">
             </div>
 
             <div class="mb-3">
@@ -33,7 +32,7 @@
             <div class="mb-3">
                 <label class="form-label">Confirmar Clave</label>
                 <input disabled maxlength="20" class="form-control" type="password" id="confirm_password" name="confirm_password" onkeyup='check();' />
-                <span id='message_password'></span>
+                <span class="mt-3" id='message_password'></span>
             </div>
 
             <div class="mb-3">
@@ -66,6 +65,10 @@
                 success: function (data)
                 {
                     $("#partialUsuario").html(data);
+                    $("#partialDocenteCurso").fadeOut();
+                    if ($("#partialUsuario").is(":hidden")) {
+                        $("#partialUsuario").fadeIn();
+                    }
                     document.getElementById('nombreUsuario').removeAttribute("disabled");
                     document.getElementById('password').removeAttribute("disabled");
                     document.getElementById('confirm_password').removeAttribute("disabled");
@@ -74,7 +77,10 @@
                 error: function (data)
                 {
                     alert('No se encuentra persona con el legajo indicado');
-                    $("#partialUsuario").fadeOut(200);
+                    if ($("#partialUsuario").is(":visible")) {
+                        $("#partialUsuario").fadeOut();
+                    }
+                    $("#partialUsuario").promise().html(null);
                 }
             });
     };
@@ -84,11 +90,11 @@
         if (document.getElementById('password').value ==
             document.getElementById('confirm_password').value) {
             document.getElementById('message_password').style.color = 'green';
-            document.getElementById('message_password').innerHTML = 'matching';
+            document.getElementById('message_password').innerHTML = 'Las contraseñas coinciden.';
             document.getElementById('botonCrear').disabled = false;
         } else {
             document.getElementById('message_password').style.color = 'red';
-            document.getElementById('message_password').innerHTML = 'not matching';
+            document.getElementById('message_password').innerHTML = 'Las contraseñas no coinciden.';
             document.getElementById('botonCrear').disabled = true;
         }
     }
