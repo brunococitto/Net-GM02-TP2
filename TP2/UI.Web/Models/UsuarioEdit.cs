@@ -17,7 +17,7 @@ namespace UI.Web.Models
     {
         public UsuarioEditValidator()
         {
-            RuleFor(x => x.NombreUsuario).NotEmpty().MaximumLength(50).Matches("^[a-zA-Z0-9]+$").WithMessage("'Nombre' debe contener solo letras y/o números");
+            RuleFor(x => x.NombreUsuario).NotEmpty().MaximumLength(50).Matches("^[a-zA-Z0-9ñÑ]+$").WithMessage("'Nombre' debe contener solo letras y/o números");
             RuleFor(x => x.Clave).MinimumLength(8).When(x => x.Clave != null);
         }
     }
