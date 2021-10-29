@@ -76,7 +76,7 @@
                         {
                             <li class="ms-md-auto"></li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Ingresar</a>
                             </li>
                         }
                         @if (User.Identity?.IsAuthenticated == true)
@@ -91,7 +91,7 @@
                                         @User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Name)?.Value
                                     </div>
                                     <div class="dropdown-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Cerrar sesión</a>
                                     </div>
                                 </div>
                             </li>

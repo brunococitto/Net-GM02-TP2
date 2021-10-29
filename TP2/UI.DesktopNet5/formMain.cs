@@ -186,7 +186,8 @@ namespace UI.Desktop
                                 {
                                     if (cell.Displayed == true)
                                     {
-                                        pdfTable.AddCell(cell.Value.ToString());
+                                        if (cell.Value == null) pdfTable.AddCell("-");
+                                        else pdfTable.AddCell(cell.Value.ToString());
                                     }
                                 }
                             }
